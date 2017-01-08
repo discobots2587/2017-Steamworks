@@ -19,7 +19,7 @@ public class HW {
     // public static int rangefinderModule = 1;
 	
 	/* CAN */// Check roboRio Web Interface for these values
-	CANTalon motorFrontLeft = new CANTalon(20);//set
+	CANTalon motorFrontLeft = new CANTalon(20);//set test change to see if gitignore works
 	CANTalon motorFrontRight = new CANTalon(15);//set
 	CANTalon motorBackLeft = new CANTalon(1);//set
 	CANTalon motorBackRight = new CANTalon(14);//set
