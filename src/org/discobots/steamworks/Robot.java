@@ -1,6 +1,8 @@
 
 package org.discobots.steamworks;
 
+import java.util.concurrent.TimeUnit;
+
 import org.discobots.steamworks.commands.ExampleCommand;
 import org.discobots.steamworks.subsystems.ExampleSubsystem;
 
@@ -79,8 +81,6 @@ public class Robot extends IterativeRobot {
 		// dashboard init
 		Dashboard.init();
 		Dashboard.update();
-		
-		
     }
 
 	/**
@@ -95,8 +95,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
-	}
+		Dashboard.update();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
+		}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -127,11 +131,17 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+        // teleop starts running. If you want the autonomous to 
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
+        if (autonomousCommand != null) autonomousCommand.cancel();
+        driveCommand = (Command) driveChooser.getSelected();
+		for (long stop=System.nanoTime()+TimeUnit.SECONDS.toNanos(1);stop>System.nanoTime();) { //rumbles upon disable for 1 second
+			oi.setRumble(1);
+			TeleopStartTime = System.currentTimeMillis();
+		}
+		if(driveCommand != null) //Starts chosen driving Command
+			driveCommand.start();
 	}
 
 	/**
@@ -139,14 +149,24 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+    	long start = System.currentTimeMillis(); //measures loop execution times
 		Scheduler.getInstance().run();
-	}
+		Dashboard.update();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
+		}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
 	@Override
 	public void testPeriodic() {
-		LiveWindow.run();
+		long start = System.currentTimeMillis();
+    	LiveWindow.run();
+		Scheduler.getInstance().run();
+		Dashboard.update();
+		long end = System.currentTimeMillis();
+		loopExecutionTime = end - start;
+		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime)/1000);
 	}
 }
