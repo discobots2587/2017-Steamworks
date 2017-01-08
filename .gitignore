@@ -1,6 +1,4 @@
 *.class
-*.project
-*.settings
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -10,22 +8,8 @@
 *.war
 *.ear
 
-# eclipse specific git ignore
-*.classpath
-*.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
+# Eclipse
 .classpath
-
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/bin/
+.project
+.settings
+.metadata
