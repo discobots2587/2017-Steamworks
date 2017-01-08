@@ -1,4 +1,6 @@
 package org.discobots.steamworks;
+
+import com.ctre.CANTalon;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -17,10 +19,10 @@ public class HW {
     // public static int rangefinderModule = 1;
 	
 	/* CAN */// Check roboRio web interface for these values
-	public final static int motorFrontLeft = 20;//set
-	public final static int motorFrontRight = 15;//set
-	public final static int motorBackLeft = 1;//set
-	public final static int motorBackRight = 14;//set
+	CANTalon motorFrontLeft = new CANTalon(20);//set
+	CANTalon motorFrontRight = new CANTalon(15);//set
+	CANTalon motorBackLeft = new CANTalon(1);//set
+	CANTalon motorBackRight = new CANTalon(14);//set
 	
 	/* PWM */
 

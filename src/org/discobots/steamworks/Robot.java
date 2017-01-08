@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
        // LogicC615.startCapture();
        LogicC615.startAutomaticCapture(C615);//automatically start streaming footage 
    }catch(Exception e){
-	    System.err.println("Mason has DiscoSwag \n BUT there is a Vision Error: " + e.getMessage());
+	    System.err.println("There is a Vision Error: " + e.getMessage());
    }
 
  
