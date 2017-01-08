@@ -4,6 +4,8 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.ExampleCommand;
 import org.discobots.steamworks.subsystems.ExampleSubsystem;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,23 +22,66 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	
+	
+	private CameraServer LogicC615;
+	public static double totalTime;
+	public static long TeleopStartTime;
+	public static long loopExecutionTime = 0;
+	
+	
+	Command autonomousCommand,driveCommand;
+    SendableChooser driveChooser, autonChooser;
+    
 
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
+    
+    public void robotInit() {
+    	//init camera and start simple stream process...
+    	//IMPORTANT -- camera system and code is redone for 2017-- Cameras should no longer have to be initialized separately ...
+   try{ 	
+	   LogicC615 = CameraServer.getInstance();//initialize server
+        //camera name taken from RoboRio
+        UsbCamera C615 = new UsbCamera("cam0", 0);
+       // LogicC615.openCamera(); 
+       // LogicC615.startCapture();
+       LogicC615.startAutomaticCapture(C615);//automatically start streaming footage 
+   }catch(Exception e){
+	    System.err.println("Mason has DiscoSwag \n BUT there is a Vision Error: " + e.getMessage());
+   }
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
-	@Override
-	public void robotInit() {
-		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-	}
+ 
+    	/* Subsystems */
+
+    //	linearPunchSub = new LinearPunchSubsystem();
+
+    	
+    	
+    	/* Dashboard Choosers */
+    	
+    	autonChooser = new SendableChooser();
+    	//autonChooser.addObject("DumbPostitioningAuton", new DumbPositioningAuton());
+		
+		
+		driveChooser = new SendableChooser();
+		//driveChooser.addObject("Tank Drive", new TankDriveCommand());
+		//driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
+		//driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
+		SmartDashboard.putData("Choose Driving Controls", driveChooser);
+
+        //gamepad mapping
+    	oi = new OI();
+		
+		// dashboard init
+		Dashboard.init();
+		Dashboard.update();
+		
+		
+    }
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -66,18 +111,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		 autonomousCommand = (Command) autonChooser.getSelected();    	//Starts chosen Auton Command
+	    	// schedule the autonomous command (example)
+	        if (autonomousCommand != null) autonomousCommand.start();
 	}
 
 	/**
