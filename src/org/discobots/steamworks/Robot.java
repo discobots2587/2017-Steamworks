@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
+	public static ExampleSubsystem exampleSub;
 	
 	
 	Command autonomousCommand,driveCommand;
@@ -58,8 +59,7 @@ public class Robot extends IterativeRobot {
 
  
     	/* Subsystems */
-
-    //	linearPunchSub = new LinearPunchSubsystem();
+    	ExampleSubsystem exampleSub = new ExampleSubsystem();
 
     	
     	
