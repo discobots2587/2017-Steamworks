@@ -1,8 +1,8 @@
-package org.usfirst.frc.team2587.robot.commands;
+package org.discobots.steamworks.commands;
+
+import org.discobots.steamworks.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-
-import org.usfirst.frc.team2587.robot.Robot;
 
 /**
  *

@@ -1,5 +1,8 @@
 
-package org.usfirst.frc.team2587.robot;
+package org.discobots.steamworks;
+
+import org.discobots.steamworks.commands.ExampleCommand;
+import org.discobots.steamworks.subsystems.ExampleSubsystem;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,9 +10,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2587.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2587.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the

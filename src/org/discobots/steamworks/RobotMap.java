@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2587.robot;
+package org.discobots.steamworks;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
