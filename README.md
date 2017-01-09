@@ -38,3 +38,4 @@ Welcome to the DiscoBots code repository for the 2017 First Robotics Competition
 Contributors:  
 Mason Cole  
 Gilbert Martinez  
+William Bittner
