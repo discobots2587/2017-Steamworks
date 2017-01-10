@@ -19,10 +19,10 @@ public class HW {
     // public static int rangefinderModule = 1;
 	
 	/* CAN */// Check roboRio Web Interface for these values
-	CANTalon motorFrontLeft = new CANTalon(20);//set
-	CANTalon motorFrontRight = new CANTalon(15);//set
-	CANTalon motorBackLeft = new CANTalon(1);//set
-	CANTalon motorBackRight = new CANTalon(14);//set
+	public final static int motorFrontLeft = 20;//set
+	public final static int motorFrontRight = 15;//set
+	public final static int motorBackLeft = 1;//set
+	public final static int motorBackRight = 14;//set
 	
 	/* PWM */
 
