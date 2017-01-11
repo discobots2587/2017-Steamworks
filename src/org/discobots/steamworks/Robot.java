@@ -1,11 +1,6 @@
 
 package org.discobots.steamworks;
 
-import java.util.concurrent.TimeUnit;
-
-import org.discobots.steamworks.commands.ExampleCommand;
-import org.discobots.steamworks.subsystems.ExampleSubsystem;
-
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -14,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import java.util.concurrent.TimeUnit;
+
+import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,29 +23,42 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
+	public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();//note as so far as I can tell, the subsystem needs to be made final w/ 2017 WPILIB Plugins
 	public static OI oi;
 	
 	
+
 	private CameraServer LogicC615;
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
-	public static ExampleSubsystem exampleSub;
 	
 	
 	Command autonomousCommand,driveCommand;
     SendableChooser driveChooser, autonChooser;
-    
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	@Override
+	public void robotInit() {
+		oi = new OI();
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    
-    public void robotInit() {
-    	//init camera and start simple stream process...
+		
+    	autonChooser = new SendableChooser();
+    	//autonChooser.addObject("DumbPostitioningAuton", new DumbPositioningAuton());
+		
+		
+		driveChooser = new SendableChooser();
+		//driveChooser.addObject("Tank Drive", new TankDriveCommand());
+		//driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
+		//driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
+		
+		
+		
+		//init camera and start simple stream process...
     	//IMPORTANT -- camera system and code is redone for 2017-- Cameras should no longer have to be initialized separately ...
-   try{ 	
+  try{ 	
 	   LogicC615 = CameraServer.getInstance();//initialize server
         //camera name taken from RoboRio
         UsbCamera C615 = new UsbCamera("cam0", 0);
@@ -56,32 +68,15 @@ public class Robot extends IterativeRobot {
    }catch(Exception e){
 	    System.err.println("There is a Vision Error: " + e.getMessage());
    }
+  
+  
+  Dashboard.init();
+	Dashboard.update();
+	SmartDashboard.putData("Choose Driving Controls", driveChooser);
 
- 
-    	/* Subsystems */
-    	ExampleSubsystem exampleSub = new ExampleSubsystem();
-
-    	
-    	
-    	/* Dashboard Choosers */
-    	
-    	autonChooser = new SendableChooser();
-    	//autonChooser.addObject("DumbPostitioningAuton", new DumbPositioningAuton());
-		
-		
-		driveChooser = new SendableChooser();
-		//driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		//driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		//driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
-		SmartDashboard.putData("Choose Driving Controls", driveChooser);
-
-        //gamepad mapping
-    	oi = new OI();
-		
-		// dashboard init
-		Dashboard.init();
-		Dashboard.update();
-    }
+  
+  
+	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -100,7 +95,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		}
+	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -115,9 +110,19 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		 autonomousCommand = (Command) autonChooser.getSelected();    	//Starts chosen Auton Command
-	    	// schedule the autonomous command (example)
-	        if (autonomousCommand != null) autonomousCommand.start();
+		
+
+		/*
+		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+		 * = new MyAutoCommand(); break; case "Default Auto": default:
+		 * autonomousCommand = new ExampleCommand(); break; }
+		 */
+
+		// schedule the autonomous command (example)
+		autonomousCommand = (Command) autonChooser.getSelected();    	//Starts chosen Auton Command
+		    	// schedule the autonomous command (example)
+		        if (autonomousCommand != null) autonomousCommand.start();
 	}
 
 	/**
@@ -131,10 +136,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+		// teleop starts running. If you want the autonomous to
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autonomousCommand != null) autonomousCommand.cancel();
         driveCommand = (Command) driveChooser.getSelected();
 		for (long stop=System.nanoTime()+TimeUnit.SECONDS.toNanos(1);stop>System.nanoTime();) { //rumbles upon disable for 1 second
 			oi.setRumble(1);
@@ -154,7 +159,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		}
+	}
 
 	/**
 	 * This function is called periodically during test mode

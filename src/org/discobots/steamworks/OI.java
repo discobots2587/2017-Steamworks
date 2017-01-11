@@ -1,6 +1,5 @@
 package org.discobots.steamworks;
 
-import org.discobots.steamworks.commands.ExampleCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
