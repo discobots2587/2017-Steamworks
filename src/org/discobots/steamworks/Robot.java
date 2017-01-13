@@ -12,28 +12,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
 public class Robot extends IterativeRobot {
 
-//	public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();//note as so far as I can tell, the subsystem needs to be made final w/ 2017 WPILIB Plugins
+	// public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();
+	
 	public static OI oi;
-	
-	
 
 	private CameraServer LogicC615;
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
-	
-	
-	Command autonomousCommand,driveCommand;
-    SendableChooser driveChooser, autonChooser;
+
+	Command autonomousCommand, driveCommand;
+	SendableChooser driveChooser, autonChooser;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -42,38 +34,35 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		
-    	autonChooser = new SendableChooser();
-    	//autonChooser.addObject("DumbPostitioningAuton", new DumbPositioningAuton());
-		
-		
-		driveChooser = new SendableChooser();
-		//driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		//driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		//driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
-		
-		
-		
-		//init camera and start simple stream process...
-    	//IMPORTANT -- camera system and code is redone for 2017-- Cameras should no longer have to be initialized separately ...
-//  try{ 	
-	//   LogicC615 = CameraServer.getInstance();//initialize server
-        //camera name taken from RoboRio
-  //      UsbCamera C615 = new UsbCamera("cam0", 0);
-       // LogicC615.openCamera(); 
-       // LogicC615.startCapture();
- //      LogicC615.startAutomaticCapture(C615);//automatically start streaming footage 
- //  }catch(Exception e){
-//	    System.err.println("There is a Vision Error: " + e.getMessage());
-  // }
-  
-  
-  Dashboard.init();
-	Dashboard.update();
-	SmartDashboard.putData("Choose Driving Controls", driveChooser);
+		autonChooser = new SendableChooser();
+		// autonChooser.addObject("DumbPostitioningAuton", new
+		// DumbPositioningAuton());
 
-  
-  
+		driveChooser = new SendableChooser();
+		// driveChooser.addObject("Tank Drive", new TankDriveCommand());
+		// driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
+		// driveChooser.addDefault("Split Arcade Drive", new
+		// SplitArcadeDriveCommand());
+
+		// init camera and start simple stream process...
+		// IMPORTANT -- camera system and code is redone for 2017-- Cameras
+		// should no longer have to be initialized separately ...
+		// try{
+		// LogicC615 = CameraServer.getInstance();//initialize server
+		// camera name taken from RoboRio
+		// UsbCamera C615 = new UsbCamera("cam0", 0);
+		// LogicC615.openCamera();
+		// LogicC615.startCapture();
+		// LogicC615.startAutomaticCapture(C615);//automatically start streaming
+		// footage
+		// }catch(Exception e){
+		// System.err.println("There is a Vision Error: " + e.getMessage());
+		// }
+
+		Dashboard.init();
+		Dashboard.update();
+		SmartDashboard.putData("Choose Driving Controls", driveChooser);
+
 	}
 
 	/**
@@ -108,7 +97,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -118,9 +106,13 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		autonomousCommand = (Command) autonChooser.getSelected();    	//Starts chosen Auton Command
-		    	// schedule the autonomous command (example)
-		        if (autonomousCommand != null) autonomousCommand.start();
+		autonomousCommand = (Command) autonChooser.getSelected(); // Starts
+																	// chosen
+																	// Auton
+																	// Command
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null)
+			autonomousCommand.start();
 	}
 
 	/**
@@ -135,15 +127,18 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (autonomousCommand != null) autonomousCommand.cancel();
-        driveCommand = (Command) driveChooser.getSelected();
-		for (long stop=System.nanoTime()+TimeUnit.SECONDS.toNanos(1);stop>System.nanoTime();) { //rumbles upon disable for 1 second
-			oi.setRumble(1);
-			TeleopStartTime = System.currentTimeMillis();
+		// continue until interrupted by another command
+		if (autonomousCommand != null)
+			autonomousCommand.cancel();
+		driveCommand = (Command) driveChooser.getSelected();
+		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
+																										// upon
+																										// disable
+			oi.setRumble(1);																			// for
+			TeleopStartTime = System.currentTimeMillis();												// one											// 1
+																										// second
 		}
-		if(driveCommand != null) //Starts chosen driving Command
+		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
 	}
 
@@ -152,7 +147,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-    	long start = System.currentTimeMillis(); //measures loop execution times
+		long start = System.currentTimeMillis(); // measures loop execution
+													// times
 		Scheduler.getInstance().run();
 		Dashboard.update();
 		long end = System.currentTimeMillis();
@@ -165,11 +161,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		long start = System.currentTimeMillis();
-    	LiveWindow.run();
+		LiveWindow.run();
 		Scheduler.getInstance().run();
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime)/1000);
+		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
 	}
 }
