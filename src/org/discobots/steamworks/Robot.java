@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();//note as so far as I can tell, the subsystem needs to be made final w/ 2017 WPILIB Plugins
+//	public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();//note as so far as I can tell, the subsystem needs to be made final w/ 2017 WPILIB Plugins
 	public static OI oi;
 	
 	
@@ -56,16 +56,16 @@ public class Robot extends IterativeRobot {
 		
 		//init camera and start simple stream process...
     	//IMPORTANT -- camera system and code is redone for 2017-- Cameras should no longer have to be initialized separately ...
-  try{ 	
-	   LogicC615 = CameraServer.getInstance();//initialize server
+//  try{ 	
+	//   LogicC615 = CameraServer.getInstance();//initialize server
         //camera name taken from RoboRio
-        UsbCamera C615 = new UsbCamera("cam0", 0);
+  //      UsbCamera C615 = new UsbCamera("cam0", 0);
        // LogicC615.openCamera(); 
        // LogicC615.startCapture();
-       LogicC615.startAutomaticCapture(C615);//automatically start streaming footage 
-   }catch(Exception e){
-	    System.err.println("There is a Vision Error: " + e.getMessage());
-   }
+ //      LogicC615.startAutomaticCapture(C615);//automatically start streaming footage 
+ //  }catch(Exception e){
+//	    System.err.println("There is a Vision Error: " + e.getMessage());
+  // }
   
   
   Dashboard.init();
