@@ -14,9 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Robot extends IterativeRobot {
 
-	// public static final DriveTrainSubsystem driveTrainSub = new
-	// DriveTrainSubsystem();//note as so far as I can tell, the subsystem needs
-	// to be made final w/ 2017 WPILIB Plugins
+	// public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();
+	
 	public static OI oi;
 
 	private CameraServer LogicC615;
@@ -128,19 +127,16 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+		// continue until interrupted by another command
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		driveCommand = (Command) driveChooser.getSelected();
 		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
 																										// upon
 																										// disable
-																										// for
-																										// 1
+			oi.setRumble(1);																			// for
+			TeleopStartTime = System.currentTimeMillis();												// one											// 1
 																										// second
-			oi.setRumble(1);
-			TeleopStartTime = System.currentTimeMillis();
 		}
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
