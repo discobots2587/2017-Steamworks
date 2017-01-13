@@ -12,9 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
+import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
+
 public class Robot extends IterativeRobot {
 
-	// public static final DriveTrainSubsystem driveTrainSub = new DriveTrainSubsystem();
+	public static DriveTrainSubsystem driveTrainSub;
 	
 	public static OI oi;
 
@@ -33,6 +35,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser();
 		// autonChooser.addObject("DumbPostitioningAuton", new
