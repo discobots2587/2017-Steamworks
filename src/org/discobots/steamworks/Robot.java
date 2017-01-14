@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
+import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 
 public class Robot extends IterativeRobot {
@@ -43,24 +45,24 @@ public class Robot extends IterativeRobot {
 
 		driveChooser = new SendableChooser();
 		// driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		// driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		// driveChooser.addDefault("Split Arcade Drive", new
-		// SplitArcadeDriveCommand());
+		 driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
+		 driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
 
 		// init camera and start simple stream process...
 		// IMPORTANT -- camera system and code is redone for 2017-- Cameras
 		// should no longer have to be initialized separately ...
-		// try{
-		// LogicC615 = CameraServer.getInstance();//initialize server
-		// camera name taken from RoboRio
-		// UsbCamera C615 = new UsbCamera("cam0", 0);
-		// LogicC615.openCamera();
-		// LogicC615.startCapture();
-		// LogicC615.startAutomaticCapture(C615);//automatically start streaming
-		// footage
-		// }catch(Exception e){
-		// System.err.println("There is a Vision Error: " + e.getMessage());
-		// }
+		try{
+			LogicC615 = CameraServer.getInstance();//initialize server
+			//camera name taken from RoboRio
+			 UsbCamera C615 = new UsbCamera("C615", 0);
+			 C615.setResolution(720, 480);
+			 //LogicC615.openCamera();
+			 //LogicC615.startCapture();
+			 LogicC615.startAutomaticCapture(C615);//automatically start streaming
+			// footage
+			 }catch(Exception e){
+			 System.err.println("There is a Vision Error: " + e.getMessage());
+			 }
 
 		Dashboard.init();
 		Dashboard.update();

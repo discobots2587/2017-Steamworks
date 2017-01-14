@@ -2,6 +2,8 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
 import com.ctre.CANTalon;
 

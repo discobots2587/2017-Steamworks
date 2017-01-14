@@ -137,8 +137,8 @@ public class OI {
 		}
 
 		public double getRawAnalogStickARX() {
-			if(gp1.getRawAxis(4)>=0.1||gp1.getRawAxis(4)<=-0.1)
-			return gp1.getRawAxis(4);
+			if(gp1.getRawAxis(2)>=0.1||gp1.getRawAxis(2)<=-0.1)//changed from 4
+			return gp1.getRawAxis(2);
 			else
 				return (xbox.getRawAxis(4));// left stick x-axis
 		}
