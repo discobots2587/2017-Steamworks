@@ -1,5 +1,6 @@
 package org.discobots.steamworks;
 
+import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -51,9 +52,10 @@ public class OI {
 		
 		public OI() {
 			//JOYSTICK 2************************************************************************************
-		/*	b2_sBack.whenPressed(new CycleDriveCommand());
-			
+			b2_sBack.whenPressed(new CycleDriveCommand());
+			b_sBack.whenPressed(new CycleDriveCommand());
 
+/*
 			
 			b2_dpadU.whenPressed(new SetArmPosCommand(2.7));
 			b2_dpadD.whenPressed(new SetArmPosCommand(0.7)); //Preferred shooting position
@@ -84,7 +86,6 @@ public class OI {
 
 			b_dpadR.whenPressed(new ShiftCommand());
 			
-			b_sBack.whenPressed(new CycleDriveCommand());
 			b_bumpR.whileHeld(new SetIntakeCommand(-1)); //pulls ball in
 			b_bumpR.whenReleased(new SetIntakeCommand(0));
 			b_bumpL.whileHeld(new SetIntakeCommand(1)); //pushes ball out
