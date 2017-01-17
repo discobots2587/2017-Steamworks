@@ -55,9 +55,10 @@ public class Robot extends IterativeRobot {
 			LogicC615 = CameraServer.getInstance();//initialize server
 			//camera name taken from RoboRio
 			 UsbCamera C615 = new UsbCamera("C615", 0);
-			 C615.setResolution(640, 480);
+			 C615.setResolution(480, 320);
 			 //LogicC615.openCamera();
 			 //LogicC615.startCapture();
+			 if(C615.isConnected())
 			 LogicC615.startAutomaticCapture(C615);//automatically start streaming
 			// footage
 			 }catch(Exception e){
