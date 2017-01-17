@@ -10,8 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CycleDriveCommand extends Command {
+	Command cmd;
+	public CycleDriveCommand(){
+		Command cmd = Robot.driveTrainSub.getCurrentCommand();	
+	}
 	
-	public CycleDriveCommand() {
+	public CycleDriveCommand(Command cmd) {
+		
 	}
 
 	// Called just before this Command runs the first time
@@ -29,7 +34,7 @@ public class CycleDriveCommand extends Command {
 	*/
 		//swap commands with a single button
 
-		if (Robot.driveTrainSub.getCurrentCommand() instanceof SplitArcadeDriveCommand) {
+		if (cmd instanceof SplitArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
 			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
 		}

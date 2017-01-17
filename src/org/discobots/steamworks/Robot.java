@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.concurrent.TimeUnit;
 
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 
@@ -28,7 +29,8 @@ public class Robot extends IterativeRobot {
 	public static long loopExecutionTime = 0;
 
 	Command autonomousCommand, driveCommand;
-	SendableChooser driveChooser, autonChooser;
+	@SuppressWarnings("rawtypes")
+	public SendableChooser driveChooser, autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -45,8 +47,8 @@ public class Robot extends IterativeRobot {
 
 		driveChooser = new SendableChooser();
 		// driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		 driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		 driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
+		 driveChooser.addObject("Arcade Drive", new CycleDriveCommand(new ArcadeDriveCommand()));
+		 driveChooser.addDefault("Split Arcade Drive", new CycleDriveCommand(new SplitArcadeDriveCommand()));
 
 		// init camera and start simple stream process...
 		// IMPORTANT -- camera system and code is redone for 2017-- Cameras
@@ -67,7 +69,7 @@ public class Robot extends IterativeRobot {
 
 		Dashboard.init();
 		Dashboard.update();
-		SmartDashboard.putData("Choose Driving Controls", driveChooser);
+		SmartDashboard.putData("Choose Controls", driveChooser);
 
 	}
 
