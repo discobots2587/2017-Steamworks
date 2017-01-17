@@ -37,13 +37,12 @@ public class Dashboard {
 		} 
 		 if(driveCounter%100==1)//for very unimportant notifications
 		{
-			Command driveCmd = Robot.driveTrainSub.getCurrentCommand();
-				if (driveCmd instanceof SplitArcadeDriveCommand) {
-					 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
+				if (Robot.driveTrainSub.getCurrentCommand() instanceof SplitArcadeDriveCommand) {
+					 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive");	
 				}
 				else
 				{
-					 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive Command");	
+					 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
 				}
 		}
 		

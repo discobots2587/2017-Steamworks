@@ -2,6 +2,7 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.Robot;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
