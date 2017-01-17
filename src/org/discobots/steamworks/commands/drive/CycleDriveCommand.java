@@ -1,11 +1,13 @@
 package org.discobots.steamworks.commands.drive;
 
+import org.discobots.steamworks.Dashboard;
 import org.discobots.steamworks.Robot;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 //import org.discobots.steamworks.commands.drive.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CycleDriveCommand extends Command {
 	
@@ -28,10 +30,15 @@ public class CycleDriveCommand extends Command {
 	Command driveCmd = Robot.driveTrainSub.getCurrentCommand();//swap commands with a single button
 
 		if (driveCmd instanceof SplitArcadeDriveCommand) {
-			new ArcadeDriveCommand().start();}
-		else 
+			new ArcadeDriveCommand().start();
+			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
+		}
+		else
+		{
 			new SplitArcadeDriveCommand().start();
-		
+			 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive Command");	
+
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
