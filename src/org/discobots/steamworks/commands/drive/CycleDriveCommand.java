@@ -1,6 +1,5 @@
 package org.discobots.steamworks.commands.drive;
 
-import org.discobots.steamworks.Dashboard;
 import org.discobots.steamworks.Robot;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -10,17 +9,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CycleDriveCommand extends Command {
-	Command cmd;
-	public CycleDriveCommand(){
-		Command cmd = Robot.driveTrainSub.getCurrentCommand();	
-	}
+	private Command cmd2;
+	boolean isDef=false;
 	
-	public CycleDriveCommand(Command cmd) {
-		
+	public CycleDriveCommand(char charCmd) {
+		isDef=true;
+		if(charCmd=='A')
+		{
+			cmd2=new ArcadeDriveCommand();
+		}
+			
+		if(charCmd=='S')
+		{
+			cmd2=new SplitArcadeDriveCommand();
+		}
+			
+	}
+	public CycleDriveCommand() {
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		if(isDef==false)
+		cmd2 = Robot.driveTrainSub.getCurrentCommand();	
+
 	/*	Command driveCmd = Robot.driveTrainSub.getCurrentCommand();//swap commands with a single button
 		if (driveCmd instanceof SplitArcadeDriveCommand) {
 			new TankDriveCommand().start();
@@ -34,7 +46,7 @@ public class CycleDriveCommand extends Command {
 	*/
 		//swap commands with a single button
 
-		if (cmd instanceof SplitArcadeDriveCommand) {
+		if (cmd2 instanceof SplitArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
 			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
 		}

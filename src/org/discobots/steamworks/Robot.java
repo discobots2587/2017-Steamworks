@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand, driveCommand;
 	@SuppressWarnings("rawtypes")
-	public SendableChooser driveChooser, autonChooser;
+	SendableChooser driveChooser, autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -47,8 +47,8 @@ public class Robot extends IterativeRobot {
 
 		driveChooser = new SendableChooser();
 		// driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		 driveChooser.addObject("Arcade Drive", new CycleDriveCommand(new ArcadeDriveCommand()));
-		 driveChooser.addDefault("Split Arcade Drive", new CycleDriveCommand(new SplitArcadeDriveCommand()));
+		 driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
+		 driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
 
 		// init camera and start simple stream process...
 		// IMPORTANT -- camera system and code is redone for 2017-- Cameras
