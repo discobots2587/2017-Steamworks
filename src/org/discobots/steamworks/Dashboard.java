@@ -1,4 +1,6 @@
 package org.discobots.steamworks;
+import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
@@ -33,7 +35,14 @@ public class Dashboard {
 		} 
 		 if(driveCounter%100==1)//for very unimportant notifications
 		{
-
+				if (Robot.driveTrainSub.getCurrentCommand() instanceof SplitArcadeDriveCommand) {
+					 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive");	
+				}
+				else
+				{
+					 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
+				}
 		}
-		}
-}
+	}}
+		
+	
