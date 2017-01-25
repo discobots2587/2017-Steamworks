@@ -33,19 +33,23 @@ public class CycleDriveCommand extends Command {
 		if(isDef==false)
 		cmd2 = Robot.driveTrainSub.getCurrentCommand();	
 
-	/*	Command driveCmd = Robot.driveTrainSub.getCurrentCommand();//swap commands with a single button
-		if (driveCmd instanceof SplitArcadeDriveCommand) {
-			new TankDriveCommand().start();
-		} else if (driveCmd instanceof TankDriveCommand) {
+												//swap commands with a single button
+		if (cmd2 instanceof SplitArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
+			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
+			 
+		} else if (cmd2 instanceof TankDriveCommand) {
+			new SplitArcadeDriveCommand().start();
+
 		} 
 		else
 		{
-			new SplitArcadeDriveCommand().start();
+			SmartDashboard.putString("Current Drive: ", "Tank Drive");	
+			new TankDriveCommand().start();
 		}
-	*/
+	
 		//swap commands with a single button
-
+/*
 		if (cmd2 instanceof SplitArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
 			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
@@ -56,8 +60,8 @@ public class CycleDriveCommand extends Command {
 			 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive");	
 
 		}
+	}*/
 	}
-
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		end();

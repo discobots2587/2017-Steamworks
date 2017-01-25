@@ -40,9 +40,14 @@ public class Dashboard {
 				if (Robot.driveTrainSub.getCurrentCommand() instanceof SplitArcadeDriveCommand) {
 					 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive");	
 				}
-				else
+				else if (Robot.driveTrainSub.getCurrentCommand() instanceof ArcadeDriveCommand)
 				{
 					 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
+				}
+				else
+				{
+					 SmartDashboard.putString("Current Drive: ", "Tank Drive");	
+
 				}
 		}
 		

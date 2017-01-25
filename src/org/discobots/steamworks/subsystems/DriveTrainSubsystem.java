@@ -76,7 +76,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	public void tankDriveRamp(double leftStick, double rightStick) {
 		if (!allowRamped) {
-			tankDriveUnramped(leftStick, rightStick);
+			tankDrive(leftStick, rightStick);
 			return;
 		}
 
@@ -127,13 +127,12 @@ public class DriveTrainSubsystem extends Subsystem {
 
 
 
-	public void tankDriveUnramped(double leftStick, double rightStick) {
+	public void tankDrive(double leftStick, double rightStick) {
 		prevLeft = 0;
 		prevRight = 0;
 		prevX = 0;
 		prevY = 0;
-		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-				* kSpeedScaling);
+		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick* kSpeedScaling);
 	}
 
 	public void arcadeDriveUnramped(double y, double x) {
