@@ -3,10 +3,11 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
-	
+	public static LiveWindow lw;
 	public static int driveCounter = 0;
  
 	public static void init() {
@@ -31,7 +32,7 @@ public class Dashboard {
 		}
 		if (driveCounter%10==1)
 		{
-			//SmartDashboard.putNumber("PRESSURE", Robot.electricalSub.getPressure());
+						//SmartDashboard.putNumber("PRESSURE", Robot.electricalSub.getPressure());
 			
 			//SmartDashboard.putBoolean("Pressure Switch State", Robot.electricalSub.getPressureSwitchState());
 		} 

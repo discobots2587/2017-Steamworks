@@ -42,7 +42,7 @@ public class DriveTrainSubsystem extends Subsystem {
 	public double buttonSpeed;
 	public int autonTimeTest;
 
-	static double kSpeedScaling = 1.0;
+	public double kSpeedScaling = 1.0;
 
 	
 	public DriveTrainSubsystem() {
