@@ -12,19 +12,19 @@ public class CycleDriveCommand extends Command {
 	private Command cmd2;
 	boolean isDef=false;
 	
-	public CycleDriveCommand(char charCmd) {
-		isDef=true;
-		if(charCmd=='A')
-		{
-			cmd2=new ArcadeDriveCommand();
-		}
+//	public CycleDriveCommand(char charCmd) {
+//		isDef=true;
+//		if(charCmd=='A')
+//		{
+//			cmd2=new ArcadeDriveCommand();
+//		}
 			
-		if(charCmd=='S')
-		{
-			cmd2=new SplitArcadeDriveCommand();
-		}
+//		if(charCmd=='S')
+//		{
+//			cmd2=new SplitArcadeDriveCommand();
+//		}
 			
-	}
+//	}
 	public CycleDriveCommand() {
 	}
 
