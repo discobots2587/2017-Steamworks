@@ -9,24 +9,30 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CycleDriveCommand extends Command {
-	private Command cmd2;
+	Command cmd2;
 	boolean isDef=false;
+
 	
-//	public CycleDriveCommand(char charCmd) {
-//		isDef=true;
-//		if(charCmd=='A')
-//		{
-//			cmd2=new ArcadeDriveCommand();
-//		}
-			
-//		if(charCmd=='S')
-//		{
-//			cmd2=new SplitArcadeDriveCommand();
-//		}
-			
-//	}
-	public CycleDriveCommand() {
+public CycleDriveCommand() {
 	}
+
+public CycleDriveCommand(char charCmd) {
+
+	isDef=true;
+		if(charCmd=='S')
+		{
+			cmd2=new TankDriveCommand();
+		}
+		if(charCmd=='A')
+		{
+			cmd2=new SplitArcadeDriveCommand();
+		}
+		if(charCmd=='T')
+		{
+			cmd2=new ArcadeDriveCommand();
+		}
+	}
+
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
