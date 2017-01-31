@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArcadeDriveCommand extends Command {
+public class TankDriveCommand extends Command {
 
-    public ArcadeDriveCommand() {
+    public TankDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrainSub);
@@ -21,7 +21,7 @@ public class ArcadeDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrainSub.arcadeDrive(-Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickALX());
+    	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY(),-Robot.oi.getRawAnalogStickARY());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,7 +31,7 @@ public class ArcadeDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrainSub.arcadeDrive(0, 0);
+    	Robot.driveTrainSub.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
