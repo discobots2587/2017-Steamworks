@@ -9,43 +9,52 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CycleDriveCommand extends Command {
-	private Command cmd2;
+	Command cmd2;
 	boolean isDef=false;
+
 	
-	public CycleDriveCommand(char charCmd) {
-		isDef=true;
-		if(charCmd=='A')
-		{
-			cmd2=new ArcadeDriveCommand();
-		}
-			
+public CycleDriveCommand() {
+	}
+
+public CycleDriveCommand(char charCmd) {
+	isDef=true;
 		if(charCmd=='S')
+		{
+			cmd2=new TankDriveCommand();
+		}
+		if(charCmd=='A')
 		{
 			cmd2=new SplitArcadeDriveCommand();
 		}
-			
+		if(charCmd=='T')
+		{
+			cmd2=new ArcadeDriveCommand();
+		}
 	}
-	public CycleDriveCommand() {
-	}
+
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		if(isDef==false)
 		cmd2 = Robot.driveTrainSub.getCurrentCommand();	
 
-	/*	Command driveCmd = Robot.driveTrainSub.getCurrentCommand();//swap commands with a single button
-		if (driveCmd instanceof SplitArcadeDriveCommand) {
-			new TankDriveCommand().start();
-		} else if (driveCmd instanceof TankDriveCommand) {
+												//swap commands with a single button
+		if (cmd2 instanceof SplitArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
+			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
+			 
+		} else if (cmd2 instanceof TankDriveCommand) {
+			new SplitArcadeDriveCommand().start();
+
 		} 
 		else
 		{
-			new SplitArcadeDriveCommand().start();
+			SmartDashboard.putString("Current Drive: ", "Tank Drive");	
+			new TankDriveCommand().start();
 		}
-	*/
+	
 		//swap commands with a single button
-
+/*
 		if (cmd2 instanceof SplitArcadeDriveCommand) {
 			new ArcadeDriveCommand().start();
 			 SmartDashboard.putString("Current Drive: ", "Arcade Drive");	
@@ -56,8 +65,8 @@ public class CycleDriveCommand extends Command {
 			 SmartDashboard.putString("Current Drive: ", "Split Arcade Drive");	
 
 		}
+	}*/
 	}
-
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		end();
