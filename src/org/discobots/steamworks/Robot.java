@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.concurrent.TimeUnit;
 
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 
 public class Robot extends IterativeRobot {
@@ -44,9 +46,12 @@ public class Robot extends IterativeRobot {
 		// DumbPositioningAuton());
 
 		driveChooser = new SendableChooser();
-		// driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		 driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		 driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
+		 driveChooser.addObject("Tank Drive", new TankDriveCommand());
+		 //driveChooser.addDefault("Arcade Drive", new ArcadeDriveCommand());
+		 //driveChooser.addObject("Split Arcade Drive", new SplitArcadeDriveCommand());
+		 driveChooser.addObject("Split Arcade Drive", new CycleDriveCommand('S'));
+		 driveChooser.addDefault("Arcade Drive", new CycleDriveCommand('A'));
+		 driveChooser.addObject("Tank Drive", new CycleDriveCommand('T'));
 
 		 try{
 				LogicC615 = CameraServer.getInstance();//initialize server
