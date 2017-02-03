@@ -1,6 +1,6 @@
 package org.discobots.steamworks;
 
-import com.ctre.CANTalon;
+//import com.ctre.CANTalon;
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking

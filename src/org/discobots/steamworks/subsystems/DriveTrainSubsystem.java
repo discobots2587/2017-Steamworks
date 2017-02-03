@@ -33,7 +33,7 @@ private RobotDrive robotDrive;
 		robotDrive.arcadeDrive(x * kSpeedScaling, -y * kSpeedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
-	public void tankDriveUnramped(double leftStick, double rightStick) {
+	public void tankDrive(double leftStick, double rightStick) {
 
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
