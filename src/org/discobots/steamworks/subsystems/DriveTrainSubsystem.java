@@ -30,7 +30,7 @@ private RobotDrive robotDrive;
 }
 	public void arcadeDrive(double y, double x) {
 
-		robotDrive.arcadeDrive(x * kSpeedScaling, -y * kSpeedScaling);
+		robotDrive.arcadeDrive(x * kSpeedScaling, y * kSpeedScaling);
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
 	public void tankDrive(double leftStick, double rightStick) {
