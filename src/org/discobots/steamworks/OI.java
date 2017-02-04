@@ -1,5 +1,6 @@
 package org.discobots.steamworks;
 
+import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -51,11 +52,11 @@ public class OI {
 		
 		public OI() {
 			//JOYSTICK 2************************************************************************************
-		/*	b2_sBack.whenPressed(new CycleDriveCommand());
+			//b2_sBack.whenPressed(new CycleDriveCommand());
 			
 
 			
-			b2_dpadU.whenPressed(new SetArmPosCommand(2.7));
+			/*b2_dpadU.whenPressed(new SetArmPosCommand(2.7));
 			b2_dpadD.whenPressed(new SetArmPosCommand(0.7)); //Preferred shooting position
 			b2_dpadR.whenPressed(new ShiftCommand());
 
@@ -136,14 +137,14 @@ public class OI {
 			if(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1)
 				return gp1.getRawAxis(2);
 			else
-				return (xbox.getRawAxis(4));// Right stick x-axis
+				return (xbox.getRawAxis(2));// Right stick x-axis
 		}
 		
 		public double getRawAnalogStickARY() {
 			if(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1)
 			return -gp1.getRawAxis(3);
 			else
-			return (-xbox.getRawAxis(5));//Right stick y-axis
+			return (-xbox.getRawAxis(3));//Right stick y-axis
 		}
 
 		public static enum Hand { 
