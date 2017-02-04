@@ -18,15 +18,15 @@ public CycleDriveCommand() {
 
 public CycleDriveCommand(char charCmd) {
 	isDef=true;
-		if(charCmd=='S')
+		if(charCmd=='T')
 		{
 			cmd2=new TankDriveCommand();
 		}
-		if(charCmd=='A')
+		if(charCmd=='S')
 		{
 			cmd2=new SplitArcadeDriveCommand();
 		}
-		if(charCmd=='T')
+		if(charCmd=='A')
 		{
 			cmd2=new ArcadeDriveCommand();
 		}
