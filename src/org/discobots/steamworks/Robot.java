@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static long loopExecutionTime = 0;
 
 	Command autonomousCommand, driveCommand;
-	SendableChooser driveChooser, autonChooser;
+	SendableChooser<Command> driveChooser, autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -41,11 +41,11 @@ public class Robot extends IterativeRobot {
 			oi = new OI();
 			driveTrainSub = new DriveTrainSubsystem();
 
-		autonChooser = new SendableChooser();
+		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
 		// DumbPositioningAuton());
 
-		driveChooser = new SendableChooser();
+		driveChooser = new SendableChooser<Command>();
 		 driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		 driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
 		 driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
