@@ -46,12 +46,12 @@ public class Robot extends IterativeRobot {
 		// DumbPositioningAuton());
 
 		driveChooser = new SendableChooser();
-		 driveChooser.addObject("Tank Drive", new TankDriveCommand());
+		 //driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		 //driveChooser.addDefault("Arcade Drive", new ArcadeDriveCommand());
 		 //driveChooser.addObject("Split Arcade Drive", new SplitArcadeDriveCommand());
 		 driveChooser.addObject("Split Arcade Drive", new CycleDriveCommand('S'));
-		 driveChooser.addDefault("Arcade Drive", new CycleDriveCommand('A'));
-		 driveChooser.addObject("Tank Drive", new CycleDriveCommand('T'));
+		 driveChooser.addObject("Arcade Drive", new CycleDriveCommand('A'));
+		 driveChooser.addDefault("Tank Drive", new CycleDriveCommand('T'));
 
 		 try{
 				LogicC615 = CameraServer.getInstance();//initialize server
