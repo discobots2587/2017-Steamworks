@@ -119,7 +119,7 @@ public class OI {
 		*/}
 		
 		public double getRawAnalogStickALX() {
-			if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<=-0.1)
+			if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<-0.1)
 				return (gp1.getRawAxis(0));
 			else
 			{
@@ -130,17 +130,23 @@ public class OI {
 
 		
 		public double getRawAnalogStickALY() {
-			if(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<=-0.1)
+			if(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1)
 			return gp1.getRawAxis(1);
 			else
 			return (xbox.getRawAxis(1));// left stick y-axis
 		}
 
 		public double getRawAnalogStickARX() {
-			if(gp1.getRawAxis(4)>=0.1||gp1.getRawAxis(4)<=-0.1)
-			return gp1.getRawAxis(4);
+			if(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1)
+			return gp1.getRawAxis(2);
 			else
-				return (xbox.getRawAxis(4));// left stick x-axis
+			return (xbox.getRawAxis(4));// left stick x-axis
+		}
+		public double getRawAnalogStickARY() {
+			if(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1)
+			return -gp1.getRawAxis(3);
+			else
+			return (-xbox.getRawAxis(5));
 		}
 
 		public static enum Hand { 
@@ -166,12 +172,7 @@ public class OI {
 			     } 
 
 
-		public double getRawAnalogStickARY() {
-			if(gp1.getRawAxis(5)>=0.1||gp1.getRawAxis(5)<=-0.1)
-			return -gp1.getRawAxis(5);
-			else
-			return (-xbox.getRawAxis(5));
-		}
+
 
 		public double getRawAnalogStickBLX() {
 			return (xbox.getRawAxis(0));
