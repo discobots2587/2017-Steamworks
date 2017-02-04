@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 		private GamePad gp1 = new GamePad(0);
 		private GamePad xbox = new GamePad(1); 
+		private boolean gp1IsConnected = false;
+		private boolean xboxIsConnected = false;
 	//set buttons for each joystick
 		// JOYSTICK 2
 		private Button b_dpadU = new DPadButton(xbox, GamePad.DPAD_Y, true);
@@ -119,6 +121,10 @@ public class OI {
 		//	b_triggerR.whileHeld(new SetIntakeCommandCommand(.5));
 		//	b_triggerL.whileHeld(new SetIntakeCommandCommand(-.5));
 		*/}
+		public OI(boolean gp1,boolean xbox){
+			gp1IsConnected=gp1;
+			xboxIsConnected=xbox;
+		}
 		
 		public double getRawAnalogStickALX() {// left stick y-axis
 			try{if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<-0.1)
@@ -135,11 +141,11 @@ public class OI {
 			
 		public double getRawAnalogStickALY() {// left stick y-axis
 			try{
-				if(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1)
+				if(gp1IsConnected&&(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1))
 					return gp1.getRawAxis(1);}
 			catch(Exception e){}
 			
-			try{if(xbox.getRawAxis(1)!=0.0)
+			try{if(xboxIsConnected&&(xbox.getRawAxis(1)!=0.0))
 				return xbox.getRawAxis(1);}
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
@@ -147,11 +153,11 @@ public class OI {
 		
 		public double getRawAnalogStickARX() {// Right stick x-axis
 			try{
-				if(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1)
+				if(gp1IsConnected&&(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1))
 					return gp1.getRawAxis(2);}
 			catch(Exception e){}
 			
-			try{if(xbox.getRawAxis(2)!=0.0)
+			try{if(xboxIsConnected&&(xbox.getRawAxis(2)!=0.0))
 				return xbox.getRawAxis(2);}
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
@@ -159,11 +165,11 @@ public class OI {
 		
 		public double getRawAnalogStickARY() {//Right stick y-axis
 			try{
-				if(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1)
+				if(gp1IsConnected&&(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1))
 					return -gp1.getRawAxis(3);}
 			catch(Exception e){}
 			//double inverter=-1.0;
-			try{ if(xbox.getRawAxis(3)!=0.0)//////this was done because try{-xbox.getRaxis(3);} was causing an error related
+			try{ if(xboxIsConnected&&(xbox.getRawAxis(3)!=0.0))//////this was done because try{-xbox.getRaxis(3);} was causing an error related
 					return -xbox.getRawAxis(3);}//to the negative sign
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
