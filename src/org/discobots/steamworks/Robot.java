@@ -1,4 +1,3 @@
-
 package org.discobots.steamworks;
 
 import edu.wpi.cscore.UsbCamera;
@@ -21,7 +20,7 @@ import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrainSubsystem driveTrainSub;
-	
+
 	public static OI oi;
 
 	private CameraServer LogicC615;
@@ -39,44 +38,49 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-			//oi = new OI();
-			driveTrainSub = new DriveTrainSubsystem();
+		// oi = new OI();
+		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
 		// DumbPositioningAuton());
 
 		driveChooser = new SendableChooser<Command>();
-		 driveChooser.addObject("Tank Drive", new TankDriveCommand());
-		 driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		 driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
-		 /*driveChooser.addDefault("Split Arcade Drive", new CycleDriveCommand('S'));
-		 driveChooser.addObject("Arcade Drive", new CycleDriveCommand('A'));
-		 driveChooser.addObject("Tank Drive", new CycleDriveCommand('T'));*/
-		 
-		 controllerChooser = new SendableChooser<OI>();
-		 controllerChooser.addObject("Logitech", new OI(true,false));
-		 controllerChooser.addObject("xbox", new OI(false,true));
-		 controllerChooser.addObject("Both", new OI(true,true));
-		 
+		driveChooser.addObject("Tank Drive", new TankDriveCommand());
+		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
+		driveChooser.addDefault("Split Arcade Drive",
+				new SplitArcadeDriveCommand());
+		/*
+		 * driveChooser.addDefault("Split Arcade Drive", new
+		 * CycleDriveCommand('S')); driveChooser.addObject("Arcade Drive", new
+		 * CycleDriveCommand('A')); driveChooser.addObject("Tank Drive", new
+		 * CycleDriveCommand('T'));
+		 */
 
-		 try{
-				LogicC615 = CameraServer.getInstance();//initialize server
-				//camera name taken from RoboRio
-				 UsbCamera C615 = new UsbCamera("C615", 0);
-				 C615.setResolution(480, 320);
-				 //LogicC615.openCamera();
-				 //LogicC615.startCapture();
-				 if(C615.isConnected())
-				 LogicC615.startAutomaticCapture(C615);//automatically start streaming
-				// footage
-				 }catch(Exception e){
-				 System.err.println("There is a Vision Error: " + e.getMessage());
-				 }
+		controllerChooser = new SendableChooser<OI>();
+		controllerChooser.addObject("Logitech", new OI(true, false));
+		controllerChooser.addObject("xbox", new OI(false, true));
+		controllerChooser.addObject("Both", new OI(true, true));
 
-			Dashboard.init();
-			Dashboard.update();
-			SmartDashboard.putData("Choose Controls", driveChooser);
+		try {
+			LogicC615 = CameraServer.getInstance();// initialize server
+			// camera name taken from RoboRio
+			UsbCamera C615 = new UsbCamera("C615", 0);
+			C615.setResolution(480, 320);
+			// LogicC615.openCamera();
+			// LogicC615.startCapture();
+			if (C615.isConnected())
+				LogicC615.startAutomaticCapture(C615);// automatically start
+														// streaming
+			// footage
+		} catch (Exception e) {
+			System.err.println("There is a Vision Error: " + e.getMessage());
+		}
+
+		Dashboard.init();
+		Dashboard.update();
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Controller", controllerChooser);
 
 	}
 
@@ -146,12 +150,13 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		driveCommand = (Command) driveChooser.getSelected();
-		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
-																										// upon
-																										// disable
-			oi.setRumble(1);																			// for
-			TeleopStartTime = System.currentTimeMillis();												// one											// 1
-																										// second
+		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
+				.nanoTime();) { // rumbles
+								// upon
+								// disable
+			oi.setRumble(1); // for
+			TeleopStartTime = System.currentTimeMillis(); // one // 1
+															// second
 		}
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
