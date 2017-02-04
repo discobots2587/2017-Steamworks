@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
+	SendableChooser<OI> controllerChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -38,7 +39,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-			oi = new OI();
+			//oi = new OI();
 			driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
@@ -52,6 +53,12 @@ public class Robot extends IterativeRobot {
 		 /*driveChooser.addDefault("Split Arcade Drive", new CycleDriveCommand('S'));
 		 driveChooser.addObject("Arcade Drive", new CycleDriveCommand('A'));
 		 driveChooser.addObject("Tank Drive", new CycleDriveCommand('T'));*/
+		 
+		 controllerChooser = new SendableChooser<OI>();
+		 controllerChooser.addObject("Logitech", new OI(true,false));
+		 controllerChooser.addObject("xbox", new OI(false,true));
+		 controllerChooser.addObject("Both", new OI(true,true));
+		 
 
 		 try{
 				LogicC615 = CameraServer.getInstance();//initialize server
