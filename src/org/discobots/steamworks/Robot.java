@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		// oi = new OI();
+		oi = new OI();
 		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
@@ -48,8 +48,7 @@ public class Robot extends IterativeRobot {
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		driveChooser.addDefault("Split Arcade Drive",
-				new SplitArcadeDriveCommand());
+		driveChooser.addDefault("Split Arcade Drive",new SplitArcadeDriveCommand());
 		/*
 		 * driveChooser.addDefault("Split Arcade Drive", new
 		 * CycleDriveCommand('S')); driveChooser.addObject("Arcade Drive", new
@@ -58,9 +57,9 @@ public class Robot extends IterativeRobot {
 		 */
 
 		controllerChooser = new SendableChooser<OI>();
-		controllerChooser.addObject("Logitech", new OI(true, false));
-		controllerChooser.addObject("xbox", new OI(false, true));
-		controllerChooser.addObject("Both", new OI(true, true));
+		controllerChooser.addObject("Logitech",oi= new OI(true, false));
+		controllerChooser.addObject("xbox",oi= new OI(false, true));
+		controllerChooser.addObject("Both",oi= new OI(true, true));
 
 		try {
 			LogicC615 = CameraServer.getInstance();// initialize server
