@@ -3,6 +3,7 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
+
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -119,41 +120,50 @@ public class OI {
 		//	b_triggerL.whileHeld(new SetIntakeCommandCommand(-.5));
 		*/}
 		
-		public double getRawAnalogStickALX() {
+		public double getRawAnalogStickALX() {// left stick y-axis
 			try{if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<-0.1)
-				return (gp1.getRawAxis(0));}// left stick y-axis
-			catch(Exception e){return (xbox.getRawAxis(0));
-			}
-			return 0.0;//if neither controller works returns 0
+				return (gp1.getRawAxis(0));}
+			catch(Exception e){}
+			
+			try{xbox.getRawAxis(0);}
+			catch(Exception e){}
+			return 0.0;//if neither controller works returns 0.0
 		}
 				
 		
 			
-		public double getRawAnalogStickALY() {
+		public double getRawAnalogStickALY() {// left stick y-axis
 			try{
 				if(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1)
 					return gp1.getRawAxis(1);}
-			catch(Exception e){
-				return (xbox.getRawAxis(1));}// left stick y-axis
-			return 0.0;//if neither controller works returns 0
+			catch(Exception e){}
+			
+			try{xbox.getRawAxis(1);}
+			catch(Exception e){}
+			return 0.0;//if neither controller works returns 0.0
 		}
 		
-		public double getRawAnalogStickARX() {
+		public double getRawAnalogStickARX() {// Right stick x-axis
 			try{
 				if(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1)
 					return gp1.getRawAxis(2);}
-			catch(Exception e){
-				return (xbox.getRawAxis(2));}// Right stick x-axis
-			return 0.0;//if neither controller works returns 0
+			catch(Exception e){}
+			
+			try{xbox.getRawAxis(2);}
+			catch(Exception e){}
+			return 0.0;//if neither controller works returns 0.0
 		}
 		
-		public double getRawAnalogStickARY() {
+		public double getRawAnalogStickARY() {//Right stick y-axis
 			try{
 				if(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1)
 					return -gp1.getRawAxis(3);}
-			catch(Exception e){
-				return (-xbox.getRawAxis(3));}//Right stick y-axis
-			return 0.0;//if neither controller works returns 0
+			catch(Exception e){}
+			//double inverter=-1.0;
+			try{ if(xbox.getRawAxis(3)!=0.0)//////this was done because try{-xbox.getRaxis(3);} was causing an error related
+					return -xbox.getRawAxis(3);}//to the negative sign
+			catch(Exception e){}
+			return 0.0;//if neither controller works returns 0.0
 		}
 
 		public static enum Hand { 
