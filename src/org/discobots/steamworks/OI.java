@@ -120,31 +120,40 @@ public class OI {
 		*/}
 		
 		public double getRawAnalogStickALX() {
-			if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<-0.1)
-				return (gp1.getRawAxis(0));
-			else
-				return (xbox.getRawAxis(0));// left stick y-axis	
+			try{if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<-0.1)
+				return (gp1.getRawAxis(0));}// left stick y-axis
+			catch(Exception e){return (xbox.getRawAxis(0));
+			}
+			return 0.0;//if neither controller works returns 0
 		}
+				
+		
 			
 		public double getRawAnalogStickALY() {
-			if(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1)
-				return gp1.getRawAxis(1);
-			else
-				return (xbox.getRawAxis(1));// left stick y-axis
+			try{
+				if(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1)
+					return gp1.getRawAxis(1);}
+			catch(Exception e){
+				return (xbox.getRawAxis(1));}// left stick y-axis
+			return 0.0;//if neither controller works returns 0
 		}
 		
 		public double getRawAnalogStickARX() {
-			if(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1)
-				return gp1.getRawAxis(2);
-			else
-				return (xbox.getRawAxis(2));// Right stick x-axis
+			try{
+				if(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1)
+					return gp1.getRawAxis(2);}
+			catch(Exception e){
+				return (xbox.getRawAxis(2));}// Right stick x-axis
+			return 0.0;//if neither controller works returns 0
 		}
 		
 		public double getRawAnalogStickARY() {
-			if(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1)
-			return -gp1.getRawAxis(3);
-			else
-			return (-xbox.getRawAxis(3));//Right stick y-axis
+			try{
+				if(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1)
+					return -gp1.getRawAxis(3);}
+			catch(Exception e){
+				return (-xbox.getRawAxis(3));}//Right stick y-axis
+			return 0.0;//if neither controller works returns 0
 		}
 
 		public static enum Hand { 
