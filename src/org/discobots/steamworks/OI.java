@@ -125,7 +125,8 @@ public class OI {
 				return (gp1.getRawAxis(0));}
 			catch(Exception e){}
 			
-			try{xbox.getRawAxis(0);}
+			try{if(xbox.getRawAxis(0)!=0.0)
+				return xbox.getRawAxis(0);}
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
 		}
@@ -138,7 +139,8 @@ public class OI {
 					return gp1.getRawAxis(1);}
 			catch(Exception e){}
 			
-			try{xbox.getRawAxis(1);}
+			try{if(xbox.getRawAxis(1)!=0.0)
+				return xbox.getRawAxis(1);}
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
 		}
@@ -149,7 +151,8 @@ public class OI {
 					return gp1.getRawAxis(2);}
 			catch(Exception e){}
 			
-			try{xbox.getRawAxis(2);}
+			try{if(xbox.getRawAxis(2)!=0.0)
+				return xbox.getRawAxis(2);}
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
 		}
