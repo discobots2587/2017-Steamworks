@@ -16,10 +16,12 @@ import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
+import org.discobots.steamworks.subsystems.GearShiftSubsystem;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveTrainSubsystem driveTrainSub;
+	public static GearShiftSubsystem gearShiftSub;
 
 	public static OI oi;
 
@@ -40,6 +42,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		driveTrainSub = new DriveTrainSubsystem();
+		gearShiftSub=new GearShiftSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
@@ -56,10 +59,10 @@ public class Robot extends IterativeRobot {
 		 * CycleDriveCommand('T'));
 		 */
 
-		controllerChooser = new SendableChooser<OI>();
+		/*controllerChooser = new SendableChooser<OI>();
 		controllerChooser.addObject("Logitech",oi= new OI(true, false));
 		controllerChooser.addObject("xbox",oi= new OI(false, true));
-		controllerChooser.addObject("Both",oi= new OI(true, true));
+		controllerChooser.addObject("Both",oi= new OI(true, true));*/
 
 		try {
 			LogicC615 = CameraServer.getInstance();// initialize server
@@ -153,7 +156,7 @@ public class Robot extends IterativeRobot {
 				.nanoTime();) { // rumbles
 								// upon
 								// disable
-			oi.setRumble(1); // for
+			//oi.setRumble(0); // for
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}

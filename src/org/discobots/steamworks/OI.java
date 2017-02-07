@@ -1,6 +1,7 @@
 package org.discobots.steamworks;
 
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
+import org.discobots.steamworks.commands.drive.GearShiftCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 
@@ -15,8 +16,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 		private GamePad gp1 = new GamePad(0);
 		private GamePad xbox = new GamePad(1); 
-		private boolean gp1IsConnected = false;
-		private boolean xboxIsConnected = false;
+		private boolean gp1IsConnected = true;
+		private boolean xboxIsConnected = true;
 	//set buttons for each joystick
 		// JOYSTICK 2
 		private Button b_dpadU = new DPadButton(xbox, GamePad.DPAD_Y, true);
@@ -56,7 +57,8 @@ public class OI {
 		public OI() {
 			//JOYSTICK 2************************************************************************************
 			//b2_sBack.whenPressed(new CycleDriveCommand());
-			
+			b2_bumpL.whenPressed(new GearShiftCommand(true));
+			b2_bumpL.whenReleased(new GearShiftCommand(false));
 
 			
 			/*b2_dpadU.whenPressed(new SetArmPosCommand(2.7));
@@ -76,13 +78,15 @@ public class OI {
 			b2_sStar.whenPressed(new SensorToggle());
 			b2_btnY.whenPressed(new ToggleCompressor());
 			
-			//JOYSTICK 1******************************************************************
-
+			//JOYSTICK 1*/
 			
-	
+			b_bumpL.whenPressed(new GearShiftCommand(true));
+			b_bumpL.whenReleased(new GearShiftCommand(false));
+			
+			
 
-			//b_dpadU.whenPressed(new SetArmPosCommand(3.558));
-			//b_dpadL.whenPressed(new SetArmPosCommand(4));
+			/*b_dpadU.whenPressed(new SetArmPosCommand(3.558));
+		b_dpadL.whenPressed(new SetArmPosCommand(4));
 			b_dpadD.whenPressed(new SetArmPosCommand(0.7));
 			b_dpadU.whenPressed(new SetArmPosCommand(2.7));
 
@@ -157,8 +161,8 @@ public class OI {
 					return gp1.getRawAxis(2);}
 			catch(Exception e){}
 			
-			try{if(xboxIsConnected&&(xbox.getRawAxis(2)!=0.0))
-				return xbox.getRawAxis(2);}
+			try{if(xboxIsConnected&&(xbox.getRawAxis(4)!=0.0))
+				return xbox.getRawAxis(4);}
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
 		}
@@ -169,8 +173,8 @@ public class OI {
 					return -gp1.getRawAxis(3);}
 			catch(Exception e){}
 			//double inverter=-1.0;
-			try{ if(xboxIsConnected&&(xbox.getRawAxis(3)!=0.0))//////this was done because try{-xbox.getRaxis(3);} was causing an error related
-					return -xbox.getRawAxis(3);}//to the negative sign
+			try{ if(xboxIsConnected&&(xbox.getRawAxis(5)!=0.0))//////this was done because try{-xbox.getRaxis(3);} was causing an error related
+					return -xbox.getRawAxis(5);}//to the negative sign
 			catch(Exception e){}
 			return 0.0;//if neither controller works returns 0.0
 		}
