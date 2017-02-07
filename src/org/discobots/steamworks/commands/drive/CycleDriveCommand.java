@@ -45,6 +45,7 @@ public CycleDriveCommand(char charCmd) {
 			 
 		} else if (cmd2 instanceof TankDriveCommand) {
 			new SplitArcadeDriveCommand().start();
+			SmartDashboard.putString("Current Drive: ", "Split Arcade Drive");	
 
 		} 
 		else

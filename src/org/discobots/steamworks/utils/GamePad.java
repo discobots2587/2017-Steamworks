@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class GamePad extends Joystick {
+public class GamePad extends Joystick implements Comparable<GamePad>{
 	
 	public GamePad(int port) {
 		super(port);
 	}
-	
+	public static final String name = "genericHID";
+public boolean isXbox= false;
 	/***** MODE D CONFIGURATION *****/ 
 	// Axis
 	public static final int AXIS_LX = 0;
@@ -96,6 +97,15 @@ public class GamePad extends Joystick {
 			return false;
 		}
 
+	}
+
+	public int compareTo(GamePad arg0) {
+		if((this.isXbox==true&&arg0.isXbox==true)||(this.isXbox==false&&arg0.isXbox==false))
+		return	 0;
+		if (this.isXbox==false&&arg0.isXbox==true)
+			return -1;
+		else
+			return 1;
 	}
 	
 }

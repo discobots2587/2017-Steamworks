@@ -17,7 +17,7 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
 	Hand right = Hand.RIGHT;
     public LTRTXBOX() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+ /*       // eg. requires(chassis);
   //  	requires(Robot.armSub);
     	
     }
@@ -57,7 +57,7 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     // Called once after isFinished returns true
     protected void end() {
     	liftSpeed=0;//always set speeds to zero in end
-    	Robot.oi.setRumble(0);
+   // 	Robot.oi.setRumble(0);
     }
 
     // Called when another command which requires one or more of the same

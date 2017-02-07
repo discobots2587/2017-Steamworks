@@ -38,7 +38,5 @@ private RobotDrive robotDrive;
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
 	}
-	
-
 }
 
