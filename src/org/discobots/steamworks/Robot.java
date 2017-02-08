@@ -16,16 +16,10 @@ import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
-import org.discobots.steamworks.subsystems.GearShiftSubsystem;
-import org.discobots.steamworks.subsystems.HangSubsystem;
-import org.discobots.steamworks.subsystems.IntakeSubsystem;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveTrainSubsystem driveTrainSub;
-	public static GearShiftSubsystem gearShiftSub;
-	public static HangSubsystem hangSub;
-	public static IntakeSubsystem intakeSub;
 
 	public static OI oi;
 
@@ -44,12 +38,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
-		driveTrainSub = new DriveTrainSubsystem();
-		gearShiftSub=new GearShiftSubsystem();
-		hangSub=new HangSubsystem();
-		intakeSub = new IntakeSubsystem();
 		oi = new OI();
+		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
@@ -59,17 +49,7 @@ public class Robot extends IterativeRobot {
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
 		driveChooser.addDefault("Split Arcade Drive",new SplitArcadeDriveCommand());
-		/*
-		 * driveChooser.addDefault("Split Arcade Drive", new
-		 * CycleDriveCommand('S')); driveChooser.addObject("Arcade Drive", new
-		 * CycleDriveCommand('A')); driveChooser.addObject("Tank Drive", new
-		 * CycleDriveCommand('T'));
-		 */
-
-		/*controllerChooser = new SendableChooser<OI>();
-		controllerChooser.addObject("Logitech",oi= new OI(true, false));
-		controllerChooser.addObject("xbox",oi= new OI(false, true));
-		controllerChooser.addObject("Both",oi= new OI(true, true));*/
+		
 
 		try {
 			LogicC615 = CameraServer.getInstance();// initialize server
@@ -89,7 +69,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.init();
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
-		//SmartDashboard.putData("Choose Controller", controllerChooser);
+		SmartDashboard.putData("Choose Controller", controllerChooser);
 
 	}
 
@@ -163,7 +143,7 @@ public class Robot extends IterativeRobot {
 				.nanoTime();) { // rumbles
 								// upon
 								// disable
-			//oi.setRumble(0); // for
+		//	oi.setRumble(1); // for
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}

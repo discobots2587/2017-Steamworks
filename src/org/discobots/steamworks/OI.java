@@ -1,248 +1,263 @@
 package org.discobots.steamworks;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
-import org.discobots.steamworks.commands.drive.GearShiftCommand;
-import org.discobots.steamworks.commands.drive.ShiftCommand;
-import org.discobots.steamworks.commands.hang.HangCommand;
-import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
+import org.discobots.steamworks.utils.Xbox;
+
 public class OI {
-		private GamePad gp1 = new GamePad(0);
-		private GamePad xbox = new GamePad(1); 
-		private boolean gp1IsConnected = true;
-		private boolean xboxIsConnected = true;
-	//set buttons for each joystick
-		// JOYSTICK 2
-		private Button b_dpadU = new DPadButton(xbox, GamePad.DPAD_Y, true);
-		private Button b_dpadD = new DPadButton(xbox, GamePad.DPAD_Y, false);
-		private Button b_dpadR = new DPadButton(xbox, GamePad.DPAD_X, true);
-		private Button b_dpadL = new DPadButton(xbox, GamePad.DPAD_X, false);
-		private Button b_bumpR = new JoystickButton(xbox, 6);
-		private Button b_bumpL = new JoystickButton(xbox, 5);
-		public double b_triggerR = xbox.getRawAxis(3);//Right Trigger
-		public double b_triggerL = xbox.getRawAxis(2);//left trigger
-		private Button b_sBack = new JoystickButton(xbox, 7);
-		private Button b_sStar = new JoystickButton(xbox, 8);
-		private Button b_btnA = new JoystickButton(xbox, 1);
-		private Button b_btnX = new JoystickButton(xbox, 3);
-		private Button b_btnB = new JoystickButton(xbox, 2);
-		private Button b_btnY = new JoystickButton(xbox, 4);
-		private Button b_clicR = new JoystickButton(xbox, 10);
-		private Button b_clicL = new JoystickButton(xbox, 9);
-		// JOYSTICK 1
-		private Button b2_dpadU = new DPadButton(gp1, GamePad.DPAD_Y, true);
-		private Button b2_dpadD = new DPadButton(gp1, GamePad.DPAD_Y, false);
-		private Button b2_dpadR = new DPadButton(gp1, GamePad.DPAD_X, true);
-		private Button b2_dpadL = new DPadButton(gp1, GamePad.DPAD_X, false);
-		private Button b2_bumpR = new JoystickButton(gp1, GamePad.BTN_RB);
-		private Button b2_bumpL = new JoystickButton(gp1, GamePad.BTN_LB);
-		private Button b2_trigR = new JoystickButton(gp1, GamePad.BTN_RT);
-		private Button b2_trigL = new JoystickButton(gp1, GamePad.BTN_LT);
-		private Button b2_sBack = new JoystickButton(gp1, GamePad.BTN_BACK);
-		private Button b2_sStar = new JoystickButton(gp1, GamePad.BTN_START);
-		private Button b2_btnA = new JoystickButton(gp1, GamePad.BTN_A);
-		private Button b2_btnX = new JoystickButton(gp1, GamePad.BTN_X);
-		private Button b2_btnB = new JoystickButton(gp1, GamePad.BTN_B);
-		private Button b2_btnY = new JoystickButton(gp1, GamePad.BTN_Y);
-		private Button b2_clicR = new JoystickButton(gp1, GamePad.AXISBTN_R);
-		private Button b2_clicL = new JoystickButton(gp1, GamePad.AXISBTN_L);
-		
-		public OI() {
-			//JOYSTICK 2************************************************************************************
-			//b2_sBack.whenPressed(new CycleDriveCommand());
-			/*b2_bumpL.whenPressed(new GearShiftCommand(true));
-			b2_bumpL.whenReleased(new GearShiftCommand(false));
-			b2_clicL.whenPressed(new ShiftCommand());*/
-			IntakeCommand ShootCommand = new IntakeCommand();
-			b2_btnY.whileHeld(new HangCommand());
-			b2_btnA.toggleWhenPressed(ShootCommand);
-			
-			/*b2_dpadU.whenPressed(new SetArmPosCommand(2.7));
-			b2_dpadD.whenPressed(new SetArmPosCommand(0.7)); //Preferred shooting position
-			b2_dpadR.whenPressed(new ShiftCommand());
 
+	ArrayList<GamePad> gamePads;
+	public int numPads;
+	protected Thread left;
+	protected Thread right;
+	private double activeLX = 0.0;
+	private double activeLY = 0.0;
+	private double activeRY = 0.0;
+	private double activeRX = 0.0;
+	public boolean running = true;
 
-			b2_bumpR.whenPressed(new SetIntakeCommand(1));
-			b2_bumpR.whenReleased(new SetIntakeCommand(0));
-			b2_bumpL.whileHeld(new SetIntakeCommand(-1));
-			b2_bumpL.whenPressed(new SetIntakeCommand(0));
-			
-			b2_btnX.whenPressed(new MoveTail(0.2));
-			b2_btnA.whenPressed(new IntakeClawCommand());
+	public OI() {
+		if (DriverStation.getInstance().isDSAttached())
+			updateControllerList();
 
-			
-			b2_sStar.whenPressed(new SensorToggle());
-			b2_btnY.whenPressed(new ToggleCompressor());
-			
-			//JOYSTICK 1*/
-			b_btnY.whileHeld(new HangCommand());
-			b_btnA.toggleWhenPressed(ShootCommand);
-			
-			/*b_bumpL.whenPressed(new GearShiftCommand(true));
-			b_bumpL.whenReleased(new GearShiftCommand(false));
-			b_clicL.whenPressed(new ShiftCommand());*/
-			
-			
+		left = new Thread() {
+			public void run() {
+				while (running) {
+					double XLX = 0;
+					double XLY = 0;
+					double GenLY = 0;
+					double GenLX = 0;
+					try {
+						for (int i = gamePads.size(); i >= 0; i--)// possibly
+																	// better
+																	// way to
+																	// sort
+																	// using
+																	// comparator
+														
+						{
+							if (gamePads.get(i) != null && gamePads.get(i).isXbox == true) {
+								if (Math.abs(XLX) < Math.abs(gamePads.get(i).getLX()))
+									XLX = gamePads.get(i).getLX();
+								if (Math.abs(XLY) < Math.abs(gamePads.get(i).getLY()))
+									XLY = gamePads.get(i).getLY();
+							} else if (gamePads.get(i) != null && gamePads.get(i).isXbox == false) {
+								if (Math.abs(GenLX) < Math.abs(gamePads.get(i).getLX()))
+									GenLX = gamePads.get(i).getLX();
+								if (Math.abs(GenLY) < Math.abs(gamePads.get(i).getLY()))
+									GenLY = gamePads.get(i).getLY();
+							}
+						} // alternative method would be to actively sort and
+							// compare gamepads/xbox controllers but could cause
+							// conflicts with other parallel requests
+						if (Math.abs(GenLX) > Math.abs(XLX) && Math.abs(GenLX) > 0.1) {
+							activeLX = GenLX;
+						} else
+							activeLX = XLX;
 
-			/*b_dpadU.whenPressed(new SetArmPosCommand(3.558));
-		b_dpadL.whenPressed(new SetArmPosCommand(4));
-			b_dpadD.whenPressed(new SetArmPosCommand(0.7));
-			b_dpadU.whenPressed(new SetArmPosCommand(2.7));
+						if (Math.abs(GenLY) > Math.abs(XLY) && Math.abs(GenLY) > 0.1) {
+							activeLY = GenLY;
+						} else
+							activeLY = XLY;
 
-			b_dpadR.whenPressed(new ShiftCommand());
-			
-			b_sBack.whenPressed(new CycleDriveCommand());
-			b_bumpR.whileHeld(new SetIntakeCommand(-1)); //pulls ball in
-			b_bumpR.whenReleased(new SetIntakeCommand(0));
-			b_bumpL.whileHeld(new SetIntakeCommand(1)); //pushes ball out
-			b_bumpL.whenReleased(new SetIntakeCommand(0));
-			
-			b_btnA.whenPressed(new IntakeClawCommand());
-		//	b_btnX.whenPressed(new MoveTail(0.2));  //TAIL WAS REMOVED
-			
-			
-			b_sStar.whenPressed(new SensorToggle());
-			b_btnY.whenPressed(new ToggleCompressor());
-			
-			b_btnB.whenPressed(new SetShooter());
-			b2_btnB.whenPressed(new SetShooter());
+					} catch (Exception e) {
+						DriverStation.reportError("Controller Glitch", true);
+						activeLX = 0.0;
+						activeLY = 0.0;
 
-			// This is for the version with single click loading and firing, no whenReleased
-		//	b_btnB.whenPressed(new LinearPunchStartCommand());
-			//b_btnB.whenReleased(new LinearPunchEndCommand());
-		//	b2_bumpR.whenPressed(new LinearPunchStartCommand());
-		//	b2_bumpR.whenReleased(new LinearPunchEndCommand());
-			
-			
-			
-			
-			//b_bumpR.whileHeld(new MoveArmCommand(ArmSubsystem.armSpeed));
-//			b_bumpR.whenReleased(new MoveArmCommand(0));
-			//b_bumpL.whileHeld(new MoveArmCommand(-ArmSubsystem.armSpeed));
-		//	b_bumpL.whenReleased(new MoveArmCommand(0));
-			
-		//	b_triggerR.whileHeld(new SetIntakeCommandCommand(.5));
-		//	b_triggerL.whileHeld(new SetIntakeCommandCommand(-.5));
-		*/}
-		public OI(boolean gp1,boolean xbox){
-			gp1IsConnected=gp1;
-			xboxIsConnected=xbox;
-		}
-		
-		public double getRawAnalogStickALX() {// left stick y-axis
-			try{if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<-0.1)
-				return (gp1.getRawAxis(0));}
-			catch(Exception e){}
-			
-			try{if(xbox.getRawAxis(0)!=0.0)
-				return xbox.getRawAxis(0);}
-			catch(Exception e){}
-			return 0.0;//if neither controller works returns 0.0
-		}
-				
-		
-			
-		public double getRawAnalogStickALY() {// left stick y-axis
-			try{
-				if(gp1IsConnected&&(gp1.getRawAxis(1)>0.1||gp1.getRawAxis(1)<-0.1))
-					return gp1.getRawAxis(1);}
-			catch(Exception e){}
-			
-			try{if(xboxIsConnected&&(xbox.getRawAxis(1)!=0.0))
-				return xbox.getRawAxis(1);}
-			catch(Exception e){}
-			return 0.0;//if neither controller works returns 0.0
-		}
-		
-		public double getRawAnalogStickARX() {// Right stick x-axis
-			try{
-				if(gp1IsConnected&&(gp1.getRawAxis(2)>0.1||gp1.getRawAxis(2)<-0.1))
-					return gp1.getRawAxis(2);}
-			catch(Exception e){}
-			
-			try{if(xboxIsConnected&&(xbox.getRawAxis(4)!=0.0))
-				return xbox.getRawAxis(4);}
-			catch(Exception e){}
-			return 0.0;//if neither controller works returns 0.0
-		}
-		
-		public double getRawAnalogStickARY() {//Right stick y-axis
-			try{
-				if(gp1IsConnected&&(gp1.getRawAxis(3)>=0.1||gp1.getRawAxis(3)<=-0.1))
-					return -gp1.getRawAxis(3);}
-			catch(Exception e){}
-			//double inverter=-1.0;
-			try{ if(xboxIsConnected&&(xbox.getRawAxis(5)!=0.0))//////this was done because try{-xbox.getRaxis(3);} was causing an error related
-					return -xbox.getRawAxis(5);}//to the negative sign
-			catch(Exception e){}
-			return 0.0;//if neither controller works returns 0.0
-		}
+						updateControllerList();
+					}
+				}
+				activeLX = 0.0;// when running set to false
+				activeLY = 0.0;
+			}
+		};
 
-		public static enum Hand { 
-	        LEFT, RIGHT 
-	} 
-		
-		public void setRumble(Hand hand, double intensity) { //set for single side of controller
-			  	final float amount = new Float(intensity); 
-			  	        
-				   if (hand == Hand.LEFT) { 
-			  	            xbox.setRumble(RumbleType.kLeftRumble, amount); 
-			 	        } 
-				   if (hand==Hand.RIGHT)
-			 	        { 
-			 	             xbox.setRumble(RumbleType.kRightRumble, amount); 
-			  	        } 
-				     } 
-		     public void setRumble(double intensity) { //set rumble for both hands
-			         final float amount = new Float(intensity); 
-			          
-			         xbox.setRumble(RumbleType.kLeftRumble, amount); 
-			         xbox.setRumble(RumbleType.kRightRumble, amount); 
-			     } 
+		right = new Thread() {
+			public void run() {
+				while (running) {
+					double XRX = 0;
+					double XRY = 0;
+					double GenRY = 0;
+					double GenRX = 0;
+					try {
+						for (int i = gamePads.size(); i >= 0; i--)// possibly
+																	// better
+																	// way to
+																	// sort
+																	// using
+																	// comparator
+															
+						{
+							if (gamePads.get(i) != null && gamePads.get(i).isXbox == true) {
+								if (Math.abs(XRX) < Math.abs(gamePads.get(i).getRX()))
+									XRX = gamePads.get(i).getRX();
+								if (Math.abs(XRY) < Math.abs(gamePads.get(i).getRY()))
+									XRY = gamePads.get(i).getRY();
+							} else if (gamePads.get(i) != null && gamePads.get(i).isXbox == false) {
+								if (Math.abs(GenRX) < Math.abs(gamePads.get(i).getRX()))
+									GenRX = gamePads.get(i).getRX();
+								if (Math.abs(GenRY) < Math.abs(gamePads.get(i).getRY()))
+									GenRY = gamePads.get(i).getRY();
+							}
+						} // alternative method would be to actively sort and
+							// compare gamepads/xbox controllers but could cause
+							// conflicts with other parallel requests
+						if (Math.abs(GenRX) > Math.abs(XRX) && Math.abs(GenRX) > 0.1) {
+							activeRX = GenRX;
+						} else
+							activeRX = XRX;
 
+						if (Math.abs(GenRY) > Math.abs(XRY) && Math.abs(GenRY) > 0.1) {
+							activeRY = GenRY;
+						} else
+							activeRY = XRY;
 
+					} catch (Exception e) {
+						DriverStation.reportError("Controller Glitch", true);
+						activeRX = 0.0;
+						activeRY = 0.0;
 
+						updateControllerList();
+					}
+				}
+				activeRX = 0.0;// when running set to false
+				activeRY = 0.0;
+			}
+		};
 
-		public double getRawAnalogStickBLX() {
-			return (xbox.getRawAxis(0));// left stick x-axis
-		}
-
-		public double getRawAnalogStickBLY() {
-			return (-xbox.getRawAxis(1));// left stick y-axis
-
-		}
-
-		public double getRawAnalogStickBRX() {
-			return (xbox.getRawAxis(4));// right stick x-axis
-
-		}
-
-		public double getRawAnalogStickBRY() {
-			return (xbox.getRawAxis(5));// right stick x-axis
-
-		}
-		public double getRT(){
-			if(gp1.getRawAxis(3)<-0.1||gp1.getRawAxis(3)>0.1)
-				return gp1.getRawAxis(3);
-			else
-			return (xbox.getRawAxis(3));
-			
-		}
-		public double getLT(){
-			if(gp1.getRawAxis(2)<-0.1||gp1.getRawAxis(2)>0.1)
-				return gp1.getRawAxis(2);
-			else
-			return (xbox.getRawAxis(2));
-		} 
+		startThreads();
 	}
-//}
+
+	public void updateControllerList() {
+		numPads = 0;
+		for (int i = 0; i <= 6; i++)// check all ports
+		{
+			if (DriverStation.getInstance().getStickAxisCount(i) >= 6) {
+				numPads++;
+				gamePads.add(i, new Xbox(i));
+				SmartDashboard.putString("Xbox in Ports", SmartDashboard.getString("Xbox in Ports", "") + i + " ");
+			} else if (DriverStation.getInstance().getStickAxisCount(i) >= 1) {
+				gamePads.add(i, new GamePad(i));
+				numPads++;
+				SmartDashboard.putString("GenericHIDcontrol in Ports",
+						SmartDashboard.getString("GenericHIDcontrol in Ports", "") + i + " ");
+			} else
+				gamePads.remove(i);
+		}
+	}
+
+	// comparator if alternative is implemented
+	/*
+	 * enum BlockSort implements Comparator<GamePad> { LX {
+	 * 
+	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
+	 * (Math.abs(b1.getLX()) -Math.abs(b2.getLX())); } },
+	 * 
+	 * LY {
+	 * 
+	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
+	 * (Math.abs(b1.getLY()) - Math.abs(b2.getLY())); } } }
+	 */
+	public void startThreads() {
+		left.run();
+		right.run();
+	}
+
+	public double getRawAnalogStickALX() {// left stick y-axis
+		if (left.isAlive())
+			return activeLX;
+		else {
+			updateControllerList();
+			left.run();
+			return 0.0;
+		}
+	}
+
+	public double getRawAnalogStickALY() {// left stick y-axis
+		if (left.isAlive())
+			return activeLY;
+		else {
+			updateControllerList();
+			left.run();
+			return 0.0;
+		}
+	}
+
+	public double getRawAnalogStickARX() {// Right stick x-axis
+		if (left.isAlive())
+			return activeRX;
+		else {
+			updateControllerList();
+			right.run();
+			return 0.0;
+		}
+	}
+
+	public double getRawAnalogStickARY() {// Right stick y-axis
+		if (left.isAlive())
+			return activeRY;
+		else {
+			updateControllerList();
+			right.run();
+			return 0.0;
+		}
+	}
+
+	public static enum Hand {
+		LEFT, RIGHT
+	}
+
+	/*
+	 * public void setRumble(Hand hand, double intensity) { //set for single
+	 * side of controller final float amount = new Float(intensity);
+	 * 
+	 * if (hand == Hand.LEFT) { xbox.setRumble(RumbleType.kLeftRumble, amount);
+	 * } if (hand==Hand.RIGHT) { xbox.setRumble(RumbleType.kRightRumble,
+	 * amount); } } public void setRumble(double intensity) { //set rumble for
+	 * both hands final float amount = new Float(intensity);
+	 * 
+	 * xbox.setRumble(RumbleType.kLeftRumble, amount);
+	 * xbox.setRumble(RumbleType.kRightRumble, amount); }
+	 * 
+	 */
+
+	/*
+	 * public double getRawAnalogStickBLX() { return (xbox.getRawAxis(0));//
+	 * left stick x-axis }
+	 * 
+	 * public double getRawAnalogStickBLY() { return (-xbox.getRawAxis(1));//
+	 * left stick y-axis
+	 * 
+	 * }
+	 * 
+	 * public double getRawAnalogStickBRX() { return (xbox.getRawAxis(4));//
+	 * right stick x-axis
+	 * 
+	 * }
+	 * 
+	 * public double getRawAnalogStickBRY() { return (xbox.getRawAxis(5));//
+	 * right stick x-axis
+	 * 
+	 * } public double getRT(){
+	 * if(gp1.getRawAxis(3)<-0.1||gp1.getRawAxis(3)>0.1) return
+	 * gp1.getRawAxis(3); else return (xbox.getRawAxis(3));
+	 * 
+	 * } public double getLT(){
+	 * if(gp1.getRawAxis(2)<-0.1||gp1.getRawAxis(2)>0.1) return
+	 * gp1.getRawAxis(2); else return (xbox.getRawAxis(2)); }
+	 */
+}
+// }
