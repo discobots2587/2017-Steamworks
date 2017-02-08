@@ -6,6 +6,7 @@ import java.util.Comparator;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
+import org.discobots.steamworks.utils.GamePad.Hand;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -138,9 +139,22 @@ public class OI {
 			}
 		};
 
-		startThreads();
+		startThreads();	
 	}
-
+public void createMapping(){
+	
+	for(GamePad i : gamePads)  {
+		if (i.isXbox)
+		{
+			i.getButton(i.makebuttons(new DPadButton(i, GamePad.DPAD_Y, false))).toggleWhenPressed(new CycleDriveCommand());
+			i.getButton(i.makebuttons(new JoystickButton(i, Xbox.BTN_BACK))).toggleWhenPressed(new CycleDriveCommand());
+		}
+		else if (!i.isXbox)
+		{
+			
+		}
+	}
+}
 	public void updateControllerList() {
 		numPads = 0;
 		for (int i = 0; i <= 6; i++)// check all ports
@@ -157,6 +171,7 @@ public class OI {
 			} else
 				gamePads.remove(i);
 		}
+		createMapping();
 	}
 
 	// comparator if alternative is implemented
@@ -215,24 +230,16 @@ public class OI {
 			return 0.0;
 		}
 	}
-
-	public static enum Hand {
-		LEFT, RIGHT
-	}
-
-	/*
-	 * public void setRumble(Hand hand, double intensity) { //set for single
-	 * side of controller final float amount = new Float(intensity);
-	 * 
-	 * if (hand == Hand.LEFT) { xbox.setRumble(RumbleType.kLeftRumble, amount);
-	 * } if (hand==Hand.RIGHT) { xbox.setRumble(RumbleType.kRightRumble,
-	 * amount); } } public void setRumble(double intensity) { //set rumble for
-	 * both hands final float amount = new Float(intensity);
-	 * 
-	 * xbox.setRumble(RumbleType.kLeftRumble, amount);
-	 * xbox.setRumble(RumbleType.kRightRumble, amount); }
-	 * 
-	 */
+	
+	  public void setRumble(Hand hand, double intensity) { //set for single side of controller
+		  for (GamePad i:gamePads)
+		  {
+			  if (i.isXbox)
+				  i.setRumble(hand, intensity); //set for single side of controller 
+		  }
+	  }
+	  
+	 
 
 	/*
 	 * public double getRawAnalogStickBLX() { return (xbox.getRawAxis(0));//

@@ -1,5 +1,8 @@
 package org.discobots.steamworks.utils;
 
+import org.discobots.steamworks.OI.Hand;
+
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 public class Xbox extends GamePad {
@@ -109,5 +112,19 @@ public class Xbox extends GamePad {
 		}
 
 	}
+
+
+	  public void setRumble(Hand hand, double intensity) { //set for single side of controller 
+
+	  final float amount = new Float(intensity);
+	  
+if (hand == Hand.LEFT) { this.setRumble(RumbleType.kLeftRumble, amount);
+}
+if (hand==Hand.RIGHT) { this.setRumble(RumbleType.kRightRumble,
+amount); } } public void setRumble(double intensity) { //set rumble for both hands 
+	  final float amount = new Float(intensity);
+
+this.setRumble(RumbleType.kLeftRumble, amount);
+this.setRumble(RumbleType.kRightRumble, amount); }
 	
 }

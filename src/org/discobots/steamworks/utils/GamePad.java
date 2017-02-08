@@ -1,24 +1,28 @@
 package org.discobots.steamworks.utils;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class GamePad extends Joystick implements Comparable<GamePad>{
-	
+public class GamePad extends Joystick{ //implements Comparable<GamePad>
+	private ArrayList<Button> buttons;
 	public GamePad(int port) {
 		super(port);
+		buttons = new ArrayList<Button>();
 	}
 	public static final String name = "genericHID";
 public boolean isXbox= false;
 	/***** MODE D CONFIGURATION *****/ 
 	// Axis
-	public static final int AXIS_LX = 0;
-	public static final int AXIS_LY = 1;
-	public static final int AXIS_RX = 2;
-	public static final int AXIS_RY = 3;
-	public static final int DPAD_X = 4;
-	public static final int DPAD_Y = 5;
+	public final static int AXIS_LX = 0;
+	public final static int AXIS_LY = 1;
+	public final static int AXIS_RX = 2;
+	public final static int AXIS_RY = 3;
+	public final static int DPAD_X = 4;
+	public final static int DPAD_Y = 5;
 	// Buttons
 	public static final int BTN_X = 1;
 	public static final int BTN_A = 2;
@@ -108,4 +112,27 @@ public boolean isXbox= false;
 			return 1;
 	}
 	
+public int makebuttons(Button but)
+{
+	buttons.add(but);
+	return buttons.size();
+}
+public int makebuttons(int i, boolean pad)
+{
+	buttons.add(new DPadButton(this,i,pad));
+	return buttons.size();
+}
+public Button getButton(int index)
+{
+	return buttons.get(index);
+}
+
+public static enum Hand {
+	LEFT, RIGHT
+}
+
+public void setRumble(Hand hand, double intensity) {//does nothing
+	// TODO Auto-generated method stub
+	
+}
 }
