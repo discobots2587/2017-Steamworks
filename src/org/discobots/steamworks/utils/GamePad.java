@@ -7,15 +7,17 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GamePad extends Joystick{ //implements Comparable<GamePad>
+public class GamePad extends Joystick { // implements Comparable<GamePad>
 	private ArrayList<Button> buttons;
+
 	public GamePad(int port) {
 		super(port);
 		buttons = new ArrayList<Button>();
 	}
+
 	public static final String name = "genericHID";
-public boolean isXbox= false;
-	/***** MODE D CONFIGURATION *****/ 
+	public boolean isXbox = false;
+	/***** MODE D CONFIGURATION *****/
 	// Axis
 	public final static int AXIS_LX = 0;
 	public final static int AXIS_LY = 1;
@@ -36,10 +38,10 @@ public boolean isXbox= false;
 
 	public static final int BTN_BACK = 9;
 	public static final int BTN_START = 10;
-	
+
 	public static final int AXISBTN_L = 11;
 	public static final int AXISBTN_R = 12;
-	
+
 	public double getLX() {
 		return this.getRawAxis(AXIS_LX);
 	}
@@ -55,7 +57,7 @@ public boolean isXbox= false;
 	public double getRY() {
 		return this.getRawAxis(AXIS_RY) * -1;
 	}
-	
+
 	public double getDX() {
 		return this.getRawAxis(DPAD_X);
 	}
@@ -63,7 +65,7 @@ public boolean isXbox= false;
 	public double getDY() {
 		return this.getRawAxis(DPAD_Y) * -1;
 	}
-	
+
 	public static class DPadButton extends Button {
 		public static final double kDefaultThreshold = 0.7;
 		private GamePad m_gp;
@@ -75,7 +77,7 @@ public boolean isXbox= false;
 		}
 
 		public DPadButton(GamePad gp, int buttonAxis, double threshold, boolean positive) {
-			m_gp = gp; 
+			m_gp = gp;
 			m_buttonAxis = buttonAxis;
 			this.positive = positive;
 		}
@@ -104,35 +106,34 @@ public boolean isXbox= false;
 	}
 
 	public int compareTo(GamePad arg0) {
-		if((this.isXbox==true&&arg0.isXbox==true)||(this.isXbox==false&&arg0.isXbox==false))
-		return	 0;
-		if (this.isXbox==false&&arg0.isXbox==true)
+		if ((this.isXbox == true && arg0.isXbox == true) || (this.isXbox == false && arg0.isXbox == false))
+			return 0;
+		if (this.isXbox == false && arg0.isXbox == true)
 			return -1;
 		else
 			return 1;
 	}
-	
-public int makebuttons(Button but)
-{
-	buttons.add(but);
-	return buttons.size();
-}
-public int makebuttons(int i, boolean pad)
-{
-	buttons.add(new DPadButton(this,i,pad));
-	return buttons.size();
-}
-public Button getButton(int index)
-{
-	return buttons.get(index);
-}
 
-public static enum Hand {
-	LEFT, RIGHT
-}
+	public int makebuttons(Button but) {
+		buttons.add(but);
+		return buttons.size();
+	}
 
-public void setRumble(Hand hand, double intensity) {//does nothing
-	// TODO Auto-generated method stub
-	
-}
+	public int makebuttons(int i, boolean pad) {
+		buttons.add(new DPadButton(this, i, pad));
+		return buttons.size();
+	}
+
+	public Button getButton(int index) {
+		return buttons.get(index);
+	}
+
+	public static enum Hand {
+		LEFT, RIGHT
+	}
+
+	public void setRumble(Hand hand, double intensity) {// does nothing
+		// TODO Auto-generated method stub
+
+	}
 }

@@ -47,7 +47,7 @@ public class OI {
 																	// sort
 																	// using
 																	// comparator
-														
+
 						{
 							if (gamePads.get(i) != null && gamePads.get(i).isXbox == true) {
 								if (Math.abs(XLX) < Math.abs(gamePads.get(i).getLX()))
@@ -100,7 +100,7 @@ public class OI {
 																	// sort
 																	// using
 																	// comparator
-															
+
 						{
 							if (gamePads.get(i) != null && gamePads.get(i).isXbox == true) {
 								if (Math.abs(XRX) < Math.abs(gamePads.get(i).getRX()))
@@ -139,22 +139,23 @@ public class OI {
 			}
 		};
 
-		startThreads();	
+		startThreads();
 	}
-public void createMapping(){
-	
-	for(GamePad i : gamePads)  {
-		if (i.isXbox)
-		{
-			i.getButton(i.makebuttons(new DPadButton(i, GamePad.DPAD_Y, false))).toggleWhenPressed(new CycleDriveCommand());
-			i.getButton(i.makebuttons(new JoystickButton(i, Xbox.BTN_BACK))).toggleWhenPressed(new CycleDriveCommand());
-		}
-		else if (!i.isXbox)
-		{
-			
+
+	public void createMapping() {
+
+		for (GamePad i : gamePads) {
+			if (i.isXbox) {
+				i.getButton(i.makebuttons(new DPadButton(i, GamePad.DPAD_Y, false)))
+						.toggleWhenPressed(new CycleDriveCommand());
+				i.getButton(i.makebuttons(new JoystickButton(i, Xbox.BTN_BACK)))
+						.toggleWhenPressed(new CycleDriveCommand());
+			} else if (!i.isXbox) {
+
+			}
 		}
 	}
-}
+
 	public void updateControllerList() {
 		numPads = 0;
 		for (int i = 0; i <= 6; i++)// check all ports
@@ -230,16 +231,15 @@ public void createMapping(){
 			return 0.0;
 		}
 	}
-	
-	  public void setRumble(Hand hand, double intensity) { //set for single side of controller
-		  for (GamePad i:gamePads)
-		  {
-			  if (i.isXbox)
-				  i.setRumble(hand, intensity); //set for single side of controller 
-		  }
-	  }
-	  
-	 
+
+	public void setRumble(Hand hand, double intensity) { // set for single side
+															// of controller
+		for (GamePad i : gamePads) {
+			if (i.isXbox)
+				i.setRumble(hand, intensity); // set for single side of
+												// controller
+		}
+	}
 
 	/*
 	 * public double getRawAnalogStickBLX() { return (xbox.getRawAxis(0));//
