@@ -28,9 +28,7 @@ public class Xbox extends GamePad {
 	public static final int BTN_Y = 4;
 
 	public static final int BTN_LB = 5;
-	public static final int BTN_LT = (Integer) null;
 	public static final int BTN_RB = 6;
-	public static final int BTN_RT = (Integer) null;
 
 	public static final int BTN_BACK = 7;
 	public static final int BTN_START = 8;

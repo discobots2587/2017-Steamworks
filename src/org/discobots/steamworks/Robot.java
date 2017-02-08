@@ -30,7 +30,6 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
-	SendableChooser<OI> controllerChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -69,7 +68,6 @@ public class Robot extends IterativeRobot {
 		Dashboard.init();
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
-		SmartDashboard.putData("Choose Controller", controllerChooser);
 
 	}
 

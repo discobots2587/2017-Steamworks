@@ -1,5 +1,7 @@
 package org.discobots.steamworks;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -19,10 +21,10 @@ import org.discobots.steamworks.utils.Xbox;
 
 public class OI {
 
-	ArrayList<GamePad> gamePads;
+	GamePad[] gamePads;
 	public int numPads;
-	protected Thread left;
-	protected Thread right;
+	private Thread left;
+	private Thread right;
 	private double activeLX = 0.0;
 	private double activeLY = 0.0;
 	private double activeRY = 0.0;
@@ -30,9 +32,7 @@ public class OI {
 	public boolean running = true;
 
 	public OI() {
-		if (DriverStation.getInstance().isDSAttached())
-			updateControllerList();
-
+		gamePads = new GamePad[6];
 		left = new Thread() {
 			public void run() {
 				while (running) {
@@ -41,7 +41,7 @@ public class OI {
 					double GenLY = 0;
 					double GenLX = 0;
 					try {
-						for (int i = gamePads.size(); i >= 0; i--)// possibly
+						for (int i = gamePads.length-1; i >= 0; i--)// possibly
 																	// better
 																	// way to
 																	// sort
@@ -49,16 +49,16 @@ public class OI {
 																	// comparator
 
 						{
-							if (gamePads.get(i) != null && gamePads.get(i).isXbox == true) {
-								if (Math.abs(XLX) < Math.abs(gamePads.get(i).getLX()))
-									XLX = gamePads.get(i).getLX();
-								if (Math.abs(XLY) < Math.abs(gamePads.get(i).getLY()))
-									XLY = gamePads.get(i).getLY();
-							} else if (gamePads.get(i) != null && gamePads.get(i).isXbox == false) {
-								if (Math.abs(GenLX) < Math.abs(gamePads.get(i).getLX()))
-									GenLX = gamePads.get(i).getLX();
-								if (Math.abs(GenLY) < Math.abs(gamePads.get(i).getLY()))
-									GenLY = gamePads.get(i).getLY();
+							if (gamePads[i] != null && gamePads[i].isXbox == true) {
+								if (Math.abs(XLX) < Math.abs(gamePads[i].getLX()))
+									XLX = gamePads[i].getLX();
+								if (Math.abs(XLY) < Math.abs(gamePads[i].getLY()))
+									XLY = gamePads[i].getLY();
+							} else if (gamePads[i] != null && gamePads[i].isXbox == false) {
+								if (Math.abs(GenLX) < Math.abs(gamePads[i].getLX()))
+									GenLX = gamePads[i].getLX();
+								if (Math.abs(GenLY) < Math.abs(gamePads[i].getLY()))
+									GenLY = gamePads[i].getLY();
 							}
 						} // alternative method would be to actively sort and
 							// compare gamepads/xbox controllers but could cause
@@ -74,11 +74,15 @@ public class OI {
 							activeLY = XLY;
 
 					} catch (Exception e) {
-						DriverStation.reportError("Controller Glitch", true);
+						StringWriter errors = new StringWriter();
+						e.printStackTrace(new PrintWriter(errors));
+						String error = "Controller Glitch";
+								error.concat(errors.toString());
+						DriverStation.reportError(error, true);
+
 						activeLX = 0.0;
 						activeLY = 0.0;
 
-						updateControllerList();
 					}
 				}
 				activeLX = 0.0;// when running set to false
@@ -94,7 +98,7 @@ public class OI {
 					double GenRY = 0;
 					double GenRX = 0;
 					try {
-						for (int i = gamePads.size(); i >= 0; i--)// possibly
+						for (int i = gamePads.length; i >= 0; i--)// possibly
 																	// better
 																	// way to
 																	// sort
@@ -102,16 +106,16 @@ public class OI {
 																	// comparator
 
 						{
-							if (gamePads.get(i) != null && gamePads.get(i).isXbox == true) {
-								if (Math.abs(XRX) < Math.abs(gamePads.get(i).getRX()))
-									XRX = gamePads.get(i).getRX();
-								if (Math.abs(XRY) < Math.abs(gamePads.get(i).getRY()))
-									XRY = gamePads.get(i).getRY();
-							} else if (gamePads.get(i) != null && gamePads.get(i).isXbox == false) {
-								if (Math.abs(GenRX) < Math.abs(gamePads.get(i).getRX()))
-									GenRX = gamePads.get(i).getRX();
-								if (Math.abs(GenRY) < Math.abs(gamePads.get(i).getRY()))
-									GenRY = gamePads.get(i).getRY();
+							if (gamePads[i] != null && gamePads[i].isXbox == true) {
+								if (Math.abs(XRX) < Math.abs(gamePads[i].getRX()))
+									XRX = gamePads[i].getRX();
+								if (Math.abs(XRY) < Math.abs(gamePads[i].getRY()))
+									XRY = gamePads[i].getRY();
+							} else if (gamePads[i] != null && gamePads[i].isXbox == false) {
+								if (Math.abs(GenRX) < Math.abs(gamePads[i].getRX()))
+									GenRX = gamePads[i].getRX();
+								if (Math.abs(GenRY) < Math.abs(gamePads[i].getRY()))
+									GenRY = gamePads[i].getRY();
 							}
 						} // alternative method would be to actively sort and
 							// compare gamepads/xbox controllers but could cause
@@ -127,24 +131,27 @@ public class OI {
 							activeRY = XRY;
 
 					} catch (Exception e) {
-						DriverStation.reportError("Controller Glitch", true);
+						StringWriter errors = new StringWriter();
+						e.printStackTrace(new PrintWriter(errors));
+						String error = "Controller Glitch";
+								error.concat(errors.toString());
+						DriverStation.reportError(error, true);
 						activeRX = 0.0;
 						activeRY = 0.0;
 
-						updateControllerList();
 					}
 				}
 				activeRX = 0.0;// when running set to false
 				activeRY = 0.0;
 			}
 		};
-
-		startThreads();
 	}
 
 	public void createMapping() {
 
 		for (GamePad i : gamePads) {
+			try{
+		if (i!=null&&i.getAxisCount()>0){
 			if (i.isXbox) {
 				i.getButton(i.makebuttons(new DPadButton(i, GamePad.DPAD_Y, false)))
 						.toggleWhenPressed(new CycleDriveCommand());
@@ -154,25 +161,44 @@ public class OI {
 
 			}
 		}
-	}
+	} catch(Exception e)
+			{
+		StringWriter errors = new StringWriter();
+		e.printStackTrace(new PrintWriter(errors));
+		String error = "Controller Glitch";
+				error.concat(errors.toString());
+		DriverStation.reportError(error, true);
+			}
+		}
+			}
 
 	public void updateControllerList() {
 		numPads = 0;
-		for (int i = 0; i <= 6; i++)// check all ports
+		running = false;
+		for (int i = 0; i <= 5; i++)// check all ports
 		{
+			try{
 			if (DriverStation.getInstance().getStickAxisCount(i) >= 6) {
 				numPads++;
-				gamePads.add(i, new Xbox(i));
+				gamePads[i]= new Xbox(i);
 				SmartDashboard.putString("Xbox in Ports", SmartDashboard.getString("Xbox in Ports", "") + i + " ");
 			} else if (DriverStation.getInstance().getStickAxisCount(i) >= 1) {
-				gamePads.add(i, new GamePad(i));
+				gamePads[i]= new GamePad(i);
 				numPads++;
 				SmartDashboard.putString("GenericHIDcontrol in Ports",
 						SmartDashboard.getString("GenericHIDcontrol in Ports", "") + i + " ");
 			} else
-				gamePads.remove(i);
+				gamePads[i]=null;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
 		}
 		createMapping();
+		running=true;
+		startThreads();
 	}
 
 	// comparator if alternative is implemented
@@ -197,7 +223,6 @@ public class OI {
 			return activeLX;
 		else {
 			updateControllerList();
-			left.run();
 			return 0.0;
 		}
 	}
@@ -207,7 +232,6 @@ public class OI {
 			return activeLY;
 		else {
 			updateControllerList();
-			left.run();
 			return 0.0;
 		}
 	}
@@ -217,7 +241,6 @@ public class OI {
 			return activeRX;
 		else {
 			updateControllerList();
-			right.run();
 			return 0.0;
 		}
 	}
@@ -227,7 +250,6 @@ public class OI {
 			return activeRY;
 		else {
 			updateControllerList();
-			right.run();
 			return 0.0;
 		}
 	}
