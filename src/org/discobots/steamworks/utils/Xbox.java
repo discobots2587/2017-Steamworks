@@ -1,7 +1,5 @@
 package org.discobots.steamworks.utils;
 
-import org.discobots.steamworks.OI.Hand;
-
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 

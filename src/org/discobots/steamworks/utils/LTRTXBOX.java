@@ -2,8 +2,7 @@ package org.discobots.steamworks.utils;
 
 
 import org.discobots.steamworks.Robot;
-import org.discobots.steamworks.OI.Hand;
-//import org.discobots.steamworks.commands.arm.BrakeCommand;
+import org.discobots.steamworks.utils.GamePad.Hand;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LTRTXBOX extends Command {//computes the interim values for the xbox triggers and does speed scaling based on pressure
 	
 	double liftSpeed;
-	Hand left = Hand.LEFT;
-	Hand right = Hand.RIGHT;
+	Hand left = GamePad.Hand.LEFT;
+	Hand right = GamePad.Hand.RIGHT;
     public LTRTXBOX() {
         // Use requires() here to declare subsystem dependencies
  /*       // eg. requires(chassis);
