@@ -2,6 +2,9 @@ package org.discobots.steamworks;
 
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.GearShiftCommand;
+import org.discobots.steamworks.commands.drive.ShiftCommand;
+import org.discobots.steamworks.commands.hang.HangCommand;
+import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 
@@ -57,9 +60,12 @@ public class OI {
 		public OI() {
 			//JOYSTICK 2************************************************************************************
 			//b2_sBack.whenPressed(new CycleDriveCommand());
-			b2_bumpL.whenPressed(new GearShiftCommand(true));
+			/*b2_bumpL.whenPressed(new GearShiftCommand(true));
 			b2_bumpL.whenReleased(new GearShiftCommand(false));
-
+			b2_clicL.whenPressed(new ShiftCommand());*/
+			IntakeCommand ShootCommand = new IntakeCommand();
+			b2_btnY.whileHeld(new HangCommand());
+			b2_btnA.toggleWhenPressed(ShootCommand);
 			
 			/*b2_dpadU.whenPressed(new SetArmPosCommand(2.7));
 			b2_dpadD.whenPressed(new SetArmPosCommand(0.7)); //Preferred shooting position
@@ -79,9 +85,12 @@ public class OI {
 			b2_btnY.whenPressed(new ToggleCompressor());
 			
 			//JOYSTICK 1*/
+			b_btnY.whileHeld(new HangCommand());
+			b_btnA.toggleWhenPressed(ShootCommand);
 			
-			b_bumpL.whenPressed(new GearShiftCommand(true));
+			/*b_bumpL.whenPressed(new GearShiftCommand(true));
 			b_bumpL.whenReleased(new GearShiftCommand(false));
+			b_clicL.whenPressed(new ShiftCommand());*/
 			
 			
 

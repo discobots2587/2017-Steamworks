@@ -17,11 +17,15 @@ import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 import org.discobots.steamworks.subsystems.GearShiftSubsystem;
+import org.discobots.steamworks.subsystems.HangSubsystem;
+import org.discobots.steamworks.subsystems.IntakeSubsystem;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveTrainSubsystem driveTrainSub;
 	public static GearShiftSubsystem gearShiftSub;
+	public static HangSubsystem hangSub;
+	public static IntakeSubsystem intakeSub;
 
 	public static OI oi;
 
@@ -40,9 +44,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		
 		driveTrainSub = new DriveTrainSubsystem();
 		gearShiftSub=new GearShiftSubsystem();
+		hangSub=new HangSubsystem();
+		intakeSub = new IntakeSubsystem();
+		oi = new OI();
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
@@ -82,7 +89,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.init();
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
-		SmartDashboard.putData("Choose Controller", controllerChooser);
+		//SmartDashboard.putData("Choose Controller", controllerChooser);
 
 	}
 

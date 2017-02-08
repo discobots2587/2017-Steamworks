@@ -26,6 +26,8 @@ public class HW {
 	public final static int motorBackLeft = 3;
 	public final static int motorBackRight = 0;	 
 	public final static int motorFrontRight = 1;
+	public final static int motorHang=  4;
+	public final static int motorShoot= 5;
 
 
 	

@@ -2,7 +2,9 @@ package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -11,11 +13,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrainSubsystem extends Subsystem {
 private double kSpeedScaling;
 private RobotDrive robotDrive;
+DoubleSolenoid shifter;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
 		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
 								  HW.motorFrontRight,HW.motorBackRight);
+		shifter = new DoubleSolenoid(HW.shifterRight,HW.shifterLeft);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -37,6 +41,13 @@ private RobotDrive robotDrive;
 
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
+	}
+	public void setShifter(Value val)
+	{
+		shifter.set(val);
+	}
+	public Value getShifter(){
+		return shifter.get();
 	}
 }
 
