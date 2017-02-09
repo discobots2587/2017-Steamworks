@@ -2,9 +2,6 @@ package org.discobots.steamworks;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Comparator;
-
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
@@ -148,6 +145,9 @@ public class OI {
 				activeRY = 0.0;
 			}
 		};
+		while(!DriverStation.getInstance().isDSAttached())
+		{
+		}
 		updateControllerList();
 	}
 
@@ -200,7 +200,9 @@ public class OI {
 				e.printStackTrace(new PrintWriter(errors));
 				String error = "Controller Glitch";
 						error.concat(errors.toString());
-				DriverStation.reportError(error, true);
+				DriverStation.reportError(error, false);
+				gamePads[i]=null;
+
 			}
 
 		}

@@ -18,10 +18,8 @@ import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 
 public class Robot extends IterativeRobot {
-
-	public static DriveTrainSubsystem driveTrainSub;
-
 	public static OI oi;
+	public static DriveTrainSubsystem driveTrainSub;
 
 	private CameraServer LogicC615;
 	public static double totalTime;
