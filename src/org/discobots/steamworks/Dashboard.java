@@ -38,6 +38,9 @@ public class Dashboard {
 		
 		//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
+			SmartDashboard.putNumber("Axis ValueLx", Robot.oi.getRawAnalogStickALX());
+			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
+
 		}
 		if (driveCounter%10==1)
 		{

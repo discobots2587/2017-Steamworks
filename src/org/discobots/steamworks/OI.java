@@ -138,13 +138,17 @@ public class OI {
 						DriverStation.reportError(error, true);
 						activeRX = 0.0;
 						activeRY = 0.0;
+						System.out.println("ERROR LEFT HAND");
+						System.out.println("ERROR LEFT HAND");
 
 					}
+					System.out.println("ActiveRY"+activeRY);
 				}
 				activeRX = 0.0;// when running set to false
 				activeRY = 0.0;
 			}
 		};
+		updateControllerList();
 	}
 
 	public void createMapping() {
@@ -178,7 +182,7 @@ public class OI {
 		for (int i = 0; i <= 5; i++)// check all ports
 		{
 			try{
-			if (DriverStation.getInstance().getStickAxisCount(i) >= 6) {
+			if (DriverStation.getInstance().getStickAxisCount(i) == 6) {
 				numPads++;
 				gamePads[i]= new Xbox(i);
 				SmartDashboard.putString("Xbox in Ports", SmartDashboard.getString("Xbox in Ports", "") + i + " ");
@@ -192,7 +196,11 @@ public class OI {
 			}
 			catch(Exception e)
 			{
-				e.printStackTrace();
+				StringWriter errors = new StringWriter();
+				e.printStackTrace(new PrintWriter(errors));
+				String error = "Controller Glitch";
+						error.concat(errors.toString());
+				DriverStation.reportError(error, true);
 			}
 
 		}
