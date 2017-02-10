@@ -2,7 +2,7 @@ package org.discobots.steamworks.commands.gearIntake;
 
 import org.discobots.steamworks.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
