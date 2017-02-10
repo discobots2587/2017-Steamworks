@@ -157,6 +157,8 @@ public class Robot extends IterativeRobot {
 													// times
 		Scheduler.getInstance().run();
 		Dashboard.update();
+		if(oi.gamePads[1].getLZ()>0)
+			SmartDashboard.putBoolean("leftTrigg", true);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}

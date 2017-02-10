@@ -2,6 +2,8 @@ package org.discobots.steamworks;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
@@ -27,10 +29,124 @@ public class OI {
 	private double activeRY = 0.0;
 	private double activeRX = 0.0;
 	public boolean running = true;
-
+	
+	
+	private Button x0_dpadD;
+	private Button x0_dpadR;
+	private Button x0_dpadL;
+	private Button x0_bumpR;
+	private Button x0_bumpL;
+	public double x0_triggerR; 
+	public double x0_triggerL;
+	private Button x0_sBack;
+	private Button x0_sStar;
+	private Button x0_btnA;
+	private Button x0_btnX;
+	private Button x0_btnB;
+	private Button x0_btnY;
+	private Button x0_clicR; 
+	private Button x0_clicL;
+	
+	private Button x1_dpadD;
+	private Button x1_dpadR;
+	private Button x1_dpadL;
+	private Button x1_bumpR;
+	private Button x1_bumpL;
+	public double x1_triggerR; 
+	public double x1_triggerL;
+	private Button x1_sBack;
+	private Button x1_sStar;
+	private Button x1_btnA;
+	private Button x1_btnX;
+	private Button x1_btnB;
+	private Button x1_btnY;
+	private Button x1_clicR; 
+	private Button x1_clicL;
+	
+	
+	private Button x2_dpadD;
+	private Button x2_dpadR;
+	private Button x2_dpadL;
+	private Button x2_bumpR;
+	private Button x2_bumpL;
+	public double x2_triggerR; 
+	public double x2_triggerL;
+	private Button x2_sBack;
+	private Button x2_sStar;
+	private Button x2_btnA;
+	private Button x2_btnX;
+	private Button x2_btnB;
+	private Button x2_btnY;
+	private Button x2_clicR; 
+	private Button x2_clicL;
+	
+	private Button x3_dpadD;
+	private Button x3_dpadR;
+	private Button x3_dpadL;
+	private Button x3_bumpR;
+	private Button x3_bumpL;
+	public double x3_triggerR; 
+	public double x3_triggerL;
+	private Button x3_sBack;
+	private Button x3_sStar;
+	private Button x3_btnA;
+	private Button x3_btnX;
+	private Button x3_btnB;
+	private Button x3_btnY;
+	private Button x3_clicR; 
+	private Button x3_clicL;
+	
+	private Button x4_dpadD;
+	private Button x4_dpadR;
+	private Button x4_dpadL;
+	private Button x4_bumpR;
+	private Button x4_bumpL;
+	public double x4_triggerR; 
+	public double x4_triggerL;
+	private Button x4_sBack;
+	private Button x4_sStar;
+	private Button x4_btnA;
+	private Button x4_btnX;
+	private Button x4_btnB;
+	private Button x4_btnY;
+	private Button x4_clicR; 
+	private Button x4_clicL;
+	
+	private Button x5_dpadD;
+	private Button x5_dpadR;
+	private Button x5_dpadL;
+	private Button x5_bumpR;
+	private Button x5_bumpL;
+	public double x5_triggerR; 
+	public double x5_triggerL;
+	private Button x5_sBack;
+	private Button x5_sStar;
+	private Button x5_btnA;
+	private Button x5_btnX;
+	private Button x5_btnB;
+	private Button x5_btnY;
+	private Button x5_clicR; 
+	private Button x5_clicL;
+	
+	private Button g1_dpadD;
+	private Button g1_dpadR;
+	private Button g1_dpadL;
+	private Button g1_bumpR;
+	private Button g1_bumpL;
+	public double g1_triggerR; 
+	public double g1_triggerL;
+	private Button g1_sBack;
+	private Button g1_sStar;
+	private Button g1_btnA;
+	private Button g1_btnX;
+	private Button g1_btnB;
+	private Button g1_btnY;
+	private Button g1_clicR; 
+	private Button g1_clicL;
+public ArrayList <Button> joystickButtons;
 	public OI() {
 		gamePads = new GamePad[6];
-		left = new Thread() {
+/*		left = new Thread() {
 			public void run() {
 				while (running) {
 					double XLX = 0;
@@ -145,38 +261,17 @@ public class OI {
 				activeRY = 0.0;
 			}
 		};
-		while(!DriverStation.getInstance().isDSAttached())
+		while(!DriverStation.getInstance().isDSAttached())//wait for driverstation attachment
 		{
-		}
-		updateControllerList();
+			}
+	*/	updateControllerList();
 	}
 
-	public void createMapping() {
-
-		for (GamePad i : gamePads) {
-			try{
-		if (i!=null&&i.getAxisCount()>0){
-			if (i.isXbox) {
-				i.getButton(i.makebuttons(new DPadButton(i, GamePad.DPAD_Y, false)))
-						.toggleWhenPressed(new CycleDriveCommand());
-				i.getButton(i.makebuttons(new JoystickButton(i, Xbox.BTN_BACK)))
-						.toggleWhenPressed(new CycleDriveCommand());
-			} else if (!i.isXbox) {
-
-			}
-		}
-	} catch(Exception e)
-			{
-		StringWriter errors = new StringWriter();
-		e.printStackTrace(new PrintWriter(errors));
-		String error = "Controller Glitch";
-				error.concat(errors.toString());
-		DriverStation.reportError(error, true);
-			}
-		}
-			}
-
 	public void updateControllerList() {
+		new Thread()
+		{
+			
+		public void run(){
 		numPads = 0;
 		running = false;
 		for (int i = 0; i <= 5; i++)// check all ports
@@ -184,10 +279,11 @@ public class OI {
 			try{
 			if (DriverStation.getInstance().getStickAxisCount(i) == 6) {
 				numPads++;
-				gamePads[i]= new Xbox(i);
+				gamePads[i]= new Xbox(i, true);
+				SmartDashboard.putString("Controller Debug Name", gamePads[i].thegetName());
 				SmartDashboard.putString("Xbox in Ports", SmartDashboard.getString("Xbox in Ports", "") + i + " ");
 			} else if (DriverStation.getInstance().getStickAxisCount(i) >= 1) {
-				gamePads[i]= new GamePad(i);
+				gamePads[i]= new GamePad(i, false);
 				numPads++;
 				SmartDashboard.putString("GenericHIDcontrol in Ports",
 						SmartDashboard.getString("GenericHIDcontrol in Ports", "") + i + " ");
@@ -206,10 +302,57 @@ public class OI {
 			}
 
 		}
+		}}.run();
 		createMapping();
 		running=true;
-		startThreads();
+		//startThreads();
 	}
+	public void createMapping() {
+
+		for (int i=5; i>=0; i--) {
+		if (gamePads[i]!=null&&gamePads[i].getAxisCount()>0){
+			if (gamePads[i].isXbox) {
+					/*
+					 * int temp; temp = gamePads[i].makebuttons(new
+					 * DPadButton(gamePads[i], Xbox.DPAD_Y, false));
+					 * gamePads[i].getButton(temp-1).toggleWhenPressed(new
+					 * CycleDriveCommand()); temp = gamePads[i].makebuttons(new
+					 * JoystickButton(gamePads[i], Xbox.BTN_BACK));
+					 * gamePads[i].getButton(temp-1).toggleWhenPressed(new
+					 * CycleDriveCommand());
+					 * SmartDashboard.putBoolean("Mapping Created for Xbox",
+					 * true);
+					 */
+				}
+			
+			if (!gamePads[i].isXbox) {
+			}
+			if (i == 1) {
+				x1_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+				x1_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+				x1_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+				x1_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
+				x1_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+				if (gamePads[i].isXbox) {
+					x1_triggerR = gamePads[i].getLZ();// Right Trigger
+					x1_triggerL = gamePads[i].getRZ();// left trigger
+				} else {
+
+				}
+				x1_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+				x1_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+				x1_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+				x1_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+				x1_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+				x1_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+				x1_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+				x1_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+			}
+		}
+		}
+	}
+
+	
 
 	// comparator if alternative is implemented
 	/*
@@ -229,37 +372,34 @@ public class OI {
 	}
 
 	public double getRawAnalogStickALX() {// left stick y-axis
-		if (left.isAlive())
+	//	if (left.isAlive())
+		SmartDashboard.putNumber("ALX", activeLX);
 			return activeLX;
-		else {
-			updateControllerList();
-			return 0.0;
-		}
+		//else {
+	//		return 0.0;
+		
 	}
 
 	public double getRawAnalogStickALY() {// left stick y-axis
-		if (left.isAlive())
+		if (true)
 			return activeLY;
 		else {
-			updateControllerList();
 			return 0.0;
 		}
 	}
 
 	public double getRawAnalogStickARX() {// Right stick x-axis
-		if (left.isAlive())
+		if (true)
 			return activeRX;
 		else {
-			updateControllerList();
 			return 0.0;
 		}
 	}
 
 	public double getRawAnalogStickARY() {// Right stick y-axis
-		if (left.isAlive())
+		if (true)
 			return activeRY;
 		else {
-			updateControllerList();
 			return 0.0;
 		}
 	}

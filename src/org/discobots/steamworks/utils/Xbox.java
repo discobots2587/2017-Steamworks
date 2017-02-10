@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 
 public class Xbox extends GamePad {
 
-	public Xbox(int port) {
-		super(port);
+	public Xbox(int port, boolean isbox) {
+		super(port, isbox);
 	}
 
 	String name = "XboxOne";
@@ -128,6 +128,10 @@ public class Xbox extends GamePad {
 
 		this.setRumble(RumbleType.kLeftRumble, amount);
 		this.setRumble(RumbleType.kRightRumble, amount);
+	}
+	public String thegetName()
+	{
+		return name;
 	}
 
 }
