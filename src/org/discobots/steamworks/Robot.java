@@ -16,10 +16,18 @@ import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
+import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
+import org.discobots.steamworks.subsystems.HangSubsystem;
+import org.discobots.steamworks.subsystems.IntakeSubsystem;
+import org.discobots.steamworks.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
 
 	public static DriveTrainSubsystem driveTrainSub;
+	public static ShooterSubsystem shootSub;
+	public static IntakeSubsystem intakeSub;
+	public static HangSubsystem hangSub;
+	public static GearIntakeSubsystem gearIntakeSub;
 
 	public static OI oi;
 
@@ -37,8 +45,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		
 		driveTrainSub = new DriveTrainSubsystem();
+		shootSub = new ShooterSubsystem();
+		intakeSub = new IntakeSubsystem();
+		hangSub = new HangSubsystem();
+		gearIntakeSub = new GearIntakeSubsystem();
+		oi = new OI();
+		
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
@@ -138,14 +152,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		driveCommand = (Command) driveChooser.getSelected();
-		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
-				.nanoTime();) { // rumbles
-								// upon
-								// disable
-		//	oi.setRumble(1); // for
-			TeleopStartTime = System.currentTimeMillis(); // one // 1
-															// second
-		}
+
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
 	}
