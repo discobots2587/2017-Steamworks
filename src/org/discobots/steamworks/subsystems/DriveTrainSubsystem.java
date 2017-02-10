@@ -1,6 +1,7 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -19,11 +20,13 @@ DoubleSolenoid shifter;
 	public DriveTrainSubsystem(){
 		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
 								  HW.motorFrontRight,HW.motorBackRight);
+		robotDrive.setSafetyEnabled(false);
 		shifter = new DoubleSolenoid(HW.shifterRight,HW.shifterLeft);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new SplitArcadeDriveCommand());
     }
 
 	public void setSpeedScaling(double speedScale) {
