@@ -128,21 +128,21 @@ public class OI {
 	private Button x5_clicR; 
 	private Button x5_clicL;
 	
-	private Button g1_dpadD;
-	private Button g1_dpadR;
-	private Button g1_dpadL;
-	private Button g1_bumpR;
-	private Button g1_bumpL;
-	public double g1_triggerR; 
-	public double g1_triggerL;
-	private Button g1_sBack;
-	private Button g1_sStar;
-	private Button g1_btnA;
-	private Button g1_btnX;
-	private Button g1_btnB;
-	private Button g1_btnY;
-	private Button g1_clicR; 
-	private Button g1_clicL;
+	private Button L1_dpadD;
+	private Button L1_dpadR;
+	private Button L1_dpadL;
+	private Button L1_bumpR;
+	private Button L1_bumpL;
+	public double L1_triggerR; 
+	public double L1_triggerL;
+	private Button L1_sBack;
+	private Button L1_sStar;
+	private Button L1_btnA;
+	private Button L1_btnX;
+	private Button L1_btnB;
+	private Button L1_btnY;
+	private Button L1_clicR; 
+	private Button L1_clicL;
 public ArrayList <Button> joystickButtons;
 	public OI() {
 		gamePads = new GamePad[6];
@@ -307,13 +307,49 @@ public ArrayList <Button> joystickButtons;
 		running=true;
 		//startThreads();
 	}
+
 	public void createMapping() {
 
-		for (int i=5; i>=0; i--) {
-		if (gamePads[i]!=null&&gamePads[i].getAxisCount()>0){
-			if (gamePads[i].isXbox) {
+		for (int i = 5; i >= 0; i--) {
+			if (gamePads[i] != null && gamePads[i].getAxisCount() > 0) {
+				if (gamePads[i].isXbox) {// ability to create entirely separate
+											// control scheme for xbox
+											// controller even if in same port
+					if (i == 1) {// Can also differentiate by specific port set
+									// in DriverStation Software
+						x1_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+						x1_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+						x1_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+						x1_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);// dynamically
+																						// referenced
+																						// so
+																						// new
+																						// gamepad
+																						// subclass
+																						// will
+																						// override
+																						// these
+																						// values
+						x1_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+						if (gamePads[i].isXbox) {// for values specific to the
+													// xbox class put here
+							x1_triggerR = gamePads[i].getLZ();// Right Trigger
+							x1_triggerL = gamePads[i].getRZ();// left trigger
+						} else {// for values specific to non xbox class put
+								// here
+
+						}
+						x1_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+						x1_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+						x1_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+						x1_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+						x1_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+						x1_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+						x1_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+						x1_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+					}
 					/*
-					 * int temp; temp = gamePads[i].makebuttons(new
+					 * int temp; temp = gamePads[i].makebuttons(new               //Previous idea to set buttons and commands in each controller object - not working
 					 * DPadButton(gamePads[i], Xbox.DPAD_Y, false));
 					 * gamePads[i].getButton(temp-1).toggleWhenPressed(new
 					 * CycleDriveCommand()); temp = gamePads[i].makebuttons(new
@@ -324,35 +360,124 @@ public ArrayList <Button> joystickButtons;
 					 * true);
 					 */
 				}
-			
-			if (!gamePads[i].isXbox) {
-			}
-			if (i == 1) {
-				x1_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
-				x1_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
-				x1_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
-				x1_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
-				x1_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
-				if (gamePads[i].isXbox) {
-					x1_triggerR = gamePads[i].getLZ();// Right Trigger
-					x1_triggerL = gamePads[i].getRZ();// left trigger
-				} else {
 
+				if (!gamePads[i].isXbox) {// ability to create entirely separate
+											// control scheme for non xbox
+											// controller even if in same port
+					if (i == 1) {// Can also differentiate by specific port set
+									// in DriverStation Software
+						L1_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+						L1_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+						L1_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+						L1_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
+						L1_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+						if (gamePads[i].isXbox) {
+							L1_triggerR = gamePads[i].getLZ();// Right Trigger
+							L1_triggerL = gamePads[i].getRZ();// left trigger
+						} else {
+
+						}
+						L1_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+						L1_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+						L1_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+						L1_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+						L1_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+						L1_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+						L1_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+						L1_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+
+					}
 				}
-				x1_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
-				x1_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
-				x1_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
-				x1_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
-				x1_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
-				x1_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
-				x1_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
-				x1_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+
+				if (i == 2) {
+					x2_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+					x2_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+					x2_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+					x2_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
+					x2_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+					if (gamePads[i].isXbox) {
+						x2_triggerR = gamePads[i].getLZ();// Right Trigger
+						x2_triggerL = gamePads[i].getRZ();// left trigger
+					} else {
+
+					}
+					x2_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+					x2_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+					x2_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+					x2_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+					x2_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+					x2_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+					x2_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+					x2_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+				}
+
+				if (i == 3) {
+					x3_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+					x3_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+					x3_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+					x3_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
+					x3_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+					if (gamePads[i].isXbox) {
+						x3_triggerR = gamePads[i].getLZ();// Right Trigger
+						x3_triggerL = gamePads[i].getRZ();// left trigger
+					} else {
+
+					}
+					x3_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+					x3_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+					x3_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+					x3_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+					x3_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+					x3_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+					x3_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+					x3_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+				}
+				if (i == 4) {
+					x4_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+					x4_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+					x4_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+					x4_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
+					x4_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+					if (gamePads[i].isXbox) {
+						x4_triggerR = gamePads[i].getLZ();// Right Trigger
+						x4_triggerL = gamePads[i].getRZ();// left trigger
+					} else {
+
+					}
+					x4_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+					x4_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+					x4_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+					x4_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+					x4_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+					x4_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+					x4_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+					x4_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+				}
+				if (i == 5) {
+					x5_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
+					x5_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
+					x5_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
+					x5_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
+					x5_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+					if (gamePads[i].isXbox) {
+						x5_triggerR = gamePads[i].getLZ();// Right Trigger
+						x5_triggerL = gamePads[i].getRZ();// left trigger
+					} else {
+
+					}
+					x5_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
+					x5_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
+					x5_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
+					x5_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
+					x5_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
+					x5_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
+					x5_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
+					x5_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+				}
+
 			}
-		}
 		}
 	}
-
-	
 
 	// comparator if alternative is implemented
 	/*
