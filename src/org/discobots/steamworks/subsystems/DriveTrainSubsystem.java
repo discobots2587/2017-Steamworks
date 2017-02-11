@@ -61,5 +61,8 @@ Solenoid shifterLeft;
 		shifterRight.set(val);
 		shifterLeft.set(val);
 	}
+	public boolean getLRShifter(){
+		return shifterRight.get();
+	}
 }
 
