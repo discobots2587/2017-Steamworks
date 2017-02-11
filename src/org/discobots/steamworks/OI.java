@@ -65,7 +65,8 @@ public class OI {
 		//JOYSTICK 2************************************************************************************
 		b2_sBack.whenPressed(new CycleDriveCommand());
 		
-		IntakeCommand in = new IntakeCommand();
+		IntakeCommand in = new IntakeCommand(1.0);
+		IntakeCommand out = new IntakeCommand(1.0);
 		GearIntakeCommand g = new GearIntakeCommand();
 		ToggleHangCommand h = new ToggleHangCommand(.75);
 		
@@ -74,6 +75,7 @@ public class OI {
 		b2_btnB.toggleWhenPressed(h);
 		
 		b2_bumpL.toggleWhenPressed(in);
+		b2_trigL.toggleWhenPressed(out);
 		b2_btnA.whileHeld(new ShootCommand());
 		b2_bumpR.toggleWhenPressed(g);
 		b2_btnX.whenPressed(new GearShiftCommand());
@@ -115,6 +117,7 @@ public class OI {
 		b_btnY.whenPressed(new HangCommand(.75,2000));
 		
 		b_bumpL.toggleWhenPressed(in);
+		
 		b_btnB.whileHeld(new ShootCommand());
 		b_bumpR.toggleWhenPressed(g);
 		b_btnX.whenPressed(new GearShiftCommand());
