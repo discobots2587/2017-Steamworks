@@ -3,14 +3,21 @@ package org.discobots.steamworks;
 
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
+import org.discobots.steamworks.commands.drive.DownShiftCommand;
+import org.discobots.steamworks.commands.drive.FullSpeedCommand;
+import org.discobots.steamworks.commands.drive.HalfSpeedCommand;
+import org.discobots.steamworks.commands.drive.ShiftCommand;
+import org.discobots.steamworks.commands.drive.UpShiftCommand;
 import org.discobots.steamworks.commands.gearIntake.GearIntakeCommand;
 import org.discobots.steamworks.commands.gearIntake.GearShiftCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.hang.ToggleHangCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
+import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
+import org.discobots.steamworks.utils.TriggerToggle;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -35,6 +42,8 @@ public class OI {
 	private Button b_bumpL = new JoystickButton(xbox, 5);
 	public double b_triggerR = xbox.getRawAxis(3);//Right Trigger
 	public double b_triggerL = xbox.getRawAxis(2);//left trigger
+	public TriggerToggle b_trigR = new TriggerToggle(xbox,3);
+	public TriggerToggle b_trigL = new TriggerToggle(xbox,2);
 	private Button b_sBack = new JoystickButton(xbox, 7);
 	private Button b_sStar = new JoystickButton(xbox, 8);
 	private Button b_btnA = new JoystickButton(xbox, 1);
@@ -69,6 +78,9 @@ public class OI {
 		IntakeCommand out = new IntakeCommand(1.0);
 		GearIntakeCommand g = new GearIntakeCommand();
 		ToggleHangCommand h = new ToggleHangCommand(.75);
+		ShootCommand shoot = new ShootCommand();
+		BlendCommand blendIn = new BlendCommand(1.0);
+		BlendCommand blendOut = new BlendCommand(-1.0);
 		
 		
 		b2_btnY.whenPressed(new HangCommand(.75,2000));
@@ -76,9 +88,15 @@ public class OI {
 		
 		b2_bumpL.toggleWhenPressed(in);
 		b2_trigL.toggleWhenPressed(out);
-		b2_btnA.whileHeld(new ShootCommand());
+		b2_btnA.toggleWhenPressed(shoot);
 		b2_bumpR.toggleWhenPressed(g);
 		b2_btnX.whenPressed(new GearShiftCommand());
+		
+		b2_dpadR.whenPressed(new FullSpeedCommand());
+		b2_dpadL.whenPressed(new HalfSpeedCommand());
+		
+		b2_dpadU.whenPressed(new UpShiftCommand());
+		b2_dpadD.whenPressed(new DownShiftCommand());
 		
 		
 		
@@ -121,6 +139,12 @@ public class OI {
 		b_btnB.whileHeld(new ShootCommand());
 		b_bumpR.toggleWhenPressed(g);
 		b_btnX.whenPressed(new GearShiftCommand());
+		
+		b_dpadR.whenPressed(new FullSpeedCommand());
+		b_dpadL.whenPressed(new HalfSpeedCommand());
+		
+		b2_dpadU.whenPressed(new UpShiftCommand());
+		b2_dpadD.whenPressed(new DownShiftCommand());
 		
 /*		b2_btnB.whileHeld(new LinearPunchStartCommand());
 		b_btnB.whileHeld(new LinearPunchStartCommand());
