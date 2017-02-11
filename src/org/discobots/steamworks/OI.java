@@ -157,9 +157,8 @@ private ArrayList<Integer> ports;
 		port3 = new ArrayList<Button>();
 		port4 = new ArrayList<Button>();
 		port5 = new ArrayList<Button>();
-
 		ports = new ArrayList<Integer>();
-		gamePads = new GamePad[6];
+		ArrayList<GamePad> gamePads = new ArrayList<GamePad>(6);
 		
 		
 		updateControllerList();
