@@ -10,29 +10,30 @@ public class Xbox extends GamePad {
 	public static int AXIS_LX=0;
 	public static int AXIS_LY=1;
 	public static int AXIS_RX=4;
-	public static final int AXIS_RY = 5;
-	public static final int DPAD_X = 4;// true is right on xbox
-	public static final int DPAD_Y = 5;// true is up on xbox
-	public static final int AXIS_LZ = 2;
-	public static final int AXIS_RZ = 3;
+	public static  int AXIS_RY = 5;
+	public static  int DPAD_X = 4;// true is right on xbox
+	public static  int DPAD_Y = 5;// true is up on xbox
+	public static  int AXIS_LZ = 2;
+	public static  int AXIS_RZ = 3;
 
 	// Buttons
-	public static final int BTN_X = 3;
-	public static final int BTN_A = 1;
-	public static final int BTN_B = 2;
-	public static final int BTN_Y = 4;
+	public static  int BTN_X = 3;
+	public static  int BTN_A = 1;
+	public static  int BTN_B = 2;
+	public static  int BTN_Y = 4;
 
-	public static final int BTN_LB = 5;
-	public static final int BTN_RB = 6;
+	public static  int BTN_LB = 5;
+	public static  int BTN_RB = 6;
 
-	public static final int BTN_BACK = 7;
-	public static final int BTN_START = 8;
-	public int AXISBTN_L = 10;// when you click the joysticks
-	public int AXISBTN_R = 9;
+	public static  int BTN_BACK = 7;
+	public static  int BTN_START = 8;
+	public static int AXISBTN_L = 10;// when you click the joysticks
+	public static int AXISBTN_R = 9;
 	public Xbox(int port, boolean isbox) {
-		super(port, isbox);
-		
+		super(port, isbox);		
 	}
+	@Override
+	
 	
 
 	public double getLZ() {
