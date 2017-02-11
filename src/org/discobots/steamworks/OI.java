@@ -81,8 +81,8 @@ public class OI {
 		//JOYSTICK 2************************************************************************************
 		b2_sBack.whenPressed(new CycleDriveCommand());
 		
-		IntakeCommand in = new IntakeCommand(1.0);
-		IntakeCommand out = new IntakeCommand(-1.0);
+		IntakeCommand in = new IntakeCommand(.75);
+		IntakeCommand out = new IntakeCommand(-.75);
 		GearIntakeCommand g = new GearIntakeCommand(1.0);
 		ToggleHangCommand h = new ToggleHangCommand(.75);
 		ShootCommand shoot = new ShootCommand();
