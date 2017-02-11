@@ -4,17 +4,12 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 public class Xbox extends GamePad {
-
-	public Xbox(int port, boolean isbox) {
-		super(port, isbox);
-	}
-
 	String name = "XboxOne";
 	public boolean isXbox = true;
 	// Axis
-	public static final int AXIS_LX = 0;
-	public static final int AXIS_LY = 1;
-	public static final int AXIS_RX = 4;
+	public static int AXIS_LX;
+	public static int AXIS_LY;
+	public static int AXIS_RX;
 	public static final int AXIS_RY = 5;
 	public static final int DPAD_X = 4;// true is right on xbox
 	public static final int DPAD_Y = 5;// true is up on xbox
@@ -32,9 +27,20 @@ public class Xbox extends GamePad {
 
 	public static final int BTN_BACK = 7;
 	public static final int BTN_START = 8;
+	public int AXISBTN_L;// when you click the joysticks
+	public int AXISBTN_R;
+	public Xbox(int port, boolean isbox) {
+		super(port, isbox);
+		 AXIS_LX = 0;
+		 AXIS_LY = 1;
+		 AXIS_RX = 4;
+		 AXISBTN_R = 9;
+		 AXISBTN_L = 10;
+	}
 
-	public static final int AXISBTN_L = 10;// when you click the joysticks
-	public static final int AXISBTN_R = 9;
+	
+
+	
 
 	public double getLZ() {
 		// returns xbox left trigger

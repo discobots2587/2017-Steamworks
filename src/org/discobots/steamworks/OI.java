@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 import org.discobots.steamworks.utils.GamePad.Hand;
@@ -140,9 +141,23 @@ public class OI {
 	private Button L1_btnY;
 	private Button L1_clicR; 
 	private Button L1_clicL;
+public ArrayList<Button> port0;
+public ArrayList<Button> port1;
+public ArrayList<Button> port2;
+public ArrayList<Button> port3;
+public ArrayList<Button> port4;
+public ArrayList<Button> port5;
+
 public ArrayList <Button> joystickButtons;
 private ArrayList<Integer> ports;
 	public OI() {
+		port0 = new ArrayList<Button>();
+		port1 = new ArrayList<Button>();
+		port2 = new ArrayList<Button>();
+		port3 = new ArrayList<Button>();
+		port4 = new ArrayList<Button>();
+		port5 = new ArrayList<Button>();
+
 		ports = new ArrayList<Integer>();
 		gamePads = new GamePad[6];
 		
@@ -161,7 +176,7 @@ private ArrayList<Integer> ports;
 		for (int i = 0; i <= 5; i++)// check all ports
 		{
 			try{
-			if (DriverStation.getInstance().getStickAxisCount(i) == 6) {
+			if (DriverStation.getInstance().getStickAxisCount(i) >= 6) {
 				ports.add(i);
 				numPads++;
 				gamePads[i]= new Xbox(i, true);
@@ -193,44 +208,47 @@ private ArrayList<Integer> ports;
 	}
 
 	public void createMapping() {
-
+		port0.clear();
+		port1.clear();
+		port2.clear();
+		port3.clear();
+		port4.clear();
+		port5.clear();
 		for (int i = 5; i >= 0; i--) {
 			if (gamePads[i] != null && gamePads[i].getAxisCount() > 0) {
-				if (gamePads[i].isXbox) {// ability to create entirely separate
+				if (gamePads[i] instanceof Xbox) {// ability to create entirely separate
 											// control scheme for xbox
 											// controller even if in same port
-					if (i == 1) {// Can also differentiate by specific port set
+					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
-						x1_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
-						x1_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
-						x1_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
-						x1_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);// dynamically
-																						// referenced
-																						// so
-																						// new
-																						// gamepad
-																						// subclass
-																						// will
-																						// override
-																						// these
-																						// values
-						x1_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
-						if (gamePads[i].isXbox) {// for values specific to the
-													// xbox class put here
-							x1_triggerR = gamePads[i].getLZ();// Right Trigger
-							x1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {// for values specific to non xbox class put
-								// here
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
+						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
+						if (gamePads[i] instanceof Xbox) {
+							L1_triggerR = gamePads[i].getLZ();// Right Trigger
+							L1_triggerL = gamePads[i].getRZ();// left trigger
+						} else {
 
 						}
-						x1_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
-						x1_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
-						x1_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
-						x1_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
-						x1_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
-						x1_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
-						x1_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
-						x1_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
+						System.out.println("Joystick RIGHT"+gamePads[i].AXISBTN_R);
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 					}
 					/*
 					 * int temp; temp = gamePads[i].makebuttons(new               //Previous idea to set buttons and commands in each controller object - not working
@@ -248,32 +266,41 @@ private ArrayList<Integer> ports;
 				if (!gamePads[i].isXbox) {// ability to create entirely separate
 											// control scheme for non xbox
 											// controller even if in same port
-					if (i == 1) {// Can also differentiate by specific port set
+
+					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
-						L1_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
-						L1_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
-						L1_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
-						L1_bumpR = new JoystickButton(gamePads[i], gamePads[i].BTN_RB);
-						L1_bumpL = new JoystickButton(gamePads[i], gamePads[i].BTN_LB);
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
+						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
 						if (gamePads[i].isXbox) {
 							L1_triggerR = gamePads[i].getLZ();// Right Trigger
 							L1_triggerL = gamePads[i].getRZ();// left trigger
 						} else {
 
 						}
-						L1_sBack = new JoystickButton(gamePads[i], gamePads[i].BTN_BACK);
-						L1_sStar = new JoystickButton(gamePads[i], gamePads[i].BTN_START);
-						L1_btnA = new JoystickButton(gamePads[i], gamePads[i].BTN_A);
-						L1_btnX = new JoystickButton(gamePads[i], gamePads[i].BTN_X);
-						L1_btnB = new JoystickButton(gamePads[i], gamePads[i].BTN_B);
-						L1_btnY = new JoystickButton(gamePads[i], gamePads[i].BTN_Y);
-						L1_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
-						L1_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
+						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 
 					}
 				}
 
-				if (i == 2) {
+				if (i == 1) {
 					x2_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
 					x2_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
 					x2_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
@@ -295,7 +322,7 @@ private ArrayList<Integer> ports;
 					x2_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
 				}
 
-				if (i == 3) {
+				if (i == 2) {
 					x3_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
 					x3_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
 					x3_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
@@ -316,7 +343,7 @@ private ArrayList<Integer> ports;
 					x3_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
 					x3_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
 				}
-				if (i == 4) {
+				if (i == 3) {
 					x4_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
 					x4_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
 					x4_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
@@ -337,7 +364,7 @@ private ArrayList<Integer> ports;
 					x4_clicR = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R);
 					x4_clicL = new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L);
 				}
-				if (i == 5) {
+				if (i == 4) {
 					x5_dpadD = new DPadButton(gamePads[i], GamePad.DPAD_Y, false);
 					x5_dpadR = new DPadButton(gamePads[i], GamePad.DPAD_X, true);
 					x5_dpadL = new DPadButton(gamePads[i], GamePad.DPAD_X, false);
@@ -452,7 +479,7 @@ public double abs(double input)
 		double XLX = 0;
 		double GenLX=0;
 		if (running=true){
-	//	try {
+		try {
 			for (int i = ports.size()-1; i >= 0; i--)// possibly
 														// better
 														// way to
@@ -476,17 +503,17 @@ public double abs(double input)
 				activeLX = GenLX;
 			} else
 				activeLX = XLX;
-		//else {
-	//		return 0.0;	
-//	}
-	////	catch (Exception e)
-//		{
+
+}
+	catch (Exception e)
+		{
 //			StringWriter errors = new StringWriter();
 //			e.printStackTrace(new PrintWriter(errors));
 //			String error = "Controller GET ActiveLX Glitch";
 //					error.concat(errors.toString());
 //			DriverStation.reportError(error, true);
-//		}
+		updateControllerList();
+		}
 			}
 		SmartDashboard.putNumber("ActiveLX", activeLX);
 		return activeLX;
@@ -496,10 +523,10 @@ public double abs(double input)
 	public double getRawAnalogStickALY() {// left stick y-axis
 		if (true)
 			return activeLY;
-		else {
+		else 
 			return 0.0;
 		}
-	}
+	
 
 	public double getRawAnalogStickARX() {// Right stick x-axis
 		if (true)

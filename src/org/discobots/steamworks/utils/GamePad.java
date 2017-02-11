@@ -11,19 +11,13 @@ public class GamePad extends Joystick { // implements Comparable<GamePad>
 	private ArrayList<Button> buttons;
 	public boolean isXbox = false;
 
-	public GamePad(int port, boolean isbox) {
-		super(port);
-		this.isXbox=isbox;
-		buttons = new ArrayList<Button>();
-	}
-
 	private static String name = "genericHID";
 	/***** MODE D CONFIGURATION *****/
 	// Axis
-	public final   int AXIS_LX = 0;
-	public final   int AXIS_LY = 1;
-	public final   int AXIS_RX = 2;
-	public final   int AXIS_RY = 3;
+	public final int AXIS_LX = 0;
+	public final int AXIS_LY = 1;
+	public final int AXIS_RX = 2;
+	public final int AXIS_RY = 3;
 	public final static   int DPAD_X = 4;
 	public final static   int DPAD_Y = 5;
 	// Buttons
@@ -40,8 +34,19 @@ public class GamePad extends Joystick { // implements Comparable<GamePad>
 	public   final int BTN_BACK = 9;
 	public   final int BTN_START = 10;
 
-	public   final int AXISBTN_L = 11;
-	public   final int AXISBTN_R = 12;
+	public int AXISBTN_L = 11;
+	public int AXISBTN_R = 12;
+	
+	public GamePad(int port, boolean isbox) {
+		super(port);
+		this.isXbox=isbox;
+		buttons = new ArrayList<Button>();
+	
+	
+	
+	}
+
+	
 
 	public double getLZ() {
 		// returns xbox left trigger

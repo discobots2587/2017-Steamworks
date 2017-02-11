@@ -135,6 +135,7 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		oi.updateControllerList();
 		driveCommand = (Command) driveChooser.getSelected();
 		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
 				.nanoTime();) { // rumbles
