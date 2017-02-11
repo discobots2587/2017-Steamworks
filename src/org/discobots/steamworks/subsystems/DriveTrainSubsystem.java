@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrainSubsystem extends Subsystem {
 private double kSpeedScaling=.75;
 public RobotDrive robotDrive;
-DoubleSolenoid shifter;
+
 Solenoid shifterRight;
 Solenoid shifterLeft;
     // Put methods for controlling this subsystem
@@ -24,7 +24,7 @@ Solenoid shifterLeft;
 		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
 								  HW.motorFrontRight,HW.motorBackRight);
 		//robotDrive.setSafetyEnabled(true);
-		shifter = new DoubleSolenoid(HW.shifterRight,HW.shifterLeft);
+
 		shifterRight = new Solenoid(HW.shifterRight);
 		shifterLeft = new Solenoid(HW.shifterLeft);
 	}
@@ -50,13 +50,7 @@ Solenoid shifterLeft;
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
 	}
-	public void setShifter(Value val)
-	{
-		shifter.set(val);
-	}
-	public Value getShifter(){
-		return shifter.get();
-	}
+
 	public void setLRShifter(boolean val){
 		shifterRight.set(val);
 		shifterLeft.set(val);
