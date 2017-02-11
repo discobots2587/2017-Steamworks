@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
+import org.discobots.steamworks.commands.auton.AutonomousCommand;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -57,6 +58,8 @@ public class Robot extends IterativeRobot {
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
 		// DumbPositioningAuton());
+		autonChooser.addDefault("AutonCommand", new AutonomousCommand());
+		SmartDashboard.putData("Choose Auton", autonChooser);
 
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
@@ -125,7 +128,7 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
-
+		
 		// schedule the autonomous command (example)
 		autonomousCommand = (Command) autonChooser.getSelected(); // Starts
 																	// chosen
