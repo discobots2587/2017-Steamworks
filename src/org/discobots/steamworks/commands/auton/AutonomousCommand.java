@@ -1,7 +1,7 @@
 package org.discobots.steamworks.commands.auton;
 
-import org.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
-import org.steamworks.commands.auton.subcommands.WaitCommand;
+import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
+import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

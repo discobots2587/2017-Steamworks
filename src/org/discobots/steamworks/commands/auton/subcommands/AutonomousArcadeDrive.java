@@ -1,4 +1,4 @@
-package org.steamworks.commands.auton.subcommands;
+package org.discobots.steamworks.commands.auton.subcommands;
 
 import org.discobots.steamworks.Robot;
 
