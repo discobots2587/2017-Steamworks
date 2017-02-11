@@ -4,11 +4,11 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
-import org.discobots.steamworks.commands.drive.DownShiftCommand;
+
 import org.discobots.steamworks.commands.drive.FullSpeedCommand;
 import org.discobots.steamworks.commands.drive.HalfSpeedCommand;
-import org.discobots.steamworks.commands.drive.ShiftCommand;
-import org.discobots.steamworks.commands.drive.UpShiftCommand;
+
+
 import org.discobots.steamworks.commands.gearIntake.GearIntakeCommand;
 import org.discobots.steamworks.commands.gearIntake.GearShiftCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
