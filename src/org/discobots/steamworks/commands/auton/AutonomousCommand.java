@@ -29,7 +29,7 @@ public class AutonomousCommand extends CommandGroup {
         // arm.
     	addSequential(new AutonomousArcadeDrive(0.5,0.0,4000));
     	addSequential(new WaitCommand(3000));
-    	addSequential(new AutonomousArcadeDrive(-0.5,-0.0,4000));
+    	addSequential(new AutonomousArcadeDrive(-0.5,0.0,4000));
     	addSequential(new WaitCommand(500));
     	
     	

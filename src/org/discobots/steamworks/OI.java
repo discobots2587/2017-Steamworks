@@ -71,10 +71,10 @@ public class OI {
 		
 		
 		b2_btnY.whenPressed(new HangCommand(.75,2000));
-		b2_btnA.toggleWhenPressed(h);
+		b2_btnB.toggleWhenPressed(h);
 		
 		b2_bumpL.toggleWhenPressed(in);
-		b2_btnB.whileHeld(new ShootCommand());
+		b2_btnA.whileHeld(new ShootCommand());
 		b2_bumpR.toggleWhenPressed(g);
 		b2_btnX.whenPressed(new GearShiftCommand());
 		
