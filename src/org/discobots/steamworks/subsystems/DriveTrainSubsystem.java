@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrainSubsystem extends Subsystem {
 private double kSpeedScaling;
-private RobotDrive robotDrive;
+public RobotDrive robotDrive;
 DoubleSolenoid shifter;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
 		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
 								  HW.motorFrontRight,HW.motorBackRight);
-		robotDrive.setSafetyEnabled(false);
+		//robotDrive.setSafetyEnabled(true);
 		shifter = new DoubleSolenoid(HW.shifterRight,HW.shifterLeft);
 	}
     public void initDefaultCommand() {
