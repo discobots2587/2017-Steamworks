@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SoftShiftCommand extends Command {
+public class HalfSpeedCommand extends Command {
 	/*private int time;
 	private long endTime;
 	private double speed;
 	private boolean fin=false;
 	public boolean end=false;*/
 
-    public SoftShiftCommand() {
+    public HalfSpeedCommand() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.driveTrainSub);
 
@@ -24,7 +24,7 @@ public class SoftShiftCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-    	Robot.driveTrainSub.setSpeedScaling(1.0);
+    	Robot.driveTrainSub.setSpeedScaling(0.5);
     } 
 
     // Called repeatedly when this Command is scheduled to run
@@ -40,7 +40,7 @@ public class SoftShiftCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrainSub.setSpeedScaling(0.0);
+
     }
 
     // Called when another command which requires one or more of the same

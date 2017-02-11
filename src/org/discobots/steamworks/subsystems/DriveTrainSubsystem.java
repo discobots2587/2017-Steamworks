@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrainSubsystem extends Subsystem {
-public double kSpeedScaling=.75;
+private double kSpeedScaling=.75;
 public RobotDrive robotDrive;
 DoubleSolenoid shifter;
     // Put methods for controlling this subsystem

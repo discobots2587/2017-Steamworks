@@ -9,20 +9,23 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class IntakeCommand extends Command {
+	private double speed;
 
-    public IntakeCommand() {
+    public IntakeCommand(double speed) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.intakeSub);
+    	this.speed=speed;
     }
 
-    // Called just before this Command runs the first time
+
+	// Called just before this Command runs the first time
     protected void initialize() {
     	
     } 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intakeSub.setSpeed(0.75);
+    	Robot.intakeSub.setSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
