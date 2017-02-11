@@ -1,7 +1,7 @@
 package org.discobots.steamworks.commands.gearIntake;
 
 import org.discobots.steamworks.Robot;
-
+import org.discobots.steamworks.commands.shoot.BlendCommand;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,6 +24,10 @@ public class GearShiftCommand extends Command {
     	if(Robot.oi.count%2==0){
     		Robot.oi.blendIn= new GearIntakeCommand(1.0);
     		Robot.oi.blendOut=new GearIntakeCommand(-1.0);
+    	}
+    	else{
+    		Robot.oi.blendIn= new BlendCommand(1.0);
+    		Robot.oi.blendOut=new BlendCommand(-1.0);
     	}
     } 
 

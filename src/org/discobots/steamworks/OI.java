@@ -2,6 +2,7 @@ package org.discobots.steamworks;
 
 
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.DownShiftCommand;
 import org.discobots.steamworks.commands.drive.FullSpeedCommand;
@@ -37,6 +38,7 @@ public class OI {
 	public Command blendIn = new BlendCommand(1.0);
 	public Command blendOut = new BlendCommand(-1.0);
 	public int count = 0;
+	public int gearCount =0;
 //set buttons for each joystick
 	// JOYSTICK 2
 	private Button b_dpadU = new DPadButton(xbox, GamePad.DPAD_Y, true);
@@ -92,19 +94,21 @@ public class OI {
 		b2_bumpL.toggleWhenPressed(in);
 		b2_trigL.toggleWhenPressed(out);
 		
-		b2_bumpR.toggleWhenPressed(blendIn);
-		b2_trigR.toggleWhenPressed(blendOut);
+		b2_bumpR.toggleWhenPressed(blendIn);//very experimental might not work
+		b2_trigR.toggleWhenPressed(blendOut);//
 		
 		b2_btnA.toggleWhenPressed(shoot);
 
 		b2_btnX.whenPressed(new GearShiftCommand());
 		
-		b2_dpadR.whenPressed(new FullSpeedCommand());
+		/*b2_dpadR.whenPressed(new FullSpeedCommand());
 		b2_dpadL.whenPressed(new HalfSpeedCommand());
 		
 		b2_dpadU.whenPressed(new UpShiftCommand());
-		b2_dpadD.whenPressed(new DownShiftCommand());
+		b2_dpadD.whenPressed(new DownShiftCommand());*/
 		
+		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
+		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
 		
 		
 	//	b2_bumpR.whenPressed(new MoveArmCommand(ArmSubsystem.armSpeed));
@@ -151,11 +155,14 @@ public class OI {
 
 		b_btnX.whenPressed(new GearShiftCommand());
 		
-		b_dpadR.whenPressed(new FullSpeedCommand());
+		/*b_dpadR.whenPressed(new FullSpeedCommand());
 		b_dpadL.whenPressed(new HalfSpeedCommand());
 		
 		b2_dpadU.whenPressed(new UpShiftCommand());
-		b2_dpadD.whenPressed(new DownShiftCommand());
+		b2_dpadD.whenPressed(new DownShiftCommand());*/
+		
+		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
+		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
 		
 /*		b2_btnB.whileHeld(new LinearPunchStartCommand());
 		b_btnB.whileHeld(new LinearPunchStartCommand());

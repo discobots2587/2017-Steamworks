@@ -5,6 +5,7 @@ import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,6 +16,8 @@ public class DriveTrainSubsystem extends Subsystem {
 private double kSpeedScaling=.75;
 public RobotDrive robotDrive;
 DoubleSolenoid shifter;
+Solenoid shifterRight;
+Solenoid shifterLeft;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
@@ -22,6 +25,8 @@ DoubleSolenoid shifter;
 								  HW.motorFrontRight,HW.motorBackRight);
 		//robotDrive.setSafetyEnabled(true);
 		shifter = new DoubleSolenoid(HW.shifterRight,HW.shifterLeft);
+		shifterRight = new Solenoid(HW.shifterRight);
+		shifterLeft = new Solenoid(HW.shifterLeft);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -51,6 +56,10 @@ DoubleSolenoid shifter;
 	}
 	public Value getShifter(){
 		return shifter.get();
+	}
+	public void setLRShifter(boolean val){
+		shifterRight.set(val);
+		shifterLeft.set(val);
 	}
 }
 
