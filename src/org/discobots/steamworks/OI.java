@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -32,6 +33,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	private GamePad gp1 = new GamePad(0);
 	private GamePad xbox = new GamePad(1); 
+	
+	public Command blendIn = new BlendCommand(1.0);
+	public Command blendOut = new BlendCommand(-1.0);
+	public int count = 0;
 //set buttons for each joystick
 	// JOYSTICK 2
 	private Button b_dpadU = new DPadButton(xbox, GamePad.DPAD_Y, true);
@@ -76,20 +81,22 @@ public class OI {
 		
 		IntakeCommand in = new IntakeCommand(1.0);
 		IntakeCommand out = new IntakeCommand(1.0);
-		GearIntakeCommand g = new GearIntakeCommand();
+		GearIntakeCommand g = new GearIntakeCommand(1.0);
 		ToggleHangCommand h = new ToggleHangCommand(.75);
 		ShootCommand shoot = new ShootCommand();
-		BlendCommand blendIn = new BlendCommand(1.0);
-		BlendCommand blendOut = new BlendCommand(-1.0);
+
 		
 		
-		b2_btnY.whenPressed(new HangCommand(.75,2000));
 		b2_btnB.toggleWhenPressed(h);
 		
 		b2_bumpL.toggleWhenPressed(in);
 		b2_trigL.toggleWhenPressed(out);
+		
+		b2_bumpR.toggleWhenPressed(blendIn);
+		b2_trigR.toggleWhenPressed(blendOut);
+		
 		b2_btnA.toggleWhenPressed(shoot);
-		b2_bumpR.toggleWhenPressed(g);
+
 		b2_btnX.whenPressed(new GearShiftCommand());
 		
 		b2_dpadR.whenPressed(new FullSpeedCommand());
@@ -132,12 +139,16 @@ public class OI {
 		
 		//JOYSTICK 1******************************************************************
 		b_sBack.whenPressed(new CycleDriveCommand());
-		b_btnY.whenPressed(new HangCommand(.75,2000));
+
 		
 		b_bumpL.toggleWhenPressed(in);
+		b_trigL.toggleWhenActive(out);
+		
+		b_bumpR.toggleWhenPressed(blendIn);
+		b_trigR.toggleWhenActive(blendOut);
 		
 		b_btnB.whileHeld(new ShootCommand());
-		b_bumpR.toggleWhenPressed(g);
+
 		b_btnX.whenPressed(new GearShiftCommand());
 		
 		b_dpadR.whenPressed(new FullSpeedCommand());

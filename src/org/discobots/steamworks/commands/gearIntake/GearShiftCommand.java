@@ -21,6 +21,10 @@ public class GearShiftCommand extends Command {
     		Robot.gearIntakeSub.set(false);}
     	else
     		Robot.gearIntakeSub.set(true);
+    	if(Robot.oi.count%2==0){
+    		Robot.oi.blendIn= new GearIntakeCommand(1.0);
+    		Robot.oi.blendOut=new GearIntakeCommand(-1.0);
+    	}
     } 
 
     // Called repeatedly when this Command is scheduled to run

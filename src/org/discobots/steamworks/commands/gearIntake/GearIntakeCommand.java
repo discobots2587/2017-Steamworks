@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class GearIntakeCommand extends Command {
+	private double speed;
 
-    public GearIntakeCommand() {
+    public GearIntakeCommand(double speed) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.gearIntakeSub);
+    	this.speed=speed;
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +23,7 @@ public class GearIntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearIntakeSub.setSpeed(0.75);
+    	Robot.gearIntakeSub.setSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
