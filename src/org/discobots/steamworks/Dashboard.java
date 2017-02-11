@@ -40,6 +40,7 @@ public class Dashboard {
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			SmartDashboard.putNumber("Axis ValueLx", Robot.oi.getRawAnalogStickALX());
 			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
+			SmartDashboard.putBoolean("TriggerToggle Right is Active", Robot.oi.b_trigR.get());
 
 		}
 		if (driveCounter%10==1)

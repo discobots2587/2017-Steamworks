@@ -21,6 +21,7 @@ import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
 import org.discobots.steamworks.subsystems.HangSubsystem;
 import org.discobots.steamworks.subsystems.IntakeSubsystem;
 import org.discobots.steamworks.subsystems.ShooterSubsystem;
+import org.discobots.steamworks.utils.TriggerToggle;
 
 public class Robot extends IterativeRobot {
 
@@ -185,5 +186,6 @@ public class Robot extends IterativeRobot {
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
+		System.out.println(oi.b_trigR.get());
 	}
 }
