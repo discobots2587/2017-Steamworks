@@ -31,7 +31,11 @@ public CycleDriveCommand(char charCmd) {
 			cmd2=new ArcadeDriveCommand();
 		}
 	}
-
+public CycleDriveCommand(int speedScale)
+{
+	isDef=true;
+	Robot.driveTrainSub.setSpeedScaling(speedScale);//take input value so can be set to driver's preferences
+}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {

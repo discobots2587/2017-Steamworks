@@ -10,10 +10,6 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 
-import org.discobots.steamworks.commands.drive.FullSpeedCommand;
-import org.discobots.steamworks.commands.drive.HalfSpeedCommand;
-
-
 import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.hang.ToggleHangCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;

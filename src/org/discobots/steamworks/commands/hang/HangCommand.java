@@ -14,6 +14,7 @@ public class HangCommand extends Command {
 	private double speed;
 	private boolean fin=false;
 	public boolean end=false;
+	boolean toggled=false;
 
     public HangCommand(double speed,int t) {
         // Use requires() here to declare subsystem dependencies
@@ -21,7 +22,12 @@ public class HangCommand extends Command {
     	this.time=t;
     	this.speed=speed;
     }
-
+    public HangCommand(double speed) {
+        // Use requires() here to declare subsystem dependencies
+    	requires(Robot.hangSub);
+    	this.speed=speed;
+    	toggled=true;
+    }
     // Called just before this Command runs the first time
     protected void initialize() {
     	endTime = System.currentTimeMillis() + time;
@@ -30,11 +36,14 @@ public class HangCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	for(long i =endTime;i>=System.currentTimeMillis();)
-    	{
     	Robot.hangSub.setSpeed(speed);
+    	if (endTime<=System.currentTimeMillis())
+    	{
+    		fin=true;
     	}
-    	fin=true;
+    	else
+    		fin=toggled;
+    	
     	
     }
 
