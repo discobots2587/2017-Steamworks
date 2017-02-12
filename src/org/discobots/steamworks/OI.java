@@ -1,22 +1,44 @@
 package org.discobots.steamworks;
 
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
+
+import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
+import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
+
+import org.discobots.steamworks.commands.drive.FullSpeedCommand;
+import org.discobots.steamworks.commands.drive.HalfSpeedCommand;
+
+
+import org.discobots.steamworks.commands.gearIntake.GearIntakeCommand;
+import org.discobots.steamworks.commands.gearIntake.GearShiftCommand;
+import org.discobots.steamworks.commands.hang.HangCommand;
+import org.discobots.steamworks.commands.hang.ToggleHangCommand;
+import org.discobots.steamworks.commands.intake.IntakeCommand;
+import org.discobots.steamworks.commands.shoot.BlendCommand;
+import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
-import org.discobots.steamworks.utils.GamePad.Hand;
+import org.discobots.steamworks.utils.TriggerToggle;
+
 
 import edu.wpi.first.wpilibj.DriverStation;
+
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.discobots.steamworks.utils.Xbox;
-
+/**
+ * This class is the glue that binds the controls on the physical operator
+ * interface to the commands and command groups that allow control of the robot.
+ */
 public class OI {
+
 
 	GamePad[] gamePads;
 	public int numPads;
@@ -623,10 +645,12 @@ private ArrayList<Integer> ports;
 				a=-a;
 			return a;
 		}	};
-	}
 
-	// comparator if alternative is implemented
+	}
+	
+
 	/*
+
 	 * enum BlockSort implements Comparator<GamePad> { LX {
 	 * 
 	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
@@ -673,15 +697,12 @@ private ArrayList<Integer> ports;
 		else {
 			return 0.0;
 		}
+
 	}
 
-	public void setRumble(Hand hand, double intensity) { // set for single side
-															// of controller
-		for (GamePad i : gamePads) {
-			if (i.isXbox)
-				i.setRumble(hand, intensity); // set for single side of
-												// controller
-		}
+	public double getRawAnalogStickBRX() {
+		return (xbox.getRawAxis(4));// left stick x-axis
+
 	}
 	
 	
@@ -698,6 +719,7 @@ private ArrayList<Integer> ports;
 														// sort
 														// using
 														// comparator
+
 
 			{
 				if (gamePads[ports.get(i)].isXbox == true) {
@@ -731,5 +753,5 @@ private ArrayList<Integer> ports;
 		return activeLX;
 		
 			}*/
+
 }
-// }

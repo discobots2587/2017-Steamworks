@@ -17,7 +17,7 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     public LTRTXBOX() {
         // Use requires() here to declare subsystem dependencies
  /*       // eg. requires(chassis);
-  //  	requires(Robot.armSub);
+  //  	requires(Robot.armSub);*/
     	
     }
 
@@ -28,7 +28,7 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		double rightT = Robot.oi.getRT();
+    		/*double rightT = Robot.oi.getRT();
     		double leftT = Robot.oi.getLT();
     	   liftSpeed = rightT-leftT;//constantly updates every 20 milliseconds
     	  // if(Math.abs(liftSpeed)<.15)

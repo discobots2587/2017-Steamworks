@@ -1,3 +1,4 @@
+
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
@@ -59,4 +60,3 @@ Solenoid shifterLeft;
 		return shifterRight.get();
 	}
 }
-
