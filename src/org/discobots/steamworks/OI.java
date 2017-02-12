@@ -14,8 +14,6 @@ import org.discobots.steamworks.commands.drive.FullSpeedCommand;
 import org.discobots.steamworks.commands.drive.HalfSpeedCommand;
 
 
-import org.discobots.steamworks.commands.gearIntake.GearIntakeCommand;
-import org.discobots.steamworks.commands.gearIntake.GearShiftCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.hang.ToggleHangCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
