@@ -24,7 +24,7 @@ import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 import org.discobots.steamworks.utils.TriggerToggle;
-
+import org.discobots.steamworks.utils.Xbox;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -697,11 +697,6 @@ private ArrayList<Integer> ports;
 		else {
 			return 0.0;
 		}
-
-	}
-
-	public double getRawAnalogStickBRX() {
-		return (xbox.getRawAxis(4));// left stick x-axis
 
 	}
 	
