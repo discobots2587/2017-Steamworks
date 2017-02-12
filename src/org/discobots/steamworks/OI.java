@@ -493,22 +493,9 @@ private ArrayList<Integer> ports;
 				}
 			}
 			}
-		}
-	}
-
-	// comparator if alternative is implemented
-	/*
-	 * enum BlockSort implements Comparator<GamePad> { LX {
-	 * 
-	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
-	 * (abs(b1.getLX()) -abs(b2.getLX())); } },
-	 * 
-	 * LY {
-	 * 
-	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
-	 * (abs(b1.getLY()) - abs(b2.getLY())); } } }
-	 */
-/*
+		}}
+	public void runThreads()
+	{
 		right = new Thread() {
 			public void run() {
 				while (running) {
@@ -517,7 +504,7 @@ private ArrayList<Integer> ports;
 					double GenRY = 0;
 					double GenRX = 0;
 					try {
-						for (int i = gamePads.length; i >= 0; i--)// possibly
+						for (int i = ports.size()-1; i >= 0; i--)// possibly
 																	// better
 																	// way to
 																	// sort
@@ -525,16 +512,16 @@ private ArrayList<Integer> ports;
 																	// comparator
 
 						{
-							if (gamePads[i] != null && gamePads[i].isXbox == true) {
-								if (abs(XRX) < abs(gamePads[i].getRX()))
-									XRX = gamePads[i].getRX();
-								if (abs(XRY) < abs(gamePads[i].getRY()))
-									XRY = gamePads[i].getRY();
-							} else if (gamePads[i] != null && gamePads[i].isXbox == false) {
-								if (abs(GenRX) < abs(gamePads[i].getRX()))
-									GenRX = gamePads[i].getRX();
+							if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
+								if (abs(XRX) < abs(gamePads[ports.get(i)].getRX()))
+									XRX = gamePads[ports.get(i)].getRX();
+								if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
+									XRY = gamePads[ports.get(i)].getRY();
+							} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
+								if (abs(GenRX) < abs(gamePads[ports.get(i)].getRX()))
+									GenRX = gamePads[ports.get(i)].getRX();
 								if (abs(GenRY) < abs(gamePads[i].getRY()))
-									GenRY = gamePads[i].getRY();
+									GenRY = gamePads[ports.get(i)].getRY();
 							}
 						} // alternative method would be to actively sort and
 							// compare gamepads/xbox controllers but could cause
@@ -552,14 +539,14 @@ private ArrayList<Integer> ports;
 					} catch (Exception e) {
 						StringWriter errors = new StringWriter();
 						e.printStackTrace(new PrintWriter(errors));
-						String error = "Controller Glitch";
+						String error = "Right Hand Controller Glitch";
 								error.concat(errors.toString());
 						DriverStation.reportError(error, true);
 						activeRX = 0.0;
 						activeRY = 0.0;
-						System.out.println("ERROR LEFT HAND");
-						System.out.println("ERROR LEFT HAND");
-
+						System.out.println("ERROR Right HAND");
+						System.out.println("ERROR Right HAND");
+						updateControllerList();
 					}
 					System.out.println("ActiveRY"+activeRY);
 				}
@@ -571,16 +558,135 @@ private ArrayList<Integer> ports;
 				if (a<0)
 					a=-a;
 				return a;
-			}	*/
+			}	};
 		
-public double abs(double input)
-{
-	if(input<0)
-		return -input;
-	return input;
-}
+	left = new Thread() {
+		public void run() {
+			while (running) {
+				double XLX = 0;
+				double XRY = 0;
+				double GenRY = 0;
+				double GenLX = 0;
+				try {
+					for (int i = ports.size()-1; i >= 0; i--)// possibly
+																// better
+																// way to
+																// sort
+																// using
+																// comparator
 
-	public double getRawAnalogStickALX() {// left stick y-axis
+					{
+						if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
+							if (abs(XLX) < abs(gamePads[ports.get(i)].getRX()))
+								XLX = gamePads[ports.get(i)].getRX();
+							if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
+								XRY = gamePads[ports.get(i)].getRY();
+						} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
+							if (abs(GenLX) < abs(gamePads[ports.get(i)].getRX()))
+								GenLX = gamePads[ports.get(i)].getRX();
+							if (abs(GenRY) < abs(gamePads[i].getRY()))
+								GenRY = gamePads[ports.get(i)].getRY();
+						}
+					} // alternative method would be to actively sort and
+						// compare gamepads/xbox controllers but could cause
+						// conflicts with other parallel requests
+					if (abs(GenLX) > abs(XLX) && abs(GenLX) > 0.1) {
+						activeLX = GenLX;
+					} else
+						activeLX = XLX;
+
+					if (abs(GenRY) > abs(XRY) && abs(GenRY) > 0.1) {
+						activeLY = GenRY;
+					} else
+						activeLY = XRY;
+
+				} catch (Exception e) {
+					StringWriter errors = new StringWriter();
+					e.printStackTrace(new PrintWriter(errors));
+					String error = "Left Hand Controller Glitch";
+							error.concat(errors.toString());
+					DriverStation.reportError(error, true);
+					activeLX = 0.0;
+					activeLY = 0.0;
+					System.out.println("ERROR Left HAND");
+					System.out.println("ERROR Left HAND");
+					updateControllerList();
+				}
+				System.out.println("ActiveRY"+activeLY);
+			}
+			activeLX = 0.0;// when running set to false
+			activeLY = 0.0;
+		}
+		public double abs(double a)
+		{
+			if (a<0)
+				a=-a;
+			return a;
+		}	};
+	}
+
+	// comparator if alternative is implemented
+	/*
+	 * enum BlockSort implements Comparator<GamePad> { LX {
+	 * 
+	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
+	 * (abs(b1.getLX()) -abs(b2.getLX())); } },
+	 * 
+	 * LY {
+	 * 
+	 * @Override public int compare(GamePad b1, GamePad b2) { return (int)
+	 * (abs(b1.getLY()) - abs(b2.getLY())); } } }
+	 */
+
+		
+	
+	
+	public double getRawAnalogStickALX()
+	{
+		if (running)
+			return activeLX;
+		else 
+			return 0.0;
+		}
+
+	
+
+	public double getRawAnalogStickALY() {// left stick y-axis
+		if (running)
+			return activeLY;
+		else 
+			return 0.0;
+		}
+	
+
+	public double getRawAnalogStickARX() {// Right stick x-axis
+		if (running)
+			return activeRX;
+		else {
+			return 0.0;
+		}
+	}
+
+	public double getRawAnalogStickARY() {// Right stick y-axis
+		if (running)
+			return activeRY;
+		else {
+			return 0.0;
+		}
+	}
+
+	public void setRumble(Hand hand, double intensity) { // set for single side
+															// of controller
+		for (GamePad i : gamePads) {
+			if (i.isXbox)
+				i.setRumble(hand, intensity); // set for single side of
+												// controller
+		}
+	}
+	
+	
+	
+	/*public double getRawAnalogStickALX() {// left stick y-axis/////////////////////////////CODE FOR IF THREAD IS NOT USED
 	//	if (left.isAlive())
 		double XLX = 0;
 		double GenLX=0;
@@ -624,65 +730,6 @@ public double abs(double input)
 		SmartDashboard.putNumber("ActiveLX", activeLX);
 		return activeLX;
 		
-			}
-
-	public double getRawAnalogStickALY() {// left stick y-axis
-		if (true)
-			return activeLY;
-		else 
-			return 0.0;
-		}
-	
-
-	public double getRawAnalogStickARX() {// Right stick x-axis
-		if (true)
-			return activeRX;
-		else {
-			return 0.0;
-		}
-	}
-
-	public double getRawAnalogStickARY() {// Right stick y-axis
-		if (true)
-			return activeRY;
-		else {
-			return 0.0;
-		}
-	}
-
-	public void setRumble(Hand hand, double intensity) { // set for single side
-															// of controller
-		for (GamePad i : gamePads) {
-			if (i.isXbox)
-				i.setRumble(hand, intensity); // set for single side of
-												// controller
-		}
-	}
-
-	/*
-	 * public double getRawAnalogStickBLX() { return (xbox.getRawAxis(0));//
-	 * left stick x-axis }
-	 * 
-	 * public double getRawAnalogStickBLY() { return (-xbox.getRawAxis(1));//
-	 * left stick y-axis
-	 * 
-	 * }
-	 * 
-	 * public double getRawAnalogStickBRX() { return (xbox.getRawAxis(4));//
-	 * right stick x-axis
-	 * 
-	 * }
-	 * 
-	 * public double getRawAnalogStickBRY() { return (xbox.getRawAxis(5));//
-	 * right stick x-axis
-	 * 
-	 * } public double getRT(){
-	 * if(gp1.getRawAxis(3)<-0.1||gp1.getRawAxis(3)>0.1) return
-	 * gp1.getRawAxis(3); else return (xbox.getRawAxis(3));
-	 * 
-	 * } public double getLT(){
-	 * if(gp1.getRawAxis(2)<-0.1||gp1.getRawAxis(2)>0.1) return
-	 * gp1.getRawAxis(2); else return (xbox.getRawAxis(2)); }
-	 */
+			}*/
 }
 // }

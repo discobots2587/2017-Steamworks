@@ -16,11 +16,18 @@ import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
+import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
+import org.discobots.steamworks.subsystems.HangSubsystem;
+import org.discobots.steamworks.subsystems.IntakeSubsystem;
+import org.discobots.steamworks.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrainSubsystem driveTrainSub;
-
+	public static ShooterSubsystem shootSub;
+	public static IntakeSubsystem intakeSub;
+	public static HangSubsystem hangSub;
+	public static GearIntakeSubsystem gearIntakeSub;
 	private CameraServer LogicC615;
 	public static double totalTime;
 	public static long TeleopStartTime;
@@ -36,6 +43,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		shootSub = new ShooterSubsystem();
+		intakeSub = new IntakeSubsystem();
+		hangSub = new HangSubsystem();
+		gearIntakeSub = new GearIntakeSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
