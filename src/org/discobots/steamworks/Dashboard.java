@@ -1,3 +1,4 @@
+
 package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -12,7 +13,6 @@ public class Dashboard {
 	static Preferences TestPrefs;
 	public static LiveWindow lw;
 	public static int driveCounter = 0;
-	private static String shifterCondition ="";
  
 	public static void init() {
 		TestPrefs = Preferences.getInstance();
@@ -39,30 +39,12 @@ public class Dashboard {
 		
 		//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
-			SmartDashboard.putNumber("Axis ValueLx", Robot.oi.getRawAnalogStickALX());
 			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
-			SmartDashboard.putBoolean("TriggerToggle Right is Active", Robot.oi.b_trigR.get());
-			
-			if(Robot.driveTrainSub.getLRShifter()){
-				shifterCondition= "High Gear";
-			}
-			else {
-				shifterCondition = "Low Gear";
-			}
-			SmartDashboard.putString("The Drive Train is in", shifterCondition);
-
 
 		}
 		if (driveCounter%10==1)
 		{
 			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.getSpeedScaling());
-			if(Robot.driveTrainSub.getLRShifter()){
-				shifterCondition= "High Gear";
-			}
-			else {
-				shifterCondition = "Low Gear";
-			}
-			SmartDashboard.putString("The Drive Train is in", shifterCondition);
 
 						//SmartDashboard.putNumber("PRESSURE", Robot.electricalSub.getPressure());
 			
@@ -85,4 +67,5 @@ public class Dashboard {
 		}
 		
 	}
+
 }

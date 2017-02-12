@@ -9,39 +9,52 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class GamePad extends Joystick { // implements Comparable<GamePad>
 	private ArrayList<Button> buttons;
-
-	public GamePad(int port) {
-		super(port);
-		buttons = new ArrayList<Button>();
-	}
-
-	public static final String name = "genericHID";
 	public boolean isXbox = false;
+
+	private static String name = "genericHID";
 	/***** MODE D CONFIGURATION *****/
 	// Axis
-	public final static int AXIS_LX = 0;
-	public final static int AXIS_LY = 1;
-	public final static int AXIS_RX = 2;
-	public final static int AXIS_RY = 3;
-	public final static int DPAD_X = 4;
-	public final static int DPAD_Y = 5;
+	public   int AXIS_LX = 0;
+	public   int AXIS_LY = 1;
+	public   int AXIS_RX = 2;
+	public   int AXIS_RY = 3;
+	public   static   int DPAD_X = 4;
+	public   static   int DPAD_Y = 5;
 	// Buttons
-	public static final int BTN_X = 1;
-	public static final int BTN_A = 2;
-	public static final int BTN_B = 3;
-	public static final int BTN_Y = 4;
+	public     int BTN_X = 1;
+	public     int BTN_A = 2;
+	public     int BTN_B = 3;
+	public     int BTN_Y = 4;
 
-	public static final int BTN_LB = 5;
-	public static final int BTN_LT = 7;
-	public static final int BTN_RB = 6;
-	public static final int BTN_RT = 8;
+	public   int BTN_LB = 5;
+	public     int BTN_LT = 7;
+	public   int BTN_RB = 6;
+	public     int BTN_RT = 8;
 
-	public static final int BTN_BACK = 9;
-	public static final int BTN_START = 10;
+	public     int BTN_BACK = 9;
+	public     int BTN_START = 10;
 
-	public static final int AXISBTN_L = 11;
-	public static final int AXISBTN_R = 12;
+	public int AXISBTN_L = 11;
+	public int AXISBTN_R = 12;
+	
+	public GamePad(int port, boolean isbox) {
+		super(port);
+		this.isXbox=isbox;
+		buttons = new ArrayList<Button>();	
+	}
 
+	
+	
+	public double getLZ() {
+		// returns xbox left trigger
+return 0;
+}
+
+	public double getRZ() {
+		// returns xbox right trigger
+return 0;
+		}
+	
 	public double getLX() {
 		return this.getRawAxis(AXIS_LX);
 	}
@@ -135,5 +148,9 @@ public class GamePad extends Joystick { // implements Comparable<GamePad>
 	public void setRumble(Hand hand, double intensity) {// does nothing
 		// TODO Auto-generated method stub
 
+	}
+
+	public String thegetName() {
+		return name;
 	}
 }

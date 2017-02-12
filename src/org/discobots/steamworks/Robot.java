@@ -1,3 +1,4 @@
+
 package org.discobots.steamworks;
 
 import edu.wpi.cscore.UsbCamera;
@@ -11,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
-import org.discobots.steamworks.commands.auton.AutonomousCommand;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -21,18 +21,14 @@ import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
 import org.discobots.steamworks.subsystems.HangSubsystem;
 import org.discobots.steamworks.subsystems.IntakeSubsystem;
 import org.discobots.steamworks.subsystems.ShooterSubsystem;
-import org.discobots.steamworks.utils.TriggerToggle;
 
 public class Robot extends IterativeRobot {
-
+	public static OI oi;
 	public static DriveTrainSubsystem driveTrainSub;
 	public static ShooterSubsystem shootSub;
 	public static IntakeSubsystem intakeSub;
 	public static HangSubsystem hangSub;
 	public static GearIntakeSubsystem gearIntakeSub;
-
-	public static OI oi;
-
 	private CameraServer LogicC615;
 	public static double totalTime;
 	public static long TeleopStartTime;
@@ -47,20 +43,16 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
-		driveTrainSub = new DriveTrainSubsystem();
+		oi = new OI();
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
 		gearIntakeSub = new GearIntakeSubsystem();
-		oi = new OI();
-		
+		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
 		// DumbPositioningAuton());
-		autonChooser.addDefault("AutonCommand", new AutonomousCommand());
-		SmartDashboard.putData("Choose Auton", autonChooser);
 
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
@@ -129,7 +121,7 @@ public class Robot extends IterativeRobot {
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
-		
+
 		// schedule the autonomous command (example)
 		autonomousCommand = (Command) autonChooser.getSelected(); // Starts
 																	// chosen
@@ -155,8 +147,16 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		oi.updateControllerList();
 		driveCommand = (Command) driveChooser.getSelected();
-
+		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
+				.nanoTime();) { // rumbles
+								// upon
+								// disable
+		//	oi.setRumble(1); // for
+			TeleopStartTime = System.currentTimeMillis(); // one // 1
+															// second
+		}
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
 	}
@@ -186,6 +186,5 @@ public class Robot extends IterativeRobot {
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
-		System.out.println(oi.b_trigR.get());
 	}
 }
