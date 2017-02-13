@@ -29,11 +29,12 @@ public class Robot extends IterativeRobot {
 	public static IntakeSubsystem intakeSub;
 	public static HangSubsystem hangSub;
 	public static GearIntakeSubsystem gearSub;
-	private CameraServer LogicC615;
+//	private CameraServer LogicC615;
+	private CameraServer GeniusCam;
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
-
+	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
 
@@ -60,7 +61,7 @@ public class Robot extends IterativeRobot {
 		driveChooser.addDefault("Split Arcade Drive",new SplitArcadeDriveCommand());
 		
 
-		try {
+	/*	try {
 			LogicC615 = CameraServer.getInstance();// initialize server
 			// camera name taken from RoboRio
 			UsbCamera C615 = new UsbCamera("C615", 0);
@@ -73,15 +74,31 @@ public class Robot extends IterativeRobot {
 														// streaming
 			}// footage
 		} catch (Exception e) {
-			System.err.println("There is a Vision Error: " + e.getMessage());
-		}
-
+			System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
+		}*/
+	//	Camthread = new Thread(){
+	//	@Override
+	//	 public void run(){
+		try {
+			GeniusCam = CameraServer.getInstance();// initialize server
+			// camera name taken from RoboRio
+			UsbCamera Genius = new UsbCamera("cam2", 0);
+			// Genius.openCamera();
+			 System.out.println(Genius.getPath());
+			
+				Genius.setResolution(480, 320);
+				GeniusCam.startAutomaticCapture(Genius);// automatically start
+														// streaming
+			}// footage
+		 catch (Exception e) {
+			System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
+	//}};
+		//Camthread.run();
+		 }
 		Dashboard.init();
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
-
-	}
-
+		}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
