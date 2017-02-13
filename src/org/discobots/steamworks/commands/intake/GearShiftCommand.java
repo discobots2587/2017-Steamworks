@@ -12,13 +12,15 @@ public class GearShiftCommand extends Command {
 
     public GearShiftCommand() {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.gearIntakeSub);
+    	requires(Robot.gearSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.gearIntakeSub.get()){
-    		Robot.gearIntakeSub.set(false);}
+    	if(Robot.gearSub.getGear()){//if solenoid is on
+    		Robot.gearSub.setGear(false);}//turn solenoid off
+    	
+    	
     //	else
     	//	Robot.gearIntakeSub.set(true);
  //   	if(Robot.oi.count%2==0){

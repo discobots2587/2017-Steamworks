@@ -42,7 +42,10 @@ public class OI {
 	private double activeRY = 0.0;
 	private double activeRX = 0.0;
 	public boolean running = true;
-	
+	private double activeRT=0.0;
+	double activeLT=0.0;
+
+
 public double L1_triggerR;	
 public double L1_triggerL;	
 
@@ -513,11 +516,12 @@ private ArrayList<Integer> ports;
 	{
 		right = new Thread() {
 			public void run() {
-				while (running) {
+				while (running) {//loops
 					double XRX = 0;
 					double XRY = 0;
 					double GenRY = 0;
 					double GenRX = 0;
+					double XRT=0;
 					try {
 						for (int i = ports.size()-1; i >= 0; i--)// possibly
 																	// better
@@ -532,6 +536,8 @@ private ArrayList<Integer> ports;
 									XRX = gamePads[ports.get(i)].getRX();
 								if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
 									XRY = gamePads[ports.get(i)].getRY();
+								if (abs(XRT) < abs(gamePads[ports.get(i)].getRZ()))
+									XRT=gamePads[ports.get(i)].getRZ();
 							} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
 								if (abs(GenRX) < abs(gamePads[ports.get(i)].getRX()))
 									GenRX = gamePads[ports.get(i)].getRX();
@@ -550,6 +556,14 @@ private ArrayList<Integer> ports;
 							activeRY = GenRY;
 						} else
 							activeRY = XRY;
+						if(abs(XRT) > 0.1)
+						{
+							activeRT = XRT;
+						}
+						else
+						{
+							activeRT=0;
+						}
 
 					} catch (Exception e) {
 						StringWriter errors = new StringWriter();
@@ -577,11 +591,12 @@ private ArrayList<Integer> ports;
 		
 	left = new Thread() {
 		public void run() {
-			while (running) {
+			while (running) {//loops
 				double XLX = 0;
-				double XRY = 0;
-				double GenRY = 0;
+				double XLY = 0;
 				double GenLX = 0;
+				double GenLY = 0;
+				double XLT =0;
 				try {
 					for (int i = ports.size()-1; i >= 0; i--)// possibly
 																// better
@@ -592,15 +607,19 @@ private ArrayList<Integer> ports;
 
 					{
 						if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
-							if (abs(XLX) < abs(gamePads[ports.get(i)].getRX()))
-								XLX = gamePads[ports.get(i)].getRX();
-							if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
-								XRY = gamePads[ports.get(i)].getRY();
+							if (abs(XLX) < abs(gamePads[ports.get(i)].getLX()))
+								XLX = gamePads[ports.get(i)].getLX();
+							if (abs(XLY) < abs(gamePads[ports.get(i)].getLY()))
+								XLY = gamePads[ports.get(i)].getLY();
+							if (abs(XLT) < abs(gamePads[ports.get(i)].getLZ()))
+									{
+										XLT=gamePads[ports.get(i)].getLZ();
+									}
 						} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
-							if (abs(GenLX) < abs(gamePads[ports.get(i)].getRX()))
-								GenLX = gamePads[ports.get(i)].getRX();
-							if (abs(GenRY) < abs(gamePads[i].getRY()))
-								GenRY = gamePads[ports.get(i)].getRY();
+							if (abs(GenLX) < abs(gamePads[ports.get(i)].getLX()))
+								GenLX = gamePads[ports.get(i)].getLX();
+							if (abs(GenLY) < abs(gamePads[i].getLY()))
+								GenLY = gamePads[ports.get(i)].getLY();
 						}
 					} // alternative method would be to actively sort and
 						// compare gamepads/xbox controllers but could cause
@@ -610,10 +629,14 @@ private ArrayList<Integer> ports;
 					} else
 						activeLX = XLX;
 
-					if (abs(GenRY) > abs(XRY) && abs(GenRY) > 0.1) {
-						activeLY = GenRY;
+					if (abs(GenLY) > abs(XLY) && abs(GenLY) > 0.1) {
+						activeLY = GenLY;
 					} else
-						activeLY = XRY;
+						activeLY = XLY;
+					if(abs(XLT) > 0.1)
+					{
+						activeRT = XLT;
+					}
 
 				} catch (Exception e) {
 					StringWriter errors = new StringWriter();
@@ -627,7 +650,7 @@ private ArrayList<Integer> ports;
 					System.out.println("ERROR Left HAND");
 					updateControllerList();
 				}
-				System.out.println("ActiveRY"+activeLY);
+				System.out.println("ActiveLY"+activeLY);
 			}
 			activeLX = 0.0;// when running set to false
 			activeLY = 0.0;
@@ -638,7 +661,11 @@ private ArrayList<Integer> ports;
 				a=-a;
 			return a;
 		}	};
-
+			
+		
+		
+			left.run();
+			right.run();
 	}
 	
 
@@ -691,6 +718,16 @@ private ArrayList<Integer> ports;
 			return 0.0;
 		}
 
+	}
+	public double getRawRT(){
+		return activeRT;//for xbox controllers with variable trigger values
+		
+	}
+
+	
+	public double getRawLT(){
+		return activeLT;//for xbox controllers with variable trigger values
+		
 	}
 	
 	

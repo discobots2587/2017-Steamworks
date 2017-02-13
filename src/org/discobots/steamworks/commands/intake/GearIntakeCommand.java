@@ -13,7 +13,7 @@ public class GearIntakeCommand extends Command {
 
     public GearIntakeCommand(double speed) {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.gearIntakeSub);
+    	requires(Robot.gearSub);
     	this.speed=speed;
     }
 
@@ -23,7 +23,7 @@ public class GearIntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearIntakeSub.setSpeed(speed);
+    	Robot.gearSub.setSpeed(speed);//sets blend speed
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,7 +33,7 @@ public class GearIntakeCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gearIntakeSub.setSpeed(0.0);
+    	Robot.gearSub.setSpeed(0.0);//turn off blend
     }
 
     // Called when another command which requires one or more of the same

@@ -15,6 +15,7 @@ public class GearIntakeSubsystem extends Subsystem {
 	// here. Call these from Commands.
 	private Spark intakeGearMotor;
 	private Solenoid gearSolenoid;
+	public int gearCount;
 	public GearIntakeSubsystem(){
 		this.gearSolenoid = new Solenoid(HW.gearSolenoid);
 		this.intakeGearMotor=new Spark(HW.motorGearIntake);
@@ -28,11 +29,11 @@ public class GearIntakeSubsystem extends Subsystem {
 	public void setSpeed(double speed){
 	intakeGearMotor.setSpeed(speed);
 	}
-	public void set(boolean val)
+	public void setGear(boolean val)
 	{
 		gearSolenoid.set(val);
 	}
-	public boolean get(){
+	public boolean getGear(){
 		return gearSolenoid.get();
 	}
 }

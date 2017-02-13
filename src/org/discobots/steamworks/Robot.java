@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 	public static ShooterSubsystem shootSub;
 	public static IntakeSubsystem intakeSub;
 	public static HangSubsystem hangSub;
-	public static GearIntakeSubsystem gearIntakeSub;
+	public static GearIntakeSubsystem gearSub;
 	private CameraServer LogicC615;
 	public static double totalTime;
 	public static long TeleopStartTime;
@@ -47,7 +47,7 @@ public class Robot extends IterativeRobot {
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
-		gearIntakeSub = new GearIntakeSubsystem();
+		gearSub = new GearIntakeSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 
 		autonChooser = new SendableChooser<Command>();

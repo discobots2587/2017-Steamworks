@@ -1,19 +1,17 @@
 package org.discobots.steamworks.commands.drive;
 
 import org.discobots.steamworks.Robot;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ComboShiftCommnad extends Command {
-	/*private int time;
+	private int time;
 	private long endTime;
 	private double speed;
 	private boolean fin=false;
-	public boolean end=false;*/
+	public boolean end=false;
 	private boolean direction = false;
 
     public ComboShiftCommnad(boolean direction) {
@@ -24,39 +22,39 @@ public class ComboShiftCommnad extends Command {
     }
 
     // Called just before this Command runs the first time
-   /* protected void initialize() {
+    protected void initialize() {
     	if(direction)
-    		Robot.oi.gearCount++;
+    		Robot.gearSub.gearCount++;
     	else
-    		Robot.oi.gearCount--;
-    	if(Robot.oi.gearCount==0){
+    		Robot.gearSub.gearCount--;
+    	if(Robot.gearSub.gearCount==0){
     		Robot.driveTrainSub.setLRShifter(false);
     		Robot.driveTrainSub.setSpeedScaling(.5);
     	}
-    	else if(Robot.oi.gearCount==1){
+    	else if(Robot.gearSub.gearCount==1){
     		Robot.driveTrainSub.setLRShifter(false);
     		Robot.driveTrainSub.setSpeedScaling(1.0);
     	}
-    	else if(Robot.oi.gearCount==2){
+    	else if(Robot.gearSub.gearCount==2){
     		Robot.driveTrainSub.setLRShifter(true);
     		Robot.driveTrainSub.setSpeedScaling(.5);
     	}
-    	else if(Robot.oi.gearCount==3){
+    	else if(Robot.gearSub.gearCount==3){
     		Robot.driveTrainSub.setLRShifter(true);
     		Robot.driveTrainSub.setSpeedScaling(1.0);
     	}
     	else if(direction){
-    		Robot.oi.gearCount=3;
+    		Robot.gearSub.gearCount=3;
     	}
     	else if(!direction){
-    		Robot.oi.gearCount=0;
+    		Robot.gearSub.gearCount=0;
     	}
     	else
     	{   		
     	}
 
     	
-    } */
+    } 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
