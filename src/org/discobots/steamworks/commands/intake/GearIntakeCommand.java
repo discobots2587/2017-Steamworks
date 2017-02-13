@@ -23,7 +23,7 @@ public class GearIntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearSub.setSpeed(speed);//sets blend speed
+    	Robot.gearSub.setSpeed(speed);//sets gear speed
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,7 +33,7 @@ public class GearIntakeCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gearSub.setSpeed(0.0);//turn off blend
+    	Robot.gearSub.setSpeed(0.0);//turn off gearintake
     }
 
     // Called when another command which requires one or more of the same

@@ -11,6 +11,7 @@ import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 
 import org.discobots.steamworks.commands.hang.HangCommand;
+import org.discobots.steamworks.commands.intake.GearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
@@ -130,10 +131,14 @@ private ArrayList<Integer> ports;
 					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
+						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand(.75));
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
+						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand(-.75));
 						if (gamePads[i] instanceof Xbox) {
 							L1_triggerR = gamePads[i].getLZ();// Right Trigger
 							L1_triggerL = gamePads[i].getRZ();// left trigger
@@ -177,6 +182,7 @@ private ArrayList<Integer> ports;
 					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
@@ -211,6 +217,7 @@ private ArrayList<Integer> ports;
 					
 					if (gamePads[i] instanceof Xbox){
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -226,7 +233,7 @@ private ArrayList<Integer> ports;
 						port1. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port1.size()-1).whenPressed(new ShootCommand());
+						port1.get(port1.size()-1).whenPressed(new ShootCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -240,6 +247,7 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
@@ -255,7 +263,7 @@ private ArrayList<Integer> ports;
 						port1. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port4.get(port1.size()-1).whenPressed(new ShootCommand());
+						port1.get(port1.size()-1).whenPressed(new ShootCommand());
 						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
@@ -272,6 +280,7 @@ private ArrayList<Integer> ports;
 				if (i == 2) {
 					if (gamePads[i] instanceof Xbox){
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -287,7 +296,7 @@ private ArrayList<Integer> ports;
 						port2. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port2.size()-1).whenPressed(new ShootCommand());
+						port2.get(port2.size()-1).whenPressed(new ShootCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -301,6 +310,7 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
@@ -316,7 +326,7 @@ private ArrayList<Integer> ports;
 						port2. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port4.get(port2.size()-1).whenPressed(new ShootCommand());
+						port2.get(port2.size()-1).whenPressed(new ShootCommand());
 						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
@@ -332,6 +342,7 @@ private ArrayList<Integer> ports;
 				if (i == 3) {
 					if (gamePads[i] instanceof Xbox){
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -347,7 +358,7 @@ private ArrayList<Integer> ports;
 						port3. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port3.size()-1).whenPressed(new ShootCommand());
+						port3.get(port3.size()-1).whenPressed(new ShootCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -361,6 +372,7 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
@@ -376,7 +388,7 @@ private ArrayList<Integer> ports;
 						port3. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port4.get(port3.size()-1).whenPressed(new ShootCommand());
+						port3.get(port3.size()-1).whenPressed(new ShootCommand());
 						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
@@ -392,6 +404,7 @@ private ArrayList<Integer> ports;
 				if (i == 4) {
 					if (gamePads[i] instanceof Xbox){
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -421,6 +434,7 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
@@ -454,6 +468,7 @@ private ArrayList<Integer> ports;
 			{
 				if (gamePads[i] instanceof Xbox){
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -469,7 +484,7 @@ private ArrayList<Integer> ports;
 					port5. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-					port4.get(port5.size()-1).whenPressed(new ShootCommand());
+					port5.get(port5.size()-1).whenPressed(new ShootCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -483,6 +498,7 @@ private ArrayList<Integer> ports;
 				}
 				if (!(gamePads[i] instanceof Xbox)){
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port5.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
@@ -498,7 +514,7 @@ private ArrayList<Integer> ports;
 					port5. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-					port4.get(port5.size()-1).whenPressed(new ShootCommand());
+					port5.get(port5.size()-1).whenPressed(new ShootCommand());
 					port5.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
