@@ -16,6 +16,7 @@ import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
+import org.discobots.steamworks.utils.GamePad.Hand;
 import org.discobots.steamworks.utils.TriggerToggle;
 import org.discobots.steamworks.utils.Xbox;
 
@@ -661,9 +662,6 @@ private ArrayList<Integer> ports;
 				a=-a;
 			return a;
 		}	};
-			
-		
-		
 			left.run();
 			right.run();
 	}
@@ -729,7 +727,29 @@ private ArrayList<Integer> ports;
 		return activeLT;//for xbox controllers with variable trigger values
 		
 	}
+
+	public void setRumble(Hand hand, double rumbleFactor) {
+		for (int i = ports.size()-1; i >= 0; i--)
+		{
+			try{
+			if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5)  {
+					 gamePads[ports.get(i)].setRumble(hand, rumbleFactor);
+			}
+				 }
 	
+			catch(Exception e){
+				StringWriter errors = new StringWriter();
+				e.printStackTrace(new PrintWriter(errors));
+				String error = "ControllerRumbleGlitch";
+						error.concat(errors.toString());
+				DriverStation.reportError(error, true);
+				activeLX = 0.0;
+				activeLY = 0.0;
+				System.out.println("ERROR Left HAND");
+				System.out.println("ERROR Left HAND");
+				updateControllerList();
+				}
+	}}
 	
 	
 	/*public double getRawAnalogStickALX() {// left stick y-axis/////////////////////////////CODE FOR IF THREAD IS NOT USED
