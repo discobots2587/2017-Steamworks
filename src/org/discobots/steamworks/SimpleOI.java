@@ -5,16 +5,10 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 
-import org.discobots.steamworks.commands.drive.FullSpeedCommand;
-import org.discobots.steamworks.commands.drive.HalfSpeedCommand;
-
-
-import org.discobots.steamworks.commands.gearIntake.GearIntakeCommand;
-import org.discobots.steamworks.commands.gearIntake.GearShiftCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
-import org.discobots.steamworks.commands.hang.ToggleHangCommand;
+import org.discobots.steamworks.commands.intake.GearIntakeCommand;
+import org.discobots.steamworks.commands.intake.GearShiftCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
-import org.discobots.steamworks.commands.intake.IntakeWhileHeldCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.utils.GamePad;
@@ -32,7 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class SimpleOI extends OI {
 	private GamePad gp1 = new GamePad(0);
 	private GamePad xbox = new GamePad(1); 
 	
@@ -78,19 +72,19 @@ public class OI {
 	private Button b2_clicR = new JoystickButton(gp1, GamePad.AXISBTN_R);
 	private Button b2_clicL = new JoystickButton(gp1, GamePad.AXISBTN_L);
 	
-	public OI() {
+	public SimpleOI() {
 		//JOYSTICK 2************************************************************************************
 		b2_sBack.whenPressed(new CycleDriveCommand());
 		
-		IntakeCommand in = new IntakeCommand(.75);
-		IntakeCommand out = new IntakeCommand(-.75);
-		GearIntakeCommand g = new GearIntakeCommand(1.0);
-		ToggleHangCommand h = new ToggleHangCommand(-1.0);
-		ShootCommand shoot = new ShootCommand();
+		IntakeCommand in = new IntakeCommand(.75);/// ---------------THIS NEEDS TO BE REMOVED
+		IntakeCommand out = new IntakeCommand(-.75);/// ---------------THIS NEEDS TO BE REMOVED
+		GearIntakeCommand g = new GearIntakeCommand(1.0);/// ---------------THIS NEEDS TO BE REMOVED
+		//ToggleHangCommand h = new ToggleHangCommand(-1.0);/// ---------------THIS NEEDS TO BE REMOVED 
+		ShootCommand shoot = new ShootCommand();/// ---------------THIS NEEDS TO BE REMOVED 
 
 		
 		
-		b2_btnB.toggleWhenPressed(h);
+	//	b2_btnB.toggleWhenPressed();
 		//b2_btnB.whileHeld(new HangCommand(1.0));
 		
 		b2_bumpL.toggleWhenPressed(in);
@@ -103,8 +97,8 @@ public class OI {
 
 		b2_btnX.whenPressed(new GearShiftCommand());
 		
-		b2_dpadR.whenPressed(new FullSpeedCommand());
-		b2_dpadL.whenPressed(new HalfSpeedCommand());
+		b2_dpadR.whenPressed(new CycleDriveCommand(1));
+		b2_dpadL.whenPressed(new CycleDriveCommand(.5));
 		
 		//b2_dpadU.whenPressed(new UpShiftCommand());
 		//b2_dpadD.whenPressed(new DownShiftCommand());
@@ -156,7 +150,7 @@ public class OI {
 		b_bumpR.toggleWhenPressed(blendIn);
 		b_trigR.toggleWhenActive(blendOut);
 		
-		b_btnB.toggleWhenPressed(h);
+	//	b_btnB.toggleWhenPressed(h);
 		
 		b_btnA.toggleWhenPressed(shoot);
 
@@ -166,8 +160,8 @@ public class OI {
 		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
 		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
 		
-		b2_dpadR.whenPressed(new FullSpeedCommand());
-		b2_dpadL.whenPressed(new HalfSpeedCommand());
+		b2_dpadR.whenPressed(new CycleDriveCommand(1));
+		b2_dpadL.whenPressed(new CycleDriveCommand(.5));
 		
 /*		b2_btnB.whileHeld(new LinearPunchStartCommand());
 		b_btnB.whileHeld(new LinearPunchStartCommand());
@@ -272,14 +266,14 @@ public class OI {
 		return (xbox.getRawAxis(5));// left stick x-axis
 
 	}
-	public double getRT(){
+	public double getRawRT(){
 		if(b2_trigR.get())//logitch controller does not have an axis on right trigger
 			return 1.0;
 		else
 			return (xbox.getRawAxis(3));
 		
 	}
-	public double getLT(){
+	public double getRawLT(){
 		if(b2_trigL.get())//logitch controller does not have an axis on left trigger
 			return 1.0;
 		else
