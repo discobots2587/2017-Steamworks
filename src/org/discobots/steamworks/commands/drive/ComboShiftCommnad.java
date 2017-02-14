@@ -4,7 +4,7 @@ import org.discobots.steamworks.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * shift through different combinations of speedscaling and gears
  */
 public class ComboShiftCommnad extends Command {
 

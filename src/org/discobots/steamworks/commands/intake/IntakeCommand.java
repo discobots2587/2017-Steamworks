@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * runs the ball intake
  */
 public class IntakeCommand extends Command {
 	private double speed;

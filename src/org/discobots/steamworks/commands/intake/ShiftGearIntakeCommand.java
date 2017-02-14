@@ -6,11 +6,11 @@ import org.discobots.steamworks.commands.shoot.BlendCommand;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Lowers and raises gear intake
  */
-public class GearShiftCommand extends Command {
+public class ShiftGearIntakeCommand extends Command {
 
-    public GearShiftCommand() {
+    public ShiftGearIntakeCommand() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.gearSub);
     }

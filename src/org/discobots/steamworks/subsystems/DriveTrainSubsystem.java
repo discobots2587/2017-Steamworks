@@ -1,6 +1,8 @@
 
 package org.discobots.steamworks.subsystems;
 
+import java.lang.Math;
+
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
@@ -51,6 +53,21 @@ Solenoid shifterLeft;
 
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
+	}
+	/*
+	 * the relationship between the input from joystick and output to the motors is exponential
+	 * instead of linear. Zero input will result in zero out put. .1 to .8 results in an output of
+	 * about .3. 1.0 input results in 1.0 output. 
+	 */
+	public void arcadeExpDrive(double y,double x){
+		double moveValue= 0.0;
+		if(y!=0.0){
+			moveValue=Math.exp(15.0*(y-1.02)+.3);
+		}
+		double rotateValue=0.0;
+		if(x!=0.0)		
+			rotateValue=Math.exp(15.0*(x-1.02)+.3);
+		robotDrive.arcadeDrive(moveValue, rotateValue);
 	}
 
 	public void setLRShifter(boolean val){

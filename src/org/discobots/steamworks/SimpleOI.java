@@ -7,7 +7,7 @@ import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SpeedShiftCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.intake.GearIntakeCommand;
-import org.discobots.steamworks.commands.intake.GearShiftCommand;
+import org.discobots.steamworks.commands.intake.ShiftGearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
@@ -87,15 +87,15 @@ public class SimpleOI extends OI {
 	//	b2_btnB.toggleWhenPressed();
 		//b2_btnB.whileHeld(new HangCommand(1.0));
 		
-		b2_bumpL.toggleWhenPressed(new IntakeCommand(.75));
-		b2_trigL.toggleWhenPressed(new IntakeCommand(-.75));
+		b2_bumpL.toggleWhenPressed(new IntakeCommand(-.75));
+		b2_trigL.whileHeld(new IntakeCommand(.75));
 		
 		b2_bumpR.whileHeld(new BlendCommand(1));
 		b2_trigR.whileHeld(new BlendCommand(-1));
 		
 		b2_btnA.whileHeld(new ShootCommand());
 
-		b2_btnX.whenPressed(new GearShiftCommand());
+		b2_btnX.whenPressed(new ShiftGearIntakeCommand());
 		
 		b2_dpadR.whenPressed(new SpeedShiftCommand(1.0));
 		b2_dpadL.whenPressed(new SpeedShiftCommand(.5));
@@ -141,8 +141,8 @@ public class SimpleOI extends OI {
 		b_sBack.whenPressed(new CycleDriveCommand());
 
 		
-		b_bumpL.whileHeld(new IntakeCommand(.75));
-		b_trigL.whileActive(new IntakeCommand(-.75));
+		b_bumpL.toggleWhenPressed(new IntakeCommand(-.75));
+		b_trigL.whileActive(new IntakeCommand(.75));
 		
 
 		//b_trigL.whileActive(new IntakeWhileHeldCommand(-1.0));
@@ -154,7 +154,7 @@ public class SimpleOI extends OI {
 		
 		b_btnA.whileHeld(new ShootCommand());;
 
-		b_btnX.whenPressed(new GearShiftCommand());
+		b_btnX.whenPressed(new ShiftGearIntakeCommand());
 		
 		
 		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
@@ -279,4 +279,8 @@ public class SimpleOI extends OI {
 		else
 			return (xbox.getRawAxis(2));
 	} 
+	/*
+	 * does nothing, present so that there will not be errors if this oi is used
+	 */
+	public void updateControllerList(){}
 }

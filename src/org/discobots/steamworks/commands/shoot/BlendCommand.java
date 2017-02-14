@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Runs the blender
  */
 public class BlendCommand extends Command {
 	private double speed;

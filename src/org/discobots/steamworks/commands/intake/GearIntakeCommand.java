@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Runs the motor on the gear intake
  */
 public class GearIntakeCommand extends Command {
 	private double speed;

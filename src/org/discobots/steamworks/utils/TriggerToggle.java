@@ -3,7 +3,9 @@ package org.discobots.steamworks.utils;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.Trigger;
-
+/*
+ * Allows for the xbox triggers to be used as buttons
+ */
 public class TriggerToggle extends Trigger {
 	
 	private final GenericHID m_joystick;
