@@ -7,10 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ComboShiftCommnad extends Command {
-	private int time;
-	private long endTime;
-	private double speed;
-	private boolean fin=false;
+
+	private boolean fin=true;
 	public boolean end=false;
 	private boolean direction = false;
 
@@ -24,30 +22,30 @@ public class ComboShiftCommnad extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(direction)
-    		Robot.gearSub.gearCount++;
+    		Robot.driveTrainSub.gearCount++;
     	else
-    		Robot.gearSub.gearCount--;
-    	if(Robot.gearSub.gearCount==0){
+    		Robot.driveTrainSub.gearCount--;
+    	if(Robot.driveTrainSub.gearCount==0){
     		Robot.driveTrainSub.setLRShifter(false);
     		Robot.driveTrainSub.setSpeedScaling(.5);
     	}
-    	else if(Robot.gearSub.gearCount==1){
+    	else if(Robot.driveTrainSub.gearCount==1){
     		Robot.driveTrainSub.setLRShifter(false);
     		Robot.driveTrainSub.setSpeedScaling(1.0);
     	}
-    	else if(Robot.gearSub.gearCount==2){
+    	else if(Robot.driveTrainSub.gearCount==2){
     		Robot.driveTrainSub.setLRShifter(true);
     		Robot.driveTrainSub.setSpeedScaling(.5);
     	}
-    	else if(Robot.gearSub.gearCount==3){
+    	else if(Robot.driveTrainSub.gearCount==3){
     		Robot.driveTrainSub.setLRShifter(true);
     		Robot.driveTrainSub.setSpeedScaling(1.0);
     	}
     	else if(direction){
-    		Robot.gearSub.gearCount=3;
+    		Robot.driveTrainSub.gearCount=3;
     	}
     	else if(!direction){
-    		Robot.gearSub.gearCount=0;
+    		Robot.driveTrainSub.gearCount=0;
     	}
     	else
     	{   		
@@ -64,7 +62,7 @@ public class ComboShiftCommnad extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return fin;
     }
 
     // Called once after isFinished returns true

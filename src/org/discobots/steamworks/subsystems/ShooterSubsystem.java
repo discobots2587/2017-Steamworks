@@ -4,6 +4,7 @@ import org.discobots.steamworks.HW;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,12 +13,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private CANTalon shootMotor;
-	private CANTalon motorBlend;
+	private Talon shootMotor;
+	private Talon motorBlend;
 	public final double kSpeed =1.0;
 	public ShooterSubsystem(){
-		this.shootMotor=new CANTalon(HW.motorShoot);
-		this.motorBlend = new CANTalon(HW.motorBlend);
+		this.shootMotor=new Talon(HW.motorShoot);
+		this.motorBlend = new Talon(HW.motorBlend);
 	}
 
 	public void initDefaultCommand() {

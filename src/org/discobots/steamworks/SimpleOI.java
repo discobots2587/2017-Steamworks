@@ -4,7 +4,7 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
-
+import org.discobots.steamworks.commands.drive.SpeedShiftCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.intake.GearIntakeCommand;
 import org.discobots.steamworks.commands.intake.GearShiftCommand;
@@ -93,12 +93,12 @@ public class SimpleOI extends OI {
 		b2_bumpR.whileHeld(new BlendCommand(1));
 		b2_trigR.whileHeld(new BlendCommand(-1));
 		
-		b2_btnA.whileActive(new ShootCommand());
+		b2_btnA.whileHeld(new ShootCommand());
 
 		b2_btnX.whenPressed(new GearShiftCommand());
 		
-		b2_dpadR.whenPressed(new CycleDriveCommand(1));
-		b2_dpadL.whenPressed(new CycleDriveCommand(.5));
+		b2_dpadR.whenPressed(new SpeedShiftCommand(1.0));
+		b2_dpadL.whenPressed(new SpeedShiftCommand(.5));
 		
 		//b2_dpadU.whenPressed(new UpShiftCommand());
 		//b2_dpadD.whenPressed(new DownShiftCommand());
@@ -160,8 +160,8 @@ public class SimpleOI extends OI {
 		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
 		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
 		
-		b2_dpadR.whenPressed(new CycleDriveCommand(1));
-		b2_dpadL.whenPressed(new CycleDriveCommand(.5));
+		b2_dpadR.whenPressed(new SpeedShiftCommand(1.0));
+		b2_dpadL.whenPressed(new SpeedShiftCommand(.5));
 		
 /*		b2_btnB.whileHeld(new LinearPunchStartCommand());
 		b_btnB.whileHeld(new LinearPunchStartCommand());
