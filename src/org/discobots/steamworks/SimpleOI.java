@@ -30,10 +30,10 @@ public class SimpleOI extends OI {
 	private GamePad gp1 = new GamePad(0);
 	private GamePad xbox = new GamePad(1); 
 	
-	public Command blendIn = new BlendCommand(1.0);
-	public Command blendOut = new BlendCommand(-1.0);
-	public int count = 0;
-	public int gearCount =0;
+	//public Command blendIn = new BlendCommand(1.0);/// ---------------THIS NEEDS TO BE REMOVED
+	//public Command blendOut = new BlendCommand(-1.0);/// ---------------THIS NEEDS TO BE REMOVED
+	//public int count = 0;/// ---------------THIS NEEDS TO BE REMOVED
+	//public int gearCount =0;/// ---------------THIS NEEDS TO BE REMOVED
 //set buttons for each joystick
 	// JOYSTICK 2
 	private Button b_dpadU = new DPadButton(xbox, GamePad.DPAD_Y, true);
@@ -76,24 +76,24 @@ public class SimpleOI extends OI {
 		//JOYSTICK 2************************************************************************************
 		b2_sBack.whenPressed(new CycleDriveCommand());
 		
-		IntakeCommand in = new IntakeCommand(.75);/// ---------------THIS NEEDS TO BE REMOVED
-		IntakeCommand out = new IntakeCommand(-.75);/// ---------------THIS NEEDS TO BE REMOVED
-		GearIntakeCommand g = new GearIntakeCommand(1.0);/// ---------------THIS NEEDS TO BE REMOVED
+		//IntakeCommand in = new IntakeCommand(.75);/// ---------------THIS NEEDS TO BE REMOVED
+		//IntakeCommand out = new IntakeCommand(-.75);/// ---------------THIS NEEDS TO BE REMOVED
+	//	GearIntakeCommand g = new GearIntakeCommand(1.0);/// ---------------THIS NEEDS TO BE REMOVED
 		//ToggleHangCommand h = new ToggleHangCommand(-1.0);/// ---------------THIS NEEDS TO BE REMOVED 
-		ShootCommand shoot = new ShootCommand();/// ---------------THIS NEEDS TO BE REMOVED 
+		//ShootCommand shoot = new ShootCommand();/// ---------------THIS NEEDS TO BE REMOVED 
 
 		
 		
 	//	b2_btnB.toggleWhenPressed();
 		//b2_btnB.whileHeld(new HangCommand(1.0));
 		
-		b2_bumpL.toggleWhenPressed(in);
-		b2_trigL.toggleWhenPressed(out);
+		b2_bumpL.toggleWhenPressed(new IntakeCommand(.75));
+		b2_trigL.toggleWhenPressed(new IntakeCommand(-.75));
 		
-		b2_bumpR.toggleWhenPressed(blendIn);//very experimental might not work
-		b2_trigR.toggleWhenPressed(blendOut);//
+		b2_bumpR.whileHeld(new BlendCommand(1));
+		b2_trigR.whileHeld(new BlendCommand(-1));
 		
-		b2_btnA.toggleWhenPressed(shoot);
+		b2_btnA.whileActive(new ShootCommand());
 
 		b2_btnX.whenPressed(new GearShiftCommand());
 		
@@ -141,18 +141,18 @@ public class SimpleOI extends OI {
 		b_sBack.whenPressed(new CycleDriveCommand());
 
 		
-		b_bumpL.toggleWhenPressed(in);
-		b_trigL.toggleWhenActive(out);
+		b_bumpL.whileHeld(new IntakeCommand(.75));
+		b_trigL.whileActive(new IntakeCommand(-.75));
 		
 
 		//b_trigL.whileActive(new IntakeWhileHeldCommand(-1.0));
 		
-		b_bumpR.toggleWhenPressed(blendIn);
-		b_trigR.toggleWhenActive(blendOut);
+		b_bumpR.whileHeld(new BlendCommand(1));
+		b_trigR.whileActive(new BlendCommand(-1));
 		
 	//	b_btnB.toggleWhenPressed(h);
 		
-		b_btnA.toggleWhenPressed(shoot);
+		b_btnA.whileHeld(new ShootCommand());;
 
 		b_btnX.whenPressed(new GearShiftCommand());
 		
