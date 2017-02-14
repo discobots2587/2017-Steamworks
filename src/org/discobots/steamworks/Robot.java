@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot {
 	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
+	private boolean simple=false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,12 +44,15 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
 		gearSub = new GearIntakeSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
+		if (simple==true)
+				oi = new SimpleOI();
+		else
+			oi = new OI();
 
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
