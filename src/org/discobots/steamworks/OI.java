@@ -45,7 +45,7 @@ public class OI {
 	private double activeRX = 0.0;
 	public boolean running = true;
 	private double activeRT=0.0;
-	double activeLT=0.0;
+	private double activeLT=0.0;
 
 
 public double L1_triggerR;	
@@ -77,7 +77,6 @@ private ArrayList<Integer> ports;
 	public void updateControllerList() {
 		new Thread()
 		{
-			
 		public void run(){
 			ports.clear();
 		numPads = 0;
@@ -113,8 +112,7 @@ private ArrayList<Integer> ports;
 		}
 		}}.run();
 		createMapping();
-		running=true;
-		runThreads();
+
 	}
 
 	public void createMapping() {
@@ -151,7 +149,7 @@ private ArrayList<Integer> ports;
 						port0. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port0.size()-1).whenPressed(new ShootCommand());
+						port0.get(port0.size()-1).whenPressed(new ShootCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -529,7 +527,9 @@ private ArrayList<Integer> ports;
 				}
 			}
 			}
-		}}
+		}		
+		running=true;
+		runThreads();}
 	public void runThreads()
 	{
 		right = new Thread() {
@@ -595,7 +595,6 @@ private ArrayList<Integer> ports;
 						System.out.println("ERROR Right HAND");
 						updateControllerList();
 					}
-					System.out.println("ActiveRY"+activeRY);
 				}
 				activeRX = 0.0;// when running set to false
 				activeRY = 0.0;
@@ -668,7 +667,6 @@ private ArrayList<Integer> ports;
 					System.out.println("ERROR Left HAND");
 					updateControllerList();
 				}
-				System.out.println("ActiveLY"+activeLY);
 			}
 			activeLX = 0.0;// when running set to false
 			activeLY = 0.0;
@@ -679,7 +677,7 @@ private ArrayList<Integer> ports;
 				a=-a;
 			return a;
 		}	};
-			left.run();
+			//left.run();
 			right.run();
 	}
 	
