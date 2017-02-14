@@ -114,6 +114,7 @@ private ArrayList<Integer> ports;
 		}}.run();
 		createMapping();
 		running=true;
+		runThreads();
 	}
 
 	public void createMapping() {
@@ -198,7 +199,7 @@ private ArrayList<Integer> ports;
 						port0. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port4.get(port0.size()-1).whenPressed(new ShootCommand());
+						port0.get(port0.size()-1).toggleWhenPressed(new ShootCommand());
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
