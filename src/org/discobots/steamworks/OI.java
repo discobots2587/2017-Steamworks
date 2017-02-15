@@ -289,6 +289,7 @@ private ArrayList<Integer> ports;
 					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -369,6 +370,7 @@ private ArrayList<Integer> ports;
 					
 					if (gamePads[i] instanceof Xbox){
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -427,6 +429,7 @@ private ArrayList<Integer> ports;
 				if (i == 2) {
 					if (gamePads[i] instanceof Xbox){
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -484,6 +487,7 @@ private ArrayList<Integer> ports;
 				if (i == 3) {
 					if (gamePads[i] instanceof Xbox){
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -541,6 +545,7 @@ private ArrayList<Integer> ports;
 				if (i == 4) {
 					if (gamePads[i] instanceof Xbox){
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -600,6 +605,7 @@ private ArrayList<Integer> ports;
 			{
 				if (gamePads[i] instanceof Xbox){
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
