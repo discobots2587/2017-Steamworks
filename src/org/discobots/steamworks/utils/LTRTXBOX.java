@@ -32,18 +32,26 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     	  // if(Math.abs(liftSpeed)<.15)
     		//   liftSpeed=0;
   //  	   Robot.armSub.setSpeed(liftSpeed);
+    	 
+    	   
     	   if (TriggerValue>.2)
     		   Robot.oi.setRumble(right, TriggerValue/2);
     	   if(TriggerValue<-.2)
     		   Robot.oi.setRumble(left,TriggerValue/2);;
-    	   if(TriggerValue<0)
-    	   {
-    		  // if(Robot.armSub.potentiometer.getAverageVoltage()< Robot.armSub.upperArmLim) //2015 we used POT values for PID
-    			 //  Robot.armSub.setSpeed(TriggerValue);
-    	   } else{
-    		  //if(Robot.armSub.potentiometer.getAverageVoltage()> Robot.armSub.lowerArmLim)
-    			  // Robot.armSub.setSpeed(TriggerValue);
-    	   }
+        	   if(-.75<TriggerValue&&TriggerValue<-.2)//deadband
+        	   {
+        		   TriggerValue=-.75;
+        		  // if(Robot.armSub.potentiometer.getAverageVoltage()< Robot.armSub.upperArmLim) //2015 we used POT values for PID
+        			 //  Robot.armSub.setSpeed(TriggerValue);
+        	   } else if (.75>TriggerValue&&TriggerValue>.2){//minimum intake speed of +/- .75
+        		   TriggerValue=.75;
+        		  //if(Robot.armSub.potentiometer.getAverageVoltage()> Robot.armSub.lowerArmLim)
+        			  // Robot.armSub.setSpeed(TriggerValue);
+        	   }
+        	   else
+        	   {
+        		   TriggerValue=0;//deadband of -.2 to .2
+        	   }
     	   Robot.intakeSub.setSpeed(TriggerValue);
     }
 
