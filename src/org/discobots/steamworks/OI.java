@@ -75,8 +75,6 @@ private ArrayList<Integer> ports;
 			public void run() {
 				while (true){
 				while (running) {//loops
-					System.out.println("right Running");
-					System.out.println("ports"+ ports.get(1));
 					double XRX = 0;
 					double XRY = 0;
 					double GenRY = 0;
@@ -142,7 +140,6 @@ private ArrayList<Integer> ports;
 				}
 				activeRX = 0.0;// when running set to false
 				activeRY = 0.0;
-				System.out.println("running=" + running);
 				}
 				
 			}
@@ -198,7 +195,7 @@ private ArrayList<Integer> ports;
 						activeLY = XLY;
 					if(abs(XLT) > 0.1)
 					{
-						activeRT = XLT;
+						activeLT = XLT;
 					}
 
 				} catch (Exception e) {
@@ -224,9 +221,14 @@ private ArrayList<Integer> ports;
 		}	};
 		
 		updateControllerList();
-		left.start();
-		right.start();
-
+		StartThreads();
+	}
+	public void StartThreads()
+	{
+		if (!left.isAlive())
+			left.start();
+		if(!right.isAlive())
+			right.start();
 	}
 
 	public void updateControllerList() {
@@ -267,6 +269,10 @@ private ArrayList<Integer> ports;
 		}}.start();
 		createMapping();
 		running=true;
+		if (!left.isAlive())
+			left.start();
+		if(!right.isAlive())
+			right.start();
 	}
 
 	public void createMapping() {
@@ -694,36 +700,22 @@ private ArrayList<Integer> ports;
 	
 	public double getRawAnalogStickALX()
 	{
-		if (running)
 			return activeLX;
-		else 
-			return 0.0;
-		}
+	}	
 
 	
 
 	public double getRawAnalogStickALY() {// left stick y-axis
-		if (running)
-			return activeLY;
-		else 
-			return 0.0;
-		}
+			return activeLY;}
 	
 
 	public double getRawAnalogStickARX() {// Right stick x-axis
-		if (running)
 			return activeRX;
-		else {
-			return 0.0;
-		}
+
 	}
 
 	public double getRawAnalogStickARY() {// Right stick y-axis
-		if (running)
 			return activeRY;
-		else {
-			return 0.0;
-		}
 
 	}
 	public double getRawRT(){

@@ -108,7 +108,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		oi.updateControllerList();
 	}
 
 	@Override
