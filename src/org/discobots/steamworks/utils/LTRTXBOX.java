@@ -16,13 +16,12 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
 	Hand right = GamePad.Hand.RIGHT;
     public LTRTXBOX() {
         // Use requires() here to declare subsystem dependencies
-
+    	requires(Robot.intakeSub);
     	//requires(Robot.armSub);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,6 +44,7 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     		  //if(Robot.armSub.potentiometer.getAverageVoltage()> Robot.armSub.lowerArmLim)
     			  // Robot.armSub.setSpeed(TriggerValue);
     	   }
+    	   Robot.intakeSub.setSpeed(TriggerValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -56,6 +56,8 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     protected void end() {
     	//liftSpeed=0;//always set speeds to zero in end
    // 	Robot.oi.setRumble(0);
+    	TriggerValue=0;
+    	Robot.intakeSub.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

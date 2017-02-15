@@ -1,6 +1,7 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.utils.LTRTXBOX;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,8 +18,7 @@ public class IntakeSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		new LTRTXBOX();
 	}
 	
 	public void setSpeed(double speed){
