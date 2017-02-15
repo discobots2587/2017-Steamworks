@@ -35,8 +35,8 @@ public class HW {
 
 	
 	/* Pneumatics */
-	public final static int shifterRight = 0;
-	public final static int shifterLeft = 1;
+	public final static int shifter = 0;//not a double solenoid
+	//public final static int shifterLeft = 1;
 	public final static int gearSolenoid = 2;
 
 

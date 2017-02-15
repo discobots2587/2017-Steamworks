@@ -20,17 +20,15 @@ private double kSpeedScaling=.75;
 public RobotDrive robotDrive;
 public int gearCount=0;
 
-Solenoid shifterRight;
-Solenoid shifterLeft;
+Solenoid shifter;
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
 		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
 								  HW.motorFrontRight,HW.motorBackRight);
 		//robotDrive.setSafetyEnabled(true);
-
-		shifterRight = new Solenoid(HW.shifterRight);
-		shifterLeft = new Solenoid(HW.shifterLeft);
+		shifter = new Solenoid(HW.shifter);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -71,10 +69,9 @@ Solenoid shifterLeft;
 	}
 
 	public void setLRShifter(boolean val){
-		shifterRight.set(val);
-		shifterLeft.set(val);
+		shifter.set(val);
 	}
 	public boolean getLRShifter(){
-		return shifterRight.get();
+		return shifter.get();
 	}
 }
