@@ -151,6 +151,10 @@ return 0;
 		// TODO Auto-generated method stub
 
 	}
+	public void setRumbleFull(double intensity) {// does nothing
+		// TODO Auto-generated method stub
+
+	}
 
 	public String thegetName() {
 		return name;

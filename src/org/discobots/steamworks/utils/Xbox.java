@@ -122,6 +122,10 @@ public class Xbox extends GamePad {
 			this.setRumble(RumbleType.kRightRumble, amount);
 		}
 	}
+	public void setRumbleFull(double intensity) { // set for single side
+		final float amount = new Float(intensity);
+		this.setRumble(amount);
+	}
 
 	public void setRumble(double intensity) { // set rumble for both hands
 		final float amount = new Float(intensity);

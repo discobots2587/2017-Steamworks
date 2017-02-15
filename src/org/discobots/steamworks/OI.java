@@ -96,7 +96,6 @@ private ArrayList<Integer> ports;
 									XRY = gamePads[ports.get(i)].getRY();
 								if (abs(XRT) < abs(gamePads[ports.get(i)].getRZ())){
 									XRT=gamePads[ports.get(i)].getRZ();
-									System.out.println("XRT"+XRT);
 								}
 							} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
 								if (abs(GenRX) < abs(gamePads[ports.get(i)].getRX()))
@@ -293,17 +292,17 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand(.75));
+						port0.get(port0.size()-1).whileHeld(new GearIntakeCommand(.75));
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
-						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand(-.75));
+						port0.get(port0.size()-1).whileHeld(new GearIntakeCommand(-.75));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port0.get(port0.size()-1).whenPressed(new ShootCommand());
+						port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
@@ -738,6 +737,7 @@ private ArrayList<Integer> ports;
 					 gamePads[ports.get(i)].setRumble(hand, rumbleFactor);
 			}
 				 }
+		
 	
 			catch(Exception e){
 				StringWriter errors = new StringWriter();
@@ -745,10 +745,27 @@ private ArrayList<Integer> ports;
 				String error = "ControllerRumbleGlitch";
 						error.concat(errors.toString());
 				DriverStation.reportError(error, true);
-				activeLX = 0.0;
-				activeLY = 0.0;
-				System.out.println("ERROR Left HAND");
-				System.out.println("ERROR Left HAND");
+				System.out.println("ERROR Rumble");
+				System.out.println("ERROR Rumble");
+				updateControllerList();
+				}
+	}}
+	public void setRumble(double rumbleFactor) {
+		for (int i = ports.size()-1; i >= 0; i--)
+		{
+			try{
+			if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5)  {
+					 gamePads[ports.get(i)].setRumbleFull(rumbleFactor);
+			}}
+			
+			catch(Exception e){
+				StringWriter errors = new StringWriter();
+				e.printStackTrace(new PrintWriter(errors));
+				String error = "ControllerRumbleGlitch";
+						error.concat(errors.toString());
+				DriverStation.reportError(error, true);
+				System.out.println("ERROR RumbleFull");
+				System.out.println("ERROR RumbleFull");
 				updateControllerList();
 				}
 	}}

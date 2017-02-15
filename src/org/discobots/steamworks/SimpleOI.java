@@ -214,6 +214,7 @@ public class SimpleOI extends OI {
 	public void createMapping()
 	{
 	}
+	
 	public void updateControllerList(){
 	}
 	public double getRawAnalogStickALX() {
@@ -285,6 +286,4 @@ public class SimpleOI extends OI {
 	} 
 	/*
 	 * does nothing, present so that there will not be errors if this oi is used
-	 */
-	public void updateControllerList(){}
-}
+	 */}
