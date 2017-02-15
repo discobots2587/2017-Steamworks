@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
-import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 
 import org.discobots.steamworks.commands.hang.HangCommand;
@@ -71,7 +70,163 @@ private ArrayList<Integer> ports;
 		ports = new ArrayList<Integer>();
 		
 		
+		
+		right = new Thread() {
+			public void run() {
+				while (true){
+				while (running) {//loops
+					System.out.println("right Running");
+					System.out.println("ports"+ ports.get(1));
+					double XRX = 0;
+					double XRY = 0;
+					double GenRY = 0;
+					double GenRX = 0;
+					double XRT=0;
+					try {
+						for (int i = ports.size()-1; i >= 0; i--)// possibly
+																	// better
+																	// way to
+																	// sort
+																	// using
+																	// comparator
+
+						{
+							if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
+								if (abs(XRX) < abs(gamePads[ports.get(i)].getRX()))
+									XRX = gamePads[ports.get(i)].getRX();
+								if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
+									XRY = gamePads[ports.get(i)].getRY();
+								if (abs(XRT) < abs(gamePads[ports.get(i)].getRZ())){
+									XRT=gamePads[ports.get(i)].getRZ();
+									System.out.println("XRT"+XRT);
+								}
+							} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
+								if (abs(GenRX) < abs(gamePads[ports.get(i)].getRX()))
+									GenRX = gamePads[ports.get(i)].getRX();
+								if (abs(GenRY) < abs(gamePads[i].getRY()))
+									GenRY = gamePads[ports.get(i)].getRY();
+							}
+						} // alternative method would be to actively sort and
+							// compare gamepads/xbox controllers but could cause
+							// conflicts with other parallel requests
+						if (abs(GenRX) > abs(XRX) && abs(GenRX) > 0.1) {
+							activeRX = GenRX;
+						} else
+							activeRX = XRX;
+
+						if (abs(GenRY) > abs(XRY) && abs(GenRY) > 0.1) {
+							activeRY = GenRY;
+						} else
+							activeRY = XRY;
+						if(abs(XRT) > 0.1)
+						{
+							activeRT = XRT;
+						}
+						else
+						{
+							activeRT=0;
+						}
+
+					} catch (Exception e) {
+						StringWriter errors = new StringWriter();
+						e.printStackTrace(new PrintWriter(errors));
+						String error = "Right Hand Controller Glitch";
+								error.concat(errors.toString());
+						DriverStation.reportError(error, true);
+						activeRX = 0.0;
+						activeRY = 0.0;
+						System.out.println("ERROR Right HAND");
+						System.out.println("ERROR Right HAND");
+						updateControllerList();
+					}
+				}
+				activeRX = 0.0;// when running set to false
+				activeRY = 0.0;
+				System.out.println("running=" + running);
+				}
+				
+			}
+			public double abs(double a)
+			{
+				if (a<0)
+					a=-a;
+				return a;
+			}	};
+		
+	left = new Thread() {
+		public void run() {
+			while(true){
+			while (running) {//loops
+				double XLX = 0;
+				double XLY = 0;
+				double GenLX = 0;
+				double GenLY = 0;
+				double XLT =0;
+				try {
+					for (int i = ports.size()-1; i >= 0; i--)// possibly
+																// better
+																// way to
+																// sort
+																// using
+																// comparator
+
+					{
+						if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
+							if (abs(XLX) < abs(gamePads[ports.get(i)].getLX()))
+								XLX = gamePads[ports.get(i)].getLX();
+							if (abs(XLY) < abs(gamePads[ports.get(i)].getLY()))
+								XLY = gamePads[ports.get(i)].getLY();
+							if (abs(XLT) < abs(gamePads[ports.get(i)].getLZ()))
+										XLT=gamePads[ports.get(i)].getLZ();
+						} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
+							if (abs(GenLX) < abs(gamePads[ports.get(i)].getLX()))
+								GenLX = gamePads[ports.get(i)].getLX();
+							if (abs(GenLY) < abs(gamePads[i].getLY()))
+								GenLY = gamePads[ports.get(i)].getLY();
+						}
+					} // alternative method would be to actively sort and
+						// compare gamepads/xbox controllers but could cause
+						// conflicts with other parallel requests
+					if (abs(GenLX) > abs(XLX) && abs(GenLX) > 0.1) {
+						activeLX = GenLX;
+					} else
+						activeLX = XLX;
+
+					if (abs(GenLY) > abs(XLY) && abs(GenLY) > 0.1) {
+						activeLY = GenLY;
+					} else
+						activeLY = XLY;
+					if(abs(XLT) > 0.1)
+					{
+						activeRT = XLT;
+					}
+
+				} catch (Exception e) {
+					StringWriter errors = new StringWriter();
+					e.printStackTrace(new PrintWriter(errors));
+					String error = "Left Hand Controller Glitch";
+							error.concat(errors.toString());
+					DriverStation.reportError(error, true);
+					activeLX = 0.0;
+					activeLY = 0.0;
+					System.out.println("ERROR Left HAND");
+					System.out.println("ERROR Left HAND");
+					updateControllerList();
+				}
+			}activeLX = 0.0;activeLY = 0.0;}
+			// when running set to false
+		}
+		public double abs(double a)
+		{
+			if (a<0)
+				a=-a;
+			return a;
+		}	};
+		
 		updateControllerList();
+		left.start();
+		right.start();
+
 	}
 
 	public void updateControllerList() {
@@ -108,11 +263,10 @@ private ArrayList<Integer> ports;
 				DriverStation.reportError(error, true);
 				gamePads[i]=null;
 			}
-
-		}
-		}}.run();
+		}		
+		}}.start();
 		createMapping();
-
+		running=true;
 	}
 
 	public void createMapping() {
@@ -123,27 +277,19 @@ private ArrayList<Integer> ports;
 		port4.clear();
 		port5.clear();
 		for (int i = 5; i >= 0; i--) {
-			if (gamePads[i] != null && gamePads[i].getAxisCount() > 0) {
+			if (gamePads[i] instanceof GamePad && gamePads[i].getAxisCount() > 0) {
 				if (gamePads[i] instanceof Xbox) {// ability to create entirely separate
 											// control scheme for xbox
 											// controller even if in same port
 					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
-						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand(.75));
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand(-.75));
-						if (gamePads[i] instanceof Xbox) {
-							L1_triggerR = gamePads[i].getLZ();// Right Trigger
-							L1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {
-
-						}
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
@@ -160,7 +306,7 @@ private ArrayList<Integer> ports;
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-					}
+					
 					/*
 					 * int temp; temp = gamePads[i].makebuttons(new               //Previous idea to set buttons and commands in each controller object - not working
 					 * DPadButton(gamePads[i], Xbox.DPAD_Y, false));
@@ -172,7 +318,7 @@ private ArrayList<Integer> ports;
 					 * SmartDashboard.putBoolean("Mapping Created for Xbox",
 					 * true);
 					 */
-				}
+				}}
 
 				if (!(gamePads[i] instanceof Xbox)) {// ability to create entirely separate
 											// control scheme for non xbox
@@ -186,6 +332,8 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
+						System.out.println("GenericPORTZERO MAPPED");
+
 						if (gamePads[i].isXbox) {
 							L1_triggerR = gamePads[i].getLZ();// Right Trigger
 							L1_triggerL = gamePads[i].getRZ();// left trigger
@@ -228,6 +376,7 @@ private ArrayList<Integer> ports;
 
 						}
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
+						System.out.println("xboxPORTOne MAPPED");
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
@@ -525,162 +674,7 @@ private ArrayList<Integer> ports;
 					port5.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 				}
-			}
-			}
-		}		
-		running=true;
-		runThreads();}
-	public void runThreads()
-	{
-		right = new Thread() {
-			public void run() {
-				while (running) {//loops
-					double XRX = 0;
-					double XRY = 0;
-					double GenRY = 0;
-					double GenRX = 0;
-					double XRT=0;
-					try {
-						for (int i = ports.size()-1; i >= 0; i--)// possibly
-																	// better
-																	// way to
-																	// sort
-																	// using
-																	// comparator
-
-						{
-							if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
-								if (abs(XRX) < abs(gamePads[ports.get(i)].getRX()))
-									XRX = gamePads[ports.get(i)].getRX();
-								if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
-									XRY = gamePads[ports.get(i)].getRY();
-								if (abs(XRT) < abs(gamePads[ports.get(i)].getRZ()))
-									XRT=gamePads[ports.get(i)].getRZ();
-							} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
-								if (abs(GenRX) < abs(gamePads[ports.get(i)].getRX()))
-									GenRX = gamePads[ports.get(i)].getRX();
-								if (abs(GenRY) < abs(gamePads[i].getRY()))
-									GenRY = gamePads[ports.get(i)].getRY();
-							}
-						} // alternative method would be to actively sort and
-							// compare gamepads/xbox controllers but could cause
-							// conflicts with other parallel requests
-						if (abs(GenRX) > abs(XRX) && abs(GenRX) > 0.1) {
-							activeRX = GenRX;
-						} else
-							activeRX = XRX;
-
-						if (abs(GenRY) > abs(XRY) && abs(GenRY) > 0.1) {
-							activeRY = GenRY;
-						} else
-							activeRY = XRY;
-						if(abs(XRT) > 0.1)
-						{
-							activeRT = XRT;
-						}
-						else
-						{
-							activeRT=0;
-						}
-
-					} catch (Exception e) {
-						StringWriter errors = new StringWriter();
-						e.printStackTrace(new PrintWriter(errors));
-						String error = "Right Hand Controller Glitch";
-								error.concat(errors.toString());
-						DriverStation.reportError(error, true);
-						activeRX = 0.0;
-						activeRY = 0.0;
-						System.out.println("ERROR Right HAND");
-						System.out.println("ERROR Right HAND");
-						updateControllerList();
-					}
-				}
-				activeRX = 0.0;// when running set to false
-				activeRY = 0.0;
-			}
-			public double abs(double a)
-			{
-				if (a<0)
-					a=-a;
-				return a;
-			}	};
-		
-	left = new Thread() {
-		public void run() {
-			while (running) {//loops
-				double XLX = 0;
-				double XLY = 0;
-				double GenLX = 0;
-				double GenLY = 0;
-				double XLT =0;
-				try {
-					for (int i = ports.size()-1; i >= 0; i--)// possibly
-																// better
-																// way to
-																// sort
-																// using
-																// comparator
-
-					{
-						if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
-							if (abs(XLX) < abs(gamePads[ports.get(i)].getLX()))
-								XLX = gamePads[ports.get(i)].getLX();
-							if (abs(XLY) < abs(gamePads[ports.get(i)].getLY()))
-								XLY = gamePads[ports.get(i)].getLY();
-							if (abs(XLT) < abs(gamePads[ports.get(i)].getLZ()))
-									{
-										XLT=gamePads[ports.get(i)].getLZ();
-									}
-						} else if (!(gamePads[ports.get(i)] instanceof Xbox)) {//if logitech or Generic HID
-							if (abs(GenLX) < abs(gamePads[ports.get(i)].getLX()))
-								GenLX = gamePads[ports.get(i)].getLX();
-							if (abs(GenLY) < abs(gamePads[i].getLY()))
-								GenLY = gamePads[ports.get(i)].getLY();
-						}
-					} // alternative method would be to actively sort and
-						// compare gamepads/xbox controllers but could cause
-						// conflicts with other parallel requests
-					if (abs(GenLX) > abs(XLX) && abs(GenLX) > 0.1) {
-						activeLX = GenLX;
-					} else
-						activeLX = XLX;
-
-					if (abs(GenLY) > abs(XLY) && abs(GenLY) > 0.1) {
-						activeLY = GenLY;
-					} else
-						activeLY = XLY;
-					if(abs(XLT) > 0.1)
-					{
-						activeRT = XLT;
-					}
-
-				} catch (Exception e) {
-					StringWriter errors = new StringWriter();
-					e.printStackTrace(new PrintWriter(errors));
-					String error = "Left Hand Controller Glitch";
-							error.concat(errors.toString());
-					DriverStation.reportError(error, true);
-					activeLX = 0.0;
-					activeLY = 0.0;
-					System.out.println("ERROR Left HAND");
-					System.out.println("ERROR Left HAND");
-					updateControllerList();
-				}
-			}
-			activeLX = 0.0;// when running set to false
-			activeLY = 0.0;
-		}
-		public double abs(double a)
-		{
-			if (a<0)
-				a=-a;
-			return a;
-		}	};
-			//left.run();
-			right.run();
-	}
-	
+			}}}}
 
 	/*
 
@@ -733,6 +727,7 @@ private ArrayList<Integer> ports;
 
 	}
 	public double getRawRT(){
+	
 		return activeRT;//for xbox controllers with variable trigger values
 		
 	}

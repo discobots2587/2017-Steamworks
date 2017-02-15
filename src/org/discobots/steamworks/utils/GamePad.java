@@ -155,4 +155,10 @@ return 0;
 	public String thegetName() {
 		return name;
 	}
+	public int getBTN_RB() {
+		return BTN_RB;
+	}
+	public static void setBTN_RB(int bTN_RB) {
+		BTN_RB = bTN_RB;
+	}
 }

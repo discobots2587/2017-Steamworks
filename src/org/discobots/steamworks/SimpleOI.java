@@ -82,7 +82,7 @@ public class SimpleOI extends OI {
 		//ShootCommand shoot = new ShootCommand();/// ---------------THIS NEEDS TO BE REMOVED 
 
 		
-		
+	
 	//	b2_btnB.toggleWhenPressed();
 		//b2_btnB.whileHeld(new HangCommand(1.0));
 		
@@ -211,6 +211,11 @@ public class SimpleOI extends OI {
 	/*
 	 * returns left tick x-axis
 	 */
+	public void createMapping()
+	{
+	}
+	public void updateControllerList(){
+	}
 	public double getRawAnalogStickALX() {
 		if(gp1.getRawAxis(0)>0.1||gp1.getRawAxis(0)<=-0.1)
 			return (gp1.getRawAxis(0));

@@ -66,6 +66,8 @@ public class Robot extends IterativeRobot {
 		Camthread = new Thread(){
 			@Override
 		public void run(){
+				System.out.println("cameratherad created");
+
 		try {
 			GeniusCam = CameraServer.getInstance();// initialize server
 			// camera name taken from RoboRio
@@ -91,6 +93,7 @@ public class Robot extends IterativeRobot {
 			}// footage
 		 catch (Exception e) {
 			System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
+			System.out.println("Genius being added");
 	}}};
 		Camthread.run();
 		 
