@@ -19,7 +19,7 @@ public class DriveTrainSubsystem extends Subsystem {
 private double kSpeedScaling=.75;
 public RobotDrive robotDrive;
 public int gearCount=0;
-
+public int sensorToggle=0;
 Solenoid shifter;
 
     // Put methods for controlling this subsystem

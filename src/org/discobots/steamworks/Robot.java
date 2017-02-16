@@ -2,6 +2,7 @@
 package org.discobots.steamworks;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,6 +18,7 @@ import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
+import org.discobots.steamworks.subsystems.ElectricalSubsystem;
 import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
 import org.discobots.steamworks.subsystems.HangSubsystem;
 import org.discobots.steamworks.subsystems.IntakeSubsystem;
@@ -29,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static IntakeSubsystem intakeSub;
 	public static HangSubsystem hangSub;
 	public static GearIntakeSubsystem gearSub;
+	public static ElectricalSubsystem electricSub;
 	private CameraServer GeniusCam;
 	public static double totalTime;
 	public static long TeleopStartTime;
@@ -49,6 +52,7 @@ public class Robot extends IterativeRobot {
 		hangSub = new HangSubsystem();
 		gearSub = new GearIntakeSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
+		electricSub = new ElectricalSubsystem();
 		if (simple==true)
 				oi = new SimpleOI();
 		else
@@ -71,13 +75,13 @@ public class Robot extends IterativeRobot {
 		try {
 			GeniusCam = CameraServer.getInstance();// initialize server
 			// camera name taken from RoboRio
-			UsbCamera C615 = new UsbCamera("C615", 1);
+	//		UsbCamera C615 = new UsbCamera("C615", 1);
 			// LogicC615.openCamera();
 			// LogicC615.startCapture();
-			if (C615.isConnected())
+	//		if (C615.isConnected())
 			{
-				C615.setResolution(480, 320);
-				GeniusCam.startAutomaticCapture(C615);// automatically start
+		//		C615.setResolution(480, 320);
+		//		GeniusCam.startAutomaticCapture(C615);// automatically start
 														// streaming
 			}// footage
 		} catch (Exception e) {
@@ -86,11 +90,14 @@ public class Robot extends IterativeRobot {
 		try {
 			// camera name taken from RoboRio
 			UsbCamera Genius = new UsbCamera("cam2", 0);
+			Genius.setPixelFormat(VideoMode.getPixelFormatFromInt(1));
+			Genius.setFPS(18);
 			// Genius.openCamera();
 			 System.out.println(Genius.getPath());
 				Genius.setResolution(320, 240);
 				GeniusCam.startAutomaticCapture(Genius);// automatically start
-			}// footage
+
+		}// footage
 		 catch (Exception e) {
 			System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
 			System.out.println("Genius being added");
