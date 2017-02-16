@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class ElectricalSubsystem extends Subsystem {
+	public int sensorToggle=0;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
