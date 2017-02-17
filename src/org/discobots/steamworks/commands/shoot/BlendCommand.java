@@ -13,38 +13,38 @@ public class BlendCommand extends Command {
 	private boolean toggle=false;
     public BlendCommand(double s) {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.shootSub);
+    	requires(Robot.blendSub);
     	speed = s;
     }   
     public BlendCommand(double s,boolean toggle) {//allows toggling of blend command
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.shootSub);
+    	requires(Robot.blendSub);
     	speed = s;
     	this.toggle=true;
     }
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(toggle)
-        	Robot.shootSub.setBlendToggle(!Robot.shootSub.isBlendToggle());
+        	Robot.blendSub.setBlendToggle(!Robot.blendSub.isBlendToggle());
     } 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shootSub.setBlend(speed);
+    	Robot.blendSub.setBlend(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(toggle)
-        return !Robot.shootSub.isBlendToggle();
+        return !Robot.blendSub.isBlendToggle();
     	else
     		return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shootSub.setBlendToggle(false);
-    	Robot.shootSub.setBlend(0.0);
+    	Robot.blendSub.setBlendToggle(false);
+    	Robot.blendSub.setBlend(0.0);
     }
 
     // Called when another command which requires one or more of the same
