@@ -17,6 +17,7 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
+import org.discobots.steamworks.subsystems.BlendSubsystem;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 import org.discobots.steamworks.subsystems.ElectricalSubsystem;
 import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static HangSubsystem hangSub;
 	public static GearIntakeSubsystem gearSub;
 	public static ElectricalSubsystem electricSub;
+	public static BlendSubsystem blendSub;
 	private CameraServer GeniusCam;
 	public static double totalTime;
 	public static long TeleopStartTime;
@@ -53,6 +55,7 @@ public class Robot extends IterativeRobot {
 		gearSub = new GearIntakeSubsystem();
 		driveTrainSub = new DriveTrainSubsystem();
 		electricSub = new ElectricalSubsystem();
+		blendSub = new BlendSubsystem();
 		if (simple==true)
 				oi = new SimpleOI();
 		else

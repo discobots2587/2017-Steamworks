@@ -114,14 +114,8 @@ private ArrayList<Integer> ports;
 							activeRY = GenRY;
 						} else
 							activeRY = XRY;
-						if(abs(XRT) > 0.1)
-						{
-							activeRT = XRT;
-						}
-						else
-						{
-							activeRT=0;
-						}
+						
+							activeRT = XRT;						
 
 					} catch (Exception e) {
 						StringWriter errors = new StringWriter();
@@ -136,6 +130,7 @@ private ArrayList<Integer> ports;
 						updateControllerList();
 					}
 				}
+				activeRT=0;
 				activeRX = 0.0;// when running set to false
 				activeRY = 0.0;
 				}
@@ -191,10 +186,8 @@ private ArrayList<Integer> ports;
 						activeLY = GenLY;
 					} else
 						activeLY = XLY;
-					if(abs(XLT) > 0.1)
-					{
+
 						activeLT = XLT;
-					}
 
 				} catch (Exception e) {
 					StringWriter errors = new StringWriter();
@@ -208,7 +201,7 @@ private ArrayList<Integer> ports;
 					System.out.println("ERROR Left HAND");
 					updateControllerList();
 				}
-			}activeLX = 0.0;activeLY = 0.0;}
+			}activeLX = 0.0;activeLY = 0.0;activeRT=0.0;}
 			// when running set to false
 		}
 		public double abs(double a)
@@ -285,11 +278,12 @@ private ArrayList<Integer> ports;
 		port5.clear();
 		for (int i = 5; i >= 0; i--) {
 			if (gamePads[i] instanceof GamePad && gamePads[i].getAxisCount() > 0) {
-				if (gamePads[i] instanceof Xbox) {// ability to create entirely separate
 											// control scheme for xbox
 											// controller even if in same port
 					if (i == 0) {// Can also differentiate by specific port set
 									// in DriverStation Software
+						if (gamePads[i] instanceof Xbox) {// ability to create entirely separate
+
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port0.get(port0.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
@@ -328,14 +322,11 @@ private ArrayList<Integer> ports;
 					 * SmartDashboard.putBoolean("Mapping Created for Xbox",
 					 * true);
 					 */
-				}}
+				}
 
 				if (!(gamePads[i] instanceof Xbox)) {// ability to create entirely separate
 											// control scheme for non xbox
 											// controller even if in same port
-
-					if (i == 0) {// Can also differentiate by specific port set
-									// in DriverStation Software
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
@@ -343,13 +334,6 @@ private ArrayList<Integer> ports;
 						port0.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
 						System.out.println("GenericPORTZERO MAPPED");
-
-						if (gamePads[i].isXbox) {
-							L1_triggerR = gamePads[i].getLZ();// Right Trigger
-							L1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {
-
-						}
 						port0.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));

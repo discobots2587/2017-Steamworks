@@ -4,6 +4,7 @@ import org.discobots.steamworks.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Runs the shooter
@@ -17,25 +18,31 @@ long endtime;
     	requires(Robot.shootSub);
     }
     public ShootCommand(boolean toggleShooter)
-    {
+    {    	requires(Robot.shootSub);
+
     	shooterToggled=true;
     	speed=-1;
     }
     public ShootCommand(boolean toggleShooter, double speed)
-    {
+    {    	requires(Robot.shootSub);
+
     shooterToggled=true;
     this.speed=-speed;
     }
     public ShootCommand(double speed)
-    {
+    {    	requires(Robot.shootSub);
+
     this.speed = -speed;	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	if (shooterToggled)
-    	    Robot.shootSub.setShooterToggled(!Robot.shootSub.isShooterToggled());			    		
-    } 
+    	{
+    	    Robot.shootSub.setShooterToggled(!Robot.shootSub.isShooterToggled());	
+    	SmartDashboard.putBoolean("ShooterToggledCommand", Robot.shootSub.isShooterToggled());
+    	}
+    	} 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {

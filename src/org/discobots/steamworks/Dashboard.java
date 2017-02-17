@@ -35,9 +35,9 @@ public class Dashboard {
 					Robot.loopExecutionTime);
 
 		} else if (driveCounter % 5 == 1) {
-			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());
-		
-		//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
+			SmartDashboard.putBoolean("Shooter Triggered Subsystem", Robot.shootSub.isShooterToggled());
+			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
+			//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
 
