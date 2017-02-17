@@ -2,7 +2,6 @@ package org.discobots.steamworks.commands.shoot;
 
 import org.discobots.steamworks.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,7 +12,6 @@ public class BlendCommand extends Command {
 	private boolean toggle=false;
     public BlendCommand(double s) {
         // Use requires() here to declare subsystem dependencies
-    	requires(Robot.blendSub);
     	speed = s;
     }   
     public BlendCommand(double s,boolean toggle) {//allows toggling of blend command
@@ -30,7 +28,12 @@ public class BlendCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (toggle&&Robot.blendSub.isBlendToggle())
     	Robot.blendSub.setBlend(speed);
+    	if(!toggle)
+    		Robot.blendSub.setBlend(speed);
+    	if(toggle&&!Robot.blendSub.isBlendToggle())
+        	Robot.blendSub.setBlend(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,7 +46,6 @@ public class BlendCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.blendSub.setBlendToggle(false);
     	Robot.blendSub.setBlend(0.0);
     }
 

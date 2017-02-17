@@ -46,6 +46,12 @@ long endtime;
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+      	if (shooterToggled&&Robot.shootSub.isShooterToggled())
+        	Robot.shootSub.setShootSpeed(speed);
+        	if(!shooterToggled)
+        		Robot.blendSub.setBlend(speed);
+          	if (shooterToggled&&!Robot.shootSub.isShooterToggled())
+            	Robot.shootSub.setShootSpeed((speed));
     	Robot.shootSub.setShootSpeed(speed);
     }
 
@@ -58,7 +64,6 @@ long endtime;
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shootSub.setShooterToggled(false);
     	Robot.shootSub.setShootSpeed(0.0);
     }
 
