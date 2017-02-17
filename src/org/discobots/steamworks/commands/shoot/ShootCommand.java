@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ShootCommand extends Command {
 boolean shooterToggled=false;
-double speed =-1;
+double speed =0;
 long endtime;
     public ShootCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -18,12 +18,12 @@ long endtime;
     }
     public ShootCommand(boolean toggleShooter)
     {
-    	shooterToggled=!Robot.shootSub.isShooterToggled();
-    	    
+    	shooterToggled=true;
+    	speed=-1;
     }
     public ShootCommand(boolean toggleShooter, double speed)
     {
-    shooterToggled=!Robot.shootSub.isShooterToggled();			
+    shooterToggled=true;
     this.speed=-speed;
     }
     public ShootCommand(double speed)
@@ -33,26 +33,26 @@ long endtime;
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	endtime = System.currentTimeMillis()+100000;//ten second limit
+    	if (shooterToggled)
+    	    Robot.shootSub.setShooterToggled(!Robot.shootSub.isShooterToggled());			    		
     } 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shootSub.setSpeed(speed);
-    	if (System.currentTimeMillis()>endtime)
-    		shooterToggled=false;
-
+    	Robot.shootSub.setShootSpeed(speed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return !shooterToggled;
+    	if(shooterToggled)
+    	return !Robot.shootSub.isShooterToggled();
+    	else 
+    		return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.shootSub.setShooterToggled(false);
-    	Robot.shootSub.setSpeed(0.0);
+    	Robot.shootSub.setShootSpeed(0.0);
     }
 
     // Called when another command which requires one or more of the same
