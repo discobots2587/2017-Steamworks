@@ -15,6 +15,7 @@ public class ShooterSubsystem extends Subsystem {
 	// here. Call these from Commands.
 	private Talon shootMotor;
 	private Talon motorBlend;
+	private boolean shooterToggled=false;
 	public final double kSpeed =1.0;
 	public ShooterSubsystem(){
 		this.shootMotor=new Talon(HW.motorShoot);
@@ -30,5 +31,13 @@ public class ShooterSubsystem extends Subsystem {
 	}
 	public void setBlend(double speed){
 	motorBlend.set(speed*kSpeed);
+	}
+
+	public boolean isShooterToggled() {
+		return shooterToggled;
+	}
+
+	public void setShooterToggled(boolean shooterToggled) {
+		this.shooterToggled = shooterToggled;
 	}
 }

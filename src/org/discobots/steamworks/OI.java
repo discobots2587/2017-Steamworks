@@ -298,7 +298,6 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port0.get(port0.size()-1).whileHeld(new ShootCommand(true));//toggles at 100% speed
-						port0.get(port0.size()-1).whenReleased(new ShootCommand(false));
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port0.get(port0.size()-1).whileHeld(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port0.get(port0.size()-1).whenReleased(new BlendCommand(0, false));//negative is blend into shooter currently//toggles
