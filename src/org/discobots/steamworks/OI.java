@@ -269,10 +269,15 @@ private ArrayList<Integer> ports;
 		createMapping();
 		running=true;
 		if (!left.isAlive())
+		{
+			left.interrupt();
 			left.start();
+		}
 		if(!right.isAlive())
+		{
+			right.interrupt();
 			right.start();
-	}
+	}}
 
 	public void createMapping() {
 		port0.clear();
@@ -720,6 +725,7 @@ private ArrayList<Integer> ports;
 			try{
 			if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5)  {
 					 gamePads[ports.get(i)].setRumble(hand, rumbleFactor);
+					 
 			}
 				 }
 		
@@ -732,7 +738,6 @@ private ArrayList<Integer> ports;
 				DriverStation.reportError(error, true);
 				System.out.println("ERROR Rumble");
 				System.out.println("ERROR Rumble");
-				updateControllerList();
 				}
 	}}
 	public void setRumble(double rumbleFactor) {

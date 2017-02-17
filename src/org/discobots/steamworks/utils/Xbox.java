@@ -1,6 +1,5 @@
 package org.discobots.steamworks.utils;
 
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 public class Xbox extends GamePad {
