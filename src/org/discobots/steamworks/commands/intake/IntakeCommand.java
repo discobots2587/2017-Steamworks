@@ -38,7 +38,7 @@ public class IntakeCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.intakeSub.setSpeed(speed);
-    	if(endtime<System.currentTimeMillis())
+    	if(endtime<System.currentTimeMillis()&&toggled==true)
     	{
     		toggled=!toggled;//ends when time limit up
     	}

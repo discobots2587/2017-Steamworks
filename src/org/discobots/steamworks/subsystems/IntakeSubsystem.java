@@ -2,6 +2,7 @@ package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.utils.LTRTXBOX;
+import org.discobots.stronghold.commands.drive.SplitArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,7 +19,7 @@ public class IntakeSubsystem extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		new LTRTXBOX();
+		setDefaultCommand(new LTRTXBOX());
 	}
 	
 	public void setSpeed(double speed){
