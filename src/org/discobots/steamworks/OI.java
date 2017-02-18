@@ -365,9 +365,9 @@ private ArrayList<Integer> ports;
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port1.get(port1.size()-1).whileHeld(new ShootCommand(1));
+						port1.get(port1.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
-						port1.get(port1.size()-1).whileHeld(new BlendCommand(-.75));//negative is blend into shooter currently
+						port1.get(port1.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 						port1.get(port1.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
 						port1. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
@@ -379,7 +379,7 @@ private ArrayList<Integer> ports;
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 						//port1.get(port1.size()-1).whenPressed(new ());///Toggle Compressor
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
-						port1.get(port1.size()-1).whenPressed(new HangCommand(1));//hanging on Y
+						port1.get(port1.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port1.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
@@ -419,16 +419,16 @@ private ArrayList<Integer> ports;
 
 				if (i == 2) {
 					if (gamePads[i] instanceof Xbox){
-					port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
-					port2.get(port2.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
-					port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
-					port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-					port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
-					port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port2.get(port2.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port2.get(port2.size()-1).whileHeld(new ShootCommand(1));
+						port2.get(port2.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
-						port2.get(port2.size()-1).whileHeld(new BlendCommand(-.75));//negative is blend into shooter currently
+						port2.get(port2.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 						port2.get(port2.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
 						port2. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
@@ -440,7 +440,7 @@ private ArrayList<Integer> ports;
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 						//port2.get(port2.size()-1).whenPressed(new ());///Toggle Compressor
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
-						port2.get(port2.size()-1).whenPressed(new HangCommand(1));//hanging on Y
+						port2.get(port2.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port2.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
@@ -486,9 +486,9 @@ private ArrayList<Integer> ports;
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port3.get(port3.size()-1).whileHeld(new ShootCommand(1));
+						port3.get(port3.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
-						port3.get(port3.size()-1).whileHeld(new BlendCommand(-.75));//negative is blend into shooter currently
+						port3.get(port3.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 						port3.get(port3.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
 						port3. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
@@ -500,7 +500,7 @@ private ArrayList<Integer> ports;
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 						//port3.get(port3.size()-1).whenPressed(new ());///Toggle Compressor
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
-						port3.get(port3.size()-1).whenPressed(new HangCommand(1));//hanging on Y
+						port3.get(port3.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port3.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
@@ -546,9 +546,9 @@ private ArrayList<Integer> ports;
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port4.get(port4.size()-1).whileHeld(new ShootCommand(1));
+						port4.get(port4.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
-						port4.get(port4.size()-1).whileHeld(new BlendCommand(-.75));//negative is blend into shooter currently
+						port4.get(port4.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 						port4.get(port4.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
 						port4. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
@@ -560,7 +560,7 @@ private ArrayList<Integer> ports;
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 						//port4.get(port4.size()-1).whenPressed(new ());///Toggle Compressor
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
-						port4.get(port4.size()-1).whenPressed(new HangCommand(1));//hanging on Y
+						port4.get(port4.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port4.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
@@ -608,12 +608,12 @@ private ArrayList<Integer> ports;
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-					port5.get(port5.size()-1).whileHeld(new ShootCommand(1));
+					port5.get(port5.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
-					port5.get(port5.size()-1).whileHeld(new BlendCommand(-.75));//negative is blend into shooter currently
+					port5.get(port5.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
 					port5.get(port5.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
-					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_START));
+					port5. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
 					port5.get(port5.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
@@ -622,7 +622,7 @@ private ArrayList<Integer> ports;
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 					//port5.get(port5.size()-1).whenPressed(new ());///Toggle Compressor
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
-					port5.get(port5.size()-1).whenPressed(new HangCommand(1));//hanging on Y
+					port5.get(port5.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 					port5.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
