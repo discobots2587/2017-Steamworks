@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class AutonomousArcadeDrive extends Command {
+public class AutonRedoCommand extends Command {
 	
 	private int time;
 	private long endTime;
@@ -16,7 +16,7 @@ public class AutonomousArcadeDrive extends Command {
 	private boolean fin=false;
 	public boolean end=false;
 	
-    public AutonomousArcadeDrive(double y, double x, int t) {//t is in milliseconds
+    public AutonRedoCommand(double y, double x, int t) {//t is in milliseconds
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrainSub);
