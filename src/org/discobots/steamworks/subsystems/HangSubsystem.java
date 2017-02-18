@@ -24,9 +24,10 @@ public class HangSubsystem extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	public void setSpeed(double speed){
+	pwm=speed;
 	hangMotor.setSpeed(speed);
 	}
 	public double getPWM(){
-		return pwm;
+		return pwm*100;
 	}
 }

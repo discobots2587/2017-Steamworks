@@ -27,6 +27,6 @@ public class IntakeSubsystem extends Subsystem {
 	pwm=speed;
 	}
 	public double getPWM(){
-		return pwm;
+		return pwm*100;
 	}
 }

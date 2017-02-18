@@ -40,7 +40,7 @@ public class ShooterSubsystem extends Subsystem {
 	}
 	
 	public double getPWM(){
-		return pwm;
+		return pwm*100;
 	}
 
 }

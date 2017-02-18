@@ -38,7 +38,7 @@ public class BlendSubsystem extends Subsystem {
 		this.blendToggle = blendToggle;
 	}
 	public double getPWM(){
-		return pwm;
+		return pwm*100;
 	}
 
 }
