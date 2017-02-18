@@ -16,9 +16,11 @@ public class ShooterSubsystem extends Subsystem {
 	private Talon shootMotor;
 	private boolean shooterToggled=false;
 	private double pwm;
+	private double setPoint;
 	public ShooterSubsystem(){
 		this.shootMotor=new Talon(HW.motorShoot);
 		pwm=0;
+		setPoint=.75;
 	}
 
 	public void initDefaultCommand() {
@@ -26,8 +28,13 @@ public class ShooterSubsystem extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	public void setShootSpeed(double speed){
-	pwm=speed;
-	shootMotor.set(speed);
+	if(speed<=setPoint){
+		pwm=speed;
+		shootMotor.set(speed);}
+	else if(speed>setPoint){
+		pwm=setPoint;
+		shootMotor.set(speed);
+	}
 	}
 
 
@@ -35,8 +42,16 @@ public class ShooterSubsystem extends Subsystem {
 		return shooterToggled;
 	}
 
+	public void setSetpoint(double set){
+		setPoint=set;
+	}
+	
 	public void setShooterToggled(boolean shooterToggled) {
 		this.shooterToggled = shooterToggled;
+	}
+	
+	public double getSetpoint(){
+		return setPoint;
 	}
 	
 	public double getPWM(){
