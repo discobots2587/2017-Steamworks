@@ -35,7 +35,7 @@ public class AutonomousArcadeDrive extends Command {
     protected void execute() {
     	for(long i =endTime;i>=System.currentTimeMillis();)
     	{
-    	Robot.driveTrainSub.robotDrive.tankDrive(speedY+speedX, -speedY+speedX);
+    	Robot.driveTrainSub.robotDrive.arcadeDrive(speedX,speedY);
     	}
     	fin=true;
     }

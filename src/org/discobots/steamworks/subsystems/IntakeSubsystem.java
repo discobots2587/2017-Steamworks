@@ -12,8 +12,10 @@ public class IntakeSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private Spark intakeMotor;
+	private double pwm;
 	public IntakeSubsystem(){
 		this.intakeMotor=new Spark(HW.motorIntake);
+		pwm=0.0;
 	}
 
 	public void initDefaultCommand() {
@@ -22,5 +24,9 @@ public class IntakeSubsystem extends Subsystem {
 	
 	public void setSpeed(double speed){
 	intakeMotor.setSpeed(speed);
+	pwm=speed;
+	}
+	public double getPWM(){
+		return pwm*100;
 	}
 }

@@ -15,8 +15,10 @@ public class ShooterSubsystem extends Subsystem {
 	// here. Call these from Commands.
 	private Talon shootMotor;
 	private boolean shooterToggled=false;
+	private double pwm;
 	public ShooterSubsystem(){
 		this.shootMotor=new Talon(HW.motorShoot);
+		pwm=0;
 	}
 
 	public void initDefaultCommand() {
@@ -24,6 +26,7 @@ public class ShooterSubsystem extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	public void setShootSpeed(double speed){
+	pwm=speed;
 	shootMotor.set(speed);
 	}
 
@@ -34,6 +37,10 @@ public class ShooterSubsystem extends Subsystem {
 
 	public void setShooterToggled(boolean shooterToggled) {
 		this.shooterToggled = shooterToggled;
+	}
+	
+	public double getPWM(){
+		return pwm*100;
 	}
 
 }

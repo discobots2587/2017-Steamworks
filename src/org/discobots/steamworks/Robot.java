@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
+import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
+import org.discobots.steamworks.commands.auton.AutonLeftPostCommand;
+import org.discobots.steamworks.commands.auton.AutonRightPostCommand;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -64,7 +67,10 @@ public class Robot extends IterativeRobot {
 		autonChooser = new SendableChooser<Command>();
 		// autonChooser.addObject("DumbPostitioningAuton", new
 		// DumbPositioningAuton());
-
+		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
+		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
+		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
+		
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
@@ -110,6 +116,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.init();
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 		}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
