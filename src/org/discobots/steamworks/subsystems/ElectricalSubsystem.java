@@ -1,9 +1,12 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.utils.CounterEncoder;
 import org.discobots.steamworks.utils.PressureSensor;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Sendable;
@@ -19,23 +22,21 @@ public class ElectricalSubsystem extends Subsystem {
 	PowerDistributionPanel pdp;
 	Compressor cmp;
 	PressureSensor ps;
-	public Encoder shoots;//shooter encoder
+	public CounterEncoder shoots;//shooter encoder
 	public ITable shootTable;
+	DigitalInput raw;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
-		shoots = new Encoder(0,1, false);
-		shoots.setIndexSource(HW.shooterEncoder);
-		shoots.setMaxPeriod(.1);
-		shoots.setMinRate(10);
-		shoots.setDistancePerPulse(2);
-		shoots.setSamplesToAverage(5);//averages last 5 samples
+		shoots = new CounterEncoder(9, 1);
 		shoots.initTable(shootTable);
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
 		ps = new PressureSensor(HW.pressureSensor);
+		raw = new DigitalInput(9);
+		
 	}
 	
     public void initDefaultCommand() {
@@ -76,14 +77,19 @@ public class ElectricalSubsystem extends Subsystem {
 	public double getCompressorControlLoopState(){
 		return cmp.getCompressorCurrent();
 	}
-	public double rawShootDist(){
-		return shoots.getRaw();
+	public double getShootRPMfiltered()
+	{
+		return shoots.getFilteredRPM();
+		}
+	public boolean getShootEncoderStopped()
+	{
+		return shoots.getStopped();
 	}
-	public int shootRotateCount(){
-		return shoots.get();
+	public double getShootRPMraw(){
+		return shoots.getRawRPM();
 	}
-	public double shootRate(){
-		return shoots.getRate();
+	public boolean getRawShootTick(){
+		return raw.get();
 	}
 
 }
