@@ -22,7 +22,7 @@ public class ElectricalSubsystem extends Subsystem {
 	PowerDistributionPanel pdp;
 	Compressor cmp;
 	PressureSensor ps;
-	public CounterEncoder shoots;//shooter encoder
+	//public CounterEncoder shoots;//shooter encoder
 	public ITable shootTable;
 	DigitalInput raw;
 
@@ -30,8 +30,8 @@ public class ElectricalSubsystem extends Subsystem {
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
-		shoots = new CounterEncoder(9, 1);
-		shoots.initTable(shootTable);
+		//shoots = new CounterEncoder(9, 1);
+	//	shoots.initTable(shootTable);
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
 		ps = new PressureSensor(HW.pressureSensor);
@@ -77,7 +77,7 @@ public class ElectricalSubsystem extends Subsystem {
 	public double getCompressorControlLoopState(){
 		return cmp.getCompressorCurrent();
 	}
-	public double getShootRPMfiltered()
+/*	public double getShootRPMfiltered()
 	{
 		return shoots.getFilteredRPM();
 		}
@@ -88,7 +88,7 @@ public class ElectricalSubsystem extends Subsystem {
 	public double getShootRPMraw(){
 		return shoots.getRawRPM();
 	}
-	public boolean getRawShootTick(){
+	*/public boolean getRawShootTick(){
 		return raw.get();
 	}
 
