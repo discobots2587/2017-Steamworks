@@ -15,8 +15,12 @@ public class HangCommand extends Command {
 	private boolean fin=false;
 	public boolean end=false;
 	boolean toggled=false;
-
-    public HangCommand(double speed,int t) {
+	public HangCommand()
+	{
+		speed=1;
+		toggled=true;
+	}
+    public HangCommand(double speed,int t,boolean time) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.hangSub);
     	this.time=t;

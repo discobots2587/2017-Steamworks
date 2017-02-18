@@ -35,8 +35,8 @@ public class OI {
 
 	GamePad[] gamePads;
 	public int numPads;
-	private Thread left;
-	private Thread right;
+	public Thread left;
+	public Thread right;
 	private double activeLX = 0.0;
 	private double activeLY = 0.0;
 	private double activeRY = 0.0;
@@ -305,7 +305,7 @@ private ArrayList<Integer> ports;
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
 						//port0.get(port0.size()-1).whenPressed(new ());///Toggle Compressor
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
-						port0.get(port0.size()-1).whenPressed(new HangCommand(1));//hanging on Y
+						port0.get(port0.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));

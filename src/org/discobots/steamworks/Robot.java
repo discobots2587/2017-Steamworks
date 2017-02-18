@@ -119,6 +119,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		oi.updateControllerList();
+		oi.running=true;
 	}
 
 	@Override
@@ -176,7 +177,6 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		oi.updateControllerList();
 		driveCommand = (Command) driveChooser.getSelected();
 		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
 				.nanoTime();) { // rumbles
@@ -187,6 +187,8 @@ public class Robot extends IterativeRobot {
 															// second
 		}
 		oi.setRumble(0); // for
+		oi.running=true;
+		oi.updateControllerList();
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();

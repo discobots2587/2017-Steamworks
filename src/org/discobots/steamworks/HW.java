@@ -48,6 +48,7 @@ public class HW {
 
 	
 	/* Digital */
-	public final static int digitalSwitch = 0;
+	public final static int shooterEncoder=6;
+
 
 }

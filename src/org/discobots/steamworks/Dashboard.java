@@ -36,6 +36,8 @@ public class Dashboard {
 
 		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putBoolean("Shooter Triggered Subsystem", Robot.shootSub.isShooterToggled());
+			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
+			SmartDashboard.putBoolean("running True?", Robot.oi.running);
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
 			//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));

@@ -36,8 +36,8 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     	   
     	   if (TriggerValue>.2)
     		   Robot.oi.setRumble(right, TriggerValue/2);
-    	   if(TriggerValue<-.2)
-    		   Robot.oi.setRumble(left,-TriggerValue/2);
+    	   //if(TriggerValue<-.2)
+    		//   Robot.oi.setRumble(left,-TriggerValue/2);
         	   if(-.75<=TriggerValue&&TriggerValue<-.3)//deadband
         	   {
         		   TriggerValue=-.75;
