@@ -35,7 +35,9 @@ public class Dashboard {
 		if (driveCounter % 5 == 0) { // 100ms
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
-			SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());
+			//SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());
+			SmartDashboard.putNumber("Shooter Rotations", Robot.electricSub.shootRotateCount());
+			SmartDashboard.putNumber("Shooter Speed", Robot.electricSub.shootRate());
 		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putBoolean("Shooter  Subsystem", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
