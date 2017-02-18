@@ -122,6 +122,7 @@ private ArrayList<Integer> ports;
 						e.printStackTrace(new PrintWriter(errors));
 						String error = "Right Hand Controller Glitch";
 								error.concat(errors.toString());
+						if(running)
 						DriverStation.reportError(error, true);
 						activeRX = 0.0;
 						activeRY = 0.0;
@@ -194,6 +195,7 @@ private ArrayList<Integer> ports;
 					e.printStackTrace(new PrintWriter(errors));
 					String error = "Left Hand Controller Glitch";
 							error.concat(errors.toString());
+					if (running)
 					DriverStation.reportError(error, true);
 					activeLX = 0.0;
 					activeLY = 0.0;
