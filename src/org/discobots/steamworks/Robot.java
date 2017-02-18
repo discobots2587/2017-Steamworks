@@ -187,8 +187,8 @@ public class Robot extends IterativeRobot {
 															// second
 		}
 		oi.setRumble(0); // for
-		oi.running=true;
 		oi.updateControllerList();
+		oi.running=true;
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
@@ -205,6 +205,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
+		Robot.oi.running=true;
 	}
 
 	/**
