@@ -3,6 +3,7 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
+import org.discobots.steamworks.commands.utils.RefreshGamepadPorts;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,7 +20,7 @@ public class Dashboard {
 		SmartDashboard.putData("Arcade Drive", new ArcadeDriveCommand());
 		SmartDashboard.putData("Split Arcade Drive", new SplitArcadeDriveCommand());
 		SmartDashboard.putData("Tank Drive", new TankDriveCommand());
-		
+		SmartDashboard.putData("Reset GamePad Ports", new RefreshGamepadPorts());
 		
 	}
 
