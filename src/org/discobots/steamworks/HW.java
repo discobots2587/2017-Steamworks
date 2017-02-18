@@ -48,7 +48,7 @@ public class HW {
 
 	
 	/* Digital */
-	public final static int shooterEncoder=6;
+	public final static int shooterEncoder=6;//infrared
 
 
 }

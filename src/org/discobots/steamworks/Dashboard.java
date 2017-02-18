@@ -3,7 +3,9 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
+import org.discobots.steamworks.commands.utils.RefreshGamepadPorts;
 
+import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -19,7 +21,7 @@ public class Dashboard {
 		SmartDashboard.putData("Arcade Drive", new ArcadeDriveCommand());
 		SmartDashboard.putData("Split Arcade Drive", new SplitArcadeDriveCommand());
 		SmartDashboard.putData("Tank Drive", new TankDriveCommand());
-		
+		SmartDashboard.putData("Reset GamePad Ports", new RefreshGamepadPorts());
 		
 	}
 
@@ -33,9 +35,11 @@ public class Dashboard {
 		if (driveCounter % 5 == 0) { // 100ms
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
-
+			//SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());
+			SmartDashboard.putNumber("Shooter Rotations", Robot.electricSub.shootRotateCount());
+			SmartDashboard.putNumber("Shooter Speed", Robot.electricSub.shootRate());
 		} else if (driveCounter % 5 == 1) {
-			SmartDashboard.putBoolean("Shooter Triggered Subsystem", Robot.shootSub.isShooterToggled());
+			SmartDashboard.putBoolean("Shooter  Subsystem", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
 			SmartDashboard.putBoolean("running True?", Robot.oi.running);
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			

@@ -4,8 +4,12 @@ import org.discobots.steamworks.HW;
 import org.discobots.steamworks.utils.PressureSensor;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
  *
@@ -15,11 +19,20 @@ public class ElectricalSubsystem extends Subsystem {
 	PowerDistributionPanel pdp;
 	Compressor cmp;
 	PressureSensor ps;
+	public Encoder shoots;//shooter encoder
+	public ITable shootTable;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
+		shoots = new Encoder(0,1, false);
+		shoots.setIndexSource(HW.shooterEncoder);
+		shoots.setMaxPeriod(.1);
+		shoots.setMinRate(10);
+		shoots.setDistancePerPulse(2);
+		shoots.setSamplesToAverage(5);//averages last 5 samples
+		shoots.initTable(shootTable);
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
 		ps = new PressureSensor(HW.pressureSensor);
@@ -63,4 +76,14 @@ public class ElectricalSubsystem extends Subsystem {
 	public double getCompressorControlLoopState(){
 		return cmp.getCompressorCurrent();
 	}
+	public double rawShootDist(){
+		return shoots.getRaw();
+	}
+	public int shootRotateCount(){
+		return shoots.get();
+	}
+	public double shootRate(){
+		return shoots.getRate();
+	}
+
 }
