@@ -1,5 +1,6 @@
 package org.discobots.steamworks.commands.auton;
 
+import org.discobots.steamworks.commands.auton.subcommands.AutonRedoCommandGroup;
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
 
@@ -35,8 +36,7 @@ public class AutonLeftPostCommand extends CommandGroup {
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));//creep into position
     	addSequential(new WaitCommand(35000));
-    	//addSequential(new AutonomousArcadeDrive(0.1,-0.5,2000));//back out
-    	addSequential(new WaitCommand(500));
+    	addSequential(new AutonRedoCommandGroup());
     	
     	
     	

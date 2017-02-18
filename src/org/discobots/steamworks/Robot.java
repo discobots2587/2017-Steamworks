@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
 		// DumbPositioningAuton());
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
 		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
-		autonChooser.addObject("AutonRight", new AutonLeftPostCommand());
+		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
 		
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());

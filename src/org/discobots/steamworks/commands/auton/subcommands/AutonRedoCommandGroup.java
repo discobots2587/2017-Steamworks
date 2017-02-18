@@ -1,17 +1,16 @@
-package org.discobots.steamworks.commands.auton;
+package org.discobots.steamworks.commands.auton.subcommands;
 
-import org.discobots.steamworks.commands.auton.subcommands.AutonRedoCommandGroup;
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *From the right starting position, delivers the gear to the right post on the ship
+ *Backs up then goes forward again
  */
-public class AutonRightPostCommand extends CommandGroup {
+public class AutonRedoCommandGroup extends CommandGroup {
     
-    public  AutonRightPostCommand() {
+    public  AutonRedoCommandGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,16 +27,10 @@ public class AutonRightPostCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));
+
+    	addSequential(new AutonomousArcadeDrive(0.1,-0.5,2000));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));
-    	addSequential(new WaitCommand(35000));
-    	addSequential(new AutonRedoCommandGroup());
-    	
+    	addSequential(new AutonomousArcadeDrive(0.1,0.5,2000));
     	
     	
     }

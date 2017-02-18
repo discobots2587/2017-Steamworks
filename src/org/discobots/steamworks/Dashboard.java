@@ -42,6 +42,10 @@ public class Dashboard {
 			//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
+			SmartDashboard.putNumber("PWM Hang", Robot.hangSub.getPWM());
+			SmartDashboard.putNumber("PWM intake",Robot.intakeSub.getPWM());
+			SmartDashboard.putNumber("PWM Shooter", Robot.shootSub.getPWM());
+			SmartDashboard.putNumber("PWM Blender", Robot.blendSub.getPWM());
 
 		}
 		if (driveCounter%10==1)
