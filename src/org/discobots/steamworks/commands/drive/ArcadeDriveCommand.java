@@ -22,7 +22,7 @@ public class ArcadeDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(),Robot.oi.getRawAnalogStickALY());
-    	Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(), Robot.oi.getRawAnalogStickALY());
+    	Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(), -Robot.oi.getRawAnalogStickALY());
 
     }
 

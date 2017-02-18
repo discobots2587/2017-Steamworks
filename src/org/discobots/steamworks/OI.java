@@ -195,7 +195,7 @@ private ArrayList<Integer> ports;
 					e.printStackTrace(new PrintWriter(errors));
 					String error = "Left Hand Controller Glitch";
 							error.concat(errors.toString());
-					if (running)
+					if(running)
 					DriverStation.reportError(error, true);
 					activeLX = 0.0;
 					activeLY = 0.0;
@@ -312,7 +312,6 @@ private ArrayList<Integer> ports;
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-					
 					/*
 					 * int temp; temp = gamePads[i].makebuttons(new               //Previous idea to set buttons and commands in each controller object - not working
 					 * DPadButton(gamePads[i], Xbox.DPAD_Y, false));
