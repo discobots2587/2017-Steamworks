@@ -2,7 +2,6 @@ package org.discobots.steamworks.commands.auton;
 
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -27,8 +26,8 @@ public class AutonCenterPostCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));
-    	addSequential(new WaitCommand(500));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2500));
+    	addSequential(new WaitCommand(1500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
     	addSequential(new WaitCommand(3500));
     	addSequential(new AutonomousArcadeDrive(-0.2, -0.5,1400));//backup 
