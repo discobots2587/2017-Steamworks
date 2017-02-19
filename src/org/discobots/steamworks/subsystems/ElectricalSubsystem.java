@@ -1,5 +1,7 @@
 package org.discobots.steamworks.subsystems;
 
+import java.util.ArrayList;
+
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.utils.CounterEncoder;
 import org.discobots.steamworks.utils.PressureSensor;
@@ -18,17 +20,22 @@ import edu.wpi.first.wpilibj.tables.ITable;
  *
  */
 public class ElectricalSubsystem extends Subsystem {
+	private double sumRPM;
+	ArrayList<Integer> ShootRPM;
 	public int sensorToggle=0;
 	PowerDistributionPanel pdp;
 	Compressor cmp;
 	PressureSensor ps;
 	public CounterEncoder shoots;//shooter encoder
 	public ITable shootTable;
+	private int shootNum;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
+		ShootRPM = new ArrayList<Integer>(10);
+		 shootNum=0;
 		shoots = new CounterEncoder(9, 2);
 		shoots.initTable(shootTable);
 		pdp = new PowerDistributionPanel();
@@ -80,8 +87,32 @@ public class ElectricalSubsystem extends Subsystem {
 	{
 		return shoots.getStopped();
 	}
-	public double getShootRPMraw(){
+	public double getShootRPMraw()
+	{ 
+		if (shoots.getRawRPM()<4000)
 		return shoots.getRawRPM();
+		else
+			return 4000;
+	}
+	public double getShootRPMAVG(){
+		if (shootNum>9)
+		{
+			ShootRPM.clear();
+			shootNum=0;
+		}
+		if(shoots.getRawRPM()<4000 && shootNum<=9)
+		{
+			sumRPM=0;
+			ShootRPM.set(shootNum, (int) shoots.getRawRPM());
+			for (int i=0; i<shootNum; i++)
+			{
+				sumRPM+=ShootRPM.get(i);
+			}
+			shootNum++;
+			sumRPM/=shootNum;
+			return sumRPM;
+		}
+			return sumRPM;
 	}
 	public double getRotations(){//does not currently return value
 		return shoots.getDistance();

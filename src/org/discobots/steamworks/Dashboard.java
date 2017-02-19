@@ -37,8 +37,8 @@ public class Dashboard {
 					Robot.loopExecutionTime);
 			//SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());//2013 motorcompressor has itable example
 			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
-			if(Robot.electricSub.getShootRPMraw()<4000)//if its under 4,000 rpm which it should be then display it on the dashboard
-			SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
+				SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
+				SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
 			//SmartDashboard.putNumber("ShooterDist", Robot.electricSub.getRotations());
 		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
