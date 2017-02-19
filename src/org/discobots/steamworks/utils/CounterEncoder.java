@@ -1,22 +1,23 @@
 package org.discobots.steamworks.utils;//from Ultimate Ascent
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.Counter;
 
 public class CounterEncoder extends Counter {
-    private EncoderFilterThread ecThread;
+    private Thread EncoderFilterThread;
+    ArrayList<Integer> Values;
     private double[] sample = new double[10];
     private int ticksPerRotation = 2;
     
     public CounterEncoder(int channel, int tpr) {
         super(channel);
         ticksPerRotation = tpr;
-        ecThread = new EncoderFilterThread();
-        ecThread.start();
+        EncoderFilter();
         Arrays.fill(sample, 0);
     }
-    
+  
     public double getRawRPM() {
         return 60 / getPeriod() / ticksPerRotation;
     }
@@ -27,11 +28,11 @@ public class CounterEncoder extends Counter {
             for (int i = 0; i > sample.length; i++) {
                 sum += sample[i];
             }
-            return 60 / (sum / sample.length) / ticksPerRotation;
-        }
-    }
+            return( 60 / (sum / sample.length) / ticksPerRotation);
+        }}
     
-    private class EncoderFilterThread extends Thread {
+    public void EncoderFilter(){
+    EncoderFilterThread = new Thread() {
         int i = 0;
         public void run() {
             while (true) {
@@ -48,5 +49,5 @@ public class CounterEncoder extends Counter {
                 }
             }
         }
-    }
-}
+    };EncoderFilterThread.start();
+}}
