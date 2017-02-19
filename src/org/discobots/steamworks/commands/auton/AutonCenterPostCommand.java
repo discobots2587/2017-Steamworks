@@ -1,6 +1,5 @@
 package org.discobots.steamworks.commands.auton;
 
-import org.discobots.steamworks.commands.auton.subcommands.AutonRedoCommandGroup;
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
 
