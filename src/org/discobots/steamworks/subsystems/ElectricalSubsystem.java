@@ -75,18 +75,15 @@ public class ElectricalSubsystem extends Subsystem {
 	public double getCompressorControlLoopState(){
 		return cmp.getCompressorCurrent();
 	}
-	public double getShootRPMfiltered()
-	{
-		return shoots.getFilteredRPM();
-		}
-	public boolean getShootEncoderStopped()
+
+	public boolean getShootEncoderStopped()//is shoot counter not counting any values
 	{
 		return shoots.getStopped();
 	}
 	public double getShootRPMraw(){
 		return shoots.getRawRPM();
 	}
-	public double getRotations(){
+	public double getRotations(){//does not currently return value
 		return shoots.getDistance();
 	}
 

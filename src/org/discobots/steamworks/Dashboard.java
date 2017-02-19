@@ -37,9 +37,8 @@ public class Dashboard {
 					Robot.loopExecutionTime);
 			//SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());//2013 motorcompressor has itable example
 			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
-			SmartDashboard.putNumber("Shooter Filtered RPM", Robot.electricSub.getShootRPMfiltered());
 			SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
-			SmartDashboard.putNumber("ShooterDist", Robot.electricSub.getRotations());
+			//SmartDashboard.putNumber("ShooterDist", Robot.electricSub.getRotations());
 		} else if (driveCounter % 5 == 1) {
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
