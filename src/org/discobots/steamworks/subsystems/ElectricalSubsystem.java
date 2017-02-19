@@ -34,7 +34,7 @@ public class ElectricalSubsystem extends Subsystem {
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
-		ShootRPM = new ArrayList<Integer>(10);
+		ShootRPM = new ArrayList<Integer>();
 		 shootNum=0;
 		shoots = new CounterEncoder(9, 2);
 		shoots.initTable(shootTable);
@@ -103,8 +103,8 @@ public class ElectricalSubsystem extends Subsystem {
 		if(shoots.getRawRPM()<4000 && shootNum<=9)
 		{
 			sumRPM=0;
-			ShootRPM.set(shootNum, (int) shoots.getRawRPM());
-			for (int i=0; i<shootNum; i++)
+			ShootRPM.add((int) shoots.getRawRPM());
+			for (int i=0; i<=shootNum; i++)
 			{
 				sumRPM+=ShootRPM.get(i);
 			}

@@ -52,6 +52,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
@@ -99,12 +100,11 @@ public class Robot extends IterativeRobot {
 		try {
 			// camera name taken from RoboRio
 			UsbCamera Genius = new UsbCamera("cam2", 0);
-			Genius.setPixelFormat(VideoMode.getPixelFormatFromInt(1));
-			Genius.setFPS(18);
 			// Genius.openCamera();
 			 System.out.println(Genius.getPath());
-				Genius.setResolution(320, 240);
 				GeniusCam.startAutomaticCapture(Genius);// automatically start
+				Genius.setFPS(18);
+				Genius.setResolution(320, 240);
 
 		}// footage
 		 catch (Exception e) {
