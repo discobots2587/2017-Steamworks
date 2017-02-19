@@ -20,6 +20,7 @@ private double kSpeedScaling=.75;
 public RobotDrive robotDrive;
 public int gearCount=0;
 Solenoid shifter;
+private double autonKonstant;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -72,5 +73,13 @@ Solenoid shifter;
 	}
 	public boolean getLRShifter(){
 		return shifter.get();
+	}
+	public void setAutonKonstant(double autonKonstant)
+	{
+		this.autonKonstant=autonKonstant;
+	}
+	public double getAutonKonstant()
+	{
+		return autonKonstant;
 	}
 }

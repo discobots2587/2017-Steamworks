@@ -27,7 +27,8 @@ public class AutonomousArcadeDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	endTime = System.currentTimeMillis() + time;
+    	long multi = (long)(100*Robot.driveTrainSub.getAutonKonstant());
+    	endTime = System.currentTimeMillis() + time*multi;
 
     }
 

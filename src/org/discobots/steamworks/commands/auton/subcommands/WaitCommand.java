@@ -8,15 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class WaitCommand extends Command {
-long endT;
+long endTime;
     public WaitCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
-    public WaitCommand(int millis)
+    public WaitCommand(int time)
     {
+    	long multi = (long)(100*Robot.driveTrainSub.getAutonKonstant());
+    	endTime = System.currentTimeMillis() + time*multi;
     	requires(Robot.driveTrainSub);
-    	 endT=System.currentTimeMillis()+millis;
     }
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -28,7 +29,7 @@ long endT;
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return System.currentTimeMillis()>=endT;
+        return System.currentTimeMillis()>=endTime;
     }
 
     // Called once after isFinished returns true
