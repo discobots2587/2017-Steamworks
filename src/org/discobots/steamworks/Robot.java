@@ -185,6 +185,9 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		driveCommand = (Command) driveChooser.getSelected();
+
+		oi.setRumble(0); // for
+		oi.updateControllerList();
 		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
 				.nanoTime();) { // rumbles
 								// upon
@@ -193,8 +196,6 @@ public class Robot extends IterativeRobot {
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}
-		oi.setRumble(0); // for
-		oi.updateControllerList();
 		oi.running=true;
 
 		if (driveCommand != null) // Starts chosen driving Command
