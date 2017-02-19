@@ -34,9 +34,14 @@ public class AutonRightPostCommand extends CommandGroup {
     	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));
-    	addSequential(new WaitCommand(3500));
-    	addSequential(new WaitCommand(500));//try again
-    	addSequential(new AutonomousArcadeDrive(0.15,0.4, 2000));
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
+    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backu
+    	addSequential(new WaitCommand(1600));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
+    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
+    	addSequential(new WaitCommand(1600));//try again
+    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));
     	
     	
     }
