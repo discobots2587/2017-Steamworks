@@ -34,8 +34,9 @@ public class AutonLeftPostCommand extends CommandGroup {
     	addSequential(new AutonomousArcadeDrive(-0.5,0.0,1000));//turn
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));//creep into position
-    	addSequential(new WaitCommand(35000));
-    	
+    	addSequential(new WaitCommand(3500));
+    	addSequential(new WaitCommand(500));//try again
+    	addSequential(new AutonomousArcadeDrive(0.15,0.4, 2000));
     	
     	
     }
