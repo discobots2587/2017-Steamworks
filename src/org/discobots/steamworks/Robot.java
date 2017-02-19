@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
 	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
-	private boolean simple=false;
+	private boolean simple = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
@@ -60,8 +60,8 @@ public class Robot extends IterativeRobot {
 		driveTrainSub = new DriveTrainSubsystem();
 		electricSub = new ElectricalSubsystem();
 		blendSub = new BlendSubsystem();
-		if (simple==true)
-				oi = new SimpleOI();
+		if (simple == true)
+			oi = new SimpleOI();
 		else
 			oi = new OI();
 
@@ -71,53 +71,58 @@ public class Robot extends IterativeRobot {
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
 		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
 		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
-		
+
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
-		driveChooser.addDefault("Split Arcade Drive",new SplitArcadeDriveCommand());
-		
-		Camthread = new Thread(){
+		driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
+
+		Camthread = new Thread() {
 			@Override
-		public void run(){
+			public void run() {
 				System.out.println("cameratherad created");
 
-		try {
-			GeniusCam = CameraServer.getInstance();// initialize server
-			// camera name taken from RoboRio
-	//		UsbCamera C615 = new UsbCamera("C615", 1);
-			// LogicC615.openCamera();
-			// LogicC615.startCapture();
-	//		if (C615.isConnected())
-			{
-		//		C615.setResolution(480, 320);
-		//		GeniusCam.startAutomaticCapture(C615);// automatically start
-														// streaming
-			}// footage
-		} catch (Exception e) {
-			System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
-		}
-		try {
-			// camera name taken from RoboRio
-			UsbCamera Genius = new UsbCamera("cam2", 0);
-			// Genius.openCamera();
-			 System.out.println(Genius.getPath());
-				GeniusCam.startAutomaticCapture(Genius);// automatically start
-				Genius.setFPS(15);
-				Genius.setResolution(320, 240);
+				try {
+					GeniusCam = CameraServer.getInstance();// initialize server
+					// camera name taken from RoboRio
+					// UsbCamera C615 = new UsbCamera("C615", 1);
+					// LogicC615.openCamera();
+					// LogicC615.startCapture();
+					// if (C615.isConnected())
+					{
+						// C615.setResolution(480, 320);
+						// GeniusCam.startAutomaticCapture(C615);//
+						// automatically start
+						// streaming
+					} // footage
+				} catch (Exception e) {
+					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
+				}
+				try {
+					// camera name taken from RoboRio
+					UsbCamera Genius = new UsbCamera("cam2", 0);
+					// Genius.openCamera();
+					System.out.println(Genius.getPath());
+					GeniusCam.startAutomaticCapture(Genius);// automatically
+															// start
+					Genius.setFPS(15);
+					Genius.setResolution(320, 240);
 
-		}// footage
-		 catch (Exception e) {
-			System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
-			System.out.println("Genius being added");
-	}}};
+				} // footage
+				catch (Exception e) {
+					System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
+					System.out.println("Genius being added");
+				}
+			}
+		};
 		Camthread.run();
-		 
+
 		Dashboard.init();
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
 		SmartDashboard.putData("Choose Auton", autonChooser);
-		}
+	}
+
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
@@ -126,7 +131,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		oi.updateControllerList();
-		oi.running=true;
+		oi.running = true;
 	}
 
 	@Override
@@ -188,15 +193,14 @@ public class Robot extends IterativeRobot {
 
 		oi.setRumble(0); // for
 		oi.updateControllerList();
-		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System
-				.nanoTime();) { // rumbles
-								// upon
-								// disable
+		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
+																										// upon
+																										// disable
 			oi.setRumble(1); // for
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}
-		oi.running=true;
+		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
@@ -213,7 +217,7 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		Robot.oi.running=true;
+		Robot.oi.running = true;
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package org.discobots.steamworks.commands.auton.subcommands;
 
+import org.discobots.steamworks.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,6 +15,7 @@ long endT;
     }
     public WaitCommand(int millis)
     {
+    	requires(Robot.driveTrainSub);
     	 endT=System.currentTimeMillis()+millis;
     }
     // Called just before this Command runs the first time
