@@ -103,7 +103,7 @@ public class Robot extends IterativeRobot {
 			// Genius.openCamera();
 			 System.out.println(Genius.getPath());
 				GeniusCam.startAutomaticCapture(Genius);// automatically start
-				Genius.setFPS(18);
+				Genius.setFPS(15);
 				Genius.setResolution(320, 240);
 
 		}// footage

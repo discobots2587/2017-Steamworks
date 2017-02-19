@@ -33,7 +33,7 @@ public class AutonomousArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	for(long i =endTime;i>=System.currentTimeMillis();)
+    	while(endTime >= System.currentTimeMillis())
     	{
     	Robot.driveTrainSub.robotDrive.arcadeDrive(speedX,speedY);
     	}

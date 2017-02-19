@@ -32,8 +32,10 @@ public class AutonCenterPostCommand extends CommandGroup {
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
     	addSequential(new WaitCommand(35000));
-    	addSequential(new AutonRedoCommandGroup());
-    	
+    	addSequential(new AutonomousArcadeDrive(-0.2, -0.5,1400));//backup 
+    	addSequential(new WaitCommand(500));//try again
+    	addSequential(new AutonomousArcadeDrive(0.15,0.4, 2000));
+    	 	
     	
     	
     }
