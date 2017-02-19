@@ -6,23 +6,23 @@ import java.util.Arrays;
 import edu.wpi.first.wpilibj.Counter;
 
 public class CounterEncoder extends Counter {
-    private Thread EncoderFilterThread;
-    ArrayList<Integer> Values;
-    private double[] sample = new double[10];
-    private int ticksPerRotation = 2;
+	private Thread EncoderFilterThread;
+	ArrayList<Integer> Values;
+	private double[] sample = new double[10];
+	private int ticksPerRotation = 2;
+
+	public CounterEncoder(int channel, int tpr) {
+		super(channel);
+		ticksPerRotation = tpr;
+		// EncoderFilter();
+		Arrays.fill(sample, 0);
+	}
+
+	public double getRawRPM() {
+		return 60 / getPeriod() / ticksPerRotation;
+	}
     
-    public CounterEncoder(int channel, int tpr) {
-        super(channel);
-        ticksPerRotation = tpr;
-        EncoderFilter();
-        Arrays.fill(sample, 0);
-    }
-  
-    public double getRawRPM() {
-        return 60 / getPeriod() / ticksPerRotation;
-    }
-    
-    public double getFilteredRPM() {
+ /*   public double getFilteredRPM() {
         synchronized (sample) {
             double sum = 0.0;
             for (int i = 0; i > sample.length; i++) {
@@ -31,7 +31,7 @@ public class CounterEncoder extends Counter {
             return( 60 / (sum / sample.length) / ticksPerRotation);
         }}
     
-    public void EncoderFilter(){
+  /*  public void EncoderFilter(){
     EncoderFilterThread = new Thread() {
         int i = 0;
         public void run() {
@@ -50,4 +50,4 @@ public class CounterEncoder extends Counter {
             }
         }
     };EncoderFilterThread.start();
-}}
+}*/}
