@@ -384,6 +384,7 @@ private ArrayList<Integer> ports;
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));

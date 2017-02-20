@@ -20,7 +20,7 @@ public class AutonomousTankDrive extends Command {
     	speedLeft = left;
     	speedRight = right;
     	long multi = (long)(100*Robot.driveTrainSub.getAutonKonstant());
-    	endTime = System.currentTimeMillis() + time*multi;
+    	endTime = System.currentTimeMillis() + time*multi/100;
     }
 
     // Called just before this Command runs the first time

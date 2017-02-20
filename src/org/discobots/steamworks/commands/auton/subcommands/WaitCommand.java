@@ -16,7 +16,7 @@ long endTime;
     public WaitCommand(int time)
     {
     	long multi = (long)(100*Robot.driveTrainSub.getAutonKonstant());
-    	endTime = System.currentTimeMillis() + time*multi;
+    	endTime = System.currentTimeMillis() + time*multi/100;
     	requires(Robot.driveTrainSub);
     }
     // Called just before this Command runs the first time
