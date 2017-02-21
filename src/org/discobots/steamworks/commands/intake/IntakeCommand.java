@@ -33,6 +33,9 @@ public class IntakeCommand extends Command {
     	{
         	endtime+=System.currentTimeMillis();
     	}
+    	else{
+    		Robot.intakeSub.setSpeed(speed);
+    	}
     } 
 
     // Called repeatedly when this Command is scheduled to run

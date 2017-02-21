@@ -59,7 +59,7 @@ public class Dashboard {
 		if (driveCounter%10==1)
 		{
 			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.getSpeedScaling());
-
+			SmartDashboard.putString("The Robot is in", Robot.driveTrainSub.getGear());
 						//SmartDashboard.putNumber("PRESSURE", Robot.electricalSub.getPressure());
 			
 			//SmartDashboard.putBoolean("Pressure Switch State", Robot.electricalSub.getPressureSwitchState());

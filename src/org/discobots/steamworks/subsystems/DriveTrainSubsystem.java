@@ -82,4 +82,12 @@ private double autonKonstant;
 	{
 		return autonKonstant;
 	}
+	public String getGear(){
+		if(getLRShifter())
+			return "High Gear";
+		else if(getLRShifter())
+			return "Low Gear";
+		else
+			return "Unknown Gear";
+	}
 }
