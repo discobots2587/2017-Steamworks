@@ -4,6 +4,7 @@ import org.discobots.steamworks.HW;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,12 +14,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Talon shootMotor;
+	private Spark shootMotor;
 	private boolean shooterToggled=false;
 	private double pwm;
 	private double setPoint;
 	public ShooterSubsystem(){
-		this.shootMotor=new Talon(HW.motorShoot);
+		this.shootMotor=new Spark(HW.motorShoot);
 		pwm=0;
 		setPoint=.75;
 	}
