@@ -7,8 +7,10 @@ import org.discobots.steamworks.HW;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -21,12 +23,19 @@ public RobotDrive robotDrive;
 public int gearCount=0;
 Solenoid shifter;
 private double autonKonstant;
+private Spark l1;
+private Spark l2;
+private Spark r1;
+private Spark r2;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
+		if (!DriverStation.getInstance().isTest())
+		{
 		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
 								  HW.motorFrontRight,HW.motorBackRight);
+		}
 		//robotDrive.setSafetyEnabled(true);
 		shifter = new Solenoid(HW.shifter);
 	}
@@ -42,6 +51,18 @@ private double autonKonstant;
 	public double getSpeedScaling(){
 		return kSpeedScaling;
 }
+	public void customTank(double L, double R){
+		l1 = new Spark(HW.motorFrontLeft);
+		l2 = new Spark(HW.motorBackLeft);
+		r1 = new Spark(HW.motorFrontRight);
+		r2 = new Spark(HW.motorBackRight);
+
+		r1.setSpeed(R);
+		r2.setSpeed(R);
+		l1.setSpeed(L);
+		l2.setSpeed(L);
+		
+	}
 	public void arcadeDrive(double y, double x) {
 
 		robotDrive.arcadeDrive(x * kSpeedScaling, y * kSpeedScaling);
