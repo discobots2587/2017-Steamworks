@@ -1,9 +1,6 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
-
-import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
