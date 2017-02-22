@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		testing = true;
+		testing = false;//////////////////////////////FOR TESTING ONLY
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
