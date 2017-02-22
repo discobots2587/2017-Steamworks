@@ -2,7 +2,7 @@ package org.discobots.steamworks;
 
 
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
-import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
+import org.discobots.steamworks.commands.drive.ShiftCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SpeedScaleCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
@@ -73,37 +73,29 @@ public class SimpleOI extends OI {
 	
 	public SimpleOI() {
 		//JOYSTICK 2************************************************************************************
-		b2_sBack.whenPressed(new CycleDriveCommand());//change drive mode
-		
-		//IntakeCommand in = new IntakeCommand(.75);/// ---------------THIS NEEDS TO BE REMOVED
-		//IntakeCommand out = new IntakeCommand(-.75);/// ---------------THIS NEEDS TO BE REMOVED
-	//	GearIntakeCommand g = new GearIntakeCommand(1.0);/// ---------------THIS NEEDS TO BE REMOVED
-		//ToggleHangCommand h = new ToggleHangCommand(-1.0);/// ---------------THIS NEEDS TO BE REMOVED 
-		//ShootCommand shoot = new ShootCommand();/// ---------------THIS NEEDS TO BE REMOVED 
+		b2_sBack.whenPressed(new BlendCommand(.75));//toogel blender in reverse
+		b2_sStar.whenPressed(new CycleDriveCommand());//cycle drive control systems
+		b2_btnY.toggleWhenPressed(new HangCommand());//toggle hang
 
 		
-	
-	//	b2_btnB.toggleWhenPressed();
-		//b2_btnB.whileHeld(new HangCommand(1.0));
+		b2_dpadU.whenPressed(new IntakeCommand(1,true,10000));//intake runs for 10 sec
+		b2_bumpR.whenPressed(new ShootCommand(true));//toggle shooter
+		b2_bumpL.whenPressed(new BlendCommand(-.75,true));//toggle bender
 		
-		b2_bumpL.toggleWhenPressed(new IntakeCommand(-.75));
-		b2_trigL.whileHeld(new IntakeCommand(.75));
-		
-		b2_bumpR.whileHeld(new BlendCommand(1));
-		b2_trigR.whileHeld(new BlendCommand(-1));
-		
-		b2_btnA.whileHeld(new ShootCommand());
+		b2_trigL.whileHeld(new IntakeCommand(-.75));
+		b2_trigR.whileHeld(new IntakeCommand(.75));
+		b2_dpadR.whenPressed(new ShiftCommand());//change gear
+
 
 		b2_btnX.whenPressed(new ShiftGearIntakeCommand());
 		
 		b2_dpadR.whenPressed(new SpeedScaleCommand(1.0));//speed scale
 		b2_dpadL.whenPressed(new SpeedScaleCommand(.5));
+
 		
 		//b2_dpadU.whenPressed(new UpShiftCommand());
 		//b2_dpadD.whenPressed(new DownShiftCommand());
 		
-		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
-		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
 		
 		
 	//	b2_bumpR.whenPressed(new MoveArmCommand(ArmSubsystem.armSpeed));
@@ -137,30 +129,21 @@ public class SimpleOI extends OI {
 		b2_btnY.whenPressed(new ToggleCompressor());*/
 		
 		//JOYSTICK 1******************************************************************
-		b_sBack.whenPressed(new CycleDriveCommand());
+		b_sBack.whenPressed(new BlendCommand(.75));//toogel blender in reverse
+		b_sStar.whenPressed(new CycleDriveCommand());//cycle drive control systems
+		b_btnY.toggleWhenPressed(new HangCommand());//toggle hang
 
 		
-		b_bumpL.toggleWhenPressed(new IntakeCommand(-.75));
-		b_trigL.whileActive(new IntakeCommand(.75));
+		b_dpadU.whenPressed(new IntakeCommand(1,true,10000));//intake runs for 10 sec
+		b_bumpR.whenPressed(new ShootCommand(true));//toggle shooter
+		b_bumpL.whenPressed(new BlendCommand(-.75,true));//toggle bender
 		
 
-		//b_trigL.whileActive(new IntakeWhileHeldCommand(-1.0));
-		
-		b_bumpR.whileHeld(new BlendCommand(1));
-		b_trigR.whileActive(new BlendCommand(-1));
-		
-	//	b_btnB.toggleWhenPressed(h);
-		
-		b_btnA.whileHeld(new ShootCommand());;
-
-		b_btnX.whenPressed(new ShiftGearIntakeCommand());
-		
-		
-		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
-		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
-		
 		b2_dpadR.whenPressed(new SpeedScaleCommand(1.0));
 		b2_dpadL.whenPressed(new SpeedScaleCommand(.5));
+
+		b_dpadR.whenPressed(new ShiftCommand());//change gear
+
 		
 /*		b2_btnB.whileHeld(new LinearPunchStartCommand());
 		b_btnB.whileHeld(new LinearPunchStartCommand());

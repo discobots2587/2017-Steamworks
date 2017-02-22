@@ -109,5 +109,4 @@ Spark backRight;
 		else
 			return "Unknown Gear";
 	}
-	
 }

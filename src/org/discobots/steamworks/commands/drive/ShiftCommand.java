@@ -6,53 +6,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * shift through different combinations of speedscaling and gears
  */
-public class ComboShiftCommnad extends Command {
+public class ShiftCommand extends Command {
 
 	private boolean fin=true;
 	public boolean end=false;
 	private boolean direction = false;
 
-    public ComboShiftCommnad(boolean direction) {
+    public ShiftCommand() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.driveTrainSub);
-    	this.direction = direction;
+    	this.direction = Robot.driveTrainSub.getLRShifter();
 
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(direction)
-    		Robot.driveTrainSub.gearCount++;
-    	else
-    		Robot.driveTrainSub.gearCount--;
-    	if(Robot.driveTrainSub.gearCount==0){
     		Robot.driveTrainSub.setLRShifter(false);
-    		Robot.driveTrainSub.setSpeedScaling(.5);
-    	}
-    	else if(Robot.driveTrainSub.gearCount==1){
-    		Robot.driveTrainSub.setLRShifter(false);
-    		Robot.driveTrainSub.setSpeedScaling(1.0);
-    	}
-    	else if(Robot.driveTrainSub.gearCount==2){
-    		Robot.driveTrainSub.setLRShifter(true);
-    		Robot.driveTrainSub.setSpeedScaling(.5);
-    	}
-    	else if(Robot.driveTrainSub.gearCount==3){
-    		Robot.driveTrainSub.setLRShifter(true);
-    		Robot.driveTrainSub.setSpeedScaling(1.0);
-    	}
-    	else if(direction){
-    		Robot.driveTrainSub.gearCount=3;
-    	}
     	else if(!direction){
-    		Robot.driveTrainSub.gearCount=0;
+    		Robot.driveTrainSub.setLRShifter(true);
     	}
-    	else
-    	{   		
-    	}
+    }
 
     	
-    } 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {

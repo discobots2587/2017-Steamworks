@@ -29,6 +29,8 @@ public class ElectricalSubsystem extends Subsystem {
 	public CounterEncoder shoots;//shooter encoder
 	public ITable shootTable;
 	private int shootNum;
+	public Encoder encoderRightDrive;
+	public Encoder encoderLeftDrive;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -41,6 +43,8 @@ public class ElectricalSubsystem extends Subsystem {
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
 		ps = new PressureSensor(HW.pressureSensor);
+		encoderLeftDrive=new Encoder(2,3);//does not exist atm
+		encoderRightDrive=new Encoder(0,1);
 		
 	}
 	
