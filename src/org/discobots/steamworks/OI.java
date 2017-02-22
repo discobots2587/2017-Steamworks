@@ -348,9 +348,9 @@ private ArrayList<Integer> ports;
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand(true));
 						port0.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand(false));
 
 					}
 				}

@@ -31,6 +31,23 @@ public CycleDriveCommand(char charCmd) {
 			cmd2=new ArcadeDriveCommand();
 		}
 	}
+public CycleDriveCommand(boolean setTurn)
+{
+	isDef=true;
+	if(setTurn==true)
+	{
+		Robot.driveTrainSub.turnScale=!Robot.driveTrainSub.turnScale;
+		SmartDashboard.putBoolean("Turning Speed Scale", Robot.driveTrainSub.turnScale);
+	}
+	if(setTurn==false)
+	{
+		Robot.driveTrainSub.directScale=!Robot.driveTrainSub.directScale;
+		SmartDashboard.putBoolean("Direct Speed Scale", Robot.driveTrainSub.directScale);
+
+	}
+
+		
+}
 public CycleDriveCommand(double speedScale)
 {
 	isDef=true;
@@ -72,22 +89,7 @@ public CycleDriveCommand(double speedScale)
 		}
 	}*/
 	}
-	public CycleDriveCommand(boolean setTurn)
-	{
-		if(setTurn==true)
-		{
-			Robot.driveTrainSub.turnScale=!Robot.driveTrainSub.turnScale;
-			SmartDashboard.putBoolean("Turning Speed Scale", Robot.driveTrainSub.turnScale);
-		}
-		if(setTurn==false)
-		{
-			Robot.driveTrainSub.directScale=!Robot.driveTrainSub.directScale;
-			SmartDashboard.putBoolean("Direct Speed Scale", Robot.driveTrainSub.directScale);
-
-		}
-
-			
-	}
+	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		end();
