@@ -31,24 +31,7 @@ public CycleDriveCommand(char charCmd) {
 			cmd2=new ArcadeDriveCommand();
 		}
 	}
-public CycleDriveCommand(String setTurn)
-{
-	speed=true;
-	isDef=true;
-	if(setTurn.equals("Turning"))
-	{
-		Robot.driveTrainSub.turnScale=!Robot.driveTrainSub.turnScale;
-		SmartDashboard.putBoolean("Turning Speed Scale", Robot.driveTrainSub.turnScale);
-	}
-	if(setTurn.equals("Direct"))
-	{
-		Robot.driveTrainSub.directScale=!Robot.driveTrainSub.directScale;
-		SmartDashboard.putBoolean("Direct Speed Scale", Robot.driveTrainSub.directScale);
 
-	}
-
-		
-}
 public CycleDriveCommand(double speedScale)
 {
 	isDef=true;

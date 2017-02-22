@@ -25,12 +25,14 @@ Spark frontLeft;
 Spark frontRight;
 Spark backLeft;
 Spark backRight;
-public boolean turnScale=false;
-public boolean directScale=false;
+public boolean turnScale;
+public boolean directScale;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
+			turnScale=false;
+			directScale=false;
 		 frontLeft = new Spark(HW.motorFrontLeft);
 		 frontRight = new Spark(HW.motorFrontRight);
 		 backLeft = new Spark(HW.motorBackLeft);
@@ -140,5 +142,6 @@ public boolean directScale=false;
 			return "Low Gear";
 		else
 			return "Unknown Gear";
+	}
 	}
 }

@@ -42,6 +42,8 @@ public class Robot extends IterativeRobot {
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
+	public static boolean directScale = false;
+	public static boolean turnScale=false;
 	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
