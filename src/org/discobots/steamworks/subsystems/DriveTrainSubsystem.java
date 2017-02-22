@@ -25,6 +25,8 @@ Spark frontLeft;
 Spark frontRight;
 Spark backLeft;
 Spark backRight;
+public boolean turnScale=false;
+public boolean directScale=false;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -53,13 +55,39 @@ Spark backRight;
 }
 	public void arcadeDrive(double y, double x) {
 
-		robotDrive.arcadeDrive(x * kSpeedScaling, y * kSpeedScaling);
+			if(!turnScale&&!directScale)
+				robotDrive.arcadeDrive(x, y);
+			else if(!turnScale&&directScale)
+				robotDrive.arcadeDrive(x, y*kSpeedScaling);
+			else if(turnScale&&!directScale)
+				robotDrive.arcadeDrive(x*kSpeedScaling, y);
+			else if(turnScale&&directScale)
+				robotDrive.arcadeDrive(x*kSpeedScaling, y*kSpeedScaling);
+
+
 		// robotdrive is dumb arcadeDrive so params are switched
 	}
-	public void tankDrive(double leftStick, double rightStick) {
+	public void tankDrive(double leftStick, double rightStick) {//.2 used to determine if turning
 
+		if(!turnScale&&!directScale)
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
+		if(turnScale&&!directScale&&Math.abs(leftStick/rightStick)>.2)
+		{
+			robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
+					* kSpeedScaling);
+		}
+		if(!turnScale&&directScale&&Math.abs(leftStick/rightStick)<.2)
+		{
+			robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
+					* kSpeedScaling);
+		}
+		if(turnScale&&directScale)
+		{
+			robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
+					* kSpeedScaling);
+		}
+		
 	}
 	public void customTank(double L, double R){
 		frontLeft.setSpeed(L*kSpeedScaling);

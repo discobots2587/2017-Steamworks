@@ -72,6 +72,19 @@ public CycleDriveCommand(double speedScale)
 		}
 	}*/
 	}
+	public CycleDriveCommand(boolean setTurn)
+	{
+		if(setTurn==true)
+		{
+			Robot.driveTrainSub.turnScale=!Robot.driveTrainSub.turnScale;
+		}
+		if(setTurn==false)
+		{
+			Robot.driveTrainSub.directScale=!Robot.driveTrainSub.directScale;
+		}
+
+			
+	}
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		end();
