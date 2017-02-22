@@ -29,6 +29,7 @@ import org.discobots.steamworks.subsystems.IntakeSubsystem;
 import org.discobots.steamworks.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
+	public static boolean testing;
 	public static OI oi;
 	public static DriveTrainSubsystem driveTrainSub;
 	public static ShooterSubsystem shootSub;
@@ -53,7 +54,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-
+		testing = true;
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();

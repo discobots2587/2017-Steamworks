@@ -2,7 +2,6 @@ package org.discobots.steamworks.commands.drive;
 
 import org.discobots.steamworks.Robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -22,11 +21,13 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		if (DriverStation.getInstance().isTest())
-    	Robot.driveTrainSub.customTank(Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY());
-		else
-	    	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY());
-
+    	if(!Robot.testing){
+        	Robot.driveTrainSub.tankDrive(-Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY());
+    	}
+    	else
+    	{
+    		Robot.driveTrainSub.customTank(Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickARY());
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

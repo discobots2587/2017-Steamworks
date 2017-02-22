@@ -5,9 +5,7 @@ import java.lang.Math;
 
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -23,19 +21,21 @@ public RobotDrive robotDrive;
 public int gearCount=0;
 Solenoid shifter;
 private double autonKonstant;
-private Spark l1;
-private Spark l2;
-private Spark r1;
-private Spark r2;
+Spark frontLeft;
+Spark frontRight;
+Spark backLeft;
+Spark backRight;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
-		if (!DriverStation.getInstance().isTest())
-		{
-		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
-								  HW.motorFrontRight,HW.motorBackRight);
-		}
+		 frontLeft = new Spark(HW.motorFrontLeft);
+		 frontRight = new Spark(HW.motorFrontRight);
+		 backLeft = new Spark(HW.motorBackLeft);
+		 backRight = new Spark(HW.motorBackRight);
+
+		robotDrive=new RobotDrive(frontLeft,backLeft,
+								  frontRight,backRight);
 		//robotDrive.setSafetyEnabled(true);
 		shifter = new Solenoid(HW.shifter);
 	}
@@ -51,18 +51,6 @@ private Spark r2;
 	public double getSpeedScaling(){
 		return kSpeedScaling;
 }
-	public void customTank(double L, double R){
-		l1 = new Spark(HW.motorFrontLeft);
-		l2 = new Spark(HW.motorBackLeft);
-		r1 = new Spark(HW.motorFrontRight);
-		r2 = new Spark(HW.motorBackRight);
-
-		r1.setSpeed(R);
-		r2.setSpeed(R);
-		l1.setSpeed(L);
-		l2.setSpeed(L);
-		
-	}
 	public void arcadeDrive(double y, double x) {
 
 		robotDrive.arcadeDrive(x * kSpeedScaling, y * kSpeedScaling);
@@ -72,6 +60,20 @@ private Spark r2;
 
 		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
 				* kSpeedScaling);
+	}
+	public void customTank(double L, double R){
+		frontLeft.setSpeed(L);
+		backLeft.setSpeed(L);
+		frontRight.setSpeed(R);
+		backRight.setSpeed(R);
+	}
+	public void frontTest(double L, double R){
+		frontLeft.setSpeed(L);
+		frontRight.setSpeed(R);
+	}
+	public void backTest(double L, double R){
+		backLeft.setSpeed(L);
+		backRight.setSpeed(R);
 	}
 	/*
 	 * the relationship between the input from joystick and output to the motors is exponential
@@ -102,5 +104,13 @@ private Spark r2;
 	public double getAutonKonstant()
 	{
 		return autonKonstant;
+	}
+	public String getGear(){
+		if(getLRShifter())
+			return "High Gear";
+		else if(getLRShifter())
+			return "Low Gear";
+		else
+			return "Unknown Gear";
 	}
 }
