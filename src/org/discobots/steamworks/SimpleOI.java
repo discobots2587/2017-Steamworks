@@ -4,6 +4,7 @@ package org.discobots.steamworks;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.ComboShiftCommnad;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
+import org.discobots.steamworks.commands.drive.SpeedScaleCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.intake.ShiftGearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
@@ -95,8 +96,8 @@ public class SimpleOI extends OI {
 
 		b2_btnX.whenPressed(new ShiftGearIntakeCommand());
 		
-		b2_dpadR.whenPressed(new CycleDriveCommand(1.0));//speed scale
-		b2_dpadL.whenPressed(new CycleDriveCommand(.5));
+		b2_dpadR.whenPressed(new SpeedScaleCommand(1.0));//speed scale
+		b2_dpadL.whenPressed(new SpeedScaleCommand(.5));
 		
 		//b2_dpadU.whenPressed(new UpShiftCommand());
 		//b2_dpadD.whenPressed(new DownShiftCommand());
@@ -158,8 +159,8 @@ public class SimpleOI extends OI {
 		b2_dpadU.whenPressed(new ComboShiftCommnad(true));
 		b2_dpadD.whenPressed(new ComboShiftCommnad(false));
 		
-		b2_dpadR.whenPressed(new CycleDriveCommand(1.0));
-		b2_dpadL.whenPressed(new CycleDriveCommand(.5));
+		b2_dpadR.whenPressed(new SpeedScaleCommand(1.0));
+		b2_dpadL.whenPressed(new SpeedScaleCommand(.5));
 		
 /*		b2_btnB.whileHeld(new LinearPunchStartCommand());
 		b_btnB.whileHeld(new LinearPunchStartCommand());

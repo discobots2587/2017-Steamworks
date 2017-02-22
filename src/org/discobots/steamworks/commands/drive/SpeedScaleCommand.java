@@ -22,6 +22,11 @@ public class SpeedScaleCommand extends Command {
     		Robot.directScale=!Robot.directScale;
     	}
     	Robot.oi.StartThreads();
+    	
+    }
+    public SpeedScaleCommand(double speedScale)
+    {
+    	Robot.driveTrainSub.setSpeedScaling(speedScale);//take input value so can be set to driver's preferences
     }
 
     // Called just before this Command runs the first time

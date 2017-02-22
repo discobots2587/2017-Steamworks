@@ -25,14 +25,10 @@ Spark frontLeft;
 Spark frontRight;
 Spark backLeft;
 Spark backRight;
-public boolean turnScale;
-public boolean directScale;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
-			turnScale=false;
-			directScale=false;
 		 frontLeft = new Spark(HW.motorFrontLeft);
 		 frontRight = new Spark(HW.motorFrontRight);
 		 backLeft = new Spark(HW.motorBackLeft);
@@ -56,40 +52,10 @@ public boolean directScale;
 		return kSpeedScaling;
 }
 	public void arcadeDrive(double y, double x) {
-
-			if(!turnScale&&!directScale)
-				robotDrive.arcadeDrive(x, y);
-			else if(!turnScale&&directScale)
-				robotDrive.arcadeDrive(x, y*kSpeedScaling);
-			else if(turnScale&&!directScale)
-				robotDrive.arcadeDrive(x*kSpeedScaling, y);
-			else if(turnScale&&directScale)
-				robotDrive.arcadeDrive(x*kSpeedScaling, y*kSpeedScaling);
-
-
-		// robotdrive is dumb arcadeDrive so params are switched
+				robotDrive.arcadeDrive(x, y);// robotdrive is dumb arcadeDrive so params are switched
 	}
 	public void tankDrive(double leftStick, double rightStick) {//.2 used to determine if turning
-
-		if(!turnScale&&!directScale)
-		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-				* kSpeedScaling);
-		if(turnScale&&!directScale&&Math.abs(leftStick/rightStick)>.2)
-		{
-			robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-					* kSpeedScaling);
-		}
-		if(!turnScale&&directScale&&Math.abs(leftStick/rightStick)<.2)
-		{
-			robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-					* kSpeedScaling);
-		}
-		if(turnScale&&directScale)
-		{
-			robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-					* kSpeedScaling);
-		}
-		
+		robotDrive.tankDrive(leftStick, -rightStick);
 	}
 	public void customTank(double L, double R){
 		frontLeft.setSpeed(L*kSpeedScaling);
@@ -143,7 +109,5 @@ public boolean directScale;
 		else
 			return "Unknown Gear";
 	}
-	public void setTurnScale(boolean a) {
-		this.turnScale=!turnScale;
-	}
+	
 }

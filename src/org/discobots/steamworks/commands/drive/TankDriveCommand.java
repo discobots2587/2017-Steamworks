@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveCommand extends Command {
 
-    public TankDriveCommand() {
+    private double speedScale;
+
+	public TankDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrainSub);
@@ -22,8 +24,20 @@ public class TankDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(!Robot.testing){
+    		if(!Robot.turnScale&&!Robot.directScale)
         	Robot.driveTrainSub.tankDrive(-Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY());
-    	}
+    		if(Robot.turnScale&&!Robot.directScale){
+    			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),1-(Math.abs((Robot.oi.getRawAnalogStickALY())+(Robot.oi.getRawAnalogStickARY())/2)));
+            	Robot.driveTrainSub.tankDrive(-Robot.oi.getRawAnalogStickALY()*speedScale,Robot.oi.getRawAnalogStickARY()*speedScale);
+    		}
+    		if(!Robot.turnScale&&Robot.directScale)
+    		{
+    			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),(Math.abs((Robot.oi.getRawAnalogStickALY())+(Robot.oi.getRawAnalogStickARY())/2)));
+            	Robot.driveTrainSub.tankDrive(-Robot.oi.getRawAnalogStickALY()*speedScale,Robot.oi.getRawAnalogStickARY()*speedScale);
+    		}
+    		if(Robot.turnScale&&Robot.directScale)
+            	Robot.driveTrainSub.tankDrive(-Robot.oi.getRawAnalogStickALY()*Robot.driveTrainSub.getSpeedScaling(),Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling());
+    		}
     	else
     	{
     		Robot.driveTrainSub.customTank(-Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickARY());
