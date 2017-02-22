@@ -143,5 +143,7 @@ public boolean directScale;
 		else
 			return "Unknown Gear";
 	}
+	public void setTurnScale(boolean a) {
+		this.turnScale=!turnScale;
 	}
 }
