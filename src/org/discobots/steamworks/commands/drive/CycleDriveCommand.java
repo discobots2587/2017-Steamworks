@@ -77,10 +77,13 @@ public CycleDriveCommand(double speedScale)
 		if(setTurn==true)
 		{
 			Robot.driveTrainSub.turnScale=!Robot.driveTrainSub.turnScale;
+			SmartDashboard.putBoolean("Turning Speed Scale", Robot.driveTrainSub.turnScale);
 		}
 		if(setTurn==false)
 		{
 			Robot.driveTrainSub.directScale=!Robot.driveTrainSub.directScale;
+			SmartDashboard.putBoolean("Direct Speed Scale", Robot.driveTrainSub.directScale);
+
 		}
 
 			

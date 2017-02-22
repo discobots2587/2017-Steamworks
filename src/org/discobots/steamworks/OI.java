@@ -309,9 +309,9 @@ private ArrayList<Integer> ports;
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 						port0.get(port0.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand(true));//turning speedscale
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand(false));//turning speedscale
 					/*
 					 * int temp; temp = gamePads[i].makebuttons(new               //Previous idea to set buttons and commands in each controller object - not working
 					 * DPadButton(gamePads[i], Xbox.DPAD_Y, false));
