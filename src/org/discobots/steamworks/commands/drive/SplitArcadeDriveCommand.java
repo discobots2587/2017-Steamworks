@@ -25,7 +25,7 @@ public class SplitArcadeDriveCommand extends Command {
     	if(!Robot.testing){
     	Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX(), -Robot.oi.getRawAnalogStickALY());}
     	else{
-        	Robot.driveTrainSub.backTest(Robot.oi.getRawAnalogStickARY(), Robot.oi.getRawAnalogStickALY());}
+        	Robot.driveTrainSub.backTest(-Robot.oi.getRawAnalogStickARY(), Robot.oi.getRawAnalogStickALY());}
 
     	}
     		

@@ -25,7 +25,7 @@ public class ArcadeDriveCommand extends Command {
     	if(!Robot.testing)
     	Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(), -Robot.oi.getRawAnalogStickALY());
     	else
-    		Robot.driveTrainSub.frontTest(Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickARY());
+    		Robot.driveTrainSub.frontTest(-Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY());
 
     }
 

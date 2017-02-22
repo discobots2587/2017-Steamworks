@@ -62,18 +62,18 @@ Spark backRight;
 				* kSpeedScaling);
 	}
 	public void customTank(double L, double R){
-		frontLeft.setSpeed(L);
-		backLeft.setSpeed(L);
-		frontRight.setSpeed(R);
-		backRight.setSpeed(R);
+		frontLeft.setSpeed(L*kSpeedScaling);
+		backLeft.setSpeed(L*kSpeedScaling);
+		frontRight.setSpeed(R*kSpeedScaling);
+		backRight.setSpeed(R*kSpeedScaling);
 	}
 	public void frontTest(double L, double R){
-		frontLeft.setSpeed(L);
-		frontRight.setSpeed(R);
+		frontLeft.setSpeed(L*kSpeedScaling);
+		frontRight.setSpeed(R*kSpeedScaling);
 	}
 	public void backTest(double L, double R){
-		backLeft.setSpeed(L);
-		backRight.setSpeed(R);
+		backLeft.setSpeed(L*kSpeedScaling);
+		backRight.setSpeed(R*kSpeedScaling);
 	}
 	/*
 	 * the relationship between the input from joystick and output to the motors is exponential

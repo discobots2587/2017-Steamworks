@@ -26,7 +26,7 @@ public class TankDriveCommand extends Command {
     	}
     	else
     	{
-    		Robot.driveTrainSub.customTank(Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickARY());
+    		Robot.driveTrainSub.customTank(-Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickARY());
     	}
     }
 
