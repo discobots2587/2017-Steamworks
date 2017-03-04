@@ -5,11 +5,9 @@ import java.lang.Math;
 
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -31,8 +29,8 @@ Spark backRight;
 	public DriveTrainSubsystem(){
 		 frontLeft = new Spark(HW.motorFrontLeft);
 		 frontRight = new Spark(HW.motorFrontRight);
-		 backLeft = new Spark(HW.motorBackLeft);
-		 backRight = new Spark(HW.motorBackRight);
+		 backLeft = new Spark(HW.motorFrontLeft);
+		 backRight = new Spark(HW.motorFrontRight);
 
 		robotDrive=new RobotDrive(frontLeft,backLeft,
 								  frontRight,backRight);
