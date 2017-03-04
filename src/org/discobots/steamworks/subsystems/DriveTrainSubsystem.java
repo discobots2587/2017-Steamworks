@@ -29,11 +29,9 @@ Spark backRight;
 	public DriveTrainSubsystem(){
 		 frontLeft = new Spark(HW.motorFrontLeft);
 		 frontRight = new Spark(HW.motorFrontRight);
-		 backLeft = new Spark(HW.motorFrontLeft);
-		 backRight = new Spark(HW.motorFrontRight);
 
-		robotDrive=new RobotDrive(frontLeft,backLeft,
-								  frontRight,backRight);
+		robotDrive=new RobotDrive(frontLeft,
+								  frontRight);
 		//robotDrive.setSafetyEnabled(true);
 		shifter = new Solenoid(HW.shifter);
 	}
