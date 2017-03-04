@@ -19,7 +19,9 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 	public static final double kMaxDist = 7;//value to change once added
 	public static final double kDistSlow = 6;//ranging shooterSpeed
 	public static final double kMinDist = 4;//smallest distance at which it will slow
-
+	double g = 9.81; // gravity
+	double y = 0; // target y--Height difference from where ball has no force acting on it from robot
+	double o = 45; // launch angle --- WILL NEED TO FIGURE THIS OUT exactly -- spin affects the angle only when ball leaves robot i believe
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;
 	PIDSource source;
@@ -48,11 +50,15 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 //		}
 //	}
 	
-	public double getLiftDistInches() {
-		return shootLidar.getDistanceIn() + offset;
+	public double getShooterDistInches() {
+		return shootLidar.getDistanceIn() + offset/2.54;
 	}  
 	
-	public double getRawLiftSpeed(){
+	public double getShooterDistCM() {
+		return shootLidar.getDistanceCm();
+	}
+	
+	public double getRawShootSpeed(){
 		return this.setpointSpeed;
 	}
 	
@@ -84,13 +90,25 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 		this.disable();
 	}
 	
+	public double CalculatedNeededBallVelo(double distCM){
+		if(useLidar)
+		{
+		double v = (Math.sqrt(g) * Math.sqrt(distCM) * Math.sqrt((Math.tan(o)*Math.tan(o))+1)) / Math.sqrt(2 * Math.tan(o) - (2 * g * y) / distCM); // velocity needed of ball
+		return v;
+		//http://gamedev.stackexchange.com/questions/17467/calculating-velocity-needed-to-hit-target-in-parabolic-arc
+		}
+		else
+			return 0;
+	}
+	
 	private void setSpeedInternal(double input) {
 		double output = input;
-		if (useLidar && this.getLiftDistInches() > kMinDist && output > 0) {
+		if (useLidar && this.getShooterDistInches() > kMinDist && output > 0) {//may change to Centimeters but inches might be easier for min/max distances
 		//	output = output / 2;
 		}
 		if(Robot.shootSub.isShooterToggled())
 		{
+			
 		Robot.shootSub.setShootSpeed(output);
 		}
 		else
@@ -101,7 +119,7 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 
 	@Override
 	protected double returnPIDInput() {
-		return this.getLiftDistInches();
+		return this.getShooterDistCM();
 	}
 
 	@Override
