@@ -101,7 +101,7 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 			return 0;
 	}
 	
-	private void setSpeedInternal(double input) {
+	private void setSpeedInternal(double input) {//may need to change to play nice with the shooter subystem....
 		double output = input;
 		if (useLidar && this.getShooterDistInches() > kMinDist && output > 0) {//may change to Centimeters but inches might be easier for min/max distances
 		//	output = output / 2;
