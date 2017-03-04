@@ -49,6 +49,11 @@ public class HW {
 	
 	/* Digital */
 	public final static int shooterEncoder=9;//infrared
+	
+	
+	/* I2C */
+	public final static int i2cLidarAddress = 0x62;
+
 
 
 }
