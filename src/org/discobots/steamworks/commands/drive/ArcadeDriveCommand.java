@@ -22,7 +22,18 @@ public class ArcadeDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(),Robot.oi.getRawAnalogStickALY());
+    	if(!Robot.testing)
     	Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(), -Robot.oi.getRawAnalogStickALY());
+    	else{
+    		if(!Robot.directScale&&!Robot.turnScale)
+        		Robot.driveTrainSub.frontTest(-Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY());
+    		if(Robot.directScale&&!Robot.turnScale)
+    		Robot.driveTrainSub.frontTest(-Robot.oi.getRawAnalogStickALY()*Robot.driveTrainSub.getSpeedScaling(),Robot.oi.getRawAnalogStickARY());
+    		if(!Robot.directScale&&Robot.turnScale)
+        		Robot.driveTrainSub.frontTest(-Robot.oi.getRawAnalogStickALY(),Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling());
+    		if(Robot.directScale&&Robot.turnScale)
+        		Robot.driveTrainSub.frontTest(-Robot.oi.getRawAnalogStickALY()*Robot.driveTrainSub.getSpeedScaling(),Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling());
+    	}
 
     }
 

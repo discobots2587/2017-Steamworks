@@ -29,6 +29,7 @@ import org.discobots.steamworks.subsystems.IntakeSubsystem;
 import org.discobots.steamworks.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
+	public static boolean testing;
 	public static OI oi;
 	public static DriveTrainSubsystem driveTrainSub;
 	public static ShooterSubsystem shootSub;
@@ -41,6 +42,8 @@ public class Robot extends IterativeRobot {
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
+	public static boolean directScale = false;
+	public static boolean turnScale=false;
 	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
@@ -53,7 +56,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-
+		testing = false;//////////////////////////////FOR TESTING ONLY
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
