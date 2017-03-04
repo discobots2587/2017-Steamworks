@@ -27,8 +27,8 @@ Spark backRight;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
-		 frontLeft = new Spark(HW.motorFrontLeft);
-		 frontRight = new Spark(HW.motorFrontRight);
+		 frontLeft = new Spark(0);
+		 frontRight = new Spark(1);
 
 		robotDrive=new RobotDrive(frontLeft,
 								  frontRight);
