@@ -23,7 +23,7 @@ public class HW {
 	public final static int motorBlend = 7;
 	
 	/* PWM */
-	public final static int  motorFrontLeft = 2;
+	public final static int  motorFrontLeft = 0;
 	//public final static int motorBackLeft = 3;
 	//public final static int motorBackRight = 0;	 
 	public final static int motorFrontRight = 1;

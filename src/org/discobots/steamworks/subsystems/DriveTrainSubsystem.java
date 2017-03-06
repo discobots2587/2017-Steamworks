@@ -21,14 +21,14 @@ Solenoid shifter;
 private double autonKonstant;
 Spark frontLeft;
 Spark frontRight;
-Spark backLeft;
-Spark backRight;
+//Spark backLeft;
+//Spark backRight;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
-		 frontLeft = new Spark(0);
-		 frontRight = new Spark(1);
+		 frontLeft = new Spark(HW.motorFrontLeft);
+		 frontRight = new Spark(HW.motorFrontRight);
 
 		robotDrive=new RobotDrive(frontLeft,
 								  frontRight);
@@ -55,17 +55,17 @@ Spark backRight;
 	}
 	public void customTank(double L, double R){
 		frontLeft.setSpeed(L*kSpeedScaling);
-		backLeft.setSpeed(L*kSpeedScaling);
+		//backLeft.setSpeed(L*kSpeedScaling);
 		frontRight.setSpeed(R*kSpeedScaling);
-		backRight.setSpeed(R*kSpeedScaling);
+		//backRight.setSpeed(R*kSpeedScaling);
 	}
 	public void frontTest(double L, double R){
 		frontLeft.setSpeed(L*kSpeedScaling);
 		frontRight.setSpeed(R*kSpeedScaling);
 	}
 	public void backTest(double L, double R){
-		backLeft.setSpeed(L*kSpeedScaling);
-		backRight.setSpeed(R*kSpeedScaling);
+		//backLeft.setSpeed(L*kSpeedScaling);
+		//backRight.setSpeed(R*kSpeedScaling);
 	}
 	/*
 	 * the relationship between the input from joystick and output to the motors is exponential
