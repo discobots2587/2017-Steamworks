@@ -34,7 +34,6 @@ public class ElectricalSubsystem extends Subsystem {
 	Compressor cmp;
 	PressureSensor ps;
 	public CounterEncoder shoots;//shooter encoder
-	public ITable shootTable;
 	private int shootNum;
 	public Encoder encoderRightDrive;
 	public Encoder encoderLeftDrive;
@@ -46,15 +45,15 @@ public class ElectricalSubsystem extends Subsystem {
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
+		GearLoaded=new DigitalInput(HW.gearDetect);
 		ShootRPM = new ArrayList<Integer>();
-		 shootNum=0;
+		shootNum=0;
 		shoots = new CounterEncoder(9, 2);
-		shoots.initTable(shootTable);
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
 		ps = new PressureSensor(HW.pressureSensor);
-		encoderLeftDrive=new Encoder(2,3);//does not exist atm
-		encoderRightDrive=new Encoder(0,1);
+		encoderLeftDrive=new Encoder(HW.EncoderLeftDrive1,HW.EncoderLeftDrive2);//does not exist atm
+		encoderRightDrive=new Encoder(HW.EncoderRightDrive1,HW.EncoderRightDrive2);// comp bot only
 		
 	}
 	
@@ -74,7 +73,13 @@ public class ElectricalSubsystem extends Subsystem {
 	{
 		if (SmartDashboard.getBoolean("GearLoaded", false)!=false){
 		}
+		try{
 		return(GearLoaded.get());
+		}
+		catch(NullPointerException e)
+		{
+			return true;
+		}
 	}
 
 	public double getPDPTotalCurrent() {

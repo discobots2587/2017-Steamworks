@@ -49,8 +49,12 @@ public class HW {
 	
 	/* Digital */
 	public final static int shooterEncoder=9;//infrared
-	public final static int gearDetect =1;
-	
+	public final static int gearDetect =4;
+	public final static int EncoderLeftDrive1 = 2;//competition bot only
+	public final static int EncoderLeftDrive2 =3;//competition bot only
+	public final static int EncoderRightDrive1 = 0;//competition bot only
+	public final static int EncoderRightDrive2 =1;//competition bot only
+
 	
 	/* I2C */
 	public final static int i2cLidarAddress = 0x62;
