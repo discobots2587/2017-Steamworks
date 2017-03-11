@@ -92,7 +92,7 @@ public class Robot extends IterativeRobot {
 
 				try {
 					// camera name taken from RoboRio
-					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture("C615", 1);
+					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
 					// LogicC615.openCamera();
 					C615.setResolution(160, 120);
 					// LogicC615.startCapture();

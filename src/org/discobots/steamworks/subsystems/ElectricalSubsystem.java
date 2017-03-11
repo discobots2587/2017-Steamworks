@@ -1,6 +1,12 @@
 package org.discobots.steamworks.subsystems;
 
+
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.utils.CounterEncoder;
@@ -14,6 +20,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
@@ -31,7 +38,10 @@ public class ElectricalSubsystem extends Subsystem {
 	private int shootNum;
 	public Encoder encoderRightDrive;
 	public Encoder encoderLeftDrive;
+	File file = new File("Output.txt");
+	List<String> newLines = new ArrayList<>();
 
+	public DigitalInput GearLoaded; //proximity sensor to check if gear is loaded
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -58,6 +68,13 @@ public class ElectricalSubsystem extends Subsystem {
 
 	public double getCurrentFromPDPChannel(int channel) {
 		return pdp.getCurrent(channel);
+	}
+	
+	public boolean isGearLoaded()
+	{
+		if (SmartDashboard.getBoolean("GearLoaded", false)!=false){
+		}
+		return(GearLoaded.get());
 	}
 
 	public double getPDPTotalCurrent() {
