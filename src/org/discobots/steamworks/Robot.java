@@ -205,7 +205,9 @@ public class Robot extends IterativeRobot {
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}
-		oi.running = true;
+				
+oi.setRumble(0); 
+	oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
