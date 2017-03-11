@@ -49,6 +49,7 @@ public class HW {
 	
 	/* Digital */
 	public final static int shooterEncoder=9;//infrared
+	public final static int gearDetect =1;
 	
 	
 	/* I2C */
