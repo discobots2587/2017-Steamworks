@@ -15,7 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
 import org.discobots.steamworks.commands.auton.AutonLeftPostCommand;
+import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
 import org.discobots.steamworks.commands.auton.AutonRightPostCommand;
+import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -75,6 +77,9 @@ public class Robot extends IterativeRobot {
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
 		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
 		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
+		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
+		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
+		
 
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
