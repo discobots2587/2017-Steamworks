@@ -40,7 +40,6 @@ public class Robot extends IterativeRobot {
 	public static GearIntakeSubsystem gearSub;
 	public static ElectricalSubsystem electricSub;
 	public static BlendSubsystem blendSub;
-	private CameraServer GeniusCam;
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
@@ -92,28 +91,25 @@ public class Robot extends IterativeRobot {
 				System.out.println("cameratherad created");
 
 				try {
-					GeniusCam = CameraServer.getInstance();// initialize server
 					// camera name taken from RoboRio
-					// UsbCamera C615 = new UsbCamera("C615", 1);
+					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture("C615", 1);
 					// LogicC615.openCamera();
+					C615.setResolution(160, 120);
 					// LogicC615.startCapture();
 					// if (C615.isConnected())
-					{
+					
 						// C615.setResolution(480, 320);
 						// GeniusCam.startAutomaticCapture(C615);//
 						// automatically start
 						// streaming
-					} // footage
+					 // footage
 				} catch (Exception e) {
 					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
 				}
 				try {
 					// camera name taken from RoboRio
-					UsbCamera Genius = new UsbCamera("cam2", 0);
+					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					System.out.println(Genius.getPath());
-					GeniusCam.startAutomaticCapture(Genius);// automatically
-															// start
 					Genius.setFPS(15);
 					Genius.setResolution(320, 240);
 
