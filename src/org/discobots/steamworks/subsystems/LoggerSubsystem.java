@@ -11,6 +11,7 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,6 +35,7 @@ public class LoggerSubsystem extends Subsystem {
             // string does not end in digits
             return -1;
         }
+        SmartDashboard.putNumber("int from file read", Integer.parseInt(str.substring(positionOfLastDigit)));
         return Integer.parseInt(str.substring(positionOfLastDigit));
     }
     
@@ -57,6 +59,7 @@ public class LoggerSubsystem extends Subsystem {
     	for (String line : Files.readAllLines(Paths.get("/home/lvuser/log.txt"), StandardCharsets.UTF_8)) {
 		    if (line.contains("Comp Gears Loaded")) {
 		       newLines.add(line.replace("Comp Gears Loaded", ""+getTrailingInteger(line)+1));
+		       SmartDashboard.putNumber("Comp Gears Loaded", getTrailingInteger(line));
 		    } else {
 		       newLines.add(line);
 		    }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.Robot;
 import org.discobots.steamworks.utils.CounterEncoder;
 import org.discobots.steamworks.utils.PressureSensor;
 
@@ -71,14 +72,17 @@ public class ElectricalSubsystem extends Subsystem {
 	
 	public boolean isGearLoaded()
 	{
-		if (SmartDashboard.getBoolean("GearLoaded", false)!=false){
-		}
+		
 		try{
+			if (SmartDashboard.getBoolean("Gear Loaded", false)!=GearLoaded.get()){
+				System.out.println("WRITING TO FILE");
+				Robot.logSub.WriteFile();//logs that a gear was loaded
+			}			
 		return(GearLoaded.get());
 		}
 		catch(NullPointerException e)
 		{
-			return true;
+			return false;
 		}
 	}
 
