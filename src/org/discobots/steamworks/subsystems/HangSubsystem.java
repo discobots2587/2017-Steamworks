@@ -12,10 +12,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class HangSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Talon hangMotor;
+	//private Talon hangMotor;
+	private Spark hangMotor;
 	private double pwm;
 	public HangSubsystem(){
-		this.hangMotor=new Talon(HW.motorHang);
+		//this.hangMotor=new Talon(HW.motorHang);
+		this.hangMotor=new Spark(HW.motorHang);
 		pwm=0.0;
 	}
 

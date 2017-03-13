@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpeedScaleCommand extends Command {
+	private double speedScale;
+	private boolean isFast=true;
     public SpeedScaleCommand(boolean turning) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -25,12 +27,27 @@ public class SpeedScaleCommand extends Command {
     	
     }
     public SpeedScaleCommand(double speedScale)
-    {
-    	Robot.driveTrainSub.setSpeedScaling(speedScale);//take input value so can be set to driver's preferences
+    {	
+    	this.speedScale=speedScale;
+    	//take input value so can be set to driver's preferences
+    }
+    public SpeedScaleCommand(){
+    	if(isFast){
+    		speedScale=.5;
+    		isFast=!isFast;}
+    	else if(!isFast){
+    		speedScale=1.0;
+    		isFast=!isFast;
+    	}
+    	else{
+    		speedScale=0.0;
+    		isFast=false;		
+    	}
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveTrainSub.setSpeedScaling(speedScale);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -25,7 +25,7 @@ public class SplitArcadeDriveCommand extends Command {
 	protected void execute() {
 		// Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX(),
 		// Robot.oi.getRawAnalogStickALY());
-		if (!Robot.testing) {
+		/*if (!Robot.testing) {
 			if (!Robot.turnScale && !Robot.directScale) {
 				Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX(),
 						-Robot.oi.getRawAnalogStickALY());
@@ -47,9 +47,9 @@ public class SplitArcadeDriveCommand extends Command {
 				turnSpeedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(), Math.abs(Robot.oi.getRawAnalogStickARX()));//can apply in reverse so smaller values have larger speedscaling
 				Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX() * speedScale,
 						-Robot.oi.getRawAnalogStickALY()*turnSpeedScale);			}
-		} else {
-			Robot.driveTrainSub.backTest(-Robot.oi.getRawAnalogStickARY(), Robot.oi.getRawAnalogStickALY());
-		}
+		} else {*/
+			Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX(), -Robot.oi.getRawAnalogStickALY());
+		//}
 
 	}
 

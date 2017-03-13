@@ -31,7 +31,7 @@ public class AutonShootAndMobilityCommand extends CommandGroup {
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(-.5,0,2000));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,.6,6000));//drive forward
+    	addSequential(new AutonomousArcadeDrive(0,.7,3750));//drive forward
 
 
     	 	

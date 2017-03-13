@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.TimeUnit;
 
+import org.discobots.steamworks.commands.auton.AutonCenterPostBumpCommand;
 import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
 import org.discobots.steamworks.commands.auton.AutonLeftPostCommand;
 import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
@@ -81,6 +82,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
+		autonChooser.addObject("AutonCenterWithBump", new AutonCenterPostBumpCommand());
 		
 
 		driveChooser = new SendableChooser<Command>();
@@ -214,6 +216,7 @@ oi.setRumble(0);
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
+		//testing=true;
 	}
 
 	/**
@@ -242,5 +245,6 @@ oi.setRumble(0);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
+		//testing=false;
 	}
 }

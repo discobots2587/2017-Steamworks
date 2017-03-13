@@ -36,7 +36,7 @@ public class AutonomousArcadeDrive extends Command {
     protected void execute() {
     	while(endTime >= System.currentTimeMillis())
     	{
-    	Robot.driveTrainSub.robotDrive.arcadeDrive(speedX,speedY);
+    	Robot.driveTrainSub.robotDrive.arcadeDrive(-speedX,speedY);
     	}
     	fin=true;
     }
