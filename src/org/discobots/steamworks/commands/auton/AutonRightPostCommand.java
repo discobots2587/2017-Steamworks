@@ -27,21 +27,21 @@ public class AutonRightPostCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonomousArcadeDrive(-0.15,0.6,2000));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(-0.15,0.5,3500));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(-0.7,0.0,800));
+    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(-0.15,0.5,3000));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
     	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backu
     	addSequential(new WaitCommand(1600));
-    	addSequential(new AutonomousArcadeDrive(-0.15,0.55, 2500));//try again
-    	//addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	//addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
-    	//addSequential(new WaitCommand(1600));//try again
-    	//addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
+    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
+    	addSequential(new WaitCommand(1600));//try again
+    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));
     	
     	
     }

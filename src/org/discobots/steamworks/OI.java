@@ -289,7 +289,7 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port0.get(port0.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
-						port0.get(port0.size()-1).whenPressed(new SpeedScaleCommand());
+						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
@@ -312,7 +312,6 @@ private ArrayList<Integer> ports;
 						port0.get(port0.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
 						port0.get(port0.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
-						
 					/*
 					 * int temp; temp = gamePads[i].makebuttons(new               //Previous idea to set buttons and commands in each controller object - not working
 					 * DPadButton(gamePads[i], Xbox.DPAD_Y, false));
