@@ -95,6 +95,9 @@ public class Lidar {
 	public synchronized double getDistanceIn() {
 		return distance / 2.54; //returns distance in inches
 	}
+	public synchronized double getDistanceCm() {
+		return distance; //returns distance in inches
+	}
 
 	private synchronized void setDistanceCm(double a) {
 		this.distance = a; //sets the distance to a

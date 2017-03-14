@@ -1,8 +1,15 @@
 package org.discobots.steamworks.subsystems;
 
+
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.Robot;
 import org.discobots.steamworks.utils.CounterEncoder;
 import org.discobots.steamworks.utils.PressureSensor;
 
@@ -14,6 +21,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
@@ -27,24 +35,26 @@ public class ElectricalSubsystem extends Subsystem {
 	Compressor cmp;
 	PressureSensor ps;
 	public CounterEncoder shoots;//shooter encoder
-	public ITable shootTable;
 	private int shootNum;
 	public Encoder encoderRightDrive;
 	public Encoder encoderLeftDrive;
+	File file = new File("Output.txt");
+	List<String> newLines = new ArrayList<>();
 
+	public DigitalInput GearLoaded; //proximity sensor to check if gear is loaded
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public ElectricalSubsystem(){
+		GearLoaded=new DigitalInput(HW.gearDetect);
 		ShootRPM = new ArrayList<Integer>();
-		 shootNum=0;
+		shootNum=0;
 		shoots = new CounterEncoder(9, 2);
-		shoots.initTable(shootTable);
 		pdp = new PowerDistributionPanel();
 		cmp = new Compressor();
 		ps = new PressureSensor(HW.pressureSensor);
-		encoderLeftDrive=new Encoder(2,3);//does not exist atm
-		encoderRightDrive=new Encoder(0,1);
+		encoderLeftDrive=new Encoder(HW.EncoderLeftDrive1,HW.EncoderLeftDrive2);//does not exist atm
+		encoderRightDrive=new Encoder(HW.EncoderRightDrive1,HW.EncoderRightDrive2);// comp bot only
 		
 	}
 	
@@ -58,6 +68,22 @@ public class ElectricalSubsystem extends Subsystem {
 
 	public double getCurrentFromPDPChannel(int channel) {
 		return pdp.getCurrent(channel);
+	}
+	
+	public boolean isGearLoaded()
+	{
+		
+		try{
+			if (SmartDashboard.getBoolean("Gear Loaded", false)!=GearLoaded.get()){
+				System.out.println("WRITING TO FILE");
+				Robot.logSub.WriteFile();//logs that a gear was loaded
+			}			
+		return(GearLoaded.get());
+		}
+		catch(NullPointerException e)
+		{
+			return false;
+		}
 	}
 
 	public double getPDPTotalCurrent() {

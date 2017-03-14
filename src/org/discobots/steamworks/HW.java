@@ -23,9 +23,9 @@ public class HW {
 	public final static int motorBlend = 7;
 	
 	/* PWM */
-	public final static int  motorFrontLeft = 2;
-	public final static int motorBackLeft = 3;
-	public final static int motorBackRight = 0;	 
+	public final static int  motorFrontLeft = 0;
+	//public final static int motorBackLeft = 3;
+	//public final static int motorBackRight = 0;	 
 	public final static int motorFrontRight = 1;
 	public final static int motorHang=  4;
 	public final static int motorIntake= 5;
@@ -49,6 +49,16 @@ public class HW {
 	
 	/* Digital */
 	public final static int shooterEncoder=9;//infrared
+	public final static int gearDetect =4;
+	public final static int EncoderLeftDrive1 = 2;//competition bot only
+	public final static int EncoderLeftDrive2 =3;//competition bot only
+	public final static int EncoderRightDrive1 = 0;//competition bot only
+	public final static int EncoderRightDrive2 =1;//competition bot only
+
+	
+	/* I2C */
+	public final static int i2cLidarAddress = 0x62;
+
 
 
 }

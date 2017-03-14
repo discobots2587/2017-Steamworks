@@ -36,7 +36,6 @@ public class Dashboard {
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
 			//SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());//2013 motorcompressor has itable example
-			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
 				SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
 				SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
 			//SmartDashboard.putNumber("ShooterDist", Robot.electricSub.getRotations());
@@ -44,6 +43,8 @@ public class Dashboard {
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
 			SmartDashboard.putBoolean("running True?", Robot.oi.running);
+			SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
+
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
 			//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
@@ -58,9 +59,12 @@ public class Dashboard {
 		}
 		if (driveCounter%10==1)
 		{
+			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
 			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.getSpeedScaling());
 			SmartDashboard.putString("The Robot is in", Robot.driveTrainSub.getGear());
-						//SmartDashboard.putNumber("PRESSURE", Robot.electricalSub.getPressure());
+			SmartDashboard.putBoolean("Direct Speed Scale On?", Robot.directScale);
+			SmartDashboard.putBoolean("Turning Speed Scale On?", Robot.turnScale);
+			SmartDashboard.putNumber("PRESSURE", Robot.electricSub.getPressure());
 			
 			//SmartDashboard.putBoolean("Pressure Switch State", Robot.electricalSub.getPressureSwitchState());
 		} 
