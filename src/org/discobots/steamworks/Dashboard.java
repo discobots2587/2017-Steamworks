@@ -68,6 +68,7 @@ public class Dashboard {
 			Robot.shootSub.setSetpoint(TestPrefs.getDouble("SetPoint", 1.0));
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			Robot.driveTrainSub.setAutonKonstant(TestPrefs.getDouble("AutonConstant", 1.0));//auton speed/time scaling --settable via driver dashboard and independent of speed scaling
+			Robot.testing = TestPrefs.getBoolean("Enable DriveTrainTesting", false);
 			SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
 			if(Robot.gearLidar)
 			{
