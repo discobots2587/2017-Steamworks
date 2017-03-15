@@ -31,7 +31,7 @@ import edu.wpi.first.wpilibj.tables.ITable;
 public class ElectricalSubsystem extends Subsystem {
 	private double sumRPM;
 	ArrayList<Integer> ShootRPM;
-	public int sensorToggle=0;
+	private int sensorToggle=0;
 	PowerDistributionPanel pdp;
 	Compressor cmp;
 	PressureSensor ps;
@@ -41,7 +41,7 @@ public class ElectricalSubsystem extends Subsystem {
 	public Encoder encoderLeftDrive;
 	File file = new File("Output.txt");
 	List<String> newLines = new ArrayList<>();
-
+	private boolean isShootsDisabled=false;//enables/disables rpm calculations
 	public DigitalInput GearLoaded; //proximity sensor to check if gear is loaded
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -56,7 +56,79 @@ public class ElectricalSubsystem extends Subsystem {
 		ps = new PressureSensor(HW.pressureSensor);
 		encoderLeftDrive=new Encoder(HW.EncoderLeftDrive1,HW.EncoderLeftDrive2);//does not exist atm
 		encoderRightDrive=new Encoder(HW.EncoderRightDrive1,HW.EncoderRightDrive2);// comp bot only
-		
+	}
+	
+	public void disableSensors(int sensorToggle)
+	{
+		if(sensorToggle>=0)
+		this.sensorToggle=sensorToggle;
+		else
+		{
+			this.sensorToggle+=-sensorToggle;
+			if(this.sensorToggle>2)
+			{
+				this.sensorToggle=0;
+			}
+		}
+		switch (sensorToggle)
+	    {
+			 case 0:
+	        	 SmartDashboard.putString("Sensors Disabled: ", "None");
+				try{	
+	        	 Robot.gearDistSub.useLidar=true;
+					Robot.gearDistSub.enable();
+				}catch(NullPointerException e)
+				{
+					System.out.println("No Lidar Subsystem Created");
+				}
+				try{	
+		        	 Robot.shootDistSub.useLidar=true;
+						Robot.shootDistSub.enable();
+					}catch(NullPointerException e)
+					{
+						System.out.println("No Lidar Subsystem Created");
+					}
+					isShootsDisabled=false;
+				break;
+	         case 1:
+	        	 SmartDashboard.putString("Sensors Disabled: ", "LIDAR");
+
+	        	 try {
+					Robot.gearDistSub.shutdownLidar();
+				} catch (NullPointerException e) {
+					System.out.println("No Lidar Subsystem Created");
+				}
+	        	 try {
+						Robot.shootDistSub.shutdownLidar();
+					} catch (NullPointerException e) {
+						System.out.println("No Lidar Subsystem Created");
+					}
+	        	 isShootsDisabled=false;
+	        	break;
+	        case 2: 
+	        	 SmartDashboard.putString("Sensors Disabled: ", "LIDAR, ShootEncoder");
+	        	 SmartDashboard.putString("Sensors Disabled: ", "LIDAR");
+
+	        	 try {
+					Robot.gearDistSub.shutdownLidar();
+				} catch (NullPointerException e) {
+					System.out.println("No Lidar Subsystem Created");
+				}
+	        	 try {
+						Robot.shootDistSub.shutdownLidar();
+					} catch (NullPointerException e) {
+						System.out.println("No Lidar Subsystem Created");
+					}
+	        	 isShootsDisabled=true;
+	        	 try{
+	        	 shoots.free();
+	        	 }
+	        	 catch(Exception e)
+	        	 {
+	        		 System.out.println("exception encountered resetting shoots");
+	        	 }
+	        	 break;
+	        }
 	}
 	
     public void initDefaultCommand() {
@@ -120,12 +192,18 @@ public class ElectricalSubsystem extends Subsystem {
 	}
 	public double getShootRPMraw()
 	{ 
+		if(!isShootsDisabled){
 		if (shoots.getRawRPM()<4000)
 		return shoots.getRawRPM();
 		else
 			return 4000;
+		}
+		else
+			return 0;
 	}
 	public double getShootRPMAVG(){
+		if(!isShootsDisabled)
+		{
 		if (shootNum>9)
 		{
 			ShootRPM.clear();
@@ -144,9 +222,15 @@ public class ElectricalSubsystem extends Subsystem {
 			return sumRPM;
 		}
 			return sumRPM;
+		}
+		else 
+			return 5000;//returns rpm is 5000 by default if disabled
 	}
 	public double getRotations(){//does not currently return value
+		if(!isShootsDisabled){
 		return shoots.getDistance();
+		}
+		return 0;
 	}
 
 }

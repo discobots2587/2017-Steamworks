@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 
 	/**
 	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * used for any initialization code.g
 	 */
 	@Override
 	public void robotInit() {
@@ -77,7 +77,7 @@ public class Robot extends IterativeRobot {
 		if(shooterLidar)
 			shootDistSub=new ShootDistSubsystem();
 		if(gearLidar)
-			
+			gearDistSub=new GearDistSubsystem();
 			
 		if (simple == true)
 			oi = new SimpleOI();

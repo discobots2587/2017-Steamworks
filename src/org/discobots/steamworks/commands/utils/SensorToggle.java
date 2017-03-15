@@ -8,22 +8,22 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SensorToggle extends Command {
-
+int temp;
     public SensorToggle() {
         // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);\
+    	temp=-1;
+    }
+    public SensorToggle(int temp) {
+        // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.driveTrainSub);
+    	this.temp=temp;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	//Robot.armSub.sensorToggle = !Robot.armSub.sensorToggle;
-    	if(Robot.electricSub.sensorToggle==0)
-    		Robot.electricSub.sensorToggle=1;
-    	else if(Robot.electricSub.sensorToggle==1)
-    		Robot.electricSub.sensorToggle=2;//some sensors turned off
-    	else
-    		Robot.electricSub.sensorToggle=0;
+    	Robot.electricSub.disableSensors(temp);
     }
 
     // Called repeatedly when this Command is scheduled to run
