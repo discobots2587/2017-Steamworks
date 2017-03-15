@@ -30,7 +30,6 @@ public class GearDistSubsystem extends PIDSubsystem {
 	
 	public GearDistSubsystem() {
 		super("GearDist",kP, kI, kD);
-		GearLidar = new Lidar(HW.i2cLidarAddress);
 		setpointSpeed=0;
 		speedControlThread = new SpeedMonitor();
 		speedControlThread.setName("D.SpeedControl");
@@ -50,13 +49,25 @@ public class GearDistSubsystem extends PIDSubsystem {
 //	}
 	
 	public double getGearDistInches() {
+		try{
 		return GearLidar.getDistanceIn() + offset/2.54;
-
+		}
+		catch(NullPointerException e)
+		{
+			System.out.println("NULL POINTER ERROR GETTING LIDAR");
+		}
+		return 0;
 	}  
 	
 	public double getGearDistCM() {
-
+			try{
 		return GearLidar.getDistanceCm();
+			}
+			catch(NullPointerException e)
+			{
+				System.out.println("NULL POINTER EXCEPTION ");
+			}
+			return 0;
 	}
 	
 	public double getRawGearSpeed(){
