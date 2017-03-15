@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  * PID Controller does work with the lidar.
  * 
  */
-public class RangeFinderSubsystem extends PIDSubsystem {
+public class ShootDistSubsystem extends PIDSubsystem {
 	private int offset=0;//add to this if the lidar module is inset into the robot. This will be exact distance from shooter to goal
 	private Lidar shootLidar;
 	public static final double kMaxDist = 7;//value to change once added
@@ -25,14 +25,14 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 	public static final double kP = 1.0 / 4.0, kI = 0, kD = 0;
 	PIDOutput output;
 	PIDSource source;
+	public boolean useLidar = false;
 	
 	SpeedMonitor speedControlThread;
 	double setpointSpeed;
 	
-	private boolean useLidar = true;
-
-	public RangeFinderSubsystem() {
+	public ShootDistSubsystem() {
 		super("ShootDist",kP, kI, kD);
+		if(useLidar){
 		setpointSpeed=0;
 		speedControlThread = new SpeedMonitor();
 		speedControlThread.setName("D.SpeedControl");
@@ -40,6 +40,7 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 		
 		this.setAbsoluteTolerance(1);
     	this.setOutputRange(0, 1);
+		}
 	}
 	
 //	public double getCurrent(boolean motor) {
@@ -51,15 +52,23 @@ public class RangeFinderSubsystem extends PIDSubsystem {
 //	}
 	
 	public double getShooterDistInches() {
+		if(useLidar){
 		return shootLidar.getDistanceIn() + offset/2.54;
+		}
+		else return 0;
 	}  
 	
 	public double getShooterDistCM() {
+		if(useLidar){
 		return shootLidar.getDistanceCm();
+		}
+		else return 0;
 	}
 	
 	public double getRawShootSpeed(){
-		return this.setpointSpeed;
+		if(useLidar){
+		return this.setpointSpeed;}
+		else return 0;
 	}
 	
 	

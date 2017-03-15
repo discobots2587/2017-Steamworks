@@ -16,6 +16,7 @@ import org.discobots.steamworks.utils.PressureSensor;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Sendable;
@@ -70,20 +71,20 @@ public class ElectricalSubsystem extends Subsystem {
 		return pdp.getCurrent(channel);
 	}
 	
-	public boolean isGearLoaded()
+	public boolean isGearLoaded()//uses D-IO to see if a gear has been loaded
 	{
 		
 		try{
-			if (SmartDashboard.getBoolean("Gear Loaded", false)!=GearLoaded.get()){
+			if (DriverStation.getInstance().isFMSAttached()&&SmartDashboard.getBoolean("Gear Loaded", false)!=GearLoaded.get()){
 				System.out.println("WRITING TO FILE");
 				Robot.logSub.WriteFile();//logs that a gear was loaded
 			}			
-		return(GearLoaded.get());
 		}
 		catch(NullPointerException e)
 		{
-			return false;
+			System.out.println("null ptr error writng file to Robo Rio");
 		}
+		return(GearLoaded.get());
 	}
 
 	public double getPDPTotalCurrent() {

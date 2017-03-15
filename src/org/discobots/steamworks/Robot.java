@@ -25,10 +25,12 @@ import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.BlendSubsystem;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 import org.discobots.steamworks.subsystems.ElectricalSubsystem;
+import org.discobots.steamworks.subsystems.GearDistSubsystem;
 import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
 import org.discobots.steamworks.subsystems.HangSubsystem;
 import org.discobots.steamworks.subsystems.IntakeSubsystem;
 import org.discobots.steamworks.subsystems.LoggerSubsystem;
+import org.discobots.steamworks.subsystems.ShootDistSubsystem;
 import org.discobots.steamworks.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
@@ -47,6 +49,10 @@ public class Robot extends IterativeRobot {
 	public static boolean directScale = false;
 	public static boolean turnScale=false;
 	public static LoggerSubsystem logSub;
+	public static ShootDistSubsystem shootDistSub;
+	public static GearDistSubsystem gearDistSub;
+	public static boolean shooterLidar=false;//USE THIS TO MANUALLY TOGGLE ON SHOOTER LIDAR -- ITS NOT YET INTEGRATED THOUGH...
+	public static boolean gearLidar=true;//USE THIS TO MANUALLY TOGGLE ON SHOOTER LIDAR -- ITS NOT YET INTEGRATED THOUGH...
 	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
@@ -59,7 +65,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		testing = false;//////////////////////////////FOR TESTING ONLY
+		testing = false;//////////////////////////////FOR TESTING DRIVETRAIN ONLY
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
@@ -68,6 +74,11 @@ public class Robot extends IterativeRobot {
 		electricSub = new ElectricalSubsystem();
 		blendSub = new BlendSubsystem();
 		logSub = new LoggerSubsystem();
+		if(shooterLidar)
+			shootDistSub=new ShootDistSubsystem();
+		if(gearLidar)
+			
+			
 		if (simple == true)
 			oi = new SimpleOI();
 		else
