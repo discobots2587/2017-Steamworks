@@ -85,8 +85,6 @@ public class Robot extends IterativeRobot {
 			oi = new OI();
 
 		autonChooser = new SendableChooser<Command>();
-		// autonChooser.addObject("DumbPostitioningAuton", new
-		// DumbPositioningAuton());
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
 		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
 		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
@@ -105,18 +103,8 @@ public class Robot extends IterativeRobot {
 				System.out.println("cameratherad created");
 
 				try {
-					// camera name taken from RoboRio
 					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
-					// LogicC615.openCamera();
-					C615.setResolution(160, 120);
-					// LogicC615.startCapture();
-					// if (C615.isConnected())
-					
-						// C615.setResolution(480, 320);
-						// GeniusCam.startAutomaticCapture(C615);//
-						// automatically start
-						// streaming
-					 // footage
+					C615.setResolution(320, 240);
 				} catch (Exception e) {
 					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
 				}
@@ -210,7 +198,6 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		driveCommand = (Command) driveChooser.getSelected();
 
-		oi.setRumble(0); // for
 		oi.updateControllerList();
 		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
 																										// upon
@@ -236,9 +223,11 @@ oi.setRumble(0);
 													// times
 		Scheduler.getInstance().run();
 		Dashboard.update();
+		Robot.oi.running = true;
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		Robot.oi.running = true;
+		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
+
 	}
 
 	/**
