@@ -360,6 +360,7 @@ private ArrayList<Integer> ports;
 				if (i == 1) {
 					
 					if (gamePads[i] instanceof Xbox){
+
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port1.get(port1.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
@@ -375,17 +376,17 @@ private ArrayList<Integer> ports;
 						port1. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port1.get(port1.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
+						port1.get(port1.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port1.get(port1.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
-						//port1.get(port1.size()-1).whenPressed(new ());///Toggle Compressor
+						port1.get(port1.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 						port1.get(port1.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port1.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.get(port1.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
 						port1.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.get(port1.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 						
 					}
 					if (!(gamePads[i] instanceof Xbox)){
@@ -422,6 +423,7 @@ private ArrayList<Integer> ports;
 
 				if (i == 2) {
 					if (gamePads[i] instanceof Xbox){
+
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port2.get(port2.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
@@ -437,17 +439,17 @@ private ArrayList<Integer> ports;
 						port2. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port2.get(port2.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
+						port2.get(port2.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port2.get(port2.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
-						//port2.get(port2.size()-1).whenPressed(new ());///Toggle Compressor
+						port2.get(port2.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 						port2.get(port2.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port2.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
+						port2.get(port2.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
 						port2.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
+						port2.get(port2.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
@@ -482,6 +484,7 @@ private ArrayList<Integer> ports;
 				
 				if (i == 3) {
 					if (gamePads[i] instanceof Xbox){
+
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port3.get(port3.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
@@ -497,17 +500,17 @@ private ArrayList<Integer> ports;
 						port3. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port3.get(port3.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
+						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port3.get(port3.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
-						//port3.get(port3.size()-1).whenPressed(new ());///Toggle Compressor
+						port3.get(port3.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 						port3.get(port3.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port3.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
+						port3.get(port3.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
 						port3.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
+						port3.get(port3.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
@@ -542,6 +545,7 @@ private ArrayList<Integer> ports;
 				}
 				if (i == 4) {
 					if (gamePads[i] instanceof Xbox){
+
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port4.get(port4.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
@@ -557,17 +561,17 @@ private ArrayList<Integer> ports;
 						port4. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port4.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
+						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port4.get(port4.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
-						//port4.get(port4.size()-1).whenPressed(new ());///Toggle Compressor
+						port4.get(port4.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 						port4.get(port4.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port4.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
+						port4.get(port4.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
 						port4.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
+						port4.get(port4.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
@@ -604,6 +608,7 @@ private ArrayList<Integer> ports;
 			if(i==5)
 			{
 				if (gamePads[i] instanceof Xbox){
+
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 					port5.get(port5.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
@@ -619,17 +624,17 @@ private ArrayList<Integer> ports;
 					port5. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-					port5.get(port5.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
+					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 					port5.get(port5.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
-					//port5.get(port5.size()-1).whenPressed(new ());///Toggle Compressor
+					port5.get(port5.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 					port5.get(port5.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 					port5.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));
-					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
+					port5.get(port5.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
 					port5.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_L));
-					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
+					port5.get(port5.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 				}
 				if (!(gamePads[i] instanceof Xbox)){
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
