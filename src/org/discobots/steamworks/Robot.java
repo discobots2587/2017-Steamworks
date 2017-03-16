@@ -15,7 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
 import org.discobots.steamworks.commands.auton.AutonLeftPostCommand;
+import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
 import org.discobots.steamworks.commands.auton.AutonRightPostCommand;
+import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -23,12 +25,16 @@ import org.discobots.steamworks.commands.drive.TankDriveCommand;
 import org.discobots.steamworks.subsystems.BlendSubsystem;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 import org.discobots.steamworks.subsystems.ElectricalSubsystem;
+import org.discobots.steamworks.subsystems.GearDistSubsystem;
 import org.discobots.steamworks.subsystems.GearIntakeSubsystem;
 import org.discobots.steamworks.subsystems.HangSubsystem;
 import org.discobots.steamworks.subsystems.IntakeSubsystem;
+import org.discobots.steamworks.subsystems.LoggerSubsystem;
+import org.discobots.steamworks.subsystems.ShootDistSubsystem;
 import org.discobots.steamworks.subsystems.ShooterSubsystem;
 
 public class Robot extends IterativeRobot {
+	public static boolean testing;
 	public static OI oi;
 	public static DriveTrainSubsystem driveTrainSub;
 	public static ShooterSubsystem shootSub;
@@ -37,10 +43,16 @@ public class Robot extends IterativeRobot {
 	public static GearIntakeSubsystem gearSub;
 	public static ElectricalSubsystem electricSub;
 	public static BlendSubsystem blendSub;
-	private CameraServer GeniusCam;
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
+	public static boolean directScale = false;
+	public static boolean turnScale=false;
+	public static LoggerSubsystem logSub;
+	public static ShootDistSubsystem shootDistSub;
+	public static GearDistSubsystem gearDistSub;
+	public static boolean shooterLidar=false;//USE THIS TO MANUALLY TOGGLE ON SHOOTER LIDAR -- ITS NOT YET INTEGRATED THOUGH...
+	public static boolean gearLidar=true;//USE THIS TO MANUALLY TOGGLE ON SHOOTER LIDAR -- ITS NOT YET INTEGRATED THOUGH...
 	Thread Camthread;
 	Command autonomousCommand, driveCommand;
 	SendableChooser<Command> driveChooser, autonChooser;
@@ -49,11 +61,11 @@ public class Robot extends IterativeRobot {
 
 	/**
 	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * used for any initialization code.g
 	 */
 	@Override
 	public void robotInit() {
-
+		testing = false;//////////////////////////////FOR TESTING DRIVETRAIN ONLY
 		shootSub = new ShooterSubsystem();
 		intakeSub = new IntakeSubsystem();
 		hangSub = new HangSubsystem();
@@ -61,6 +73,12 @@ public class Robot extends IterativeRobot {
 		driveTrainSub = new DriveTrainSubsystem();
 		electricSub = new ElectricalSubsystem();
 		blendSub = new BlendSubsystem();
+		logSub = new LoggerSubsystem();
+		if(shooterLidar)
+			shootDistSub=new ShootDistSubsystem();
+		if(gearLidar)
+			gearDistSub=new GearDistSubsystem();
+			
 		if (simple == true)
 			oi = new SimpleOI();
 		else
@@ -72,6 +90,9 @@ public class Robot extends IterativeRobot {
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
 		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
 		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
+		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
+		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
+		
 
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
@@ -84,28 +105,25 @@ public class Robot extends IterativeRobot {
 				System.out.println("cameratherad created");
 
 				try {
-					GeniusCam = CameraServer.getInstance();// initialize server
 					// camera name taken from RoboRio
-					// UsbCamera C615 = new UsbCamera("C615", 1);
+					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
 					// LogicC615.openCamera();
+					C615.setResolution(160, 120);
 					// LogicC615.startCapture();
 					// if (C615.isConnected())
-					{
+					
 						// C615.setResolution(480, 320);
 						// GeniusCam.startAutomaticCapture(C615);//
 						// automatically start
 						// streaming
-					} // footage
+					 // footage
 				} catch (Exception e) {
 					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
 				}
 				try {
 					// camera name taken from RoboRio
-					UsbCamera Genius = new UsbCamera("cam2", 0);
+					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					System.out.println(Genius.getPath());
-					GeniusCam.startAutomaticCapture(Genius);// automatically
-															// start
 					Genius.setFPS(15);
 					Genius.setResolution(320, 240);
 
@@ -201,7 +219,9 @@ public class Robot extends IterativeRobot {
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}
-		oi.running = true;
+				
+oi.setRumble(0); 
+	oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();

@@ -5,11 +5,9 @@ import java.lang.Math;
 
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,12 +19,19 @@ public RobotDrive robotDrive;
 public int gearCount=0;
 Solenoid shifter;
 private double autonKonstant;
+Spark frontLeft;
+Spark frontRight;
+//Spark backLeft;
+//Spark backRight;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public DriveTrainSubsystem(){
-		robotDrive=new RobotDrive(HW.motorFrontLeft,HW.motorBackLeft,
-								  HW.motorFrontRight,HW.motorBackRight);
+		 frontLeft = new Spark(HW.motorFrontLeft);
+		 frontRight = new Spark(HW.motorFrontRight);
+
+		robotDrive=new RobotDrive(frontLeft,
+								  frontRight);
 		//robotDrive.setSafetyEnabled(true);
 		shifter = new Solenoid(HW.shifter);
 	}
@@ -43,14 +48,24 @@ private double autonKonstant;
 		return kSpeedScaling;
 }
 	public void arcadeDrive(double y, double x) {
-
-		robotDrive.arcadeDrive(x * kSpeedScaling, y * kSpeedScaling);
-		// robotdrive is dumb arcadeDrive so params are switched
+				robotDrive.arcadeDrive(x, y);// robotdrive is dumb arcadeDrive so params are switched
 	}
-	public void tankDrive(double leftStick, double rightStick) {
-
-		robotDrive.tankDrive(leftStick * kSpeedScaling, -rightStick
-				* kSpeedScaling);
+	public void tankDrive(double leftStick, double rightStick) {//.2 used to determine if turning
+		robotDrive.tankDrive(leftStick, -rightStick);
+	}
+	public void customTank(double L, double R){
+		frontLeft.setSpeed(L*kSpeedScaling);
+		//backLeft.setSpeed(L*kSpeedScaling);
+		frontRight.setSpeed(R*kSpeedScaling);
+		//backRight.setSpeed(R*kSpeedScaling);
+	}
+	public void frontTest(double L, double R){
+		frontLeft.setSpeed(L*kSpeedScaling);
+		frontRight.setSpeed(R*kSpeedScaling);
+	}
+	public void backTest(double L, double R){
+		//backLeft.setSpeed(L*kSpeedScaling);
+		//backRight.setSpeed(R*kSpeedScaling);
 	}
 	/*
 	 * the relationship between the input from joystick and output to the motors is exponential

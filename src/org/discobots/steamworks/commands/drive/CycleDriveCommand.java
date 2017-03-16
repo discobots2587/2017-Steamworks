@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CycleDriveCommand extends Command {
 	Command cmd2;
 	boolean isDef=false;
-
+	boolean speed=false;
 	
 public CycleDriveCommand() {
 	}
@@ -31,14 +31,10 @@ public CycleDriveCommand(char charCmd) {
 			cmd2=new ArcadeDriveCommand();
 		}
 	}
-public CycleDriveCommand(double speedScale)
-{
-	isDef=true;
-	Robot.driveTrainSub.setSpeedScaling(speedScale);//take input value so can be set to driver's preferences
-}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		if(!speed){
 		if(isDef==false)
 		cmd2 = Robot.driveTrainSub.getCurrentCommand();	
 
@@ -71,7 +67,8 @@ public CycleDriveCommand(double speedScale)
 
 		}
 	}*/
-	}
+	}}
+	
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		end();
