@@ -48,10 +48,10 @@ Spark frontRight;
 		return kSpeedScaling;
 }
 	public void arcadeDrive(double y, double x) {
-				robotDrive.arcadeDrive(x, y);// robotdrive is dumb arcadeDrive so params are switched
+				robotDrive.arcadeDrive(-x, -y);// robotdrive is dumb arcadeDrive so params are switched
 	}
 	public void tankDrive(double leftStick, double rightStick) {//.2 used to determine if turning
-		robotDrive.tankDrive(leftStick, -rightStick);
+		robotDrive.tankDrive(-leftStick, rightStick);
 	}
 	public void customTank(double L, double R){
 		frontLeft.setSpeed(L*kSpeedScaling);
