@@ -2,7 +2,7 @@ package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,10 +12,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearIntakeSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Solenoid gearSolenoid;
+	private DoubleSolenoid gearSolenoid;
+	private int gearState=-1;
+	private boolean gearOut=false;
 
 	public GearIntakeSubsystem(){
-		this.gearSolenoid = new Solenoid(HW.gearSolenoid);
+		this.gearSolenoid = new DoubleSolenoid(HW.gearSolenoid1, HW.gearSolenoid2);
 	}
 
 	public void initDefaultCommand() {
@@ -23,11 +25,23 @@ public class GearIntakeSubsystem extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 	
-	public void setGear(boolean val)
+	public void setGearState(int gearState)
 	{
-		gearSolenoid.set(val);
+		this.gearState=gearState;
+		if(gearState==-1){
+			gearOut=false;
+		gearSolenoid.set(DoubleSolenoid.Value.kReverse);}
+		if(gearState==0)
+		gearSolenoid.set(DoubleSolenoid.Value.kOff);
+		if(gearState==1){
+			gearOut=true;
+		gearSolenoid.set(DoubleSolenoid.Value.kForward);}
 	}
-	public boolean getGear(){
-		return gearSolenoid.get();
+	public int getGearState(){
+		return gearState;
 	}
-}
+
+	public boolean isGearOut() {
+		return gearOut;
+	}}
+

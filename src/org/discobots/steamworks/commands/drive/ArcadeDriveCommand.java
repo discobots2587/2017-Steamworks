@@ -26,9 +26,9 @@ public class ArcadeDriveCommand extends Command {
     	Robot.driveTrainSub.frontTest(-Robot.oi.getRawAnalogStickALY(), Robot.oi.getRawAnalogStickARY());
     	else{
     		if(!Robot.directScale&&!Robot.turnScale)
-        		Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(),-Robot.oi.getRawAnalogStickALY());
+        		Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(),Robot.oi.getRawAnalogStickALY());
     		if(!Robot.directScale&&Robot.turnScale)
-    		Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX()*Robot.driveTrainSub.getSpeedScaling(),-Robot.oi.getRawAnalogStickALY());
+    		Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX()*Robot.driveTrainSub.getSpeedScaling(),Robot.oi.getRawAnalogStickALY());
     		if(Robot.directScale&&!Robot.turnScale)
         		Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickALX(),Robot.oi.getRawAnalogStickALY()*Robot.driveTrainSub.getSpeedScaling());
     		if(Robot.directScale&&Robot.turnScale)
