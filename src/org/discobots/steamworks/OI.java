@@ -10,9 +10,11 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SpeedScaleCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
+import org.discobots.steamworks.commands.intake.GearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
+import org.discobots.steamworks.commands.utils.ToggleCompressor;
 import org.discobots.steamworks.utils.GamePad;
 import org.discobots.steamworks.utils.GamePad.DPadButton;
 import org.discobots.steamworks.utils.GamePad.Hand;
@@ -301,11 +303,11 @@ private ArrayList<Integer> ports;
 						port0. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggle shoot command with 10 second limit per toggle
+						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port0.get(port0.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
-						//port0.get(port0.size()-1).whenPressed(new ());///Toggle Compressor
+						port0.get(port0.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_Y));
 						port0.get(port0.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
 						port0.add( new JoystickButton(gamePads[i], Xbox.AXISBTN_R));

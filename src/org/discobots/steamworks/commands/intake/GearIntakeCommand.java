@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Lowers and raises gear intake
  */
-public class ShiftGearIntakeCommand extends Command {
+public class GearIntakeCommand extends Command {
 
-    public ShiftGearIntakeCommand() {
+    public GearIntakeCommand() {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.gearSub);
     }
