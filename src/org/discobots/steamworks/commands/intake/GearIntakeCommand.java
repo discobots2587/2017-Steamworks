@@ -19,10 +19,8 @@ public class GearIntakeCommand extends Command {
     protected void initialize() {
     	if(Robot.gearSub.getGear()){//if solenoid is on
     		Robot.gearSub.setGear(false);}//turn solenoid off
-    	
-    	
-    //	else
-    	//	Robot.gearIntakeSub.set(true);
+    	else
+    		Robot.gearSub.setGear(true);
  //   	if(Robot.oi.count%2==0){
     	//	Robot.oi.blendIn= new GearIntakeCommand(1.0);
     	//	Robot.oi.blendOut=new GearIntakeCommand(-1.0);

@@ -303,7 +303,7 @@ private ArrayList<Integer> ports;
 						port0. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
+						port0.get(port0.size()-1).whenPressed(new GearIntakeCommand());
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port0.get(port0.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -376,7 +376,7 @@ private ArrayList<Integer> ports;
 						port1. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port1.get(port1.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
+						port1.get(port1.size()-1).whenPressed(new GearIntakeCommand()); 
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port1.get(port1.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -439,7 +439,7 @@ private ArrayList<Integer> ports;
 						port2. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port2.get(port2.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
+						port2.get(port2.size()-1).whenPressed(new GearIntakeCommand()); 
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port2.get(port2.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -500,7 +500,7 @@ private ArrayList<Integer> ports;
 						port3. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
+						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand()); 
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port3.get(port3.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -561,7 +561,7 @@ private ArrayList<Integer> ports;
 						port4. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
+						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand()); 
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port4.get(port4.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -624,7 +624,7 @@ private ArrayList<Integer> ports;
 					port5. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand());//toggle shoot command with 10 second limit per toggle
+					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand()); 
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 					port5.get(port5.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
