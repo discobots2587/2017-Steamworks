@@ -38,7 +38,6 @@ public class Dashboard {
 		if (driveCounter % 5 == 0) { // 100ms
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
-			//SmartDashboard.getData(Robot.electricSub.shoots.getSmartDashboardType());//2013 motorcompressor has itable example
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
 			SmartDashboard.putBoolean("running True?", Robot.oi.running);
@@ -58,7 +57,7 @@ public class Dashboard {
 			SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
 			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
 			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.getSpeedScaling());
-			SmartDashboard.putString("The Robot is in", Robot.driveTrainSub.getGear());
+			SmartDashboard.putNumber("The Gear Intake is in: ", Robot.gearSub.getGearState());
 			SmartDashboard.putBoolean("Direct Speed Scale On?", Robot.directScale);
 			SmartDashboard.putBoolean("Turning Speed Scale On?", Robot.turnScale);
 			SmartDashboard.putNumber("PWM Hang", Robot.hangSub.getPWM());
@@ -68,6 +67,8 @@ public class Dashboard {
 			Robot.shootSub.setSetpoint(TestPrefs.getDouble("SetPoint", 1.0));
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			Robot.driveTrainSub.setAutonKonstant(TestPrefs.getDouble("AutonConstant", 1.0));//auton speed/time scaling --settable via driver dashboard and independent of speed scaling
+			Robot.gearLidar=TestPrefs.getBoolean("GearLidarSub", false);//create Gear Lidar subsystem on robot initialization?
+			Robot.shooterLidar=TestPrefs.getBoolean("ShootLidarSub", false);//create shoot lidar on initialization?
 			Robot.testing = TestPrefs.getBoolean("EnableDriveTrainTesting", false);
 			SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
 			if(Robot.gearLidar)

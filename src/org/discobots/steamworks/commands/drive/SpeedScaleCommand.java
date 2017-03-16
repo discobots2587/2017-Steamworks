@@ -8,9 +8,21 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpeedScaleCommand extends Command {
+	boolean turning;
     public SpeedScaleCommand(boolean turning) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.driveTrainSub);
+    	this.turning=turning;
+    	
+    }
+    public SpeedScaleCommand(double speedScale)
+    {
+    	Robot.driveTrainSub.setSpeedScaling(speedScale);//take input value so can be set to driver's preferences
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
     	if(turning)
     	{
     		System.out.println("Setting TurnScale");
@@ -21,16 +33,7 @@ public class SpeedScaleCommand extends Command {
     	{
     		Robot.directScale=!Robot.directScale;
     	}
-    	Robot.oi.StartThreads();
-    	
-    }
-    public SpeedScaleCommand(double speedScale)
-    {
-    	Robot.driveTrainSub.setSpeedScaling(speedScale);//take input value so can be set to driver's preferences
-    }
-
-    // Called just before this Command runs the first time
-    protected void initialize() {
+    	Robot.oi.StartThreads();    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -39,7 +42,7 @@ public class SpeedScaleCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

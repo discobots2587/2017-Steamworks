@@ -56,6 +56,7 @@ public class ElectricalSubsystem extends Subsystem {
 		ps = new PressureSensor(HW.pressureSensor);
 		encoderLeftDrive=new Encoder(HW.EncoderLeftDrive1,HW.EncoderLeftDrive2);//does not exist atm
 		encoderRightDrive=new Encoder(HW.EncoderRightDrive1,HW.EncoderRightDrive2);// comp bot only
+		disableSensors(0);
 	}
 	
 	public void disableSensors(int sensorToggle)

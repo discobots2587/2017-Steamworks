@@ -1,10 +1,12 @@
 package org.discobots.steamworks.subsystems;
 
 import org.discobots.steamworks.HW;
+import org.discobots.steamworks.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -30,11 +32,13 @@ public class GearIntakeSubsystem extends Subsystem {
 		this.gearState=gearState;
 		if(gearState==-1){
 			gearOut=false;
+			SmartDashboard.putNumber("The Gear Intake is in: ", -1);
 		gearSolenoid.set(DoubleSolenoid.Value.kReverse);}
 		if(gearState==0)
 		gearSolenoid.set(DoubleSolenoid.Value.kOff);
 		if(gearState==1){
 			gearOut=true;
+			SmartDashboard.putNumber("The Gear Intake is in: ", 1);
 		gearSolenoid.set(DoubleSolenoid.Value.kForward);}
 	}
 	public int getGearState(){
