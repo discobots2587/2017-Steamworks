@@ -59,17 +59,17 @@ public class Dashboard {
 			SmartDashboard.putNumber("The gear intake is: ", Robot.gearSub.getGearState());
 			SmartDashboard.putBoolean("Direct Speed Scale On?", Robot.directScale);
 			SmartDashboard.putBoolean("Turning Speed Scale On?", Robot.turnScale);
-			SmartDashboard.putNumber("PWM Hang", Robot.hangSub.getPWM());
-			SmartDashboard.putNumber("PWM intake",Robot.intakeSub.getPWM());
-			SmartDashboard.putNumber("PWM Shooter", Robot.shootSub.getPWM());
-			SmartDashboard.putNumber("PWM Blender", Robot.blendSub.getPWM());
+		//	SmartDashboard.putNumber("PWM Hang", Robot.hangSub.getPWM());
+		//	SmartDashboard.putNumber("PWM intake",Robot.intakeSub.getPWM());
+		//	SmartDashboard.putNumber("PWM Shooter", Robot.shootSub.getPWM());
+		//	SmartDashboard.putNumber("PWM Blender", Robot.blendSub.getPWM());
 			Robot.shootSub.setSetpoint(TestPrefs.getDouble("SetPoint", 1.0));
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			Robot.driveTrainSub.setAutonKonstant(TestPrefs.getDouble("AutonConstant", 1.0));//auton speed/time scaling --settable via driver dashboard and independent of speed scaling
 			Robot.gearLidar=TestPrefs.getBoolean("GearLidarSub", false);//create Gear Lidar subsystem on robot initialization?
 			Robot.shooterLidar=TestPrefs.getBoolean("ShootLidarSub", false);//create shoot lidar on initialization?
 			Robot.testing = TestPrefs.getBoolean("EnableDriveTrainTesting", false);
-			SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
+		//	SmartDashboard.putNumber("Shooter Raw RPM", Robot.electricSub.getShootRPMraw());
 			if(Robot.gearLidar)
 			{
 			SmartDashboard.putBoolean("GEAR IS LOADABLE? ", Robot.gearDistSub.onTarget());//Is the robot within the required distance parameters to load a gear from the human player?

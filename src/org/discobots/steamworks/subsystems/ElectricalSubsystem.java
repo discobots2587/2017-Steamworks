@@ -150,7 +150,7 @@ public class ElectricalSubsystem extends Subsystem {
 		try{
 			if (DriverStation.getInstance().isFMSAttached()&&SmartDashboard.getBoolean("Gear Loaded", false)!=GearLoaded.get()){
 				System.out.println("WRITING TO FILE");
-				Robot.logSub.WriteFile();//logs that a gear was loaded
+				Robot.logSub.WriteFile("Gears Scored In Competition: ");//logs that a gear was loaded
 			}			
 		}
 		catch(NullPointerException e)
