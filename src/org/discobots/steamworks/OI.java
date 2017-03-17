@@ -228,10 +228,11 @@ private ArrayList<Integer> ports;
 					for(int rep=0; rep<=rumbletime/10; rep++)
 					{
 						try {
-							long rumblesTime=System.currentTimeMillis()+700;
-							setRumble(1.0);
+							long rumblesTime=System.currentTimeMillis()+1000;
 							while(System.currentTimeMillis()<=rumblesTime);
 							{
+								setRumble(1.0);
+
 							}
 							if(System.currentTimeMillis()>rumblesTime)
 							{
