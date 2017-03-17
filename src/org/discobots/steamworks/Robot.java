@@ -4,6 +4,7 @@ package org.discobots.steamworks;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -227,7 +228,13 @@ oi.setRumble(0);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
-
+		if(DriverStation.getInstance().isFMSAttached())
+		{
+			if(DriverStation.getInstance().getMatchTime()==30)
+			{
+				Robot.oi.setTime(30);
+			}
+		}
 	}
 
 	/**

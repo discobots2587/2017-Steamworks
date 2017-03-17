@@ -34,7 +34,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 
-
+	private int matchTimeWarning;
 	GamePad[] gamePads;
 	public int numPads;
 	public Thread left;
@@ -749,6 +749,23 @@ private ArrayList<Integer> ports;
 				updateControllerList();
 				}
 	}}
+	public void setTime(int i) {
+		if(matchTimeWarning!=i){
+		for(int rep=0; rep<=i/10; rep++)
+		{
+			try {
+				long rumbleTime=System.currentTimeMillis()+700;
+				while(System.currentTimeMillis()<rumbleTime)
+				setRumble(1.0);
+				while(System.currentTimeMillis()<rumbleTime+700)
+				{
+				}
+			} catch (Exception e) {
+				System.out.println("RumbleTimeException");
+			}
+		}
+		}		
+	}
 	
 	
 	/*public double getRawAnalogStickALX() {// left stick y-axis/////////////////////////////CODE FOR IF THREAD IS NOT USED
