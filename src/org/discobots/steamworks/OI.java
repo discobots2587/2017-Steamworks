@@ -751,20 +751,27 @@ private ArrayList<Integer> ports;
 	}}
 	public void setTime(int i) {
 		if(matchTimeWarning!=i){
+			matchTimeWarning=i;
+			new Thread() {
+				public void run(){
 		for(int rep=0; rep<=i/10; rep++)
 		{
 			try {
 				long rumbleTime=System.currentTimeMillis()+700;
-				while(System.currentTimeMillis()<rumbleTime)
 				setRumble(1.0);
-				while(System.currentTimeMillis()<rumbleTime+700)
+				while(System.currentTimeMillis()<=rumbleTime);
 				{
+				}
+				if(System.currentTimeMillis()>rumbleTime)
+				{
+					setRumble(0.0);
 				}
 			} catch (Exception e) {
 				System.out.println("RumbleTimeException");
 			}
 		}
-		}		
+				}}.run();;}	
+		setRumble(0.0);
 	}
 	
 	

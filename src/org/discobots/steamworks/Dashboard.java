@@ -41,11 +41,9 @@ public class Dashboard {
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
 			SmartDashboard.putBoolean("running True?", Robot.oi.running);
-			//SmartDashboard.putNumber("ShooterDist", Robot.electricSub.getRotations());
 		} else if (driveCounter % 5 == 1) {
 
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
-			//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
 			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
 			SmartDashboard.putNumber("PRESSURE", Robot.electricSub.getPressure());
 			SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
