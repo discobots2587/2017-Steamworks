@@ -15,7 +15,7 @@ public class GearIntakeSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private DoubleSolenoid gearSolenoid;
-	private int gearState=-1;
+	private int gearState=0;
 	private boolean gearOut=false;
 
 	public GearIntakeSubsystem(){
