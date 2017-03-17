@@ -34,11 +34,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 
-	private int matchTimeWarning;
+	public int matchTimeWarning;
 	GamePad[] gamePads;
 	public int numPads;
 	public Thread left;
 	public Thread right;
+	public Thread rumbleThread;
 	private double activeLX = 0.0;
 	private double activeLY = 0.0;
 	private double activeRY = 0.0;
@@ -70,6 +71,7 @@ private ArrayList<Integer> ports;
 		port5 = new ArrayList<Button>();
 		ports = new ArrayList<Integer>();
 		
+
 		
 		
 		right = new Thread() {
@@ -215,15 +217,46 @@ private ArrayList<Integer> ports;
 			return a;
 		}	};
 		
+		
+		rumbleThread = new Thread(){
+			int rumbletime=0;
+			public void run(){
+				while(running){
+				if(rumbletime!=matchTimeWarning)
+				{
+					rumbletime=matchTimeWarning;
+					for(int rep=0; rep<=rumbletime/10; rep++)
+					{
+						try {
+							long rumblesTime=System.currentTimeMillis()+700;
+							setRumble(1.0);
+							while(System.currentTimeMillis()<=rumblesTime);
+							{
+							}
+							if(System.currentTimeMillis()>rumblesTime)
+							{
+								setRumble(0.0);
+							}
+						} catch (Exception e) {
+							System.out.println("RumbleTimeException");
+						}
+					}
+				}			}
+		}};
+		
 		updateControllerList();
 		StartThreads();
 	}
+	
+	
 	public void StartThreads()
 	{
 		if (!left.isAlive())
 			left.start();
 		if(!right.isAlive())
 			right.start();
+		if(!rumbleThread.isAlive())
+			rumbleThread.start();
 	}
 
 	public void updateControllerList() {
@@ -710,9 +743,6 @@ private ArrayList<Integer> ports;
 	}
 
 	public void setRumble(Hand hand, double rumbleFactor) {
-		new Thread(){
-			public void run(){
-	
 		for (int i = ports.size()-1; i >= 0; i--)
 		{
 			try{
@@ -732,10 +762,9 @@ private ArrayList<Integer> ports;
 				System.out.println("ERROR Rumble");
 				System.out.println("ERROR Rumble");
 				}
-	}}}.start();	}
+	}}
 	public void setRumble(double rumbleFactor) {
-		new Thread(){
-			public void run(){
+
 		for (int i = ports.size()-1; i >= 0; i--)
 		{
 			try{
@@ -752,30 +781,9 @@ private ArrayList<Integer> ports;
 				System.out.println("ERROR RumbleFull");
 				System.out.println("ERROR RumbleFull");
 				}
-	}}}.start();}
+	}}
 	public void setTime(int i) {
-		if(matchTimeWarning!=i){
-			matchTimeWarning=i;
-			new Thread() {
-				public void run(){
-		for(int rep=0; rep<=i/10; rep++)
-		{
-			try {
-				long rumbleTime=System.currentTimeMillis()+700;
-				setRumble(1.0);
-				while(System.currentTimeMillis()<=rumbleTime);
-				{
-				}
-				if(System.currentTimeMillis()>rumbleTime)
-				{
-					setRumble(0.0);
-				}
-			} catch (Exception e) {
-				System.out.println("RumbleTimeException");
-			}
-		}
-				}}.start();;}	
-		setRumble(0.0);
+		matchTimeWarning=i;
 	}
 	
 	

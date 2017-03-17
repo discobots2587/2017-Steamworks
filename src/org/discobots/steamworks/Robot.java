@@ -106,6 +106,9 @@ public class Robot extends IterativeRobot {
 				try {
 					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
 					C615.setResolution(320, 240);
+					if (!C615.isConnected())
+						C615.free();
+
 				} catch (Exception e) {
 					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
 				}
@@ -113,8 +116,8 @@ public class Robot extends IterativeRobot {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setResolution(160, 120);
-					Genius.setFPS(15);
+					Genius.setResolution(320, 240);
+					Genius.setFPS(30);
 				} // footage
 				catch (Exception e) {
 					System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
@@ -211,8 +214,8 @@ public class Robot extends IterativeRobot {
 															// second
 		}
 				
-oi.setRumble(0); 
-	oi.running = true;
+		oi.setRumble(0); 
+		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
@@ -230,12 +233,11 @@ oi.setRumble(0);
 		Robot.oi.running = true;
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
-		totalTime = (double) ((System.currentTimeMillis() - TeleopStartTime) / 1000);
 		if(DriverStation.getInstance().isFMSAttached())
 		{
 			if(DriverStation.getInstance().getMatchTime()==30)
 			{
-				Robot.oi.setTime(30);
+				oi.setTime(30);
 			}
 		}
 	}

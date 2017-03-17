@@ -41,6 +41,7 @@ public class Dashboard {
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
 			SmartDashboard.putBoolean("running True?", Robot.oi.running);
+			SmartDashboard.putString("Gear Solenoid State: ", Robot.gearSub.getGearSolenoidState());
 		} else if (driveCounter % 5 == 1) {
 
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
