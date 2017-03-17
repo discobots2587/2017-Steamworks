@@ -710,6 +710,9 @@ private ArrayList<Integer> ports;
 	}
 
 	public void setRumble(Hand hand, double rumbleFactor) {
+		new Thread(){
+			public void run(){
+	
 		for (int i = ports.size()-1; i >= 0; i--)
 		{
 			try{
@@ -729,8 +732,10 @@ private ArrayList<Integer> ports;
 				System.out.println("ERROR Rumble");
 				System.out.println("ERROR Rumble");
 				}
-	}}
+	}}}.start();	}
 	public void setRumble(double rumbleFactor) {
+		new Thread(){
+			public void run(){
 		for (int i = ports.size()-1; i >= 0; i--)
 		{
 			try{
@@ -746,9 +751,8 @@ private ArrayList<Integer> ports;
 				DriverStation.reportError(error, true);
 				System.out.println("ERROR RumbleFull");
 				System.out.println("ERROR RumbleFull");
-				updateControllerList();
 				}
-	}}
+	}}}.start();}
 	public void setTime(int i) {
 		if(matchTimeWarning!=i){
 			matchTimeWarning=i;
@@ -770,7 +774,7 @@ private ArrayList<Integer> ports;
 				System.out.println("RumbleTimeException");
 			}
 		}
-				}}.run();;}	
+				}}.start();;}	
 		setRumble(0.0);
 	}
 	

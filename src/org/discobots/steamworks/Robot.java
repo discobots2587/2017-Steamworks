@@ -80,10 +80,10 @@ public class Robot extends IterativeRobot {
 		if(gearLidar)
 			gearDistSub=new GearDistSubsystem();
 			
-		if (simple == true)
-			oi = new SimpleOI();
-		else
-			oi = new OI();
+		if (simple == true){
+			oi = new SimpleOI();}
+		else{
+			oi = new OI();}
 
 		autonChooser = new SendableChooser<Command>();
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
@@ -139,6 +139,8 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		oi.updateControllerList();
 		oi.running = true;
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 	}
 
 	@Override
@@ -146,6 +148,8 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
