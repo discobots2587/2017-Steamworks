@@ -28,15 +28,15 @@ public class TankDriveCommand extends Command {
         	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY(),-Robot.oi.getRawAnalogStickARY());
     		if(Robot.turnScale&&!Robot.directScale){
     			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),1-(Math.abs((Robot.oi.getRawAnalogStickALY())+(Robot.oi.getRawAnalogStickARY())/2)));
-            	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY()*speedScale,-Robot.oi.getRawAnalogStickARY()*speedScale);
+            	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*speedScale,-Robot.oi.getRawAnalogStickALY()*speedScale);
     		}
     		if(!Robot.turnScale&&Robot.directScale)
     		{
     			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),(Math.abs((Robot.oi.getRawAnalogStickALY())+(Robot.oi.getRawAnalogStickARY())/2)));
-            	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY()*speedScale,-Robot.oi.getRawAnalogStickARY()*speedScale);
+            	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*speedScale,-Robot.oi.getRawAnalogStickALY()*speedScale);
     		}
     		if(Robot.turnScale&&Robot.directScale)
-            	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickALY()*Robot.driveTrainSub.getSpeedScaling(),-Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling());
+            	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling(),-Robot.oi.getRawAnalogStickALY()*Robot.driveTrainSub.getSpeedScaling());
     		}
     	else
     	{

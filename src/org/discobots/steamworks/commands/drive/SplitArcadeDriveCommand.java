@@ -27,25 +27,25 @@ public class SplitArcadeDriveCommand extends Command {
 		// Robot.oi.getRawAnalogStickALY());
 		if (!Robot.testing) {
 			if (!Robot.turnScale && !Robot.directScale) {
-				Robot.driveTrainSub.arcadeDrive(-Robot.oi.getRawAnalogStickARX(),
+				Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX(),
 						Robot.oi.getRawAnalogStickALY());
 			}
 			if (Robot.turnScale && !Robot.directScale) {
 				turnSpeedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(), 1-Math.abs(Robot.oi.getRawAnalogStickARX()));
-				Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX() * turnSpeedScale,
+				Robot.driveTrainSub.arcadeDrive(-Robot.oi.getRawAnalogStickARX() * turnSpeedScale,
 						Robot.oi.getRawAnalogStickALY());
 			}
 			if (!Robot.turnScale && Robot.directScale) {
 				//turnSpeedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(), 1-Math.abs(Robot.oi.getRawAnalogStickARX()));//can apply in reverse so smaller values have larger speedscaling
 				speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(), 1-Math.abs(Robot.oi.getRawAnalogStickALY()));
 
-				Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX() * speedScale,
+				Robot.driveTrainSub.arcadeDrive(-Robot.oi.getRawAnalogStickARX() * speedScale,
 						Robot.oi.getRawAnalogStickALY());
 			}
 			if(Robot.turnScale && Robot.directScale) 
 			{	speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(), 1-Math.abs(Robot.oi.getRawAnalogStickALY()));
 				turnSpeedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(), Math.abs(Robot.oi.getRawAnalogStickARX()));//can apply in reverse so smaller values have larger speedscaling
-				Robot.driveTrainSub.arcadeDrive(Robot.oi.getRawAnalogStickARX() * speedScale,
+				Robot.driveTrainSub.arcadeDrive(-Robot.oi.getRawAnalogStickARX() * speedScale,
 						Robot.oi.getRawAnalogStickALY()*turnSpeedScale);			}
 		} else {
 			Robot.driveTrainSub.backTest(-Robot.oi.getRawAnalogStickARY(), Robot.oi.getRawAnalogStickALY());
