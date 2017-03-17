@@ -209,12 +209,10 @@ public class Robot extends IterativeRobot {
 		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
 																										// upon
 																										// disable
-			oi.setRumble(1); // for
+			oi.setTime(10); // for
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
 		}
-				
-		oi.setRumble(0); 
 		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
