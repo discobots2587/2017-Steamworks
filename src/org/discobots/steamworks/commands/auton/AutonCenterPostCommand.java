@@ -29,10 +29,12 @@ public class AutonCenterPostCommand extends CommandGroup {
     	addSequential(new AutonomousArcadeDrive(0.15,0.6,2500));
     	addSequential(new WaitCommand(1500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
+    	addSequential(new AutonomousArcadeDrive(-0.15,-0.5,1000));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
     	addSequential(new AutonomousArcadeDrive(-0.2, -0.6,	1000));//backup 
     	addSequential(new WaitCommand(1600));//try again
     	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));
+    	addSequential(new AutonomousArcadeDrive(-0.15,-0.5,1000));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
     	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
     	addSequential(new WaitCommand(1600));//try again
