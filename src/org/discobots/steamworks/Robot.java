@@ -104,21 +104,21 @@ public class Robot extends IterativeRobot {
 			public void run() {
 				System.out.println("cameratherad created");
 
-				try {
-					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
-					C615.setResolution(320, 240);
-					if (!C615.isConnected())
-						C615.free();
+				//try {
+				//	UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
+				//	C615.setResolution(320, 240);
+				//	if (!C615.isConnected())
+				//		C615.free();
 
-				} catch (Exception e) {
-					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
-				}
+				//} catch (Exception e) {
+				//	System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
+				//}
 				try {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
 					Genius.setResolution(320, 240);
-					Genius.setFPS(30);
+					Genius.setFPS(15);
 				} // footage
 				catch (Exception e) {
 					System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
 				}
 			}
 		};
-		Camthread.run();
+		Camthread.start();
 
 		Dashboard.init();
 		Dashboard.update();
