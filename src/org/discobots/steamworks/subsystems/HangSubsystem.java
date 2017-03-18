@@ -14,6 +14,7 @@ public class HangSubsystem extends Subsystem {
 	// here. Call these from Commands.
 	private Talon hangMotor;
 	private double pwm;
+	public boolean autoHanging=false;
 	public HangSubsystem(){
 		this.hangMotor=new Talon(HW.motorHang);
 		pwm=0.0;
@@ -27,7 +28,8 @@ public class HangSubsystem extends Subsystem {
 	pwm=speed;
 	hangMotor.setSpeed(speed);
 	}
-	public double getPWM(){
-		return pwm*100;
+	public double getHangMotorSpeed()
+	{
+		return hangMotor.get();
 	}
 }

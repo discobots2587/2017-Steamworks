@@ -33,13 +33,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
-	public int matchTimeWarning;
 	GamePad[] gamePads;
 	public int numPads;
 	public Thread left;
 	public Thread right;
-	public Thread rumbleThread;
 	private double activeLX = 0.0;
 	private double activeLY = 0.0;
 	private double activeRY = 0.0;
@@ -216,35 +213,6 @@ private ArrayList<Integer> ports;
 				a=-a;
 			return a;
 		}	};
-		
-		
-		rumbleThread = new Thread(){
-			int rumbletime=0;
-			public void run(){
-				while(running){
-				if(rumbletime!=matchTimeWarning)
-				{
-					rumbletime=matchTimeWarning;
-					for(int rep=0; rep<=rumbletime/10; rep++)
-					{
-						try {
-							long rumblesTime=System.currentTimeMillis()+1000;
-							while(System.currentTimeMillis()<=rumblesTime);
-							{
-								setRumble(1.0);
-
-							}
-							if(System.currentTimeMillis()>rumblesTime)
-							{
-								setRumble(0.0);
-							}
-						} catch (Exception e) {
-							System.out.println("RumbleTimeException");
-						}
-					}
-				}			}
-		}};
-		
 		updateControllerList();
 		StartThreads();
 	}
@@ -256,8 +224,7 @@ private ArrayList<Integer> ports;
 			left.start();
 		if(!right.isAlive())
 			right.start();
-		if(!rumbleThread.isAlive())
-			rumbleThread.start();
+
 	}
 
 	public void updateControllerList() {
@@ -410,7 +377,7 @@ private ArrayList<Integer> ports;
 						port1. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port1.get(port1.size()-1).whenPressed(new GearIntakeCommand()); 
+						port1.get(port1.size()-1).whenPressed(new GearIntakeCommand());
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port1.get(port1.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -473,7 +440,7 @@ private ArrayList<Integer> ports;
 						port2. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port2.get(port2.size()-1).whenPressed(new GearIntakeCommand()); 
+						port2.get(port2.size()-1).whenPressed(new GearIntakeCommand());
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port2.get(port2.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -783,9 +750,7 @@ private ArrayList<Integer> ports;
 				System.out.println("ERROR RumbleFull");
 				}
 	}}
-	public void setTime(int i) {
-		matchTimeWarning=i;
-	}
+
 	
 	
 	/*public double getRawAnalogStickALX() {// left stick y-axis/////////////////////////////CODE FOR IF THREAD IS NOT USED

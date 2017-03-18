@@ -23,6 +23,7 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
+import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.subsystems.BlendSubsystem;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 import org.discobots.steamworks.subsystems.ElectricalSubsystem;
@@ -206,13 +207,13 @@ public class Robot extends IterativeRobot {
 		driveCommand = (Command) driveChooser.getSelected();
 
 		oi.updateControllerList();
-		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
-																										// upon
+		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles upon
 																										// disable
-			oi.setTime(10); // for
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
+			oi.setRumble(1.0);
 		}
+		oi.setRumble(0);
 		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
@@ -230,14 +231,22 @@ public class Robot extends IterativeRobot {
 		Dashboard.update();
 		Robot.oi.running = true;
 		long end = System.currentTimeMillis();
-		loopExecutionTime = end - start;
-		if(DriverStation.getInstance().isFMSAttached())
-		{
-			if(DriverStation.getInstance().getMatchTime()==30)
+		//if(DriverStation.getInstance().isFMSAttached())
+		//{
+		//	if(DriverStation.getInstance().getMatchTime()==35)
+		//	{
+			//	oi.updateControllerList();
+			//	oi.running=true;
+			//	if(Robot.hangSub.getHangMotorSpeed()==0);
+			//	new HangCommand().start();
+		//	}
+		//}
+		/*if(Robot.hangSub.getHangMotorSpeed()==0 && hangSub.autoHanging==false)
 			{
-				oi.setTime(30);
+			hangSub.autoHanging=true;
+			new HangCommand().start();
 			}
-		}
+		loopExecutionTime = end - start;*/
 	}
 
 	/**

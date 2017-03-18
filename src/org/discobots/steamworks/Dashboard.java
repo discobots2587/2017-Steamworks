@@ -25,6 +25,8 @@ public class Dashboard {
 		SmartDashboard.putData("Reset GamePad Ports", new RefreshGamepadPorts());		
 		SmartDashboard.putData("Disable Sensors?", new SensorToggle());
 		SmartDashboard.putData("Disable LIDAR?", new SensorToggle(1));
+		SmartDashboard.putNumber("Hang Motor Speed", Robot.hangSub.getHangMotorSpeed());
+
 
 	}
 
@@ -36,6 +38,7 @@ public class Dashboard {
 		}
 
 		if (driveCounter % 5 == 0) { // 100ms
+			SmartDashboard.putNumber("Hang Motor Speed", Robot.hangSub.getHangMotorSpeed());
 			SmartDashboard.putNumber("Robot Loop Execution Time",
 					Robot.loopExecutionTime);
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
