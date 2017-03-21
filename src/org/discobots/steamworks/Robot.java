@@ -4,6 +4,7 @@ package org.discobots.steamworks;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -22,6 +23,7 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.TankDriveCommand;
+import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.subsystems.BlendSubsystem;
 import org.discobots.steamworks.subsystems.DriveTrainSubsystem;
 import org.discobots.steamworks.subsystems.ElectricalSubsystem;
@@ -79,14 +81,12 @@ public class Robot extends IterativeRobot {
 		if(gearLidar)
 			gearDistSub=new GearDistSubsystem();
 			
-		if (simple == true)
-			oi = new SimpleOI();
-		else
-			oi = new OI();
+		if (simple == true){
+			oi = new SimpleOI();}
+		else{
+			oi = new OI();}
 
 		autonChooser = new SendableChooser<Command>();
-		// autonChooser.addObject("DumbPostitioningAuton", new
-		// DumbPositioningAuton());
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
 		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
 		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
@@ -104,29 +104,21 @@ public class Robot extends IterativeRobot {
 			public void run() {
 				System.out.println("cameratherad created");
 
-				try {
-					// camera name taken from RoboRio
-					UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
-					// LogicC615.openCamera();
-					C615.setResolution(160, 120);
-					// LogicC615.startCapture();
-					// if (C615.isConnected())
-					
-						// C615.setResolution(480, 320);
-						// GeniusCam.startAutomaticCapture(C615);//
-						// automatically start
-						// streaming
-					 // footage
-				} catch (Exception e) {
-					System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
-				}
+				//try {
+				//	UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
+				//	C615.setResolution(320, 240);
+				//	if (!C615.isConnected())
+				//		C615.free();
+
+				//} catch (Exception e) {
+				//	System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
+				//}
 				try {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setFPS(15);
 					Genius.setResolution(320, 240);
-
+					Genius.setFPS(15);
 				} // footage
 				catch (Exception e) {
 					System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
@@ -134,7 +126,7 @@ public class Robot extends IterativeRobot {
 				}
 			}
 		};
-		Camthread.run();
+		Camthread.start();
 
 		Dashboard.init();
 		Dashboard.update();
@@ -151,6 +143,8 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		oi.updateControllerList();
 		oi.running = true;
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 	}
 
 	@Override
@@ -158,6 +152,8 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
@@ -210,18 +206,15 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		driveCommand = (Command) driveChooser.getSelected();
 
-		oi.setRumble(0); // for
 		oi.updateControllerList();
-		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles
-																										// upon
+		for (long stop = System.nanoTime() + TimeUnit.SECONDS.toNanos(1); stop > System.nanoTime();) { // rumbles upon
 																										// disable
-			oi.setRumble(1); // for
 			TeleopStartTime = System.currentTimeMillis(); // one // 1
 															// second
+			oi.setRumble(1.0);
 		}
-				
-oi.setRumble(0); 
-	oi.running = true;
+		oi.setRumble(0);
+		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command
 			driveCommand.start();
@@ -236,9 +229,24 @@ oi.setRumble(0);
 													// times
 		Scheduler.getInstance().run();
 		Dashboard.update();
-		long end = System.currentTimeMillis();
-		loopExecutionTime = end - start;
 		Robot.oi.running = true;
+		long end = System.currentTimeMillis();
+		//if(DriverStation.getInstance().isFMSAttached())
+		//{
+		//	if(DriverStation.getInstance().getMatchTime()==35)
+		//	{
+			//	oi.updateControllerList();
+			//	oi.running=true;
+			//	if(Robot.hangSub.getHangMotorSpeed()==0);
+			//	new HangCommand().start();
+		//	}
+		//}
+		/*if(Robot.hangSub.getHangMotorSpeed()==0 && hangSub.autoHanging==false)
+			{
+			hangSub.autoHanging=true;
+			new HangCommand().start();
+			}
+		loopExecutionTime = end - start;*/
 	}
 
 	/**

@@ -6,7 +6,7 @@ import org.discobots.steamworks.commands.drive.ShiftCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SpeedScaleCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
-import org.discobots.steamworks.commands.intake.ShiftGearIntakeCommand;
+import org.discobots.steamworks.commands.intake.GearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
@@ -87,7 +87,7 @@ public class SimpleOI extends OI {
 		b2_dpadR.whenPressed(new ShiftCommand());//change gear
 
 
-		b2_btnX.whenPressed(new ShiftGearIntakeCommand());
+		b2_btnX.whenPressed(new GearIntakeCommand());
 		
 		b2_dpadR.whenPressed(new SpeedScaleCommand(1.0));//speed scale
 		b2_dpadL.whenPressed(new SpeedScaleCommand(.5));

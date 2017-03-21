@@ -106,10 +106,10 @@ public class GearDistSubsystem extends PIDSubsystem {
 		if (useLidar && this.getGearDistInches() > kMinDist && output > 0) {//may change to Centimeters but inches might be easier for min/max distances
 		//	output = output / 2;
 		}
-		if(Robot.gearSub.getGear());
+		if(Robot.gearSub.isGearOut());
 		{	
 		}
-		if(!Robot.gearSub.getGear());
+		if(!Robot.gearSub.isGearOut());
 		{
 		}
 	}

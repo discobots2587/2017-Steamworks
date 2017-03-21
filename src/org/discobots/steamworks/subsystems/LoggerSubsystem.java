@@ -53,13 +53,13 @@ public class LoggerSubsystem extends Subsystem {
     
     
     
-    public void WriteFile(){
+    public void WriteFile(String lineContains){
     	List<String> newLines = new ArrayList<>();
     	try{
     	for (String line : Files.readAllLines(Paths.get("/home/lvuser/log.txt"), StandardCharsets.UTF_8)) {
-		    if (line.contains("Comp Gears Loaded")) {
-		       newLines.add(line.replace("Comp Gears Loaded", ""+getTrailingInteger(line)+1));
-		       SmartDashboard.putNumber("Comp Gears Loaded", getTrailingInteger(line));
+		    if (line.contains(lineContains)) {
+		       newLines.add(line.replace(lineContains, ""+getTrailingInteger(line)+1));
+		       SmartDashboard.putNumber(lineContains, getTrailingInteger(line));
 		    } else {
 		       newLines.add(line);
 		    }

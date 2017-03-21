@@ -20,8 +20,7 @@ public class HW {
 	
 	/* CAN */// Check roboRio Web Interface for these values
 	public final static int motorShoot = 6;
-	public final static int motorBlend = 7;
-	
+	public final static int motorBlend = 7; 
 	/* PWM */
 	public final static int  motorFrontLeft = 0;
 	//public final static int motorBackLeft = 3;
@@ -29,14 +28,14 @@ public class HW {
 	public final static int motorFrontRight = 1;
 	public final static int motorHang=  4;
 	public final static int motorIntake= 5;
-	//public final static int motorShoot = 6;
 
 
 	
 	/* Pneumatics */
-	public final static int shifter = 0;//not a double solenoid
+	public final static int shifter = 7;//not a double solenoid
 	//public final static int shifterLeft = 1;
-	public final static int gearSolenoid = 2;
+	public final static int gearSolenoid2 = 1;
+	public final static int gearSolenoid1 = 0;
 
 
 

@@ -26,11 +26,7 @@ public class AutonMobilityCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,6000));//drive forward
+    	addSequential(new AutonomousArcadeDrive(-0.15,0.6,6400));//drive forward//left adjust for rightward veer
 
-
-    	 	
-    	
-    	
     }
 }
