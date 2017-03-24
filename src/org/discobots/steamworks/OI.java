@@ -331,29 +331,33 @@ private ArrayList<Integer> ports;
 				if (!(gamePads[i] instanceof Xbox)) {// ability to create entirely separate
 											// control scheme for non xbox
 											// controller even if in same port
-						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
-						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
-						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
-						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
-						port0.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
-						System.out.println("GenericPORTZERO MAPPED");
-						port0.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-						port0. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port0.get(port0.size()-1).toggleWhenPressed(new ShootCommand());
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
-						port0.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+					
+					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+					port0.get(port0.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
+					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+					port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
+					port0.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
+					port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+					port0.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
+					port0.get(port0.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
+					port0.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
+					port0.get(port0.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
+					port0. add(new JoystickButton(gamePads[i], GamePad.BTN_START));
+					port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+					port0.add( new JoystickButton(gamePads[i], GamePad.BTN_A));
+					port0.get(port0.size()-1).whenPressed(new GearIntakeCommand());
+					port0.add( new JoystickButton(gamePads[i], GamePad.BTN_X));
+					port0.get(port0.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
+					port0.add( new JoystickButton(gamePads[i], GamePad.BTN_B));
+					port0.get(port0.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
+					port0.add( new JoystickButton(gamePads[i], GamePad.BTN_Y));
+					port0.get(port0.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
+					port0.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_R));
+					port0.get(port0.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
+					port0.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_L));
+					port0.get(port0.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 
 					}
 				}
@@ -392,33 +396,32 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port1.get(port1.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
-						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
-						if (gamePads[i].isXbox) {
-							L1_triggerR = gamePads[i].getLZ();// Right Trigger
-							L1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {
+						port1.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
+						port1.get(port1.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port1.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
+						port1.get(port1.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
+						port1.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
+						port1.get(port1.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
+						port1. add(new JoystickButton(gamePads[i], GamePad.BTN_START));
+						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
+						port1.add( new JoystickButton(gamePads[i], GamePad.BTN_A));
+						port1.get(port1.size()-1).whenPressed(new GearIntakeCommand());
+						port1.add( new JoystickButton(gamePads[i], GamePad.BTN_X));
+						port1.get(port1.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
+						port1.add( new JoystickButton(gamePads[i], GamePad.BTN_B));
+						port1.get(port1.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
+						port1.add( new JoystickButton(gamePads[i], GamePad.BTN_Y));
+						port1.get(port1.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
+						port1.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_R));
+						port1.get(port1.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
+						port1.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_L));
+						port1.get(port1.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 
-						}
-						port1.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
-						port1. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port1.get(port1.size()-1).whenPressed(new ShootCommand());
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
-						port1.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
-						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 					}
 				}
 
@@ -454,33 +457,32 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port2.get(port2.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
-						port2.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
-						if (gamePads[i].isXbox) {
-							L1_triggerR = gamePads[i].getLZ();// Right Trigger
-							L1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {
+						port2.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
+						port2.get(port2.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port2.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
+						port2.get(port2.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
+						port2.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
+						port2.get(port2.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
+						port2. add(new JoystickButton(gamePads[i], GamePad.BTN_START));
+						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
+						port2.add( new JoystickButton(gamePads[i], GamePad.BTN_A));
+						port2.get(port2.size()-1).whenPressed(new GearIntakeCommand());
+						port2.add( new JoystickButton(gamePads[i], GamePad.BTN_X));
+						port2.get(port2.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
+						port2.add( new JoystickButton(gamePads[i], GamePad.BTN_B));
+						port2.get(port2.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
+						port2.add( new JoystickButton(gamePads[i], GamePad.BTN_Y));
+						port2.get(port2.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
+						port2.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_R));
+						port2.get(port2.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
+						port2.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_L));
+						port2.get(port2.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 
-						}
-						port2.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-						port2. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port2.get(port2.size()-1).whenPressed(new ShootCommand());
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
-						port2.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
-						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 					}}
 				
 				if (i == 3) {
@@ -515,33 +517,32 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port3.get(port3.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
-						port3.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
-						if (gamePads[i].isXbox) {
-							L1_triggerR = gamePads[i].getLZ();// Right Trigger
-							L1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {
+						port3.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
+						port3.get(port3.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port3.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
+						port3.get(port3.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
+						port3.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
+						port3.get(port3.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
+						port3. add(new JoystickButton(gamePads[i], GamePad.BTN_START));
+						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
+						port3.add( new JoystickButton(gamePads[i], GamePad.BTN_A));
+						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand());
+						port3.add( new JoystickButton(gamePads[i], GamePad.BTN_X));
+						port3.get(port3.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
+						port3.add( new JoystickButton(gamePads[i], GamePad.BTN_B));
+						port3.get(port3.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
+						port3.add( new JoystickButton(gamePads[i], GamePad.BTN_Y));
+						port3.get(port3.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
+						port3.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_R));
+						port3.get(port3.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
+						port3.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_L));
+						port3.get(port3.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 
-						}
-						port3.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
-						port3. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port3.get(port3.size()-1).whenPressed(new ShootCommand());
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
-						port3.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
-						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 					}
 				}
 				if (i == 4) {
@@ -576,33 +577,32 @@ private ArrayList<Integer> ports;
 					}
 					if (!(gamePads[i] instanceof Xbox)){
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
+						port4.get(port4.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
+						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
-						port4.add(new JoystickButton(gamePads[i], gamePads[i].BTN_RB));
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].BTN_LB));
-						if (gamePads[i].isXbox) {
-							L1_triggerR = gamePads[i].getLZ();// Right Trigger
-							L1_triggerL = gamePads[i].getRZ();// left trigger
-						} else {
+						port4.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
+						port4.get(port4.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port4.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
+						port4.get(port4.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
+						port4.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
+						port4.get(port4.size()-1).whileHeld(new BlendCommand(.75));//in case blender gets jammed
+						port4. add(new JoystickButton(gamePads[i], GamePad.BTN_START));
+						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
+						port4.add( new JoystickButton(gamePads[i], GamePad.BTN_A));
+						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand());
+						port4.add( new JoystickButton(gamePads[i], GamePad.BTN_X));
+						port4.get(port4.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
+						port4.add( new JoystickButton(gamePads[i], GamePad.BTN_B));
+						port4.get(port4.size()-1).whenPressed(new ToggleCompressor());///Toggle Compressor
+						port4.add( new JoystickButton(gamePads[i], GamePad.BTN_Y));
+						port4.get(port4.size()-1).toggleWhenPressed(new HangCommand());//hanging on Y
+						port4.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_R));
+						port4.get(port4.size()-1).whenReleased(new SpeedScaleCommand(true));//turning speedscale
+						port4.add( new JoystickButton(gamePads[i], GamePad.AXISBTN_L));
+						port4.get(port4.size()-1).whenReleased(new SpeedScaleCommand(false));//direct speedscale
 
-						}
-						port4.add(new JoystickButton(gamePads[i], gamePads[i].BTN_BACK));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
-						port4. add(new JoystickButton(gamePads[i], gamePads[i].BTN_START));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].BTN_A));
-						port4.get(port4.size()-1).whenPressed(new ShootCommand());
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].BTN_X));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].BTN_B));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].BTN_Y));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_R));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
-						port4.add( new JoystickButton(gamePads[i], gamePads[i].AXISBTN_L));
-						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 					}
 				}
 
