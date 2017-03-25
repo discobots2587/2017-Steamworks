@@ -3,6 +3,7 @@ package org.discobots.steamworks.subsystems;
 import org.discobots.steamworks.HW;
 import org.discobots.steamworks.utils.LTRTXBOX;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -11,10 +12,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class IntakeSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Spark intakeMotor;
+	private Talon intakeMotor;
 	private double pwm;
 	public IntakeSubsystem(){
-		this.intakeMotor=new Spark(HW.motorIntake);
+		this.intakeMotor=new Talon(HW.motorIntake);
 		pwm=0.0;
 	}
 
