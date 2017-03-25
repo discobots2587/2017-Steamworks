@@ -89,7 +89,7 @@ private ArrayList<Integer> ports;
 																	// comparator
 
 						{
-							if (gamePads[ports.get(i)] instanceof Xbox && ports.get(i)!=5) {//EXAMPLE -- currently excluding xbox controller in port 5 for other uses
+							if (gamePads[ports.get(i)] instanceof Xbox) {//EXAMPLE -- (&& ports.get(i)!=5) would exclude xbox controller in port 5 for other uses
 								if (abs(XRX) < abs(gamePads[ports.get(i)].getRX()))
 									XRX = gamePads[ports.get(i)].getRX();
 								if (abs(XRY) < abs(gamePads[ports.get(i)].getRY()))
