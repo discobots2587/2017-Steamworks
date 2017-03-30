@@ -4,6 +4,7 @@ import org.discobots.steamworks.HW;
 import org.discobots.steamworks.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,7 @@ public class GearIntakeSubsystem extends Subsystem {
 
 	public GearIntakeSubsystem(){
 		this.gearSolenoid = new DoubleSolenoid(HW.gearSolenoid1, HW.gearSolenoid2);
+		gearSolenoid.set(DoubleSolenoid.Value.kForward);//starts in kForward
 	}
 
 	public void initDefaultCommand() {

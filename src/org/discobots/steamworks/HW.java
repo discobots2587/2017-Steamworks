@@ -36,7 +36,7 @@ public class HW {
 	//public final static int shifterLeft = 1;
 	public final static int gearSolenoid2 = 1;
 	public final static int gearSolenoid1 = 0;
-
+	public final static int notificationLight=10;
 
 
 	

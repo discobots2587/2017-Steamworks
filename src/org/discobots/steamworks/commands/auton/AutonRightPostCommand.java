@@ -7,8 +7,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *From the right starting position, delivers the gear to the right post on the ship
- */
-public class AutonRightPostCommand extends CommandGroup {
+ *////////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+public class AutonRightPostCommand extends CommandGroup {///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
     
     public  AutonRightPostCommand() {
         // Add Commands here:
