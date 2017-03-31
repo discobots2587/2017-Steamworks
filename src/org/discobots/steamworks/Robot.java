@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.concurrent.TimeUnit;
 
 import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
-import org.discobots.steamworks.commands.auton.AutonLeftPostCommand;
+import org.discobots.steamworks.commands.auton.AutonRightPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
-import org.discobots.steamworks.commands.auton.AutonRightPostCommand;
+import org.discobots.steamworks.commands.auton.AutonLeftPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
@@ -88,8 +88,8 @@ public class Robot extends IterativeRobot {
 
 		autonChooser = new SendableChooser<Command>();
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
-		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
-		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
+		autonChooser.addObject("AutonRightPost", new AutonRightPostGearCommand());
+		autonChooser.addObject("AutonLeftPost", new AutonLeftPostGearCommand());
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
 		

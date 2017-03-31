@@ -1,23 +1,18 @@
 package org.discobots.steamworks.commands.auton;
 
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
+import org.discobots.steamworks.commands.auton.subcommands.AutonomousTankDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
 import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *From the right starting position, delivers the gear to the right post on the ship
- *////////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-public class AutonRightPostCommand extends CommandGroup {///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+ *From the left starting position, delivers the gear to the left post on ship
+ */
+public class AutonRightPostGearCommand extends CommandGroup {///////////////////////CREATED BASED ON WORKING RIGHT POST
     
-    public  AutonRightPostCommand() {
+    public  AutonRightPostGearCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -35,22 +30,21 @@ public class AutonRightPostCommand extends CommandGroup {///////////////////////
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new ExtendHoodCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));
+    	addSequential(new AutonomousArcadeDrive(-0.2,0.6,2200));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
+    	addSequential(new AutonomousArcadeDrive(-0.2,0.5,4000));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));
+    	addSequential(new AutonomousArcadeDrive(-0.5,0.0,1000));
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));
+    	addSequential(new AutonomousArcadeDrive(-0.17,0.5,3000));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backu
+    	addSequential(new AutonomousArcadeDrive(-0.23, -0.6, 1000));//backu
     	addSequential(new WaitCommand(1600));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
+    	addSequential(new AutonomousArcadeDrive(-0.2,0.55, 2500));//try again
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
+    	addSequential(new AutonomousArcadeDrive(-0.25, -0.6, 1000));//backup 
     	addSequential(new WaitCommand(1600));//try again
-    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));
-    	
+    	addSequential(new AutonomousArcadeDrive(0.2, 0.55, 2500));
     	
     }
 }
