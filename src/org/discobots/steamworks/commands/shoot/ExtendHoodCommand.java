@@ -9,16 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ExtendHoodCommand extends Command {
 	Long endT;
-    public ExtendHoodCommand(double time) {
+	int time;
+    public ExtendHoodCommand(int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-		endT= (long) (System.currentTimeMillis()+time);
     	requires(Robot.shootSub);
+    	this.time=time;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+		endT= (long) (System.currentTimeMillis()+time);
     	Robot.shootSub.setShootHood(1);
     }
 
@@ -40,7 +41,6 @@ public class ExtendHoodCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shootSub.setShootHood(0);
     	end();
     }
 }
