@@ -34,12 +34,12 @@ public class AutonCenterPostCommand extends CommandGroup {
     	addSequential(new WaitCommand(1500));
     	addSequential(new AutonomousArcadeDrive(-0.2,-0.7, 1000));//backup at angle
     	addSequential(new AutonomousArcadeDrive(0,-0.7, 400));//backup at angle
-    	addSequential(new AutonomousArcadeDrive(-0.3, 0.65,1500));//forwards again greater angle
+    	addSequential(new AutonomousArcadeDrive(-0.3, 0.65,1550));//forwards again greater angle
     	addParallel(new ExtendHoodCommand(1000));
     	addSequential(new WaitCommand(1500));
     	addSequential(new AutonomousArcadeDrive(0.2,-0.7, 1000));//backup at angle
     	addSequential(new AutonomousArcadeDrive(0,-0.7, 400));//backup no angle
-    	addSequential(new AutonomousArcadeDrive(0.3, 0.65,1500));//forwards again greater angle
+    	addSequential(new AutonomousArcadeDrive(0.3, 0.65,1550));//forwards again greater angle
     	addSequential(new WaitCommand(1500));
     	addSequential(new AutonomousArcadeDrive(0.2,-0.5, 1000));//backup at angle
     	addSequential(new AutonomousArcadeDrive(0.3, 0.55,1200));//forwards again greater angle
