@@ -2,6 +2,8 @@ package org.discobots.steamworks.commands.auton;
 
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
+import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -26,6 +28,7 @@ public class AutonCenterPostCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addParallel(new ExtendHoodCommand(500));
     	addSequential(new AutonomousArcadeDrive(-0.1,0.6,3000));//left adjust for rightward veer
     	addSequential(new AutonomousArcadeDrive(-0.1,0.5,2000));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
@@ -36,7 +39,7 @@ public class AutonCenterPostCommand extends CommandGroup {
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
     	addSequential(new AutonomousArcadeDrive(.15, -0.6, 1500));//backup 
     	addSequential(new WaitCommand(1600));//try again
-    	addSequential(new AutonomousArcadeDrive(-2, 0.55, 2500));
+    	addSequential(new AutonomousArcadeDrive(-.2, 0.55, 2500));
 
     	 	
     	
