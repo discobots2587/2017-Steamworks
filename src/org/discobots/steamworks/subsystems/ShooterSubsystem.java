@@ -11,15 +11,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Spark shootMotor;
+	private Talon shootsMotor;
 	private boolean shooterToggled=false;
 	private double pwm;
 	private double setPoint;
+	private Spark shootHood;
 	public ShooterSubsystem(){
-		this.shootMotor=new Spark(HW.motorShoot);
+		shootHood=new Spark(HW.motorHood);
+		shootsMotor=new Talon(HW.motorShoot);
 		pwm=0;
 		setPoint=.75;
 	}
+	
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -28,10 +31,10 @@ public class ShooterSubsystem extends Subsystem {
 	public void setShootSpeed(double speed){
 	if(speed<=setPoint){
 		pwm=speed;
-		shootMotor.set(speed);}
+		shootsMotor.set(speed);}
 	else if(speed>setPoint){
 		pwm=setPoint;
-		shootMotor.set(speed);
+		shootsMotor.set(speed);
 	}
 	}
 
@@ -54,6 +57,16 @@ public class ShooterSubsystem extends Subsystem {
 	
 	public double getPWM(){
 		return pwm*100;
+	}
+
+
+	public double getShootHoodSpd() {
+		return shootHood.get();
+	}
+
+
+	public void setShootHood(double speed) {
+		shootHood.set(speed);
 	}
 
 }

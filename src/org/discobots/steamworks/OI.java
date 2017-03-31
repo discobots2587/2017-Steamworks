@@ -13,6 +13,7 @@ import org.discobots.steamworks.commands.hang.HangCommand;
 import org.discobots.steamworks.commands.intake.GearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
+import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.commands.utils.ToggleCompressor;
 import org.discobots.steamworks.utils.GamePad;
@@ -294,6 +295,7 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port0.get(port0.size()-1).whenPressed(new ExtendHoodCommand(500));//toggles Hood of Shoot To Extend
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
