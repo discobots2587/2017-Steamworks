@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ExtendHoodCommand extends Command {
-	double endT;
+	Long endT;
     public ExtendHoodCommand(double time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-		endT= System.currentTimeMillis()+time;
+		endT= (long) (System.currentTimeMillis()+time);
     	requires(Robot.shootSub);
     }
 

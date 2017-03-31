@@ -29,18 +29,14 @@ public class AutonCenterPostCommand extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new ExtendHoodCommand(700));
-    	addSequential(new AutonomousArcadeDrive(-0.1,0.6,3000));//left adjust for rightward veer
-    	addSequential(new AutonomousArcadeDrive(-0.1,0.5,2000));
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(-0.10, -0.6,1000));//backup
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(.2,0.55, 1200));
-    	addSequential(new AutonomousArcadeDrive(-.15,-0.4,1000));
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(.15, -0.6, 1500));//backup 
-    	addSequential(new WaitCommand(1600));//try again
-    	addSequential(new AutonomousArcadeDrive(-.2, 0.55, 2500));
-
+    	addSequential(new AutonomousArcadeDrive(0,0.7,1500));//straight
+    	addSequential(new AutonomousArcadeDrive(0,0.5,1000));
+    	addSequential(new WaitCommand(1500));
+    	addSequential(new AutonomousArcadeDrive(-0.2,-0.5, 1000));//backup at angle
+    	addSequential(new AutonomousArcadeDrive(-0.1, 0.55,1200));//forwards again
+    	addSequential(new WaitCommand(1500));
+    	addSequential(new AutonomousArcadeDrive(0.2,-0.5, 1000));//backup at angle
+    	addSequential(new AutonomousArcadeDrive(0.1, 0.55,1200));//forwards again
     	 	
     	
     	

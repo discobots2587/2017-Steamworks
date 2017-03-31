@@ -15,7 +15,8 @@ long endTime;
     }
     public WaitCommand(int time)
     {
-    	long multi = (long)(100*Robot.driveTrainSub.getAutonKonstant());
+    	//long multi = (long)(100*Robot.driveTrainSub.getAutonKonstant());
+    	long multi=100;
     	endTime = System.currentTimeMillis() + time*multi/100;
     	requires(Robot.driveTrainSub);
     }

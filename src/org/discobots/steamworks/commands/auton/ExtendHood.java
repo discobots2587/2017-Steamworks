@@ -10,6 +10,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ExtendHood extends CommandGroup {
 
     public ExtendHood() {
-        this.addSequential(new ExtendHoodCommand(500));
+        this.addSequential(new ExtendHoodCommand(750));
     }
 }
