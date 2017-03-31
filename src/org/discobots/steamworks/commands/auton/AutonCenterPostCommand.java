@@ -28,7 +28,7 @@ public class AutonCenterPostCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new ExtendHoodCommand(500));
+    	addParallel(new ExtendHoodCommand(700));
     	addSequential(new AutonomousArcadeDrive(-0.1,0.6,3000));//left adjust for rightward veer
     	addSequential(new AutonomousArcadeDrive(-0.1,0.5,2000));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));

@@ -295,7 +295,7 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
-						port0.get(port0.size()-1).whenPressed(new ExtendHoodCommand(500));//toggles Hood of Shoot To Extend
+						port0.get(port0.size()-1).whenActive(new ExtendHoodCommand(1000));//toggles Hood of Shoot To Extend
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
@@ -339,6 +339,7 @@ private ArrayList<Integer> ports;
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+					port0.get(port0.size()-1).whenPressed(new ExtendHoodCommand(1000));//toggles Hood of Shoot To Extend
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port0.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
 					port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
