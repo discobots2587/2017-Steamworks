@@ -98,7 +98,8 @@ public class Robot extends IterativeRobot {
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
 		driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
-
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 		Camthread = new Thread() {
 			@Override
 			public void run() {
@@ -117,7 +118,6 @@ public class Robot extends IterativeRobot {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setResolution(320, 240);
 					Genius.setFPS(15);
 				} // footage
 				catch (Exception e) {
@@ -152,8 +152,6 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
-		SmartDashboard.putData("Choose Controls", driveChooser);
-		SmartDashboard.putData("Choose Auton", autonChooser);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
