@@ -122,7 +122,7 @@ public class Robot extends IterativeRobot {
 					// Genius.openCamera();
 					Genius.setFPS(MAX_PRIORITY);
 					Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
-					Genius.setResolution(300, 169);
+					//Genius.setResolution(300, 169);
 
 				} // footage
 				catch (Exception e) {
