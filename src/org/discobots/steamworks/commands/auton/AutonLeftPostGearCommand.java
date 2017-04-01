@@ -35,7 +35,7 @@ public class AutonLeftPostGearCommand extends CommandGroup {////////////////////
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new ExtendHoodCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0,0.7,1000));//drive forwards
+    	addSequential(new AutonomousArcadeDrive(0,0.7,500));//drive forwards
     	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));//turn right arc
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));//turn right arc

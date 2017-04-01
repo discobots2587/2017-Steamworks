@@ -30,7 +30,7 @@ public class AutonRightPostGearCommand extends CommandGroup {///////////////////
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new ExtendHoodCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0,0.7,1000));
+    	addSequential(new AutonomousArcadeDrive(0,0.7,500));
     	addSequential(new AutonomousArcadeDrive(-0.2,0.6,2200));//arc turn
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(-0.2,0.5,4000));//arc turn
