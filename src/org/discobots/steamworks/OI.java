@@ -295,7 +295,7 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
-						port0.get(port0.size()-1).whenActive(new ExtendHoodCommand(1000));//toggles Hood of Shoot To Extend
+						port0.get(port0.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port0.get(port0.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -339,7 +339,7 @@ private ArrayList<Integer> ports;
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
-					port0.get(port0.size()-1).whenPressed(new ExtendHoodCommand(1000));//toggles Hood of Shoot To Extend
+					port0.get(port0.size()-1).whenPressed(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port0.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
 					port0.get(port0.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -374,6 +374,7 @@ private ArrayList<Integer> ports;
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port1.get(port1.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port1.get(port1.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -436,6 +437,7 @@ private ArrayList<Integer> ports;
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port2.get(port2.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port2.get(port2.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -496,6 +498,7 @@ private ArrayList<Integer> ports;
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port3.get(port3.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port3.get(port3.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -506,7 +509,7 @@ private ArrayList<Integer> ports;
 						port3. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand()); 
+						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port3.get(port3.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -550,12 +553,12 @@ private ArrayList<Integer> ports;
 				}
 				if (i == 4) {
 					if (gamePads[i] instanceof Xbox){
-
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port4.get(port4.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port4.get(port4.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 						port4.get(port4.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -566,7 +569,7 @@ private ArrayList<Integer> ports;
 						port4. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand()); 
+						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port4.get(port4.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -618,6 +621,7 @@ private ArrayList<Integer> ports;
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+					port5.get(port5.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
 					port5.get(port5.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
@@ -628,7 +632,7 @@ private ArrayList<Integer> ports;
 					port5. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand()); 
+					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 					port5.get(port5.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
