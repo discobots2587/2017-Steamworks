@@ -2,6 +2,7 @@ package org.discobots.steamworks.commands.auton;
 
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousTankDrive;
+import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
 import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -17,7 +18,10 @@ public class PivotRightGearAuton extends CommandGroup {
     	addSequential(new ExtendHoodCommand(1000));
     	addSequential(new AutonomousArcadeDrive(0,0.7,1500));//straight
     	addSequential(new AutonomousArcadeDrive(0,0.5,1000));
-    	addSequential(new AutonomousTankDrive(-.5,.5,1000));
+    	addSequential(new WaitCommand(500));
+    	addSequential(new AutonomousTankDrive(-.5,.5,1000)); //pivot rotate check direction
+    	addSequential(new AutonomousArcadeDrive(0,0.5,1000));
+
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
