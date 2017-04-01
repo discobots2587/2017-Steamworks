@@ -25,7 +25,6 @@ public class Dashboard {
 		SmartDashboard.putData("Reset GamePad Ports", new RefreshGamepadPorts());		
 		SmartDashboard.putData("Disable Sensors?", new SensorToggle());
 		SmartDashboard.putData("Disable LIDAR?", new SensorToggle(1));
-		SmartDashboard.putNumber("Hang Motor Speed", Robot.hangSub.getHangMotorSpeed());
 
 
 	}
@@ -56,6 +55,7 @@ public class Dashboard {
 		}
 		if (driveCounter%10==1)
 		{
+			SmartDashboard.putNumber("Hang Motor Speed", Robot.hangSub.getHangMotorSpeed());
 			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
 			//SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
 			//SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
