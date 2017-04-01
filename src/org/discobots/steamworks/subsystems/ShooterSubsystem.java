@@ -13,50 +13,28 @@ public class ShooterSubsystem extends Subsystem {
 	// here. Call these from Commands.
 	private Talon shootsMotor;
 	private boolean shooterToggled=false;
-	private double pwm;
-	private double setPoint;
 	private Spark shootHood;
 	public ShooterSubsystem(){
 		shootHood=new Spark(HW.motorHood);
 		shootsMotor=new Talon(HW.motorShoot);
-		pwm=0;
-		setPoint=.75;
 	}
-	
-
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}
-	public void setShootSpeed(double speed){
-	if(speed<=setPoint){
-		pwm=speed;
-		shootsMotor.set(speed);}
-	else if(speed>setPoint){
-		pwm=setPoint;
-		shootsMotor.set(speed);
-	}
-	}
-
-
+	
 	public boolean isShooterToggled() {
 		return shooterToggled;
 	}
 
-	public void setSetpoint(double set){
-		setPoint=set;
+
+	public void setShootSpeed(double speed)
+	{
+		shootsMotor.set(speed);
 	}
 	
 	public void setShooterToggled(boolean shooterToggled) {
 		this.shooterToggled = shooterToggled;
-	}
-	
-	public double getSetpoint(){
-		return setPoint;
-	}
-	
-	public double getPWM(){
-		return pwm*100;
 	}
 
 
