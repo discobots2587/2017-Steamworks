@@ -19,6 +19,7 @@ import org.discobots.steamworks.commands.auton.AutonRightPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
 import org.discobots.steamworks.commands.auton.AutonLeftPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
+import org.discobots.steamworks.commands.auton.PivotRightGearAuton;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -92,6 +93,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("AutonLeftPost", new AutonLeftPostGearCommand());
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
+		autonChooser.addObject("PivotRightGear", new PivotRightGearAuton());
 		
 
 		driveChooser = new SendableChooser<Command>();
