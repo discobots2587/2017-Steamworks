@@ -79,7 +79,7 @@ public class SimpleOI extends OI {
 
 		
 		b2_dpadU.whenPressed(new IntakeCommand(1,true,10000));//intake runs for 10 sec
-		b2_bumpR.whenPressed(new ShootCommand(true));//toggle shooter
+		b2_bumpR.whenPressed(new ShootCommand());//toggle shooter
 		b2_bumpL.whenPressed(new BlendCommand(-.75,true));//toggle bender
 		
 		b2_trigL.whileHeld(new IntakeCommand(-.75));
@@ -135,7 +135,7 @@ public class SimpleOI extends OI {
 
 		
 		b_dpadU.whenPressed(new IntakeCommand(1,true,10000));//intake runs for 10 sec
-		b_bumpR.whenPressed(new ShootCommand(true));//toggle shooter
+		b_bumpR.whenPressed(new ShootCommand());//toggle shooter
 		b_bumpL.whenPressed(new BlendCommand(-.75,true));//toggle bender
 		
 

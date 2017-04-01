@@ -67,7 +67,6 @@ public class Dashboard {
 		//	SmartDashboard.putNumber("PWM intake",Robot.intakeSub.getPWM());
 		//	SmartDashboard.putNumber("PWM Shooter", Robot.shootSub.getPWM());
 		//	SmartDashboard.putNumber("PWM Blender", Robot.blendSub.getPWM());
-			Robot.shootSub.setSetpoint(TestPrefs.getDouble("SetPoint", 1.0));
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			Robot.driveTrainSub.setAutonKonstant(TestPrefs.getDouble("AutonConstant", 1.0));//auton speed/time scaling --settable via driver dashboard and independent of speed scaling
 			Robot.gearLidar=TestPrefs.getBoolean("GearLidarSub", false);//create Gear Lidar subsystem on robot initialization?
