@@ -35,21 +35,20 @@ public class AutonLeftPostGearCommand extends CommandGroup {////////////////////
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new ExtendHoodCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));
+    	addSequential(new AutonomousArcadeDrive(0,0.7,1000));//drive forwards
+    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));//turn right arc
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));//turn right arc
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));
+    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));//pivot turn right XD
     	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backu
-    	addSequential(new WaitCommand(1600));
+    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));//arc right 
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(1.5));
+    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup
     	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(1.5));
     	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
-    	addSequential(new WaitCommand(1600));//try again
-    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));
+    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));//try again
     	
     	
     }

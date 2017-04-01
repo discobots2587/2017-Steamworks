@@ -48,19 +48,19 @@ public class Dashboard {
 		} else if (driveCounter % 5 == 1) {
 
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
-			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
-			SmartDashboard.putNumber("PRESSURE", Robot.electricSub.getPressure());
-			SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
-			SmartDashboard.putBoolean("Gear State (true=out) ", Robot.gearSub.isGearOut());
+			//SmartDashboard.putNumber("PRESSURE", Robot.electricSub.getPressure());
+			//SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
+			//SmartDashboard.putBoolean("Gear State (true=out) ", Robot.gearSub.isGearOut());
 
 
 		}
 		if (driveCounter%10==1)
 		{
-			SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
-			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
+			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
+			//SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
+			//SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
 			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.getSpeedScaling());
-			SmartDashboard.putNumber("The gear intake is: ", Robot.gearSub.getGearState());
+			//SmartDashboard.putNumber("The gear intake is: ", Robot.gearSub.getGearState());
 			SmartDashboard.putBoolean("Direct Speed Scale On?", Robot.directScale);
 			SmartDashboard.putBoolean("Turning Speed Scale On?", Robot.turnScale);
 		//	SmartDashboard.putNumber("PWM Hang", Robot.hangSub.getPWM());

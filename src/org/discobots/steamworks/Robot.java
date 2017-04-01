@@ -118,7 +118,10 @@ public class Robot extends IterativeRobot {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setFPS(15);
+					Genius.setFPS(MAX_PRIORITY);
+					Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
+					Genius.setResolution(300, 169);
+
 				} // footage
 				catch (Exception e) {
 					System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
