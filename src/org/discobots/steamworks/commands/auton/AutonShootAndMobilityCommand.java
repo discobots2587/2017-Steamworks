@@ -29,7 +29,11 @@ public class AutonShootAndMobilityCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new ExtendHoodCommand(500));
+    	addSequential(new ExtendHoodCommand(500));
+    	addSequential(new AutonomousArcadeDrive(-7,0,500));
+    	addSequential(new AutonomousArcadeDrive(0,7,2500));
+    	addSequential(new ExtendHoodCommand(500));
+    	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousShootCommand(5000));
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(-.5,0,2000));

@@ -29,9 +29,8 @@ public class AutonCenterPostCommand extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addSequential(new ExtendHoodCommand(1000));
-    	addSequential(new AutonomousArcadeDrive(0,0.7,1500));//straight
+    	addSequential(new AutonomousArcadeDrive(0,0.75,1500));//straight
     	addSequential(new AutonomousArcadeDrive(0,0.5,1000));
-    	addSequential(new WaitCommand(1));
     	addSequential(new WaitCommand(2));
     	addSequential(new AutonomousArcadeDrive(-0.15,-0.7, 600));//backup at angle
     	addSequential(new AutonomousArcadeDrive(0,-0.7, 400));//backup straight

@@ -31,13 +31,10 @@ public class AutonRightPostGearCommand extends CommandGroup {///////////////////
         // arm.
     	addParallel(new ExtendHoodCommand(500));
     	addSequential(new AutonomousArcadeDrive(0,0.7,500));
-    	addSequential(new AutonomousArcadeDrive(-0.2,0.6,2200));//arc turn
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(-0.2,0.5,4000));//arc turn
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(-0.5,0.0,1000));//pivot turn XD 
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(-0.17,0.5,3000));
+    	addSequential(new AutonomousArcadeDrive(-0.3,0.6,1500));//arc turnewd
+    	addSequential(new AutonomousArcadeDrive(-0.3,0.6,2000));//arc turn
+    	addSequential(new AutonomousArcadeDrive(-0.55,0.0,900));//pivot turn XD 
+    	addSequential(new AutonomousArcadeDrive(-0.2,0.6,2400));
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
     	addSequential(new AutonomousArcadeDrive(-0.23, -0.6, 1000));//backup
     	addSequential(new AutonomousArcadeDrive(-0.2,0.55, 2500));//try again

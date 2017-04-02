@@ -20,12 +20,12 @@ public class ExtendHoodCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 		endT= (long) (System.currentTimeMillis()+time);
-    	Robot.shootSub.setShootHood(1);
+    	Robot.shootSub.setShootHood(.3);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shootSub.setShootHood(.5);
+    	Robot.shootSub.setShootHood(.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()

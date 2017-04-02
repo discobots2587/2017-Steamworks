@@ -293,7 +293,7 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port0.get(port0.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whileHeld(new HangCommand(0.9));//hanging motor while held at 90% power
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port0.get(port0.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));

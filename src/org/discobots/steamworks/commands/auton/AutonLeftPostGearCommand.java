@@ -35,14 +35,12 @@ public class AutonLeftPostGearCommand extends CommandGroup {////////////////////
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new ExtendHoodCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0,0.7,500));//drive forwards
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));//turn right arc
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));//turn right arc
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));//pivot turn right XD
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));//arc right 
+    	addSequential(new AutonomousArcadeDrive(0,0.7,200));//drive forwards
+    	addSequential(new AutonomousArcadeDrive(0.15,0.6,1500));//turn right arc
+    	addSequential(new AutonomousArcadeDrive(0.3,0.5,2000));//turn right arc
+    	addSequential(new AutonomousArcadeDrive(0.55,0.0,900));//pivot turn right XD
+    	addSequential(new AutonomousArcadeDrive(0.2,0.55,2400));//arc right 
+    	addSequential(new AutonomousArcadeDrive(0,0.7,800));//drive straight
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(1.5));
     	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup
     	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
