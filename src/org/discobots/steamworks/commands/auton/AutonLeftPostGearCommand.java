@@ -40,7 +40,7 @@ public class AutonLeftPostGearCommand extends CommandGroup {////////////////////
     	addSequential(new AutonomousArcadeDrive(0.3,0.5,2000));//turn right arc
     	addSequential(new AutonomousArcadeDrive(0.55,0.0,900));//pivot turn right XD
     	addSequential(new AutonomousArcadeDrive(0.2,0.55,2400));//arc right 
-    	addSequential(new AutonomousArcadeDrive(0,0.7,800));//drive straight
+    	addSequential(new AutonomousArcadeDrive(0,0.7,900));//drive straight
     	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(1.5));
     	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup
     	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
