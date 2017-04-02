@@ -43,7 +43,8 @@ boolean toggled=false;
 
     // Called once after isFinished returns true
     protected void end(){
-    Robot.hangSub.setSpeed(0);
+        Robot.hangSub.setSpeed(0);
+
     }
 
     // Called when another command which requires one or more of the same
