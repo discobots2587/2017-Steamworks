@@ -216,6 +216,7 @@ public class Robot extends IterativeRobot {
 			oi.setRumble(1.0);
 		}
 		oi.setRumble(0);
+		oi.updateControllerList();
 		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command

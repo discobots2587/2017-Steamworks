@@ -16,7 +16,7 @@ public class PivotRightGearAuton extends CommandGroup {
     	
     	
     	addSequential(new AutonomousArcadeDrive(0,0.7,1500));//straight
-    	addParallel(new ExtendHoodCommand(500));
+    //	addParallel(new ExtendHoodCommand(500));
     	addSequential(new AutonomousArcadeDrive(0,0.5,1000));
     	addSequential(new WaitCommand(500));
     	addSequential(new AutonomousArcadeDrive(-0.5,0, 1000));
