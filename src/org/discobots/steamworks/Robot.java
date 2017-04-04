@@ -42,9 +42,6 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrainSub = new DriveTrainSubsystem();
 
-		autonChooser = new SendableChooser();
-		// autonChooser.addObject("DumbPostitioningAuton", new
-		// DumbPositioningAuton());
 
 		driveChooser = new SendableChooser();
 		// driveChooser.addObject("Tank Drive", new TankDriveCommand());
@@ -57,7 +54,6 @@ public class Robot extends IterativeRobot {
 		 CamThread = new Thread() {
 				@Override
 				public void run() {
-					System.out.println("cameratherad created");
 
 					//try {
 					//	UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
@@ -84,6 +80,7 @@ public class Robot extends IterativeRobot {
 				}
 			};
 			CamThread.start();
+			SmartDashboard.putData("DriveChooser", driveChooser);
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.

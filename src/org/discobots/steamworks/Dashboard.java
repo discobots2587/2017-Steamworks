@@ -14,10 +14,6 @@ public class Dashboard {
 	public static int driveCounter = 0;
  
 	public static void init() {
-		TestPrefs = Preferences.getInstance();
-		SmartDashboard.putData("Arcade Drive", new ArcadeDriveCommand());
-		SmartDashboard.putData("Split Arcade Drive", new SplitArcadeDriveCommand());
-		SmartDashboard.putData("Tank Drive", new TankDriveCommand());
 		
 		
 	}
@@ -37,11 +33,9 @@ public class Dashboard {
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());
 		
 		//SmartDashboard.putNumber("Potentiometer", Robot.armSub.potentiometer.getAverageVoltage());
-			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 		}
 		if (driveCounter%10==1)
 		{
-			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.kSpeedScaling);
 
 						//SmartDashboard.putNumber("PRESSURE", Robot.electricalSub.getPressure());
 			
