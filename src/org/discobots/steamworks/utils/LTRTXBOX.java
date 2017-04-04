@@ -38,17 +38,17 @@ public class LTRTXBOX extends Command {//computes the interim values for the xbo
     		   Robot.oi.setRumble(right, TriggerValue/2);
     	   //if(TriggerValue<-.2)
     		//   Robot.oi.setRumble(left,-TriggerValue/2);
-        	   if(-.75<=TriggerValue&&TriggerValue<-.3)//deadband
+        	   if(-.75<=TriggerValue&&TriggerValue<-.5)//deadband
         	   {
-        		   TriggerValue=-.75;
+        		   TriggerValue=-.5;
         		  // if(Robot.armSub.potentiometer.getAverageVoltage()< Robot.armSub.upperArmLim) //2015 we used POT values for PID
         			 //  Robot.armSub.setSpeed(TriggerValue);
-        	   } else if (.75>=TriggerValue&&TriggerValue>.3){//minimum intake speed of +/- .75
-        		   TriggerValue=.75;
+        	   } else if (.75>TriggerValue&&TriggerValue>.5){//minimum intake speed of +/- .75
+        		   TriggerValue=.5;
         		  //if(Robot.armSub.potentiometer.getAverageVoltage()> Robot.armSub.lowerArmLim)
         			  // Robot.armSub.setSpeed(TriggerValue);
         	   }
-        	   else if(-.3<=TriggerValue&&.3>=TriggerValue)
+        	   else if(-.2<=TriggerValue&&.2>=TriggerValue)
         	   {
         		   TriggerValue=0;//deadband of -.2 to .2
         	   }

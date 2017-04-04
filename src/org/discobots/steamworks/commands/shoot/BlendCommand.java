@@ -12,6 +12,7 @@ public class BlendCommand extends Command {
 	private boolean toggle=false;
     public BlendCommand(double s) {
         // Use requires() here to declare subsystem dependencies
+    	requires(Robot.blendSub);
     	speed = s;
     }   
     public BlendCommand(double s,boolean toggle) {//allows toggling of blend command

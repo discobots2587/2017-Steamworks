@@ -1,8 +1,10 @@
 package org.discobots.steamworks.commands.auton;
 
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
-import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
+import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *From the center position, delivers the gear to the center post on the ship
@@ -26,19 +28,22 @@ public class AutonCenterPostCommand extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonomousArcadeDrive(-0.1,0.6,3000));//left adjust for rightward veer
-    	addSequential(new AutonomousArcadeDrive(-0.1,0.5,2000));
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(-0.10, -0.6,1000));//backup
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(.2,0.55, 1200));
-    	addSequential(new AutonomousArcadeDrive(-.15,-0.4,1000));
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(.15, -0.6, 1500));//backup 
-    	addSequential(new WaitCommand(1600));//try again
-    	addSequential(new AutonomousArcadeDrive(-2, 0.55, 2500));
-
-    	 	
+  //  	addSequential(new ExtendHoodCommand(1000));
+    	addSequential(new AutonomousArcadeDrive(0,0.75,1500));//straight
+    	addSequential(new AutonomousArcadeDrive(0,0.5,1000));
+    	addSequential(new WaitCommand(2));
+    	addSequential(new AutonomousArcadeDrive(-0.15,-0.7, 600));//backup at angle
+    	addSequential(new AutonomousArcadeDrive(0,-0.7, 400));//backup straight
+    	addSequential(new AutonomousArcadeDrive(-0.2, 0.65,1200));//forwards again greater angle
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new WaitCommand(2));
+    	addSequential(new AutonomousArcadeDrive(0.15,-0.7, 600));//backup at angle
+    	addSequential(new AutonomousArcadeDrive(0,-0.7, 400));//backup no angle
+    	addSequential(new AutonomousArcadeDrive(0.2, 0.65,1200));//forwards again greater angle
+    	addSequential(new WaitCommand(.5));
+    	addSequential(new WaitCommand(1.5));
+    	addSequential(new AutonomousArcadeDrive(0.2,-0.7, 750));//backup at angle
+    	addSequential(new AutonomousArcadeDrive(0.3, 0.55,1200));//forwards again greater angle
     	
     	
     }

@@ -10,9 +10,11 @@ import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SpeedScaleCommand;
 import org.discobots.steamworks.commands.hang.HangCommand;
+import org.discobots.steamworks.commands.hang.HangCommand2;
 import org.discobots.steamworks.commands.intake.GearIntakeCommand;
 import org.discobots.steamworks.commands.intake.IntakeCommand;
 import org.discobots.steamworks.commands.shoot.BlendCommand;
+import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
 import org.discobots.steamworks.commands.shoot.ShootCommand;
 import org.discobots.steamworks.commands.utils.ToggleCompressor;
 import org.discobots.steamworks.utils.GamePad;
@@ -292,11 +294,12 @@ private ArrayList<Integer> ports;
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port0.get(port0.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
-						port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
+						port0.get(port0.size()-1).whenPressed(new HangCommand2(1));//hanging motor while held at 90% power
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port0.get(port0.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port0.get(port0.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port0.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port0.get(port0.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port0.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
@@ -337,9 +340,10 @@ private ArrayList<Integer> ports;
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port0.get(port0.size()-1).whenPressed(new CycleDriveCommand());
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+					port0.get(port0.size()-1).whenPressed(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 					port0.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port0.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
-					port0.get(port0.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+					port0.get(port0.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 					port0.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
 					port0.get(port0.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 					port0.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
@@ -371,9 +375,10 @@ private ArrayList<Integer> ports;
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port1.get(port1.size()-1).whenPressed(new CycleDriveCommand());
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port1.get(port1.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port1.get(port1.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port1.get(port1.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port1.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port1.get(port1.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port1.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
@@ -402,7 +407,7 @@ private ArrayList<Integer> ports;
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port1.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port1.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
-						port1.get(port1.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port1.get(port1.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port1.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
 						port1.get(port1.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port1.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
@@ -433,9 +438,10 @@ private ArrayList<Integer> ports;
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port2.get(port2.size()-1).whenPressed(new CycleDriveCommand());
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port2.get(port2.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port2.get(port2.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port2.get(port2.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port2.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port2.get(port2.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port2.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
@@ -463,7 +469,7 @@ private ArrayList<Integer> ports;
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port2.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port2.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
-						port2.get(port2.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port2.get(port2.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port2.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
 						port2.get(port2.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port2.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
@@ -493,9 +499,10 @@ private ArrayList<Integer> ports;
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port3.get(port3.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port3.get(port3.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port3.get(port3.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port3.get(port3.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port3.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
@@ -503,7 +510,7 @@ private ArrayList<Integer> ports;
 						port3. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port3.get(port3.size()-1).whenPressed(new CycleDriveCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand()); 
+						port3.get(port3.size()-1).whenPressed(new GearIntakeCommand());
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port3.get(port3.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port3.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -523,7 +530,7 @@ private ArrayList<Integer> ports;
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port3.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port3.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
-						port3.get(port3.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port3.get(port3.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port3.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
 						port3.get(port3.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port3.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
@@ -547,15 +554,15 @@ private ArrayList<Integer> ports;
 				}
 				if (i == 4) {
 					if (gamePads[i] instanceof Xbox){
-
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, false));
 						port4.get(port4.size()-1).whenPressed(new IntakeCommand(1,true,10000));//ten seconds of intaking toggle
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+						port4.get(port4.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-						port4.get(port4.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port4.get(port4.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 						port4.get(port4.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port4.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
@@ -563,7 +570,7 @@ private ArrayList<Integer> ports;
 						port4. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 						port4.get(port4.size()-1).whenPressed(new CycleDriveCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand()); 
+						port4.get(port4.size()-1).whenPressed(new GearIntakeCommand());
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 						port4.get(port4.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 						port4.add( new JoystickButton(gamePads[i], Xbox.BTN_B));
@@ -583,7 +590,7 @@ private ArrayList<Integer> ports;
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
 						port4.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 						port4.add(new JoystickButton(gamePads[i], GamePad.BTN_RB));
-						port4.get(port4.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+						port4.get(port4.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 						port4.add( new JoystickButton(gamePads[i], GamePad.BTN_LB));
 						port4.get(port4.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 						port4.add(new JoystickButton(gamePads[i], GamePad.BTN_BACK));
@@ -615,9 +622,10 @@ private ArrayList<Integer> ports;
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_Y, true));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, true));
+					port5.get(port5.size()-1).whenActive(new ExtendHoodCommand(750));//toggles Hood of Shoot To Extend
 					port5.add(new DPadButton(gamePads[i], GamePad.DPAD_X, false));
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_RB));
-					port5.get(port5.size()-1).whenPressed(new ShootCommand(true));//toggles at 100% speed
+					port5.get(port5.size()-1).whenPressed(new ShootCommand());//toggles at 100% speed
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_LB));
 					port5.get(port5.size()-1).whenPressed(new BlendCommand(-.75, true));//negative is blend into shooter currently//toggles
 					port5.add(new JoystickButton(gamePads[i], Xbox.BTN_BACK));
@@ -625,7 +633,7 @@ private ArrayList<Integer> ports;
 					port5. add(new JoystickButton(gamePads[i], Xbox.BTN_START));
 					port5.get(port5.size()-1).whenPressed(new CycleDriveCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_A));
-					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand()); 
+					port5.get(port5.size()-1).whenPressed(new GearIntakeCommand());
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_X));
 					port5.get(port5.size()-1).whileHeld(new ShootCommand(.75));//shoot 3/4 speed while held
 					port5.add( new JoystickButton(gamePads[i], Xbox.BTN_B));

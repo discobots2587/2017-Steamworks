@@ -15,10 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.concurrent.TimeUnit;
 
 import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
-import org.discobots.steamworks.commands.auton.AutonLeftPostCommand;
+import org.discobots.steamworks.commands.auton.AutonRightPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
-import org.discobots.steamworks.commands.auton.AutonRightPostCommand;
+import org.discobots.steamworks.commands.auton.AutonLeftPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
+import org.discobots.steamworks.commands.auton.PivotRightGearAuton;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
 import org.discobots.steamworks.commands.drive.SplitArcadeDriveCommand;
@@ -88,17 +89,19 @@ public class Robot extends IterativeRobot {
 
 		autonChooser = new SendableChooser<Command>();
 		autonChooser.addDefault("AutonCenter", new AutonCenterPostCommand());
-		autonChooser.addObject("AutonRight", new AutonRightPostCommand());
-		autonChooser.addObject("AutonLeft", new AutonLeftPostCommand());
+		autonChooser.addObject("AutonRightPost", new AutonRightPostGearCommand());
+		autonChooser.addObject("AutonLeftPost", new AutonLeftPostGearCommand());
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
+		autonChooser.addObject("PivotRightGear", new PivotRightGearAuton());
 		
 
 		driveChooser = new SendableChooser<Command>();
 		driveChooser.addObject("Tank Drive", new TankDriveCommand());
 		driveChooser.addObject("Arcade Drive", new ArcadeDriveCommand());
 		driveChooser.addDefault("Split Arcade Drive", new SplitArcadeDriveCommand());
-
+		SmartDashboard.putData("Choose Controls", driveChooser);
+		SmartDashboard.putData("Choose Auton", autonChooser);
 		Camthread = new Thread() {
 			@Override
 			public void run() {
@@ -117,8 +120,10 @@ public class Robot extends IterativeRobot {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setResolution(320, 240);
-					Genius.setFPS(15);
+					Genius.setFPS(MAX_PRIORITY);
+					Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
+					//Genius.setResolution(300, 169);
+
 				} // footage
 				catch (Exception e) {
 					System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
@@ -152,8 +157,6 @@ public class Robot extends IterativeRobot {
 		long start = System.currentTimeMillis();
 		Scheduler.getInstance().run();
 		Dashboard.update();
-		SmartDashboard.putData("Choose Controls", driveChooser);
-		SmartDashboard.putData("Choose Auton", autonChooser);
 		long end = System.currentTimeMillis();
 		loopExecutionTime = end - start;
 	}
@@ -171,7 +174,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -214,6 +216,7 @@ public class Robot extends IterativeRobot {
 			oi.setRumble(1.0);
 		}
 		oi.setRumble(0);
+		oi.updateControllerList();
 		oi.running = true;
 
 		if (driveCommand != null) // Starts chosen driving Command

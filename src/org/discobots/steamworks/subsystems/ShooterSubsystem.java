@@ -11,49 +11,52 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Spark shootMotor;
+	private Spark shootsMotor;
 	private boolean shooterToggled=false;
-	private double pwm;
-	private double setPoint;
+	private Spark shootHood;
 	public ShooterSubsystem(){
-		this.shootMotor=new Spark(HW.motorShoot);
-		pwm=0;
-		setPoint=.75;
+		shootHood=new Spark(HW.motorHood);
+		shootsMotor=new Spark(HW.motorShoot);
+		/*new Thread(){
+			public void run(){
+				while(true)
+				{
+				if(isShooterToggled())
+				{
+					setShootSpeed(1);
+				}
+			}
+			}
+		}.start();*/
 	}
-
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 	}
-	public void setShootSpeed(double speed){
-	if(speed<=setPoint){
-		pwm=speed;
-		shootMotor.set(speed);}
-	else if(speed>setPoint){
-		pwm=setPoint;
-		shootMotor.set(speed);
-	}
-	}
-
-
+	
+	
 	public boolean isShooterToggled() {
 		return shooterToggled;
 	}
 
-	public void setSetpoint(double set){
-		setPoint=set;
+
+	public void setShootSpeed(double speed)
+	{
+		shootsMotor.set(-speed);
 	}
 	
 	public void setShooterToggled(boolean shooterToggled) {
 		this.shooterToggled = shooterToggled;
 	}
-	
-	public double getSetpoint(){
-		return setPoint;
+
+
+	public double getShootHoodSpd() {
+		return shootHood.get();
 	}
-	
-	public double getPWM(){
-		return pwm*100;
+
+
+	public void setShootHood(double speed) {
+		shootHood.set(speed);
 	}
 
 }

@@ -25,7 +25,6 @@ public class Dashboard {
 		SmartDashboard.putData("Reset GamePad Ports", new RefreshGamepadPorts());		
 		SmartDashboard.putData("Disable Sensors?", new SensorToggle());
 		SmartDashboard.putData("Disable LIDAR?", new SensorToggle(1));
-		SmartDashboard.putNumber("Hang Motor Speed", Robot.hangSub.getHangMotorSpeed());
 
 
 	}
@@ -44,30 +43,30 @@ public class Dashboard {
 			SmartDashboard.putBoolean("Shooter toggled in Subsystem?", Robot.shootSub.isShooterToggled());
 			SmartDashboard.putBoolean("LeftHandRunning", Robot.oi.left.isAlive());
 			SmartDashboard.putBoolean("running True?", Robot.oi.running);
-			SmartDashboard.putString("Gear Solenoid State: ", Robot.gearSub.getGearSolenoidState());
+			//SmartDashboard.putString("Gear Solenoid State: ", Robot.gearSub.getGearSolenoidState());
 		} else if (driveCounter % 5 == 1) {
 
 			//SmartDashboard.putData("DriveTrainCommand", Robot.driveTrainSub.getCurrentCommand());			
-			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
-			SmartDashboard.putNumber("PRESSURE", Robot.electricSub.getPressure());
-			SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
-			SmartDashboard.putBoolean("Gear State (true=out) ", Robot.gearSub.isGearOut());
+			//SmartDashboard.putNumber("PRESSURE", Robot.electricSub.getPressure());
+			//SmartDashboard.putNumber("shooter Avg RPM", Robot.electricSub.getShootRPMAVG());//mason's custom rpm average
+			//SmartDashboard.putBoolean("Gear State (true=out) ", Robot.gearSub.isGearOut());
 
 
 		}
 		if (driveCounter%10==1)
 		{
-			SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
-			SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
+			SmartDashboard.putNumber("Hang Motor Speed", Robot.hangSub.getHangMotorSpeed());
+			SmartDashboard.putNumber("Axis ValueRx", Robot.oi.getRawAnalogStickARX());
+			//SmartDashboard.putBoolean("Gear Loaded", Robot.electricSub.isGearLoaded());
+			//SmartDashboard.putBoolean("Shooter Encoder stopped", Robot.electricSub.getShootEncoderStopped());
 			SmartDashboard.putNumber("SpeedScaling", Robot.driveTrainSub.getSpeedScaling());
-			SmartDashboard.putNumber("The gear intake is: ", Robot.gearSub.getGearState());
+			//SmartDashboard.putNumber("The gear intake is: ", Robot.gearSub.getGearState());
 			SmartDashboard.putBoolean("Direct Speed Scale On?", Robot.directScale);
 			SmartDashboard.putBoolean("Turning Speed Scale On?", Robot.turnScale);
 		//	SmartDashboard.putNumber("PWM Hang", Robot.hangSub.getPWM());
 		//	SmartDashboard.putNumber("PWM intake",Robot.intakeSub.getPWM());
 		//	SmartDashboard.putNumber("PWM Shooter", Robot.shootSub.getPWM());
 		//	SmartDashboard.putNumber("PWM Blender", Robot.blendSub.getPWM());
-			Robot.shootSub.setSetpoint(TestPrefs.getDouble("SetPoint", 1.0));
 			Robot.driveTrainSub.setSpeedScaling(TestPrefs.getDouble("SpeedScaling", 1.0));
 			Robot.driveTrainSub.setAutonKonstant(TestPrefs.getDouble("AutonConstant", 1.0));//auton speed/time scaling --settable via driver dashboard and independent of speed scaling
 			Robot.gearLidar=TestPrefs.getBoolean("GearLidarSub", false);//create Gear Lidar subsystem on robot initialization?

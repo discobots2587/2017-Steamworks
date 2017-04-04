@@ -2,6 +2,7 @@ package org.discobots.steamworks.commands.auton;
 
 import org.discobots.steamworks.commands.auton.subcommands.AutonomousArcadeDrive;
 import org.discobots.steamworks.commands.auton.subcommands.WaitCommand;
+import org.discobots.steamworks.commands.shoot.ExtendHoodCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -14,9 +15,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 ///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
 ///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
 ///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
-public class AutonRightPostCommand extends CommandGroup {///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
+public class AutonLeftPostGearCommand extends CommandGroup {///////////////////////////////////////WORKS PERFECTLY DO NOT CHANGE
     
-    public  AutonRightPostCommand() {
+    public  AutonLeftPostGearCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -33,21 +34,19 @@ public class AutonRightPostCommand extends CommandGroup {///////////////////////
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new AutonomousArcadeDrive(0.15,0.6,2200));
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,4000));
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.5,0.0,1000));
-    	addSequential(new WaitCommand(500));
-    	addSequential(new AutonomousArcadeDrive(0.15,0.5,3000));
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
-    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backu
-    	addSequential(new WaitCommand(1600));
+    	//addParallel(new ExtendHoodCommand(500));
+    	addSequential(new AutonomousArcadeDrive(0,0.7,200));//drive forwards
+    	addSequential(new AutonomousArcadeDrive(0.15,0.6,1500));//turn right arc
+    	addSequential(new AutonomousArcadeDrive(0.3,0.5,2000));//turn right arc
+    	addSequential(new AutonomousArcadeDrive(0.55,0.0,900));//pivot turn right XD
+    	addSequential(new AutonomousArcadeDrive(0.2,0.55,2400));//arc right 
+    	addSequential(new AutonomousArcadeDrive(0,0.7,900));//drive straight
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(1.5));
+    	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup
     	addSequential(new AutonomousArcadeDrive(0.15,0.55, 2500));//try again
-    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(2));
+    	addSequential(new edu.wpi.first.wpilibj.command.WaitCommand(1.5));
     	addSequential(new AutonomousArcadeDrive(0.2, -0.6, 1000));//backup 
-    	addSequential(new WaitCommand(1600));//try again
-    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));
+    	addSequential(new AutonomousArcadeDrive(-0.15, 0.55, 2500));//try again
     	
     	
     }
