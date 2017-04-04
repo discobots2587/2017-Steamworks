@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterSubsystem extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private Spark shootsMotor;
+	private Talon shootsMotor;
 	private boolean shooterToggled=false;
 	private Spark shootHood;
 	public ShooterSubsystem(){
 		shootHood=new Spark(HW.motorHood);
-		shootsMotor=new Spark(HW.motorShoot);
+		shootsMotor=new Talon(HW.motorShoot);
 		/*new Thread(){
 			public void run(){
 				while(true)
