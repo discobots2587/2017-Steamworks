@@ -27,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static double totalTime;
 	public static long TeleopStartTime;
 	public static long loopExecutionTime = 0;
+	Thread CamThread;
 
 	Command autonomousCommand, driveCommand;
 	@SuppressWarnings("rawtypes")
@@ -53,26 +54,37 @@ public class Robot extends IterativeRobot {
 		// init camera and start simple stream process...
 		// IMPORTANT -- camera system and code is redone for 2017-- Cameras
 		// should no longer have to be initialized separately ...
-		try{
-			LogicC615 = CameraServer.getInstance();//initialize server
-			//camera name taken from RoboRio
-			 UsbCamera C615 = new UsbCamera("C615", 0);
-			 C615.setResolution(480, 320);
-			 //LogicC615.openCamera();
-			 //LogicC615.startCapture();
-			 if(C615.isConnected())
-			 LogicC615.startAutomaticCapture(C615);//automatically start streaming
-			// footage
-			 }catch(Exception e){
-			 System.err.println("There is a Vision Error: " + e.getMessage());
-			 }
+		 CamThread = new Thread() {
+				@Override
+				public void run() {
+					System.out.println("cameratherad created");
 
-		Dashboard.init();
-		Dashboard.update();
-		SmartDashboard.putData("Choose Controls", driveChooser);
+					//try {
+					//	UsbCamera C615 = CameraServer.getInstance().startAutomaticCapture(1);
+					//	C615.setResolution(320, 240);
+					//	if (!C615.isConnected())
+					//		C615.free();
 
+					//} catch (Exception e) {
+					//	System.err.println("There is a Vision Error w/ C615: " + e.getMessage());
+					//}
+					try {
+						// camera name taken from RoboRio
+						UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
+						// Genius.openCamera();
+						Genius.setFPS(MAX_PRIORITY);
+						Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
+						//Genius.setResolution(300, 169);
+
+					} // footage
+					catch (Exception e) {
+						System.err.println("There is a Vision Error w/ Genius: " + e.getMessage());
+						System.out.println("Genius being added");
+					}
+				}
+			};
+			CamThread.start();
 	}
-
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
