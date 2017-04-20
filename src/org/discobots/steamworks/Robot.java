@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import org.discobots.steamworks.commands.auton.AutonCenterPostCommand;
 import org.discobots.steamworks.commands.auton.AutonRightPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
+import org.discobots.steamworks.commands.auton.AutonRampedStraightLong;
 import org.discobots.steamworks.commands.auton.AutonLeftPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
 import org.discobots.steamworks.commands.auton.AutonStraightLong;
@@ -95,6 +96,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
 		autonChooser.addObject("AutonStraightLong", new AutonStraightLong());
+		autonChooser.addObject("AutonRampedStraightLong", new AutonRampedStraightLong());
 
 		//autonChooser.addObject("PivotRightGear", new PivotRightGearAuton());
 		
