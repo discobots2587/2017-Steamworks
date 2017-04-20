@@ -19,6 +19,7 @@ import org.discobots.steamworks.commands.auton.AutonRightPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonMobilityCommand;
 import org.discobots.steamworks.commands.auton.AutonLeftPostGearCommand;
 import org.discobots.steamworks.commands.auton.AutonShootAndMobilityCommand;
+import org.discobots.steamworks.commands.auton.AutonStraightLong;
 import org.discobots.steamworks.commands.auton.PivotRightGearAuton;
 import org.discobots.steamworks.commands.drive.ArcadeDriveCommand;
 import org.discobots.steamworks.commands.drive.CycleDriveCommand;
@@ -93,6 +94,8 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("AutonLeftPost", new AutonLeftPostGearCommand());
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
+		autonChooser.addObject("AutonStraightLong", new AutonStraightLong());
+
 		//autonChooser.addObject("PivotRightGear", new PivotRightGearAuton());
 		
 
