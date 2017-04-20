@@ -19,6 +19,7 @@ long startTime;
 double scaledLeft;
 double scaledRight;
 long midTime;
+long lengthLim;
     public AutonomousRampedTankDrive(double left, double right, long timeMili, boolean straightRamp, boolean turnRamp) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -27,9 +28,9 @@ long midTime;
     	this.left=left;
     	this.right=right;
     	this.turnRamp=turnRamp;
-    	endTime=System.currentTimeMillis()+(timeMili/2);
-
-    	
+    	midTime=System.currentTimeMillis()+(timeMili/2);
+    	lengthLim=timeMili;
+ 	
     	
     }
 
@@ -40,20 +41,30 @@ long midTime;
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	 if(System.currentTimeMillis()<midTime){
+    		 scaledLeft = (1-(endTime-System.currentTimeMillis())/lengthLim)*left;
+    	 	 scaledRight = (1-(endTime-System.currentTimeMillis())/lengthLim)*right;
+    	 	 }
+    	 else
+    	 {
+    		 scaledLeft = left;
+    		 scaledRight = right;
+    	 }
+
     	 
         		if(!turnRamp&&!straightRamp)
-            	Robot.driveTrainSub.tankDrive(left,-right);
+            	Robot.driveTrainSub.tankDrive(scaledLeft,-scaledRight);
         		if(turnRamp&&!straightRamp){
-        			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),1-(Math.abs((left)+(right)/2)));
-                	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*speedScale,-left*speedScale);
+        			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),1-(Math.abs((scaledLeft)+(scaledRight)/2)));
+                	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*speedScale,-scaledLeft*speedScale);
         		}
         		if(!turnRamp&&straightRamp)
         		{
-        			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),(Math.abs((left)+(Robot.oi.getRawAnalogStickARY())/2)));
-                	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*speedScale,-left*speedScale);
+        			speedScale = Math.pow(Robot.driveTrainSub.getSpeedScaling(),(Math.abs((scaledLeft)+(Robot.oi.getRawAnalogStickARY())/2)));
+                	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*speedScale,-scaledLeft*speedScale);
         		}
         		if(turnRamp&&straightRamp)
-                	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling(),-left*Robot.driveTrainSub.getSpeedScaling());
+                	Robot.driveTrainSub.tankDrive(Robot.oi.getRawAnalogStickARY()*Robot.driveTrainSub.getSpeedScaling(),-scaledLeft*Robot.driveTrainSub.getSpeedScaling());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -70,5 +81,6 @@ long midTime;
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
