@@ -93,7 +93,7 @@ public class Robot extends IterativeRobot {
 		autonChooser.addObject("AutonLeftPost", new AutonLeftPostGearCommand());
 		autonChooser.addObject("AutonMobility", new AutonMobilityCommand());
 		autonChooser.addObject("AutonShootAndMobility", new AutonShootAndMobilityCommand());
-		autonChooser.addObject("PivotRightGear", new PivotRightGearAuton());
+		//autonChooser.addObject("PivotRightGear", new PivotRightGearAuton());
 		
 
 		driveChooser = new SendableChooser<Command>();
@@ -120,9 +120,9 @@ public class Robot extends IterativeRobot {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setFPS(MAX_PRIORITY);
-					Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
-					//Genius.setResolution(300, 169);
+					Genius.setFPS(20);
+					//Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
+					Genius.setResolution(214, 160);
 
 				} // footage
 				catch (Exception e) {
