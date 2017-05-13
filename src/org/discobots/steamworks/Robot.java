@@ -125,9 +125,9 @@ public class Robot extends IterativeRobot {
 					// camera name taken from RoboRio
 					UsbCamera Genius = CameraServer.getInstance().startAutomaticCapture(0);
 					// Genius.openCamera();
-					Genius.setFPS(10);
+					Genius.setFPS(30);
 					//Genius.setResolution(NORM_PRIORITY, NORM_PRIORITY);
-					Genius.setResolution(160, 120);
+					Genius.setResolution(720, 480);
 
 				} // footage
 				catch (Exception e) {
@@ -138,7 +138,7 @@ public class Robot extends IterativeRobot {
 		};
 		Camthread.start();
 
-		Dashboard.init();
+		Dashboard.init(); 
 		Dashboard.update();
 		SmartDashboard.putData("Choose Controls", driveChooser);
 		SmartDashboard.putData("Choose Auton", autonChooser);

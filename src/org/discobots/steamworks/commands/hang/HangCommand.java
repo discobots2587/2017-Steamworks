@@ -29,7 +29,7 @@ public class HangCommand extends Command {
     public HangCommand(double speed) {
         // Use requires() here to declare subsystem dependencies
     	requires(Robot.hangSub);
-    	this.speed=speed;
+    	this.speed=-speed;
     	time =0;
     }
     // Called just before this Command runs the first time

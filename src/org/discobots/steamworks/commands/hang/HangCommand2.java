@@ -27,7 +27,7 @@ boolean toggled=false;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(toggled && Robot.hangSub.getToggled())
-    	Robot.hangSub.setSpeed(speed);
+    	Robot.hangSub.setSpeed(-speed);
     	if(toggled && !Robot.hangSub.getToggled())
         	Robot.hangSub.setSpeed(0);
     	if(!toggled)
